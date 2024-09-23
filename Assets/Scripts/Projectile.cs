@@ -13,16 +13,15 @@ public class Projectile : MonoBehaviour
 
     public float rocketSpeed = 10.0f;
     Vector3 enemyPosition;
+    Vector3 targetPosition;
+    Vector3 rocketDir;
+    float rocketRotSpeed = 5000.0f;
 
     private void Awake()
     {
         rigid = GetComponent<Rigidbody>();
     }
 
-    private void Start()
-    {
-        
-    }
     public void SetForce(float force)
     {
         rigid.AddForce(transform.forward * force, ForceMode.Impulse);
@@ -51,17 +50,48 @@ public class Projectile : MonoBehaviour
             enemy.OnDamaged(PlayerStat.Inst.bulletDamage);
             enemyPosition = enemy.transform.position;
 
-            Debug.Log(enemyPosition);
         }
+    }
+
+    private void OnEnable()
+    {
+        EnemyCharacter.OnEnemyDamaged += HandleEnemyDamaged;
+    }
+
+    private void OnDisable()
+    {
+        EnemyCharacter.OnEnemyDamaged -= HandleEnemyDamaged;
+    }
+
+    private void HandleEnemyDamaged(EnemyCharacter enemy, int damage)
+    {
+        targetPosition = enemyPosition;
     }
 
     void Rocket()
     {
         if(gameObject.tag == "Rocket")
         {
-        
-            transform.position = Vector3.Lerp(transform.position, enemyPosition, Time.deltaTime * rocketSpeed);
+            RocketRotate();
+            transform.position = Vector3.MoveTowards(transform.position, 
+                new Vector3(DronCtrl.Instance.targetEnemy.transform.position.x,
+                            DronCtrl.Instance.targetEnemy.transform.position.y + 0.5f,
+                            DronCtrl.Instance.targetEnemy.transform.position.z), Time.deltaTime * rocketSpeed);
         }
+    }
+
+    void RocketRotate()  
+    {
+        rocketDir = DronCtrl.Instance.targetEnemy.transform.position - transform.position;
+        rocketDir.Normalize();
+
+
+        float angle = Mathf.Atan2(rocketDir.y, rocketDir.x) * Mathf.Rad2Deg;
+        Quaternion targetRot = Quaternion.AngleAxis(angle, Vector3.right);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation,
+                                        targetRot, rocketRotSpeed * Time.deltaTime);
+
+
     }
 }
 
