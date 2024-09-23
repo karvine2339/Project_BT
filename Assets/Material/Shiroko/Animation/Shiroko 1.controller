@@ -48,7 +48,7 @@ BlendTree:
     m_DirectBlendParameter: Blend
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 252f2fbd3de48f747ba52ce6bbb8ce30, type: 2}
+    m_Motion: {fileID: 7400000, guid: e86e6fcc31e7595448313de1a9a5ff4d, type: 2}
     m_Threshold: 0.125
     m_Position: {x: 0, y: 1}
     m_TimeScale: 1
@@ -56,7 +56,7 @@ BlendTree:
     m_DirectBlendParameter: Blend
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 252f2fbd3de48f747ba52ce6bbb8ce30, type: 2}
+    m_Motion: {fileID: 7400000, guid: e86e6fcc31e7595448313de1a9a5ff4d, type: 2}
     m_Threshold: 0.25
     m_Position: {x: 0, y: -1}
     m_TimeScale: 1
@@ -64,7 +64,7 @@ BlendTree:
     m_DirectBlendParameter: Blend
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 252f2fbd3de48f747ba52ce6bbb8ce30, type: 2}
+    m_Motion: {fileID: 7400000, guid: e86e6fcc31e7595448313de1a9a5ff4d, type: 2}
     m_Threshold: 0.375
     m_Position: {x: 1, y: 0}
     m_TimeScale: 1
@@ -72,7 +72,7 @@ BlendTree:
     m_DirectBlendParameter: Blend
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 252f2fbd3de48f747ba52ce6bbb8ce30, type: 2}
+    m_Motion: {fileID: 7400000, guid: e86e6fcc31e7595448313de1a9a5ff4d, type: 2}
     m_Threshold: 0.5
     m_Position: {x: 1, y: 1}
     m_TimeScale: 1
@@ -80,7 +80,7 @@ BlendTree:
     m_DirectBlendParameter: Blend
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 252f2fbd3de48f747ba52ce6bbb8ce30, type: 2}
+    m_Motion: {fileID: 7400000, guid: e86e6fcc31e7595448313de1a9a5ff4d, type: 2}
     m_Threshold: 0.625
     m_Position: {x: 1, y: -1}
     m_TimeScale: 1
@@ -88,7 +88,7 @@ BlendTree:
     m_DirectBlendParameter: Blend
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 252f2fbd3de48f747ba52ce6bbb8ce30, type: 2}
+    m_Motion: {fileID: 7400000, guid: e86e6fcc31e7595448313de1a9a5ff4d, type: 2}
     m_Threshold: 0.75
     m_Position: {x: -1, y: 0}
     m_TimeScale: 1
@@ -96,7 +96,7 @@ BlendTree:
     m_DirectBlendParameter: Blend
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 252f2fbd3de48f747ba52ce6bbb8ce30, type: 2}
+    m_Motion: {fileID: 7400000, guid: e86e6fcc31e7595448313de1a9a5ff4d, type: 2}
     m_Threshold: 0.875
     m_Position: {x: -1, y: 1}
     m_TimeScale: 1
@@ -104,7 +104,7 @@ BlendTree:
     m_DirectBlendParameter: Blend
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 252f2fbd3de48f747ba52ce6bbb8ce30, type: 2}
+    m_Motion: {fileID: 7400000, guid: e86e6fcc31e7595448313de1a9a5ff4d, type: 2}
     m_Threshold: 1
     m_Position: {x: -1, y: -1}
     m_TimeScale: 1
@@ -118,6 +118,32 @@ BlendTree:
   m_UseAutomaticThresholds: 1
   m_NormalizedBlendValues: 0
   m_BlendType: 2
+--- !u!1102 &-8258454752034378617
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Shiroko_Original_Stand_Attack_Ing 1
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 7400000, guid: eac4ac92928dc604888694a5fe89c049, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!114 &-7906415132709263160
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -130,6 +156,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50a992031da68da46a0088b58e7e2eb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1102 &-6400941325965177260
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Shiroko_Original_Stand_Attack_Start 1
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 7400000, guid: e6b621384623aec49a3c0ae204350521, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!1102 &-6393281747608914974
 AnimatorState:
   serializedVersion: 6
@@ -227,7 +279,7 @@ BlendTree:
     m_DirectBlendParameter: Blend
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: a94eed30e0ba92b4486b9fe4c3ca5222, type: 2}
+    m_Motion: {fileID: 7400000, guid: 37d2cc1d76f854246b20c17435385371, type: 2}
     m_Threshold: 1
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -241,6 +293,32 @@ BlendTree:
   m_UseAutomaticThresholds: 1
   m_NormalizedBlendValues: 0
   m_BlendType: 0
+--- !u!1102 &-5629104508762394266
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Shiroko_Original_Stand_Reload 1
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 7400000, guid: 4884c427c49e0c54e9291035d817d92c, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!206 &-5044860671645660808
 BlendTree:
   m_ObjectHideFlags: 1
@@ -306,7 +384,7 @@ BlendTree:
     m_DirectBlendParameter: Blend
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 2082c210de0aa3d478ea6d9ad45b4785, type: 2}
+    m_Motion: {fileID: 7400000, guid: e86e6fcc31e7595448313de1a9a5ff4d, type: 2}
     m_Threshold: 0
     m_Position: {x: 0, y: 1}
     m_TimeScale: 1
@@ -314,7 +392,7 @@ BlendTree:
     m_DirectBlendParameter: Blend
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 2082c210de0aa3d478ea6d9ad45b4785, type: 2}
+    m_Motion: {fileID: 7400000, guid: e86e6fcc31e7595448313de1a9a5ff4d, type: 2}
     m_Threshold: 0
     m_Position: {x: 0, y: -1}
     m_TimeScale: 1
@@ -322,7 +400,7 @@ BlendTree:
     m_DirectBlendParameter: Blend
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 2082c210de0aa3d478ea6d9ad45b4785, type: 2}
+    m_Motion: {fileID: 7400000, guid: e86e6fcc31e7595448313de1a9a5ff4d, type: 2}
     m_Threshold: 0
     m_Position: {x: 1, y: 0}
     m_TimeScale: 1
@@ -330,7 +408,7 @@ BlendTree:
     m_DirectBlendParameter: Blend
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 2082c210de0aa3d478ea6d9ad45b4785, type: 2}
+    m_Motion: {fileID: 7400000, guid: e86e6fcc31e7595448313de1a9a5ff4d, type: 2}
     m_Threshold: 0
     m_Position: {x: 1, y: 1}
     m_TimeScale: 1
@@ -338,7 +416,7 @@ BlendTree:
     m_DirectBlendParameter: Blend
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 2082c210de0aa3d478ea6d9ad45b4785, type: 2}
+    m_Motion: {fileID: 7400000, guid: e86e6fcc31e7595448313de1a9a5ff4d, type: 2}
     m_Threshold: 0
     m_Position: {x: 1, y: -1}
     m_TimeScale: 1
@@ -346,7 +424,7 @@ BlendTree:
     m_DirectBlendParameter: Blend
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 2082c210de0aa3d478ea6d9ad45b4785, type: 2}
+    m_Motion: {fileID: 7400000, guid: e86e6fcc31e7595448313de1a9a5ff4d, type: 2}
     m_Threshold: 0
     m_Position: {x: -1, y: 0}
     m_TimeScale: 1
@@ -354,7 +432,7 @@ BlendTree:
     m_DirectBlendParameter: Blend
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 2082c210de0aa3d478ea6d9ad45b4785, type: 2}
+    m_Motion: {fileID: 7400000, guid: e86e6fcc31e7595448313de1a9a5ff4d, type: 2}
     m_Threshold: 0
     m_Position: {x: -1, y: 1}
     m_TimeScale: 1
@@ -362,7 +440,7 @@ BlendTree:
     m_DirectBlendParameter: Blend
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 2082c210de0aa3d478ea6d9ad45b4785, type: 2}
+    m_Motion: {fileID: 7400000, guid: e86e6fcc31e7595448313de1a9a5ff4d, type: 2}
     m_Threshold: 0
     m_Position: {x: -1, y: -1}
     m_TimeScale: 1
@@ -407,6 +485,32 @@ BlendTree:
   m_UseAutomaticThresholds: 1
   m_NormalizedBlendValues: 0
   m_BlendType: 0
+--- !u!1102 &-3321015767342071427
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Shiroko_Original_Move_Ing 3
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 7400000, guid: 2082c210de0aa3d478ea6d9ad45b4785, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!206 &-3166133384363318153
 BlendTree:
   m_ObjectHideFlags: 1
@@ -669,6 +773,24 @@ AnimatorStateMachine:
   - serializedVersion: 1
     m_State: {fileID: -6393281747608914974}
     m_Position: {x: 360, y: 230, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: -3321015767342071427}
+    m_Position: {x: 510.72406, y: 474.73102, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: -8258454752034378617}
+    m_Position: {x: 314.7541, y: 426.80542, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: -6400941325965177260}
+    m_Position: {x: 236.88525, y: 480.0158, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 6294926607970353297}
+    m_Position: {x: 178.48358, y: 395.65787, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: -5629104508762394266}
+    m_Position: {x: 148.63385, y: 477.42017, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 7026138387526744895}
+    m_Position: {x: 614.5492, y: 568.26715, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -688,7 +810,7 @@ BlendTree:
   m_Name: BlendTree
   m_Childs:
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: a94eed30e0ba92b4486b9fe4c3ca5222, type: 2}
+    m_Motion: {fileID: 7400000, guid: 37d2cc1d76f854246b20c17435385371, type: 2}
     m_Threshold: 0
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -696,7 +818,7 @@ BlendTree:
     m_DirectBlendParameter: Blend
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 252f2fbd3de48f747ba52ce6bbb8ce30, type: 2}
+    m_Motion: {fileID: 7400000, guid: e86e6fcc31e7595448313de1a9a5ff4d, type: 2}
     m_Threshold: 0.125
     m_Position: {x: 0, y: 1}
     m_TimeScale: 0.5
@@ -704,7 +826,7 @@ BlendTree:
     m_DirectBlendParameter: Blend
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 2b66ae5f7f4ec2342855e782900c6ed1, type: 2}
+    m_Motion: {fileID: 7400000, guid: e86e6fcc31e7595448313de1a9a5ff4d, type: 2}
     m_Threshold: 0.25
     m_Position: {x: 0, y: -1}
     m_TimeScale: 0.5
@@ -712,7 +834,7 @@ BlendTree:
     m_DirectBlendParameter: Blend
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 2b66ae5f7f4ec2342855e782900c6ed1, type: 2}
+    m_Motion: {fileID: 7400000, guid: e86e6fcc31e7595448313de1a9a5ff4d, type: 2}
     m_Threshold: 0.375
     m_Position: {x: 1, y: 0}
     m_TimeScale: 0.5
@@ -720,7 +842,7 @@ BlendTree:
     m_DirectBlendParameter: Blend
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 252f2fbd3de48f747ba52ce6bbb8ce30, type: 2}
+    m_Motion: {fileID: 7400000, guid: e86e6fcc31e7595448313de1a9a5ff4d, type: 2}
     m_Threshold: 0.5
     m_Position: {x: 1, y: 1}
     m_TimeScale: 0.5
@@ -728,7 +850,7 @@ BlendTree:
     m_DirectBlendParameter: Blend
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 2b66ae5f7f4ec2342855e782900c6ed1, type: 2}
+    m_Motion: {fileID: 7400000, guid: e86e6fcc31e7595448313de1a9a5ff4d, type: 2}
     m_Threshold: 0.625
     m_Position: {x: 1, y: -1}
     m_TimeScale: 0.5
@@ -736,7 +858,7 @@ BlendTree:
     m_DirectBlendParameter: Blend
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 2b66ae5f7f4ec2342855e782900c6ed1, type: 2}
+    m_Motion: {fileID: 7400000, guid: e86e6fcc31e7595448313de1a9a5ff4d, type: 2}
     m_Threshold: 0.75
     m_Position: {x: -1, y: 0}
     m_TimeScale: 0.5
@@ -744,7 +866,7 @@ BlendTree:
     m_DirectBlendParameter: Blend
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 252f2fbd3de48f747ba52ce6bbb8ce30, type: 2}
+    m_Motion: {fileID: 7400000, guid: e86e6fcc31e7595448313de1a9a5ff4d, type: 2}
     m_Threshold: 0.875
     m_Position: {x: -1, y: 1}
     m_TimeScale: 0.5
@@ -752,7 +874,7 @@ BlendTree:
     m_DirectBlendParameter: Blend
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 2b66ae5f7f4ec2342855e782900c6ed1, type: 2}
+    m_Motion: {fileID: 7400000, guid: e86e6fcc31e7595448313de1a9a5ff4d, type: 2}
     m_Threshold: 1
     m_Position: {x: -1, y: -1}
     m_TimeScale: 0.5
@@ -926,6 +1048,58 @@ BlendTree:
   m_UseAutomaticThresholds: 1
   m_NormalizedBlendValues: 0
   m_BlendType: 2
+--- !u!1102 &6294926607970353297
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Shiroko_Original_Stand_Idle 1
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 7400000, guid: 5ba10730af114484b86a423203fae9c2, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
+--- !u!1102 &7026138387526744895
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Shiroko_Original_Stand_Attack_Start
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 7400000, guid: a6157f9fdc656ce4bad9aaa79702fdc2, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!114 &7547564568588459264
 MonoBehaviour:
   m_ObjectHideFlags: 1
