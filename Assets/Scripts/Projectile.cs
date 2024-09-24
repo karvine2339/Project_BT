@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class Projectile : MonoBehaviour
 {
@@ -15,11 +17,11 @@ public class Projectile : MonoBehaviour
     Vector3 enemyPosition;
     Vector3 targetPosition;
     Vector3 rocketDir;
-    float rocketRotSpeed = 5000.0f;
+    float rocketRotSpeed = 50.0f;
 
     private void Awake()
     {
-        rigid = GetComponent<Rigidbody>();
+        rigid = GetComponent<Rigidbody>(); 
     }
 
     public void SetForce(float force)
@@ -29,9 +31,8 @@ public class Projectile : MonoBehaviour
 
     private void Update()
     {
-        Rocket();
+        RocketActive();
 
-        Debug.Log(enemyPosition);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -47,9 +48,15 @@ public class Projectile : MonoBehaviour
 
         if(collision.transform.TryGetComponent(out EnemyCharacter enemy))
         {
-            enemy.OnDamaged(PlayerStat.Inst.bulletDamage);
-            enemyPosition = enemy.transform.position;
-
+            if (gameObject.tag == "Rocket")
+            {
+                enemy.OnDamaged((int)PlayerStat.Inst.bulletDamage * Random.Range(1.5f, 2.0f));
+            }
+            else
+            {
+                enemy.OnDamaged(PlayerStat.Inst.bulletDamage);
+            }
+            Destroy(gameObject);
         }
     }
 
@@ -65,32 +72,39 @@ public class Projectile : MonoBehaviour
 
     private void HandleEnemyDamaged(EnemyCharacter enemy, int damage)
     {
-        targetPosition = enemyPosition;
+       
     }
 
-    void Rocket()
+    void RocketActive()
     {
         if(gameObject.tag == "Rocket")
         {
             RocketRotate();
-            transform.position = Vector3.MoveTowards(transform.position, 
+            transform.position = Vector3.MoveTowards(transform.position,
                 new Vector3(DronCtrl.Instance.targetEnemy.transform.position.x,
-                            DronCtrl.Instance.targetEnemy.transform.position.y + 0.5f,
+                            DronCtrl.Instance.targetEnemy.transform.position.y + 0.75f,
                             DronCtrl.Instance.targetEnemy.transform.position.z), Time.deltaTime * rocketSpeed);
+
+            Ray rocketRay = new Ray(transform.position, rocketDir);
+            Debug.DrawRay(transform.position, rocketDir * 10f, Color.red);
         }
     }
 
-    void RocketRotate()  
+
+    public void RocketRotate()
     {
-        rocketDir = DronCtrl.Instance.targetEnemy.transform.position - transform.position;
+
+        Vector3 targetPos = new Vector3(DronCtrl.Instance.targetEnemy.transform.position.x,
+                            DronCtrl.Instance.targetEnemy.transform.position.y + 0.75f,
+                            DronCtrl.Instance.targetEnemy.transform.position.z);
+        rocketDir = targetPos - transform.position;
         rocketDir.Normalize();
 
+        Quaternion targetRot = Quaternion.LookRotation(rocketDir);
 
-        float angle = Mathf.Atan2(rocketDir.y, rocketDir.x) * Mathf.Rad2Deg;
-        Quaternion targetRot = Quaternion.AngleAxis(angle, Vector3.right);
-        transform.rotation = Quaternion.RotateTowards(transform.rotation,
-                                        targetRot, rocketRotSpeed * Time.deltaTime);
+        Quaternion newTargetRot = targetRot * Quaternion.Euler(-80, 0, 0);
 
+        transform.rotation = Quaternion.Slerp(transform.rotation, newTargetRot , rocketRotSpeed * Time.deltaTime);
 
     }
 }

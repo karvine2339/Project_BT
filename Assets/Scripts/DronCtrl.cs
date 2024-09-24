@@ -15,10 +15,14 @@ public class DronCtrl : MonoBehaviour
 
     public Transform RocketRightStartPosition;
     public Transform RocketLeftStartPosition;
+    Transform rocketInitPosition;
 
     public Projectile rocketPrefab;
 
     private float rocketRate = 0.5f;
+    private float rocketDelay = 1.5f;
+    private bool isRight = false;
+    private int rocketCount = 0;
 
     private float activeTime = 0f;
 
@@ -67,7 +71,7 @@ public class DronCtrl : MonoBehaviour
         {
             if(enemy == _enemy)
             {
-                activeTime = 5.0f;
+                activeTime = 10.0f;
                 targetEnemy = _enemy;
             }
         }
@@ -81,14 +85,29 @@ public class DronCtrl : MonoBehaviour
 
         activeTime -= Time.deltaTime;
         rocketRate -= Time.deltaTime;
+        rocketDelay -= Time.deltaTime;
+
+        if (rocketDelay >= 0)
+            return;
+
         if (rocketRate <= 0)
         {
-            Projectile newBullet = Instantiate(rocketPrefab, RocketRightStartPosition.position, Quaternion.Euler(90,0,0));
-            newBullet.gameObject.SetActive(true);
-
-            rocketRate = 0.5f;
+            
+           rocketInitPosition = isRight? RocketRightStartPosition : RocketLeftStartPosition;
+           Projectile newRocket = Instantiate(rocketPrefab,rocketInitPosition.position,
+                                                             Quaternion.Euler(-80, 0, 0));       
+            isRight = !isRight;
+            newRocket.gameObject.SetActive(true);
+            rocketRate = 0.2f;
+            rocketCount++;
+            if(rocketCount == 5)
+            {
+                rocketDelay = 2.0f;
+                rocketCount = 0;
+            }
         }
     }
+
 
 
     private void OnDetected(GameObject detectedObject)

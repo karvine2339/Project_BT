@@ -13,13 +13,6 @@ public class DamageTextCtrl : MonoBehaviour
     {
         Instance = this;
     }
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            CreatePopup(Vector3.one,Random.Range(100,1000).ToString()); 
-        }
-    }
 
     public void CreatePopup(Vector3 position, string text)
     {

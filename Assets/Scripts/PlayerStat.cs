@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class PlayerStat : MonoBehaviour
 {
-    private int _bulletMinDamage;
-    private int _bulletMaxDamage;
-    public int BulletMinDamage
+    private float _bulletMinDamage;
+    private float _bulletMaxDamage;
+    public float BulletMinDamage
     {
         get { return _bulletMinDamage; }
         set
@@ -19,7 +19,7 @@ public class PlayerStat : MonoBehaviour
         }
     }
 
-    public int BulletMaxDamage
+    public float BulletMaxDamage
     {
         get { return _bulletMaxDamage + 1; }
         set
@@ -49,9 +49,9 @@ public class PlayerStat : MonoBehaviour
         }
     }
 
-    public int bulletDamage;
+    public float bulletDamage;
 
-    public delegate void DamageChanged(int newDamage);
+    public delegate void DamageChanged(float newDamage);
     public static event DamageChanged OnDamageChanged;
 
     public delegate void FireRateChanged(float newFireRate);

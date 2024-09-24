@@ -110,14 +110,14 @@ public class ChrBase : MonoBehaviour
         //characterAnimator.SetTrigger("JumpTrigger");
     }
 
-    public virtual void OnDamaged(int damage)
+    public virtual void OnDamaged(float damage)
     {
         if(isLive)
         {
             DamageTextCtrl.Instance.CreatePopup(new Vector3(transform.position.x + Random.Range(-0.2f,0.2f),
                                                             transform.position.y + Random.Range(-0.2f,0.2f),
                                                             transform.position.z),damage.ToString());
-            curHp -= damage;
+            curHp -= (int)damage;
 
             if(curHp <= 0)
             {
