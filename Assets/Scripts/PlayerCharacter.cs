@@ -30,6 +30,52 @@ public class PlayerCharacter : ChrBase
 
     private float aimRigWeight;
 
+    public static PlayerCharacter Instance { get; private set; }
+
+    private InteractionSensor interactionSensor;
+
+    private List<IInteractable> currentInteractionItems = new List<IInteractable>();
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        Instance = this;
+
+        interactionSensor = GetComponentInChildren<InteractionSensor>();
+        interactionSensor.OnDetected += OnDetectedInteraction;
+        interactionSensor.OnLostSignal += OnLostInteraction;
+    }
+
+    public void Interact()
+    {
+        if (currentInteractionItems.Count <= 0)
+        {
+            return;
+        }
+
+        Interaction_UI.Instance.ExecuteInteractionData();
+    }
+
+    private void OnDetectedInteraction(IInteractable interactable)
+    {
+        if (interactable.IsAutoInteract == true)
+        {
+            interactable.Interact(this);
+        }
+        else
+        {
+            Interaction_UI.Instance.AddInteractionData(interactable);
+            currentInteractionItems.Add(interactable);
+        }
+    }
+
+    private void OnLostInteraction(IInteractable interactable)
+    {
+        Interaction_UI.Instance.RemoveInteractionData(interactable);
+
+        currentInteractionItems.Remove(interactable);
+    }
     protected override void Start()
     {
         aimRig = GetComponentInChildren<Rig>();
@@ -126,16 +172,16 @@ public class PlayerCharacter : ChrBase
         isReload = false;
     }
 
-    private void OnControllerColliderHit(ControllerColliderHit hit)
-    {
-        if(hit.transform.TryGetComponent(out DroppedWeapon weapon))
-        {
-            PlayerStat.Inst.BulletMinDamage = weapon.GetMinDamage();
-            PlayerStat.Inst.BulletMaxDamage = weapon.GetMaxDamage();
-            PlayerStat.Inst.FireRate = weapon.GetFireRate();
+    //private void OnControllerColliderHit(ControllerColliderHit hit)
+    //{
+    //    if(hit.transform.TryGetComponent(out DroppedWeapon weapon))
+    //    {
+    //        PlayerStat.Inst.BulletMinDamage = weapon.GetMinDamage();
+    //        PlayerStat.Inst.BulletMaxDamage = weapon.GetMaxDamage();
+    //        PlayerStat.Inst.FireRate = weapon.GetFireRate();
 
-            Destroy(weapon.gameObject);
-        }
-    }
+    //        Destroy(weapon.gameObject);
+    //    }
+    //}
 }
 
