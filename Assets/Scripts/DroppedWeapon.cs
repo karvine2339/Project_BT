@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DroppedWeapon : MonoBehaviour
+public class DroppedWeapon : MonoBehaviour, IInteractable
 {
+    public bool IsAutoInteract => false;
+    public string Message => gameObject.name.ToString();
 
     [SerializeField] private int weaponMinDamage;
     [SerializeField] private int weaponMaxDamage;
@@ -21,9 +23,10 @@ public class DroppedWeapon : MonoBehaviour
         weaponFireRate = Random.Range(0.07f, 0.2f);
     }
 
-    private void OnControllerColliderHit(ControllerColliderHit collision)
+
+    public void Interact(ChrBase playerCharacter)
     {
-        if(collision.transform.TryGetComponent(out PlayerCharacter player))
+        if (Input.GetKeyDown(KeyCode.F))
         {
             PlayerStat.Inst.BulletMinDamage = weaponMinDamage;
             PlayerStat.Inst.BulletMaxDamage = weaponMaxDamage;
