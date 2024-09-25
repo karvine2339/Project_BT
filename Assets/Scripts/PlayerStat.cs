@@ -57,11 +57,11 @@ public class PlayerStat : MonoBehaviour
     public delegate void FireRateChanged(float newFireRate);
     public static event FireRateChanged OnFireRateChanged;
 
-    public static PlayerStat Inst;
+    public static PlayerStat Instance;
 
     private void Awake()
     {
-        Inst = this;
+        Instance = this;
     }
 
     private void Start()

@@ -29,16 +29,16 @@ public class CharacterController : MonoBehaviour
 
     private void OnMouseWheel(float mouseWheel)
     {
-        //Interaction_UI.Instance.ChangeSelection(mouseWheel);
+        Interaction_UI.Instance.ChangeSelection(mouseWheel);
     }
 
     private void Interact()
     {
-        //var playerCharacter = characterBase as PlayerCharacter;
-        //if (playerCharacter == null)
-        //    return;
+        var playerCharacter = characterBase as PlayerCharacter;
+        if (playerCharacter == null)
+            return;
 
-        //playerCharacter.Interact();
+        playerCharacter.Interact();
     }
 
     private void Update()

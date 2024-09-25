@@ -127,6 +127,8 @@ public class PlayerCharacter : ChrBase
 
         if(Input.GetKeyDown(KeyCode.R))
         {
+            if (isReload)
+                return;
             StartCoroutine("Reload");
         }
 
@@ -142,6 +144,9 @@ public class PlayerCharacter : ChrBase
             {
                 if (curAmmo == 0)
                 {
+                    if (isReload)
+                        return;
+
                     StartCoroutine("Reload");
                     return;
                 }
@@ -153,7 +158,7 @@ public class PlayerCharacter : ChrBase
                 newBullet.gameObject.SetActive(true);
                 newBullet.SetForce(projectileSpeed);
                 curAmmo--;
-                PlayerStat.Inst.bulletDamage = Random.Range(PlayerStat.Inst.BulletMinDamage, PlayerStat.Inst.BulletMaxDamage);
+                PlayerStat.Instance.bulletDamage = Random.Range(PlayerStat.Instance.BulletMinDamage, PlayerStat.Instance.BulletMaxDamage);
                 fireRate = 0.1f;
 
 

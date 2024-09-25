@@ -26,27 +26,14 @@ public class DroppedWeapon : MonoBehaviour, IInteractable
 
     public void Interact(ChrBase playerCharacter)
     {
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            PlayerStat.Inst.BulletMinDamage = weaponMinDamage;
-            PlayerStat.Inst.BulletMaxDamage = weaponMaxDamage;
 
-            Destroy(gameObject);
-        }
-    }
+        PlayerStat.Instance.BulletMinDamage = weaponMinDamage;
+        PlayerStat.Instance.BulletMaxDamage = weaponMaxDamage;
+        PlayerStat.Instance.FireRate = weaponFireRate;
 
-    public int GetMinDamage()
-    {
-        return weaponMinDamage;
-    }
+        Interaction_UI.Instance.RemoveInteractionData(this);
 
-    public int GetMaxDamage()
-    {
-        return weaponMaxDamage;
-    }
+        Destroy(gameObject);
 
-    public float GetFireRate()
-    {
-        return weaponFireRate;
     }
 }
