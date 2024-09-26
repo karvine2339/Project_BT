@@ -16,7 +16,6 @@ public class PlayerCharacter : ChrBase
 
     public float fireRate = 0.1f;
     public float reloadTime = 1.3f;
-    private float bulletDamage;
     bool isReload = false;
 
     [SerializeField] private LayerMask aimColliderLayerMask = new LayerMask();
@@ -95,8 +94,6 @@ public class PlayerCharacter : ChrBase
 
     protected override void Update()
     {
-        GroundCheck();
-        FreeFall();
 
         aimingBlend = Mathf.Lerp(aimingBlend, (IsAiming ? 1f : 0f), Time.deltaTime * 10f);
         SetAiming(aimingBlend);
@@ -160,7 +157,7 @@ public class PlayerCharacter : ChrBase
                 curAmmo--;
                 PlayerStat.Instance.bulletDamage = Random.Range(PlayerStat.Instance.BulletMinDamage, PlayerStat.Instance.BulletMaxDamage);
                 fireRate = 0.1f;
-
+                HUDManager.Instance.SetWeaponAmmo(curAmmo, maxAmmo);
 
                 BTInputSystem.Instance.TriggerRecoil();
             }
@@ -173,6 +170,7 @@ public class PlayerCharacter : ChrBase
         characterAnimator.SetBool("IsReload",true);
         yield return new WaitForSeconds(reloadTime);
         curAmmo = maxAmmo;
+        HUDManager.Instance.SetWeaponAmmo(curAmmo, maxAmmo);
         characterAnimator.SetBool("IsReload", false);
         isReload = false;
     }

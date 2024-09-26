@@ -20,7 +20,6 @@ public class CharacterController : MonoBehaviour
 
     private void Start()
     {
-        BTInputSystem.Instance.onJumpCallback += Jump;
         BTInputSystem.Instance.onAttack += Attack;
         BTInputSystem.Instance.onInteract += Interact;
         BTInputSystem.Instance.onMouseWheel += OnMouseWheel;
@@ -60,11 +59,6 @@ public class CharacterController : MonoBehaviour
     {
         Vector2 look = BTInputSystem.Instance.look; 
         CameraRotate(look);                         
-    }
-
-    private void Jump()
-    {
-        characterBase.Jump();
     }
 
     private void Attack()

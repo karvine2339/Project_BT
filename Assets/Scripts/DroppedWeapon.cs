@@ -11,11 +11,6 @@ public class DroppedWeapon : MonoBehaviour, IInteractable
     [SerializeField] private int weaponMaxDamage;
     [SerializeField] private float weaponFireRate;
 
-    void Update()
-    {
-
-    }
-
     private void Start()
     {
         weaponMinDamage = Random.Range(50, 100);

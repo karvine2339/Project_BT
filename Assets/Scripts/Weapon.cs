@@ -4,7 +4,12 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    public int weaponDamage;
-    public float attRate;
-    public int price;
+    public int CurrentAmmo => curAmmo;
+    public int MaxAmmo => maxAmmo;
+
+    public int maxAmmo;
+    public int curAmmo;
+
+    public Projectile projectilePrefab;
+    public Transform fireStartPoint;
 }

@@ -6,7 +6,6 @@ using UnityEngine;
 public class ChrBase : MonoBehaviour
 {
     public bool IsAiming { get; set; }
-    public bool IsGrounded => isGrounded;
 
     public bool IsPossibleMovement
     {
@@ -33,11 +32,6 @@ public class ChrBase : MonoBehaviour
     public float groundRadius = 0.1f;
     public float groundOffset = 0.1f;
     public LayerMask groundLayer;
-
-    protected float verticalVelocity; 
-    protected bool isGrounded; 
-    protected float jumpTimeout = 0.1f;
-    protected float jumpTimeoutDelta = 0f;
 
     protected bool isWalk = false;
     protected bool isStrafe = false;
@@ -73,9 +67,6 @@ public class ChrBase : MonoBehaviour
     protected virtual void Update()
     {
 
-        GroundCheck();
-        FreeFall();
-
         characterAnimator.SetFloat("Strafe", isStrafe ? 1f : 0f);
 
         speed = isWalk ? 1f : 3f;
@@ -97,17 +88,6 @@ public class ChrBase : MonoBehaviour
     public virtual void SetAiming(float aiming)
     {
 
-    }
-
-    public void Jump()
-    {
-        if (isGrounded == false || jumpTimeoutDelta > 0f)
-            return;
-
-        verticalVelocity = jumpForce;
-        jumpTimeoutDelta = jumpTimeout;
-
-        //characterAnimator.SetTrigger("JumpTrigger");
     }
 
     public virtual void OnDamaged(float damage, float criticalHit,float criticalDamage)
@@ -155,8 +135,7 @@ public class ChrBase : MonoBehaviour
 
         Vector3 targetDirection = Quaternion.Euler(0, targetRotation, 0) * Vector3.forward;
 
-        unityCharacterController.Move(targetDirection.normalized * moveSpeed * Time.deltaTime
-            + new Vector3(0f, verticalVelocity, 0f) * Time.deltaTime);
+        unityCharacterController.Move(targetDirection.normalized * moveSpeed * Time.deltaTime);
 
         //characterAnimator.SetFloat("Horizontal", false == IsPossibleMovement ? 0 : input.x);
 
@@ -184,33 +163,5 @@ public class ChrBase : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
     }
 
-    public void GroundCheck()
-    {
-        Vector3 spherePosition = transform.position + (Vector3.down * groundOffset);
-
-        isGrounded = Physics.CheckSphere(spherePosition, groundRadius, groundLayer, QueryTriggerInteraction.Ignore);
-
-        //characterAnimator.SetBool("IsGrounded", isGrounded);
-    }
-
-    public void FreeFall()
-    {
-        if (isGrounded == false) 
-        {
-            verticalVelocity += Physics.gravity.y * Time.deltaTime;
-        }
-        else 
-        {
-
-            if (jumpTimeoutDelta > 0)
-            {
-                jumpTimeoutDelta -= Time.deltaTime;
-            }
-            else
-            {
-                verticalVelocity = 0f;
-            }
-        }
-    }
 }
 
