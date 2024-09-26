@@ -35,7 +35,6 @@ public class DamageTextAnimation : MonoBehaviour
         else if(gameObject.tag == "CriticalDamage")
         {
             tmp.color = new Color(1, 0.5f, 0, opacityCurve.Evaluate(time));
-            Debug.Log("Critical");
         }
         transform.localScale = Vector3.one *scaleCurve.Evaluate(time);
         transform.position = origin + new Vector3(0, 1 + heightCurve.Evaluate(time), 0);

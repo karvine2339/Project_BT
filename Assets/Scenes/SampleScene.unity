@@ -3728,7 +3728,7 @@ MonoBehaviour:
   fireStartPoint: {fileID: 1650610042}
   projectileSpeed: 2000
   fireRate: 0.2
-  reloadTime: 3.2
+  reloadTime: 2.65
   aimColliderLayerMask:
     serializedVersion: 2
     m_Bits: 192
@@ -3761,12 +3761,12 @@ Animator:
     'Bip001 R Hand'\n\tTransform 'Bip001 R Foot'\n\tTransform 'Bip001 L Clavicle'\n\tTransform
     'Bip001 R Thigh'\n\tTransform 'Bip001 Pelvis'\n\tand more ...\n\tFrom animation
     clip 'Shiroko_Original_Stand_Idle'\n\tFrom animation clip 'Shiroko_Original_Move_Ing
-    1'\n\tFrom animation clip 'Shiroko_Original_Move_Ing 1'\n\tFrom animation clip
-    'Shiroko_Original_Move_Ing 1'\n\tFrom animation clip 'Shiroko_Original_Move_Ing
-    1'\n\tFrom animation clip 'Shiroko_Original_Move_Ing 1'\n\tFrom animation clip
-    'Shiroko_Original_Move_Ing 1'\n\tFrom animation clip 'Shiroko_Original_Move_Ing
-    1'\n\tFrom animation clip 'Shiroko_Original_Move_Ing 1'\n\tFrom animation clip
-    'Shiroko_Original_Stand_Reload'\n\tand more ..."
+    1'\n\tFrom animation clip 'Shiroko_Original_Stand_Attack_Ing'\n\tFrom animation
+    clip 'Shiroko_Original_Move_Ing 3'\n\tFrom animation clip 'Shiroko_Original_Stand_Attack_Ing
+    1'\n\tFrom animation clip 'Shiroko_Original_Stand_Attack_Start 1'\n\tFrom animation
+    clip 'Shiroko_Original_Stand_Idle 1'\n\tFrom animation clip 'Shiroko_Original_Stand_Reload
+    1'\n\tFrom animation clip 'Shiroko_Original_Stand_Attack_Start'\n\tFrom animation
+    clip 'Shiroko_Original_Move_Ing 1'\n\tand more ..."
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
