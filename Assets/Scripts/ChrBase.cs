@@ -110,7 +110,7 @@ public class ChrBase : MonoBehaviour
         //characterAnimator.SetTrigger("JumpTrigger");
     }
 
-    public virtual void OnDamaged(float damage)
+    public virtual void OnDamaged(float damage, float criticalHit,float criticalDamage)
     {
         if(isLive)
         {

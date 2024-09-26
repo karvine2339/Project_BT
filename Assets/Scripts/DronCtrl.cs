@@ -65,7 +65,6 @@ public class DronCtrl : MonoBehaviour
 
     private void HandleEnemyDamaged(EnemyCharacter enemy, int damage)
     {
-        Debug.Log($"적 {enemy.name}에게 {damage}의 데미지를 주었습니다.");     
 
         foreach(var _enemy in detectedEnemy)
         {

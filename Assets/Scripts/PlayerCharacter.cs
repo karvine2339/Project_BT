@@ -129,7 +129,7 @@ public class PlayerCharacter : ChrBase
         {
             if (isReload)
                 return;
-            StartCoroutine("Reload");
+            StartCoroutine(Reload());
         }
 
         
@@ -147,7 +147,7 @@ public class PlayerCharacter : ChrBase
                     if (isReload)
                         return;
 
-                    StartCoroutine("Reload");
+                    StartCoroutine(Reload());
                     return;
                 }
                 if (isReload == true)

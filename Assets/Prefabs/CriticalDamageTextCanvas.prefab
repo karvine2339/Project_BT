@@ -74,7 +74,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.57254905, b: 0, a: 1}
+  m_Color: {r: 1, g: 0.41960785, b: 0, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 0
@@ -83,7 +83,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 192bca12a7e59c44692dac91db6bb03f, type: 2}
-    m_FontSize: 5
+    m_FontSize: 7
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
@@ -110,8 +110,8 @@ GameObject:
   - component: {fileID: 8828963507325088031}
   - component: {fileID: 7955077253198417973}
   m_Layer: 5
-  m_Name: DamageTextCanvas
-  m_TagString: DefaultDamage
+  m_Name: CriticalDamageTextCanvas
+  m_TagString: CriticalDamage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -258,9 +258,9 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 2
-      inSlope: -2.5
-      outSlope: -2.5
+      value: 3.5
+      inSlope: -6.25
+      outSlope: -6.25
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
@@ -268,7 +268,7 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0.4
       value: 1
-      inSlope: -2.5
+      inSlope: -6.25
       outSlope: 0
       tangentMode: 69
       weightedMode: 0

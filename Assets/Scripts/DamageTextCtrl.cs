@@ -8,6 +8,7 @@ public class DamageTextCtrl : MonoBehaviour
 {
     public static DamageTextCtrl Instance;
     public GameObject damageText;
+    public GameObject criticalText;
 
     private void Awake()
     {
@@ -22,5 +23,15 @@ public class DamageTextCtrl : MonoBehaviour
 
         //Destroy Timer
         Destroy(popup,1f);  
+    }
+
+    public void CreateCriPopup(Vector3 position, string text)
+    {
+        var popup = Instantiate(criticalText, position,Quaternion.identity);
+        var temp = popup.transform.GetChild(0).GetComponent<Text>();
+        temp.text = text;
+
+        //Destroy Timer
+        Destroy(popup, 1f);
     }
 }

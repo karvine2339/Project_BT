@@ -49,6 +49,35 @@ public class PlayerStat : MonoBehaviour
         }
     }
 
+    private float _criticalProbability;
+
+    public float CriticalProbability
+    {
+        get { return _criticalProbability; }
+        set
+        {
+            if (_criticalProbability != value)
+            {
+                _criticalProbability = value;
+                OnCriticalChanged?.Invoke(_criticalProbability);
+            }
+        }
+    }
+
+    private float _criticalDamage;
+    public float CriticalDamage
+    {
+        get { return _criticalDamage; }
+        set
+        {
+            if (_criticalDamage != value)
+            {
+                _criticalDamage = value;
+                OnCriticalDamageChanged?.Invoke(_criticalDamage);
+            }
+        }
+    }
+
     public float bulletDamage;
 
     public delegate void DamageChanged(float newDamage);
@@ -56,6 +85,12 @@ public class PlayerStat : MonoBehaviour
 
     public delegate void FireRateChanged(float newFireRate);
     public static event FireRateChanged OnFireRateChanged;
+
+    public delegate void CriticalChanged(float newCriticalProbability);
+    public static event CriticalChanged OnCriticalChanged;
+
+    public delegate void CriticalDamageChanged(float newCriticalDamage);
+    public static event CriticalDamageChanged OnCriticalDamageChanged;
 
     public static PlayerStat Instance;
 
@@ -66,6 +101,7 @@ public class PlayerStat : MonoBehaviour
 
     private void Start()
     {
-     
+        CriticalProbability = 20f;
+        CriticalDamage = 1.0f;
     }
 }

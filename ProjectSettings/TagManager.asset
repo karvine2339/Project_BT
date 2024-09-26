@@ -7,6 +7,8 @@ TagManager:
   - Enemy
   - Team2
   - Rocket
+  - DefaultDamage
+  - CriticalDamage
   layers:
   - Default
   - TransparentFX

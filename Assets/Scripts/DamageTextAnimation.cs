@@ -4,6 +4,11 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+public enum Damage
+{
+    damage,
+    critical
+}
 public class DamageTextAnimation : MonoBehaviour
 {
     public AnimationCurve opacityCurve;
@@ -23,7 +28,15 @@ public class DamageTextAnimation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        tmp.color = new Color(255, 255, 255, opacityCurve.Evaluate(time));
+        if (gameObject.tag == "DefaultDamage")
+        {
+            tmp.color = new Color(255, 255, 255, opacityCurve.Evaluate(time));
+        }
+        else if(gameObject.tag == "CriticalDamage")
+        {
+            tmp.color = new Color(1, 0.5f, 0, opacityCurve.Evaluate(time));
+            Debug.Log("Critical");
+        }
         transform.localScale = Vector3.one *scaleCurve.Evaluate(time);
         transform.position = origin + new Vector3(0, 1 + heightCurve.Evaluate(time), 0);
 

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1495,8 +1495,8 @@ MonoBehaviour:
     m_Bits: 0
   curAmmo: 0
   maxAmmo: 30
-  maxHp: 100000
-  curHp: 100000
+  maxHp: 20000
+  curHp: 20000
 --- !u!1 &668704109
 GameObject:
   m_ObjectHideFlags: 0
@@ -1796,8 +1796,8 @@ MonoBehaviour:
     m_Bits: 0
   curAmmo: 0
   maxAmmo: 30
-  maxHp: 100000
-  curHp: 100000
+  maxHp: 20000
+  curHp: 20000
 --- !u!95 &682393067
 Animator:
   serializedVersion: 5
@@ -5511,6 +5511,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageText: {fileID: 7745758651734964301, guid: 27c6b2d62217cd34fbaa3684129105b8, type: 3}
+  criticalText: {fileID: 7745758651734964301, guid: d2a4622f2e49cab44876c2291e2ec6a2, type: 3}
 --- !u!4 &1960315166
 Transform:
   m_ObjectHideFlags: 0
