@@ -9,6 +9,7 @@ TagManager:
   - Rocket
   - DefaultDamage
   - CriticalDamage
+  - Bullet
   layers:
   - Default
   - TransparentFX

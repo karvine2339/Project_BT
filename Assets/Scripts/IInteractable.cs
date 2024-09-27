@@ -9,5 +9,7 @@ public interface IInteractable
 
 
     public void Interact(ChrBase playerCharacter);
+
+    public void ShowInfo(ChrBase playerCharacter);
 }
 

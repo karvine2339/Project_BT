@@ -76,6 +76,17 @@ public class Interaction_UI : MonoBehaviour
         }
     }
 
+    public void ExecuteShowInfo()
+    {
+        if (selectedIndex < 0)
+            return;
+
+        if(selectedIndex < createdItems.Count)
+        {
+            createdItems[selectedIndex].InteractableData.ShowInfo(PlayerCharacter.Instance);
+        }
+    }
+
     public void ChangeSelection(float mouseWheel)
     {
         if (createdItems.Count <= 0)

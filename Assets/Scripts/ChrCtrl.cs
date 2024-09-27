@@ -22,6 +22,7 @@ public class CharacterController : MonoBehaviour
     {
         BTInputSystem.Instance.onAttack += Attack;
         BTInputSystem.Instance.onInteract += Interact;
+        BTInputSystem.Instance.onShowInfo += ShowInfo;
         BTInputSystem.Instance.onMouseWheel += OnMouseWheel;
 
     }
@@ -38,6 +39,15 @@ public class CharacterController : MonoBehaviour
             return;
 
         playerCharacter.Interact();
+    }
+
+    private void ShowInfo()
+    {
+        var playerCharacter = characterBase as PlayerCharacter;
+        if (playerCharacter == null)
+            return;
+
+        playerCharacter.ShowInfo();
     }
 
     private void Update()

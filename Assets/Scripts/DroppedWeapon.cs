@@ -7,6 +7,8 @@ public class DroppedWeapon : MonoBehaviour, IInteractable
     public bool IsAutoInteract => false;
     public string Message => gameObject.name.ToString();
 
+    public string weaponName;
+
     [SerializeField] private int weaponMinDamage;
     [SerializeField] private int weaponMaxDamage;
     [SerializeField] private float weaponFireRate;
@@ -30,5 +32,16 @@ public class DroppedWeapon : MonoBehaviour, IInteractable
 
         Destroy(gameObject);
 
+    }
+
+    public void ShowInfo(ChrBase playerCharacter)
+    {
+        Debug.Log(weaponName);
+        Debug.Log(weaponMaxDamage);
+    }
+
+    public void InitWeaponData(WeaponData weaponData)
+    {
+        weaponName = weaponData.name;
     }
 }
