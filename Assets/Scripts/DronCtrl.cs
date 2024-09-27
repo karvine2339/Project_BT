@@ -91,18 +91,21 @@ public class DronCtrl : MonoBehaviour
 
         if (rocketRate <= 0)
         {
-            
-           rocketInitPosition = isRight? RocketRightStartPosition : RocketLeftStartPosition;
-           Projectile newRocket = Instantiate(rocketPrefab,rocketInitPosition.position,
-                                                             Quaternion.Euler(-80, 0, 0));       
-            isRight = !isRight;
-            newRocket.gameObject.SetActive(true);
-            rocketRate = 0.2f;
-            rocketCount++;
-            if(rocketCount == 5)
+            if (targetEnemy != null)
             {
-                rocketDelay = 2.0f;
-                rocketCount = 0;
+
+                rocketInitPosition = isRight ? RocketRightStartPosition : RocketLeftStartPosition;
+                Projectile newRocket = Instantiate(rocketPrefab, rocketInitPosition.position,
+                                                                  Quaternion.Euler(-80, 0, 0));
+                isRight = !isRight;
+                newRocket.gameObject.SetActive(true);
+                rocketRate = 0.2f;
+                rocketCount++;
+                if (rocketCount == 5)
+                {
+                    rocketDelay = 2.0f;
+                    rocketCount = 0;
+                }
             }
         }
     }
