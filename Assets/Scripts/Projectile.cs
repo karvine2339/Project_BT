@@ -16,6 +16,7 @@ public class Projectile : MonoBehaviour
     public float rocketSpeed = 10.0f;
 
     private Vector3 rocketDir;
+
     private bool hasTarget = false;
 
     float rocketRotSpeed = 50.0f;

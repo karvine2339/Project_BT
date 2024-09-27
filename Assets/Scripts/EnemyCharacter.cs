@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -10,7 +11,7 @@ public class EnemyCharacter : ChrBase
     public static event Action<EnemyCharacter, int> OnEnemyDamaged;
 
     public List<WeaponData> weaponList;
-    public GameObject weaponPrefab;
+    public GameObject[] weaponPrefab;
 
     public override void OnDamaged(float damage, float criticalHit,float criticalDamage)  
     {
@@ -44,13 +45,20 @@ public class EnemyCharacter : ChrBase
 
     public GameObject DropWeapon(Vector3 dropPos)
     {
-        WeaponData randWeaponData = weaponList[Random.Range(0, weaponList.Count)];
+        if (weaponList.Count == 0 || weaponPrefab.Length == 0)
+        {
+            Debug.LogError("Weapon list or prefab array is empty!");
+            return null;
+        }
 
-        GameObject droppedWeapon = Instantiate(weaponPrefab, dropPos, Quaternion.identity);
+        GameObject droppedWeapon = Instantiate(weaponPrefab[Random.Range(0,weaponPrefab.Length)], dropPos, gameObject.transform.rotation);    
+
+        DroppedWeapon prefabComponent = droppedWeapon.GetComponent<DroppedWeapon>();
+
+        WeaponData weaponData = prefabComponent.weaponData;
 
         DroppedWeapon weaponComponent = droppedWeapon.GetComponent<DroppedWeapon>();
-
-        weaponComponent.InitWeaponData(randWeaponData);
+        weaponComponent.InitWeaponData(weaponData);
 
         return droppedWeapon;
     }

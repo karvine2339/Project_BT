@@ -9,15 +9,15 @@ public class DroppedWeapon : MonoBehaviour, IInteractable
 
     public string weaponName;
 
-    [SerializeField] private int weaponMinDamage;
-    [SerializeField] private int weaponMaxDamage;
+    public WeaponData weaponData;
+
+    [SerializeField] private float weaponMinDamage;
+    [SerializeField] private float weaponMaxDamage;
     [SerializeField] private float weaponFireRate;
 
     private void Start()
     {
-        weaponMinDamage = Random.Range(50, 100);
-        weaponMaxDamage = Random.Range(150, 200);
-        weaponFireRate = Random.Range(0.07f, 0.2f);
+        InitWeaponData(weaponData);
     }
 
 
@@ -37,11 +37,15 @@ public class DroppedWeapon : MonoBehaviour, IInteractable
     public void ShowInfo(ChrBase playerCharacter)
     {
         Debug.Log(weaponName);
-        Debug.Log(weaponMaxDamage);
+        Debug.Log(weaponData.maxDamage);
+        Debug.Log(weaponFireRate);
     }
 
     public void InitWeaponData(WeaponData weaponData)
     {
-        weaponName = weaponData.name;
+        weaponName = weaponData.weaponName;
+        weaponMinDamage = weaponData.minDamage;
+        weaponMaxDamage = weaponData.maxDamage;
+        weaponFireRate = Random.Range(weaponData.minfireRate,weaponData.maxfireRate);
     }
 }
