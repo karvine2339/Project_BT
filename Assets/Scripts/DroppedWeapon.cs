@@ -5,7 +5,7 @@ using UnityEngine;
 public class DroppedWeapon : MonoBehaviour, IInteractable
 {
     public bool IsAutoInteract => false;
-    public string Message => gameObject.name.ToString();
+    public string Message => weaponName;
 
     public string weaponName;
 
