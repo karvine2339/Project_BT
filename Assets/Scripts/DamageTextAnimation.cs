@@ -15,14 +15,14 @@ public class DamageTextAnimation : MonoBehaviour
     public AnimationCurve scaleCurve;
     public AnimationCurve heightCurve;
 
-    private Text tmp;
+    private TextMeshPro tmp;
     private float time = 0;
     private Vector3 origin;
 
 
     private void Awake()
     {
-        tmp = transform.GetChild(0).GetComponent<Text>();
+        tmp = transform.GetChild(0).GetComponent<TextMeshPro>();
         origin = transform.position;
     }
     // Update is called once per frame

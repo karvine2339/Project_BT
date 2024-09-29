@@ -166,7 +166,7 @@ public class PlayerCharacter : ChrBase
                 newBullet.SetForce(projectileSpeed);
                 curAmmo--;
                 PlayerStat.Instance.bulletDamage = Random.Range(PlayerStat.Instance.BulletMinDamage, PlayerStat.Instance.BulletMaxDamage);
-                fireRate = 0.1f;
+                fireRate = PlayerStat.Instance.FireRate;
                 HUDManager.Instance.SetWeaponAmmo(curAmmo, maxAmmo);
 
                 BTInputSystem.Instance.TriggerRecoil();

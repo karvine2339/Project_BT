@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Windows;
 
 public class DamageTextCtrl : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class DamageTextCtrl : MonoBehaviour
 
     public TextMeshProUGUI textMeshPro;
 
+    private TextMeshPro temp;
     private void Awake()
     {
         Instance = this;
@@ -20,22 +22,20 @@ public class DamageTextCtrl : MonoBehaviour
     public void CreatePopup(Vector3 position, string text)
     {
         var popup = Instantiate(damageText,position,Quaternion.identity);
-        var temp = popup.transform.GetChild(0).GetComponent<Text>();
-        temp.text = text;
+        temp = popup.transform.GetChild(0).GetComponent<TextMeshPro>();
 
         SetSpriteText(text);
 
-        //Destroy Timer
         Destroy(popup,1f);  
     }
 
     public void CreateCriPopup(Vector3 position, string text)
     {
         var popup = Instantiate(criticalText, position,Quaternion.identity);
-        var temp = popup.transform.GetChild(0).GetComponent<Text>();
-        temp.text = text;
+        temp = popup.transform.GetChild(0).GetComponent<TextMeshPro>();
+       
+        SetSpriteText(text);
 
-        //Destroy Timer
         Destroy(popup, 1f);
     }
 
@@ -51,6 +51,6 @@ public class DamageTextCtrl : MonoBehaviour
             }
         }
 
-        textMeshPro.text = spriteText; // 변환된 텍스트 설정
+        temp.text = spriteText; 
     }
 }
