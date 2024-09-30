@@ -18,3 +18,4 @@ MonoBehaviour:
   maxDamage: 100
   minfireRate: 0.2
   maxfireRate: 0.1
+  weaponImg: {fileID: 21300000, guid: 60bbe4238c168884d88f11871904eed0, type: 3}

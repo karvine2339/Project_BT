@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HUDManager : MonoBehaviour
 {
@@ -11,9 +12,13 @@ public class HUDManager : MonoBehaviour
     public TextMeshProUGUI weaponNameText;
     public TextMeshProUGUI weaponAmmoText;
 
+    public Image weaponImage;
+
     public void Awake()
     {
         Instance = this; 
+
+        weaponImage = GetComponentInChildren<Image>();
     }
 
     public void OnDestroy()

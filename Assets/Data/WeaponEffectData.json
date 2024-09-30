@@ -1,0 +1,33 @@
+{
+  "effectTables": [
+    {
+      "name": "WeaponEffects",
+      "effects": [
+        {
+          "effectName": "데미지 증가",
+          "minValue": 50,
+          "maxValue": 100,
+          "chance": 1.0
+        },
+        {
+          "effectName": "연사속도 증가",
+          "minValue": 50,
+          "maxValue": 100,
+          "chance": 1.0
+        },
+        {
+          "effectName": "크리티컬 확률 증가",
+          "minValue": 10,
+          "maxValue": 20,
+          "chance": 1.0
+        },
+        {
+          "effectName": "크리티컬 데미지 증가",
+          "minValue": 10,
+          "maxValue": 20,
+          "chance": 0.5
+        }
+      ]
+    }
+  ]
+}

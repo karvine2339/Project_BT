@@ -11,9 +11,7 @@ public class DamageTextCtrl : MonoBehaviour
     public GameObject damageText;
     public GameObject criticalText;
 
-    public TextMeshProUGUI textMeshPro;
-
-    private TextMeshPro temp;
+    public Text temp;
     private void Awake()
     {
         Instance = this;
@@ -22,9 +20,11 @@ public class DamageTextCtrl : MonoBehaviour
     public void CreatePopup(Vector3 position, string text)
     {
         var popup = Instantiate(damageText,position,Quaternion.identity);
-        temp = popup.transform.GetChild(0).GetComponent<TextMeshPro>();
+        temp = popup.transform.GetChild(0).GetComponent<Text>();
 
-        SetSpriteText(text);
+        //SetSpriteText(text);
+
+        temp.text = text;
 
         Destroy(popup,1f);  
     }
@@ -32,25 +32,27 @@ public class DamageTextCtrl : MonoBehaviour
     public void CreateCriPopup(Vector3 position, string text)
     {
         var popup = Instantiate(criticalText, position,Quaternion.identity);
-        temp = popup.transform.GetChild(0).GetComponent<TextMeshPro>();
-       
-        SetSpriteText(text);
+        temp = popup.transform.GetChild(0).GetComponent<Text>();
+
+        //SetSpriteText(text);
+
+        temp.text = text;
 
         Destroy(popup, 1f);
     }
 
-    public void SetSpriteText(string input)
-    {
-        string spriteText = "";
-        foreach (char c in input)
-        {
-            if (c >= '0' && c <= '9') // 숫자일 경우
-            {
-                int spriteIndex = c - '0'; // '0'을 빼서 인덱스를 계산
-                spriteText += $"<sprite={spriteIndex}>"; // 해당 스프라이트 태그 추가
-            }
-        }
+    //public void SetSpriteText(string input)
+    //{
+    //    string spriteText = "";
+    //    foreach (char c in input)
+    //    {
+    //        if (c >= '0' && c <= '9') 
+    //        {
+    //            int spriteIndex = c - '0'; 
+    //            spriteText += $"<color=#00FF22><sprite={spriteIndex}></color>"; 
+    //        }
+    //    }
 
-        temp.text = spriteText; 
-    }
+    //    temp.text = spriteText; 
+    //}
 }

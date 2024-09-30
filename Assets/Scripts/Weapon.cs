@@ -20,7 +20,7 @@ public class Weapon : MonoBehaviour
     public Projectile projectilePrefab;
     public Transform fireStartPoint;
 
-    bool isReload = false;
+    //bool isReload = false;
 
 
 }
