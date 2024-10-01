@@ -15,8 +15,8 @@ public class DroppedWeapon : MonoBehaviour, IInteractable
     public class Effect
     {
         public string effectName;  
-        public int minValue;     
-        public int maxValue;       
+        public float minValue;     
+        public float maxValue;       
         public float chance;      
     }
 
@@ -132,9 +132,9 @@ public class DroppedWeapon : MonoBehaviour, IInteractable
         {
             if (effect.effectName == "데미지 증가")
             {
-                int randDmg = Random.Range(effect.minValue, effect.maxValue);
-                weaponMinDamage += randDmg;
-                weaponMaxDamage += randDmg;
+                float randDmg = Random.Range(effect.minValue, effect.maxValue);
+                weaponMinDamage *=  1 + (randDmg / 100);
+                weaponMaxDamage *= 1 + (randDmg / 100);
             }
 
             else if (effect.effectName == "크리티컬 확률 증가")
@@ -144,7 +144,7 @@ public class DroppedWeapon : MonoBehaviour, IInteractable
 
             else if (effect.effectName == "연사속도 증가")
             {
-                weaponFireRate = weaponFireRate - (weaponFireRate * Random.Range(effect.minValue / 100, effect.maxValue / 100));
+                weaponFireRate /= 1 + Random.Range(effect.minValue / 100, effect.maxValue / 100);
             }
             else if (effect.effectName == "크리티컬 데미지 증가")
             {
