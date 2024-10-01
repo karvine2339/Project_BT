@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class Interaction_UI : MonoBehaviour
 {
@@ -10,15 +11,20 @@ public class Interaction_UI : MonoBehaviour
 
     [SerializeField] private Transform listItemRoot;
     [SerializeField] private Interaction_List listItemPrefab;
+    public GameObject weaponInfoBox; 
 
     private List<Interaction_List> createdItems = new List<Interaction_List>();
     private int selectedIndex = -1;
+
+    public Transform canvas;
 
     private void Awake()
     {
         Instance = this;
 
         listItemPrefab.gameObject.SetActive(false);
+
+        canvas = this.transform;
     }
 
     public void AddInteractionData(IInteractable interactionData)
@@ -26,8 +32,10 @@ public class Interaction_UI : MonoBehaviour
         Interaction_List newItem = Instantiate(listItemPrefab, listItemRoot);
         newItem.gameObject.SetActive(true);
         newItem.InteractableData = interactionData;
-        newItem.Message = interactionData.Message;
+        newItem.nonSelectedMessage = interactionData.Message;
+        newItem.selectedMessage = interactionData.Message;
         newItem.IsSelected = false;
+        newItem.IsSelectedObject = false;
 
         createdItems.Add(newItem);
 
@@ -35,6 +43,7 @@ public class Interaction_UI : MonoBehaviour
         {
             selectedIndex = 0;
             newItem.IsSelected = true;
+            newItem.IsSelectedObject = true;
         }
     }
 
@@ -58,6 +67,7 @@ public class Interaction_UI : MonoBehaviour
                 selectedIndex = 0;
             }
             createdItems[selectedIndex].IsSelected = true;
+            createdItems[selectedIndex].IsSelectedObject = true;
         }
         else
         {
@@ -76,14 +86,25 @@ public class Interaction_UI : MonoBehaviour
         }
     }
 
-    public void ExecuteShowInfo()
+    public void ShowInfoBox()
     {
         if (selectedIndex < 0)
             return;
 
         if(selectedIndex < createdItems.Count)
         {
-            createdItems[selectedIndex].InteractableData.ShowInfo(PlayerCharacter.Instance);
+            createdItems[selectedIndex].InteractableData.ShowInfoBox(PlayerCharacter.Instance);
+        }
+    }
+
+    public void HideInfoBox()
+    {
+        if (selectedIndex < 0)
+            return;
+
+        if(selectedIndex < createdItems.Count)
+        {
+            createdItems[selectedIndex].InteractableData.HideInfoBox(PlayerCharacter.Instance);
         }
     }
 
@@ -93,6 +114,7 @@ public class Interaction_UI : MonoBehaviour
             return;
 
         createdItems[selectedIndex].IsSelected = false;
+        createdItems[selectedIndex].IsSelectedObject = false;
 
         if (mouseWheel > 0)
         {
@@ -112,6 +134,7 @@ public class Interaction_UI : MonoBehaviour
         }
 
         createdItems[selectedIndex].IsSelected = true;
+        createdItems[selectedIndex].IsSelectedObject = true;
     }
 }
 

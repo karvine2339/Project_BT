@@ -22,7 +22,8 @@ public class CharacterController : MonoBehaviour
     {
         BTInputSystem.Instance.onAttack += Attack;
         BTInputSystem.Instance.onInteract += Interact;
-        BTInputSystem.Instance.onShowInfo += ShowInfo;
+        BTInputSystem.Instance.onShowInfo += ShowInfoBox;
+        BTInputSystem.Instance.onHideInfo += HideInfoBox;
         BTInputSystem.Instance.onMouseWheel += OnMouseWheel;
 
     }
@@ -41,13 +42,22 @@ public class CharacterController : MonoBehaviour
         playerCharacter.Interact();
     }
 
-    private void ShowInfo()
+    private void ShowInfoBox()
     {
         var playerCharacter = characterBase as PlayerCharacter;
         if (playerCharacter == null)
             return;
 
-        playerCharacter.ShowInfo();
+        playerCharacter.ShowInfoBox();
+    }
+
+    private void HideInfoBox()
+    {
+        var playerCharacter = characterBase as PlayerCharacter;
+        if (playerCharacter == null)
+            return;
+
+        playerCharacter.HideInfoBox();
     }
 
     private void Update()

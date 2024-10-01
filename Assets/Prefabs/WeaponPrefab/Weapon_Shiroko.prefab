@@ -99,9 +99,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: 
   weaponData: {fileID: 11400000, guid: 32d15122237f9be4a94627369f31a897, type: 2}
+  weaponImg: {fileID: 0}
   weaponMinDamage: 0
   weaponMaxDamage: 0
   weaponFireRate: 0
+  weaponCriticalProbability: 20
+  weaponCriticalDamage: 1.5
 --- !u!135 &2133567975139510680
 SphereCollider:
   m_ObjectHideFlags: 0

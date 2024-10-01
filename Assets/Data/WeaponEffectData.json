@@ -5,27 +5,39 @@
       "effects": [
         {
           "effectName": "데미지 증가",
-          "minValue": 50,
-          "maxValue": 100,
-          "chance": 1.0
+          "minValue": 30,
+          "maxValue": 50,
+          "chance": 1.0,
+          "InfoString": "데미지 증가 : 데미지 value% 증가"
         },
         {
           "effectName": "연사속도 증가",
           "minValue": 50,
           "maxValue": 100,
-          "chance": 1.0
+          "chance": 1.0,
+          "InfoString": "빠른 사격 : 연사속도 value% 증가"
         },
         {
           "effectName": "크리티컬 확률 증가",
           "minValue": 10,
           "maxValue": 20,
-          "chance": 1.0
+          "chance": 1.0,
+          "InfoString": "크리티컬 확률 증가 : 크리티컬 확률 value% 증가"
         },
         {
           "effectName": "크리티컬 데미지 증가",
-          "minValue": 10,
-          "maxValue": 20,
-          "chance": 0.5
+          "minValue": 50,
+          "maxValue": 100,
+          "chance": 1.0,
+          "InfoString": "크리티컬 데미지 증가 : 크리티컬 데미지 value% 증가"
+        },
+        {
+          "effectName": "불안정한 개조",
+          "minValue": 50,
+          "MaxValue": 100,
+          "RecoilValue": 50,
+          "chance" : 1.0,
+          "InfoString": "불안정한 개조 : 데미지 value% 증가 , 총기 반동 recoilValue% 증가"
         }
       ]
     }

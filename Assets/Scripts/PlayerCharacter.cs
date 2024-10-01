@@ -56,14 +56,24 @@ public class PlayerCharacter : ChrBase
         Interaction_UI.Instance.ExecuteInteractionData();
     }
 
-    public void ShowInfo()
+    public void ShowInfoBox()
     {
         if(currentInteractionItems.Count <= 0)
         {
             return;
         }
 
-        Interaction_UI.Instance.ExecuteShowInfo();
+        Interaction_UI.Instance.ShowInfoBox();
+    }
+
+    public void HideInfoBox()
+    {
+        if(currentInteractionItems.Count <= 0)
+        {
+            return;
+        }
+
+        Interaction_UI.Instance.HideInfoBox();
     }
 
     private void OnDetectedInteraction(IInteractable interactable)

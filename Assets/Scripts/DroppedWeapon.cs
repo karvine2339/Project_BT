@@ -6,6 +6,7 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.IO;
 using Random = UnityEngine.Random;
+using static DroppedWeapon;
 
 public class DroppedWeapon : MonoBehaviour, IInteractable
 {
@@ -14,10 +15,13 @@ public class DroppedWeapon : MonoBehaviour, IInteractable
     [Serializable]
     public class Effect
     {
-        public string effectName;  
+        public string effectName;
+        public float damageMinValue;
+        public float damageMaxValue;
         public float minValue;     
         public float maxValue;       
-        public float chance;      
+        public float chance;
+        public string InfoString;
     }
 
     [Serializable]
@@ -43,24 +47,27 @@ public class DroppedWeapon : MonoBehaviour, IInteractable
 
     public Sprite weaponImg;
 
+    private GameObject weaponInfoBox;
+    WeaponInfoBox weaponInfo;
+
     [SerializeField] private float weaponMinDamage;
     [SerializeField] private float weaponMaxDamage;
     [SerializeField] private float weaponFireRate;
-    [SerializeField] private float weaponCriticalProbability;
-    [SerializeField] private float weaponCriticalDamage;
-
+    [SerializeField] private float weaponCriticalProbability = 20.0f;
+    [SerializeField] private float weaponCriticalDamage = 1.5f;
+    private string[] weaponEffect = new string[3];
     private void Start()
     {
+        weaponInfoBox = Interaction_UI.Instance.weaponInfoBox;
+
         InitWeaponData(weaponData);
 
         string json = System.IO.File.ReadAllText(jsonFilePath);
-
-
-
         effectData = JsonConvert.DeserializeObject<Root>(json);
 
         InitWeaponEffect();
 
+        weaponInfo = weaponInfoBox.GetComponent<WeaponInfoBox>();
 
         //Root parsedData = JsonConvert.DeserializeObject<Root>(json);
 
@@ -84,7 +91,8 @@ public class DroppedWeapon : MonoBehaviour, IInteractable
         PlayerStat.Instance.BulletMinDamage = weaponMinDamage;
         PlayerStat.Instance.BulletMaxDamage = weaponMaxDamage;
         PlayerStat.Instance.FireRate = weaponFireRate;
-        PlayerStat.Instance.CriticalProbability += weaponCriticalProbability;
+        PlayerStat.Instance.CriticalProbability = weaponCriticalProbability;
+        PlayerStat.Instance.CriticalDamage = weaponCriticalDamage;
 
         Interaction_UI.Instance.RemoveInteractionData(this);
 
@@ -94,13 +102,30 @@ public class DroppedWeapon : MonoBehaviour, IInteractable
 
     }
 
-    public void ShowInfo(ChrBase playerCharacter)
+    public void ShowInfoBox(ChrBase playerCharacter)
     {
-        Debug.Log(weaponName);
-        Debug.Log(weaponMaxDamage);
-        Debug.Log(weaponFireRate);
-        Debug.Log(weaponCriticalProbability);
-        Debug.Log(weaponCriticalDamage);
+        if(weaponInfoBox != null)
+        {
+            weaponInfoBox.gameObject.SetActive(true);
+            weaponInfo.weaponDamageText.text = weaponMinDamage.ToString("N0") + " ~ " + weaponMaxDamage.ToString("N0");
+            weaponInfo.weaponFireRateText.text = weaponFireRate.ToString("N2") + "초 / 발";
+            weaponInfo.weaponNameText.text = weaponName;
+            weaponInfo.weaponImg.sprite = weaponImg;
+            weaponInfo.effect[0].text = weaponEffect[0];
+            weaponInfo.effect[1].text = weaponEffect[1];
+            weaponInfo.effect[2].text = weaponEffect[2];
+
+        }
+        Debug.Log("Show Info Box");
+    }
+
+    public void HideInfoBox(ChrBase playerCharacter)
+    {
+        if (weaponInfoBox != null)
+        {
+            weaponInfoBox.gameObject.SetActive(false);
+        }
+        Debug.Log("Hide Info Box");
     }
 
     public void InitWeaponData(WeaponData weaponData)
@@ -119,37 +144,55 @@ public class DroppedWeapon : MonoBehaviour, IInteractable
         for (int i = 0; i < 3; i++)
         {
             EffectTable randomTable = effectData.effectTables[Random.Range(0, effectData.effectTables.Count)];
-            Effect randomEffect = randomTable.effects[Random.Range(0, randomTable.effects.Count)];
+            Effect effect = randomTable.effects[Random.Range(0, randomTable.effects.Count)];
 
-            if (Random.value <= randomEffect.chance)
+            if (Random.value <= effect.chance)
             {
-                selectedEffects.Add(randomEffect);
-                Debug.Log("Effect Applied: " + randomEffect.effectName);
+                selectedEffects.Add(effect);
+                Debug.Log("Effect Applied: " + effect.effectName);
+
+                if (effect.effectName == "데미지 증가")
+                {
+                    float randVal = Random.Range(effect.minValue, effect.maxValue);
+                    weaponMinDamage *= 1 + (randVal / 100);
+                    weaponMaxDamage *= 1 + (randVal / 100);
+                    weaponEffect[i] = effect.InfoString.Replace("value", randVal.ToString("N0"));
+                }
+
+                else if (effect.effectName == "크리티컬 확률 증가")
+                {
+                    float randVal = Random.Range(effect.minValue,effect.maxValue);
+                    weaponCriticalProbability += randVal;
+                    weaponEffect[i] = effect.InfoString.Replace("value", randVal.ToString("N0"));
+                }
+
+                else if (effect.effectName == "연사속도 증가")
+                {
+                    float randVal = Random.Range(effect.minValue , effect.maxValue);
+                    weaponFireRate /= 1 + randVal / 100;
+                    weaponEffect[i] = effect.InfoString.Replace("value", randVal.ToString("N0"));
+                }
+                else if (effect.effectName == "크리티컬 데미지 증가")
+                {
+                    float randVal = Random.Range(effect.minValue, effect.maxValue);
+                    weaponCriticalDamage += randVal / 100;
+                    weaponEffect[i] = effect.InfoString.Replace("value", randVal.ToString("N0"));
+
+                }
+                else if (effect.effectName == "불안정한 개조")
+                {
+                    float randVal = Random.Range(effect.minValue, effect.maxValue);
+                    weaponMinDamage *= 1 + (randVal / 100);
+                    weaponMaxDamage *= 1 + (randVal / 100);
+                    weaponEffect[i] = effect.InfoString.Replace("value", randVal.ToString("N0"))
+                                                     .Replace("recoilValue", randVal.ToString("N0"));
+                }
+
             }
         }
 
         foreach (var effect in selectedEffects)
         {
-            if (effect.effectName == "데미지 증가")
-            {
-                float randDmg = Random.Range(effect.minValue, effect.maxValue);
-                weaponMinDamage *=  1 + (randDmg / 100);
-                weaponMaxDamage *= 1 + (randDmg / 100);
-            }
-
-            else if (effect.effectName == "크리티컬 확률 증가")
-            {
-                weaponCriticalProbability += Random.Range(effect.minValue, effect.maxValue);
-            }
-
-            else if (effect.effectName == "연사속도 증가")
-            {
-                weaponFireRate /= 1 + Random.Range(effect.minValue / 100, effect.maxValue / 100);
-            }
-            else if (effect.effectName == "크리티컬 데미지 증가")
-            {
-                weaponCriticalDamage += Random.Range(effect.minValue, effect.maxValue);
-            }
 
         }
     }

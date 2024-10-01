@@ -101,7 +101,6 @@ public class PlayerStat : MonoBehaviour
 
     private void Start()
     {
-        CriticalProbability = 20f;
-        CriticalDamage = 1.0f;
+
     }
 }

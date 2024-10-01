@@ -10,6 +10,8 @@ public interface IInteractable
 
     public void Interact(ChrBase playerCharacter);
 
-    public void ShowInfo(ChrBase playerCharacter);
+    public void ShowInfoBox(ChrBase playerCharacter);
+
+    public void HideInfoBox(ChrBase playerCharacter);
 }
 
