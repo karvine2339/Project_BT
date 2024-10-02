@@ -170,6 +170,7 @@ public class PlayerCharacter : ChrBase
                 if (isReload == true)
                     return;
 
+                characterAnimator.SetTrigger("Fire");
                 Vector3 aimDir = (targetPointPosition - fireStartPoint.position).normalized;
                 Projectile newBullet = Instantiate(projectilePrefab, fireStartPoint.position, Quaternion.LookRotation(aimDir, Vector3.up));
                 newBullet.gameObject.SetActive(true);

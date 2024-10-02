@@ -91,6 +91,9 @@ public class Projectile : MonoBehaviour
         {
             if (DronCtrl.Instance.targetEnemy != null)
             {
+                if (rigid.isKinematic)
+                    return;
+
                 hasTarget = true;
 
                 RocketRotate();
@@ -112,7 +115,11 @@ public class Projectile : MonoBehaviour
 
                 Ray rocketRay = new Ray(transform.position, rocketDir);
                 Debug.DrawRay(transform.position, rocketDir * 10f, Color.green);
+
+                rigid.isKinematic = true;
             }
+
+            Destroy(gameObject, 5.0f);
         }
     }
 

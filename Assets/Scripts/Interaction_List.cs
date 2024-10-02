@@ -50,14 +50,6 @@ public class Interaction_List : MonoBehaviour
         set
         {
             selectedObject.SetActive(value);
-            if (value == true)
-            {
-                rect.sizeDelta = new Vector2(350, 100);
-            }
-            else
-            {
-                rect.sizeDelta = new Vector2(350, 50);
-            }
         }
     }
 
