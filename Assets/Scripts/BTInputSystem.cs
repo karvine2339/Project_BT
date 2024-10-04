@@ -43,6 +43,8 @@ public class BTInputSystem : MonoBehaviour
     public System.Action onInteract;
     public System.Action onShowInfo;
     public System.Action onHideInfo;
+    public System.Action onChangedPrimaryWeapon;
+    public System.Action onChangedSecondaryWeapon;
     public System.Action<float> onMouseWheel;
 
     private Vector2 lastMousePosition;
@@ -127,6 +129,16 @@ public class BTInputSystem : MonoBehaviour
         if(Input.GetKeyUp(KeyCode.V))
         {
             onHideInfo?.Invoke();
+        }
+
+        if(Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            onChangedPrimaryWeapon?.Invoke();
+        }
+
+        if(Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            onChangedSecondaryWeapon?.Invoke();
         }
 
         float mouseWheel = Input.GetAxis("Mouse ScrollWheel");

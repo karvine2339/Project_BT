@@ -25,6 +25,8 @@ public class CharacterController : MonoBehaviour
         BTInputSystem.Instance.onShowInfo += ShowInfoBox;
         BTInputSystem.Instance.onHideInfo += HideInfoBox;
         BTInputSystem.Instance.onMouseWheel += OnMouseWheel;
+        BTInputSystem.Instance.onChangedPrimaryWeapon += OnChangedPrimaryWeapon;
+        BTInputSystem.Instance.onChangedSecondaryWeapon += OnChangedSecondaryWeapon;
 
     }
 
@@ -84,6 +86,16 @@ public class CharacterController : MonoBehaviour
     private void Attack()
     {
         characterBase.Fire();
+    }
+
+    private void OnChangedPrimaryWeapon()
+    {
+        characterBase.ChangedPrimaryWeapon();
+    }
+
+    private void OnChangedSecondaryWeapon()
+    {
+        characterBase.ChangedSecondaryWeapon();
     }
     private void CameraRotate(Vector2 look)
     {

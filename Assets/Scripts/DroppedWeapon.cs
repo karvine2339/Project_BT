@@ -50,6 +50,13 @@ public class DroppedWeapon : MonoBehaviour, IInteractable
     private GameObject weaponInfoBox;
     WeaponInfoBox weaponInfo;
 
+    public GameObject weaponObject;
+    Dictionary<string, string> weaponPrefabPaths = new Dictionary<string, string>()
+    {
+        {"Weapon_Shiroko_Dropped" , "Weapon_Shiroko" },
+        {"Weapon_Serika_Dropped", "Weapon_Serika" }
+    };
+
     [SerializeField] private float weaponMinDamage;
     [SerializeField] private float weaponMaxDamage;
     [SerializeField] private float weaponFireRate;
@@ -85,15 +92,53 @@ public class DroppedWeapon : MonoBehaviour, IInteractable
     }
 
 
-    public void Interact(ChrBase playerCharacter)
+    public void Interact(PlayerCharacter playerCharacter)
     {
+        string prefabPaths = weaponPrefabPaths[this.gameObject.name];
+        weaponObject = Resources.Load(prefabPaths) as GameObject;
 
-        PlayerStat.Instance.BulletMinDamage = weaponMinDamage;
-        PlayerStat.Instance.BulletMaxDamage = weaponMaxDamage;
-        PlayerStat.Instance.FireRate = weaponFireRate;
-        PlayerStat.Instance.CriticalProbability = weaponCriticalProbability;
-        PlayerStat.Instance.CriticalDamage = weaponCriticalDamage;
+        GameObject newWeaponInstance = Instantiate(weaponObject, playerCharacter.weaponRoot);
+        Weapon newWeapon = newWeaponInstance.GetComponent<Weapon>();
 
+        if (playerCharacter.weapons[0] == null || playerCharacter.weapons[1] == null)
+        {
+            if (playerCharacter.weapons[0] == null)
+            {
+                playerCharacter.weapons[0] = newWeapon;
+                playerCharacter.currentWeapon = playerCharacter.weapons[0];
+                playerCharacter.ChangedPrimaryWeapon();
+            }
+            else if (playerCharacter.weapons[1] == null)
+            {
+                playerCharacter.weapons[1] = newWeapon;
+                playerCharacter.currentWeapon = playerCharacter.weapons[1];
+                playerCharacter.ChangedSecondaryWeapon();
+            }
+
+            ApplyWeaponStats(playerCharacter);
+            newWeapon.InitWeaponStat();
+        }
+
+        else
+        {
+            if (playerCharacter.currentWeapon == playerCharacter.weapons[0])
+            {
+                Destroy(playerCharacter.weapons[0].gameObject);
+                playerCharacter.weapons[0] = newWeapon;
+                playerCharacter.currentWeapon = playerCharacter.weapons[0];
+                playerCharacter.ChangedPrimaryWeapon();
+            }
+            else if (playerCharacter.currentWeapon == playerCharacter.weapons[1])
+            {
+                Destroy(playerCharacter.weapons[1].gameObject);
+                playerCharacter.weapons[1] = newWeapon;
+                playerCharacter.currentWeapon = playerCharacter.weapons[1];
+                playerCharacter.ChangedSecondaryWeapon();
+            }
+
+            ApplyWeaponStats(playerCharacter);
+            newWeapon.InitWeaponStat();
+        }
         Interaction_UI.Instance.RemoveInteractionData(this);
 
         HUDManager.Instance.weaponImage.sprite = weaponImg;
@@ -102,7 +147,7 @@ public class DroppedWeapon : MonoBehaviour, IInteractable
 
     }
 
-    public void ShowInfoBox(ChrBase playerCharacter)
+    public void ShowInfoBox(PlayerCharacter playerCharacter)
     {
         if(weaponInfoBox != null)
         {
@@ -119,7 +164,7 @@ public class DroppedWeapon : MonoBehaviour, IInteractable
         Debug.Log("Show Info Box");
     }
 
-    public void HideInfoBox(ChrBase playerCharacter)
+    public void HideInfoBox(PlayerCharacter playerCharacter)
     {
         if (weaponInfoBox != null)
         {
@@ -195,5 +240,14 @@ public class DroppedWeapon : MonoBehaviour, IInteractable
         {
 
         }
+    }
+
+    private void ApplyWeaponStats(PlayerCharacter playerCharacter)
+    {
+        playerCharacter.currentWeapon.minDamage = weaponMinDamage;
+        playerCharacter.currentWeapon.maxDamage = weaponMaxDamage;
+        playerCharacter.currentWeapon.fireRate = weaponFireRate;
+        playerCharacter.currentWeapon.criticalProbability = weaponCriticalProbability;
+        playerCharacter.currentWeapon.criticalDamage = weaponCriticalDamage;
     }
 }

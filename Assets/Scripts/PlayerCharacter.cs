@@ -25,7 +25,6 @@ public class PlayerCharacter : ChrBase
     [SerializeField] private Vector3 targetPointPosition;
     private Rig aimRig;
     private RigBuilder rigBuilder;
-    private Rig rig;
 
     private float aimRigWeight;
 
@@ -34,6 +33,11 @@ public class PlayerCharacter : ChrBase
     private InteractionSensor interactionSensor;
 
     private List<IInteractable> currentInteractionItems = new List<IInteractable>();
+
+    public Transform weaponRoot;
+    public Weapon[] weapons = new Weapon[2];
+
+    public Weapon currentWeapon = null;
 
     protected override void Awake()
     {
@@ -44,6 +48,8 @@ public class PlayerCharacter : ChrBase
         interactionSensor = GetComponentInChildren<InteractionSensor>();
         interactionSensor.OnDetected += OnDetectedInteraction;
         interactionSensor.OnLostSignal += OnLostInteraction;
+
+        //weapons = GetComponentsInChildren<Weapon>(true);
     }
 
     public void Interact()
@@ -99,10 +105,12 @@ public class PlayerCharacter : ChrBase
     {
         aimRig = GetComponentInChildren<Rig>();
         rigBuilder = GetComponentInChildren<RigBuilder>();
-        curAmmo = 30;
 
         aimColliderLayerMask = LayerMask.GetMask("Wall");
         targetPointLayerMask = ~LayerMask.GetMask("Wall");
+
+        weapons[0] = GetComponentInChildren<Weapon>();
+        currentWeapon = weapons[0];
 
     }
 
@@ -148,7 +156,6 @@ public class PlayerCharacter : ChrBase
                 return;
             StartCoroutine(Reload());
         }
-
         
     }
 
@@ -159,7 +166,7 @@ public class PlayerCharacter : ChrBase
             fireRate -= Time.deltaTime;
             if (fireRate <= 0.0f)
             {
-                if (curAmmo == 0)
+                if (currentWeapon.curAmmo == 0)
                 {
                     if (isReload)
                         return;
@@ -175,13 +182,66 @@ public class PlayerCharacter : ChrBase
                 Projectile newBullet = Instantiate(projectilePrefab, fireStartPoint.position, Quaternion.LookRotation(aimDir, Vector3.up));
                 newBullet.gameObject.SetActive(true);
                 newBullet.SetForce(projectileSpeed);
-                curAmmo--;
+                currentWeapon.curAmmo--;
                 PlayerStat.Instance.bulletDamage = Random.Range(PlayerStat.Instance.BulletMinDamage, PlayerStat.Instance.BulletMaxDamage);
                 fireRate = PlayerStat.Instance.FireRate;
-                HUDManager.Instance.SetWeaponAmmo(curAmmo, maxAmmo);
+                HUDManager.Instance.SetWeaponAmmo(currentWeapon.curAmmo, currentWeapon.maxAmmo);
 
                 BTInputSystem.Instance.TriggerRecoil();
             }
+        }
+    }
+
+    public override void ChangedPrimaryWeapon()
+    {
+        if (isReload)
+            return;
+
+        if (weapons[0].gameObject != null && weapons[0].gameObject.activeSelf == false)
+        { 
+            if (weapons[0].gameObject.activeSelf == false)
+            {
+                weapons[0].gameObject.SetActive(true);
+                currentWeapon = weapons[0];
+            }
+
+            HUDManager.Instance.SetWeaponInfo(weapons[0].weaponName, weapons[0].CurrentAmmo, weapons[0].MaxAmmo);
+            HUDManager.Instance.SetWeaponAmmo(weapons[0].CurrentAmmo, weapons[0].MaxAmmo);
+            HUDManager.Instance.weaponImage.sprite = weapons[0].weaponImage;
+
+            if (weapons[1].gameObject.activeSelf == true)
+            {
+                weapons[1].gameObject.SetActive(false);
+            }
+
+            Debug.Log($"WeaponChanged. Current Weapon = {weapons[0].name}");
+        }
+    }
+
+
+
+    public override void ChangedSecondaryWeapon()
+    {
+        if (isReload)
+            return;
+
+        if (weapons[1].gameObject != null && weapons[1].gameObject.activeSelf == false)
+        {
+            if (weapons[1].gameObject.activeSelf == false)
+            {
+                weapons[1].gameObject.SetActive(true);
+                currentWeapon = weapons[1];
+            }
+            HUDManager.Instance.SetWeaponInfo(weapons[1].weaponName, weapons[1].CurrentAmmo, weapons[1].MaxAmmo);
+            HUDManager.Instance.SetWeaponAmmo(weapons[1].CurrentAmmo, weapons[1].MaxAmmo);
+            HUDManager.Instance.weaponImage.sprite = weapons[1].weaponImage;
+
+            if (weapons[0].gameObject.activeSelf == true)
+            {
+                weapons[0].gameObject.SetActive(false);
+            }
+
+            Debug.Log($"WeaponChanged. Current Weapon = {weapons[1].name}");
         }
     }
 
@@ -190,22 +250,10 @@ public class PlayerCharacter : ChrBase
         isReload = true;
         characterAnimator.SetBool("IsReload",true);
         yield return new WaitForSeconds(reloadTime);
-        curAmmo = maxAmmo;
-        HUDManager.Instance.SetWeaponAmmo(curAmmo, maxAmmo);
+        currentWeapon.curAmmo = currentWeapon.maxAmmo;
+        HUDManager.Instance.SetWeaponAmmo(currentWeapon.curAmmo, currentWeapon.maxAmmo);
         characterAnimator.SetBool("IsReload", false);
         isReload = false;
     }
-
-    //private void OnControllerColliderHit(ControllerColliderHit hit)
-    //{
-    //    if(hit.transform.TryGetComponent(out DroppedWeapon weapon))
-    //    {
-    //        PlayerStat.Inst.BulletMinDamage = weapon.GetMinDamage();
-    //        PlayerStat.Inst.BulletMaxDamage = weapon.GetMaxDamage();
-    //        PlayerStat.Inst.FireRate = weapon.GetFireRate();
-
-    //        Destroy(weapon.gameObject);
-    //    }
-    //}
 }
 

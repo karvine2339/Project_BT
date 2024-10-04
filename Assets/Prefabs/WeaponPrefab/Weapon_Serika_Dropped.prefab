@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4484544998081288871
+--- !u!1 &7226450620033817685
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,48 +8,48 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6760717781417950840}
-  - component: {fileID: 4619042909706514251}
-  - component: {fileID: 8171754879073038638}
-  - component: {fileID: 6315718752693149878}
-  - component: {fileID: 2133567975139510680}
+  - component: {fileID: 6720398334283667049}
+  - component: {fileID: 6948904751322461857}
+  - component: {fileID: 3472223434574455075}
+  - component: {fileID: 3867567255864418183}
+  - component: {fileID: 4637863024448016136}
   m_Layer: 0
-  m_Name: Weapon_Shiroko
+  m_Name: Weapon_Serika_Dropped
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6760717781417950840
+--- !u!4 &6720398334283667049
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4484544998081288871}
+  m_GameObject: {fileID: 7226450620033817685}
   serializedVersion: 2
   m_LocalRotation: {x: -0.6123724, y: -0.35355344, z: 0.35355344, w: 0.6123724}
-  m_LocalPosition: {x: 3.1, y: 0.35, z: 0.63}
+  m_LocalPosition: {x: 1.602, y: 0.415, z: 0.415}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: -30, y: -90, z: 90}
---- !u!33 &4619042909706514251
+--- !u!33 &6948904751322461857
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4484544998081288871}
-  m_Mesh: {fileID: 1658370558034691207, guid: 3dca80d1650fca844b9a2b793ffc066b, type: 3}
---- !u!23 &8171754879073038638
+  m_GameObject: {fileID: 7226450620033817685}
+  m_Mesh: {fileID: -7803304473591371465, guid: a53cff2b96dda4044831603d8fe55a2e, type: 3}
+--- !u!23 &3472223434574455075
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4484544998081288871}
+  m_GameObject: {fileID: 7226450620033817685}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 38faf6b691ffe4742866b9394e698b73, type: 2}
+  - {fileID: 2100000, guid: 26985250be971e1479b24b27385a166b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -85,33 +85,33 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &6315718752693149878
+--- !u!114 &3867567255864418183
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4484544998081288871}
+  m_GameObject: {fileID: 7226450620033817685}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 418c53cb83d6984428adf3e657e98c3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   weaponName: 
-  weaponData: {fileID: 11400000, guid: 32d15122237f9be4a94627369f31a897, type: 2}
+  weaponData: {fileID: 11400000, guid: 452f49eba2faa28469491bb76ab80f5e, type: 2}
   weaponImg: {fileID: 0}
   weaponMinDamage: 0
   weaponMaxDamage: 0
   weaponFireRate: 0
   weaponCriticalProbability: 20
   weaponCriticalDamage: 1.5
---- !u!135 &2133567975139510680
+--- !u!135 &4637863024448016136
 SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4484544998081288871}
+  m_GameObject: {fileID: 7226450620033817685}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -124,5 +124,5 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.28533456
-  m_Center: {x: -0.049485408, y: -0.002676215, z: 0.014026852}
+  m_Radius: 0.2853156
+  m_Center: {x: -0.049154222, y: 0.0000000949949, z: 0.0135495085}

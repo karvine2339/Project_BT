@@ -50,9 +50,6 @@ public class ChrBase : MonoBehaviour
     protected UnityEngine.CharacterController unityCharacterController;
     protected Animator characterAnimator;
 
-    public int curAmmo = 0;
-    public int maxAmmo = 30;
-
     public int maxHp = 100;
     public int curHp = 100;
 
@@ -81,6 +78,16 @@ public class ChrBase : MonoBehaviour
     }
 
     public virtual void Fire()
+    {
+
+    }
+
+    public virtual void ChangedPrimaryWeapon()
+    {
+
+    }
+
+    public virtual void ChangedSecondaryWeapon()
     {
 
     }

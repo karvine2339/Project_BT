@@ -8,10 +8,10 @@ public interface IInteractable
     public string Message { get; }
 
 
-    public void Interact(ChrBase playerCharacter);
+    public void Interact(PlayerCharacter playerCharacter);
 
-    public void ShowInfoBox(ChrBase playerCharacter);
+    public void ShowInfoBox(PlayerCharacter playerCharacter);
 
-    public void HideInfoBox(ChrBase playerCharacter);
+    public void HideInfoBox(PlayerCharacter playerCharacter);
 }
 
