@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 
+public class weaponInfo
+{ 
+
+
+}
 public class Interaction_UI : MonoBehaviour
 {
 

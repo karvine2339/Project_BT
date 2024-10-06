@@ -16,6 +16,7 @@ public class DroppedWeapon : MonoBehaviour, IInteractable
     public class Effect
     {
         public string effectName;
+        public int effectType;
         public float damageMinValue;
         public float damageMaxValue;
         public float minValue;     
@@ -53,8 +54,8 @@ public class DroppedWeapon : MonoBehaviour, IInteractable
     public GameObject weaponObject;
     Dictionary<string, string> weaponPrefabPaths = new Dictionary<string, string>()
     {
-        {"Weapon_Shiroko_Dropped" , "Weapon_Shiroko" },
-        {"Weapon_Serika_Dropped", "Weapon_Serika" }
+        {"Weapon_Shiroko_Dropped(Clone)" , "Weapon_Shiroko" },
+        {"Weapon_Serika_Dropped(Clone)", "Weapon_Serika" }
     };
 
     [SerializeField] private float weaponMinDamage;
@@ -62,6 +63,7 @@ public class DroppedWeapon : MonoBehaviour, IInteractable
     [SerializeField] private float weaponFireRate;
     [SerializeField] private float weaponCriticalProbability = 20.0f;
     [SerializeField] private float weaponCriticalDamage = 1.5f;
+    [SerializeField] private float[] effectVal = new float[3];
     private string[] weaponEffect = new string[3];
     private void Start()
     {
@@ -127,6 +129,7 @@ public class DroppedWeapon : MonoBehaviour, IInteractable
                 playerCharacter.weapons[0] = newWeapon;
                 playerCharacter.currentWeapon = playerCharacter.weapons[0];
                 playerCharacter.ChangedPrimaryWeapon();
+                Debug.Log("d");
             }
             else if (playerCharacter.currentWeapon == playerCharacter.weapons[1])
             {
@@ -196,41 +199,40 @@ public class DroppedWeapon : MonoBehaviour, IInteractable
                 selectedEffects.Add(effect);
                 Debug.Log("Effect Applied: " + effect.effectName);
 
-                if (effect.effectName == "데미지 증가")
+                if (effect.effectType == 1)
                 {
-                    float randVal = Random.Range(effect.minValue, effect.maxValue);
-                    weaponMinDamage *= 1 + (randVal / 100);
-                    weaponMaxDamage *= 1 + (randVal / 100);
-                    weaponEffect[i] = effect.InfoString.Replace("value", randVal.ToString("N0"));
+                    effectVal[i] = Random.Range(effect.minValue, effect.maxValue);
+                    weaponMinDamage *= 1 + (effectVal[i] / 100);
+                    weaponMaxDamage *= 1 + (effectVal[i] / 100);
+                    weaponEffect[i] = effect.InfoString.Replace("value", effectVal[i].ToString("N0"));
                 }
 
-                else if (effect.effectName == "크리티컬 확률 증가")
+                else if (effect.effectType == 2)
                 {
-                    float randVal = Random.Range(effect.minValue,effect.maxValue);
-                    weaponCriticalProbability += randVal;
-                    weaponEffect[i] = effect.InfoString.Replace("value", randVal.ToString("N0"));
+                    effectVal[i] = Random.Range(effect.minValue, effect.maxValue);
+                    weaponFireRate /= 1 + effectVal[i] / 100;
+                    weaponEffect[i] = effect.InfoString.Replace("value", effectVal[i].ToString("N0"));
                 }
 
-                else if (effect.effectName == "연사속도 증가")
+                else if (effect.effectType == 3)
                 {
-                    float randVal = Random.Range(effect.minValue , effect.maxValue);
-                    weaponFireRate /= 1 + randVal / 100;
-                    weaponEffect[i] = effect.InfoString.Replace("value", randVal.ToString("N0"));
+                    effectVal[i] = Random.Range(effect.minValue, effect.maxValue);
+                    weaponCriticalProbability += effectVal[i];
+                    weaponEffect[i] = effect.InfoString.Replace("value", effectVal[i].ToString("N0"));
                 }
-                else if (effect.effectName == "크리티컬 데미지 증가")
+                else if (effect.effectType == 4)
                 {
-                    float randVal = Random.Range(effect.minValue, effect.maxValue);
-                    weaponCriticalDamage += randVal / 100;
-                    weaponEffect[i] = effect.InfoString.Replace("value", randVal.ToString("N0"));
-
+                    effectVal[i] = Random.Range(effect.minValue, effect.maxValue);
+                    weaponCriticalDamage += effectVal[i] / 100;
+                    weaponEffect[i] = effect.InfoString.Replace("value", effectVal[i].ToString("N0"));
                 }
-                else if (effect.effectName == "불안정한 개조")
+                else if (effect.effectType == 5)
                 {
-                    float randVal = Random.Range(effect.minValue, effect.maxValue);
-                    weaponMinDamage *= 1 + (randVal / 100);
-                    weaponMaxDamage *= 1 + (randVal / 100);
-                    weaponEffect[i] = effect.InfoString.Replace("value", randVal.ToString("N0"))
-                                                     .Replace("recoilValue", randVal.ToString("N0"));
+                    effectVal[i] = Random.Range(effect.minValue, effect.maxValue);
+                    weaponMinDamage *= 1 + (effectVal[i] / 100);
+                    weaponMaxDamage *= 1 + (effectVal[i] / 100);
+                    weaponEffect[i] = effect.InfoString.Replace("value", effectVal[i].ToString("N0"))
+                                                     .Replace("recoilValue", effectVal[i].ToString("N0"));
                 }
 
             }

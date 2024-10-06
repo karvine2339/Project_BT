@@ -4,6 +4,7 @@
       "name": "WeaponEffects",
       "effects": [
         {
+          "effectType" :  1,
           "effectName": "데미지 증가",
           "minValue": 30,
           "maxValue": 50,
@@ -11,6 +12,7 @@
           "InfoString": "데미지 증가 : 데미지 value% 증가"
         },
         {
+          "effectType": 2,
           "effectName": "연사속도 증가",
           "minValue": 50,
           "maxValue": 100,
@@ -18,6 +20,7 @@
           "InfoString": "빠른 사격 : 연사속도 value% 증가"
         },
         {
+          "effectType": 3,
           "effectName": "크리티컬 확률 증가",
           "minValue": 10,
           "maxValue": 20,
@@ -25,6 +28,7 @@
           "InfoString": "크리티컬 확률 증가 : 크리티컬 확률 value% 증가"
         },
         {
+          "effectType": 4,
           "effectName": "크리티컬 데미지 증가",
           "minValue": 50,
           "maxValue": 100,
@@ -32,11 +36,12 @@
           "InfoString": "크리티컬 데미지 증가 : 크리티컬 데미지 value% 증가"
         },
         {
+          "effectType": 5,
           "effectName": "불안정한 개조",
           "minValue": 50,
           "MaxValue": 100,
           "RecoilValue": 50,
-          "chance" : 1.0,
+          "chance": 1.0,
           "InfoString": "불안정한 개조 : 데미지 value% 증가 , 총기 반동 recoilValue% 증가"
         }
       ]

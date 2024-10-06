@@ -178,8 +178,8 @@ public class PlayerCharacter : ChrBase
                     return;
 
                 characterAnimator.SetTrigger("Fire");
-                Vector3 aimDir = (targetPointPosition - fireStartPoint.position).normalized;
-                Projectile newBullet = Instantiate(projectilePrefab, fireStartPoint.position, Quaternion.LookRotation(aimDir, Vector3.up));
+                Vector3 aimDir = (targetPointPosition - currentWeapon.fireStartPoint.position).normalized;
+                Projectile newBullet = Instantiate(projectilePrefab, currentWeapon.fireStartPoint.position, Quaternion.LookRotation(aimDir, Vector3.up));
                 newBullet.gameObject.SetActive(true);
                 newBullet.SetForce(projectileSpeed);
                 currentWeapon.curAmmo--;
@@ -194,27 +194,30 @@ public class PlayerCharacter : ChrBase
 
     public override void ChangedPrimaryWeapon()
     {
-        if (isReload)
-            return;
+        if (weapons[0] != null)
+        {
+            if (isReload)
+                return;
 
-        if (weapons[0].gameObject != null && weapons[0].gameObject.activeSelf == false)
-        { 
-            if (weapons[0].gameObject.activeSelf == false)
+            if (weapons[0].gameObject != null && weapons[0].gameObject.activeSelf == false)
             {
-                weapons[0].gameObject.SetActive(true);
-                currentWeapon = weapons[0];
+                if (weapons[0].gameObject.activeSelf == false)
+                {
+                    weapons[0].gameObject.SetActive(true);
+                    currentWeapon = weapons[0];
+                }
+
+                HUDManager.Instance.SetWeaponInfo(weapons[0].weaponName, weapons[0].CurrentAmmo, weapons[0].MaxAmmo);
+                HUDManager.Instance.SetWeaponAmmo(weapons[0].CurrentAmmo, weapons[0].MaxAmmo);
+                HUDManager.Instance.weaponImage.sprite = weapons[0].weaponImage;
+
+                if (weapons[1].gameObject.activeSelf == true)
+                {
+                    weapons[1].gameObject.SetActive(false);
+                }
+
+                Debug.Log($"WeaponChanged. Current Weapon = {weapons[0].name}");
             }
-
-            HUDManager.Instance.SetWeaponInfo(weapons[0].weaponName, weapons[0].CurrentAmmo, weapons[0].MaxAmmo);
-            HUDManager.Instance.SetWeaponAmmo(weapons[0].CurrentAmmo, weapons[0].MaxAmmo);
-            HUDManager.Instance.weaponImage.sprite = weapons[0].weaponImage;
-
-            if (weapons[1].gameObject.activeSelf == true)
-            {
-                weapons[1].gameObject.SetActive(false);
-            }
-
-            Debug.Log($"WeaponChanged. Current Weapon = {weapons[0].name}");
         }
     }
 
@@ -222,24 +225,21 @@ public class PlayerCharacter : ChrBase
 
     public override void ChangedSecondaryWeapon()
     {
-        if (isReload)
-            return;
-
-        if (weapons[1].gameObject != null && weapons[1].gameObject.activeSelf == false)
+        if (weapons[1] != null)
         {
-            if (weapons[1].gameObject.activeSelf == false)
-            {
-                weapons[1].gameObject.SetActive(true);
-                currentWeapon = weapons[1];
-            }
-            HUDManager.Instance.SetWeaponInfo(weapons[1].weaponName, weapons[1].CurrentAmmo, weapons[1].MaxAmmo);
-            HUDManager.Instance.SetWeaponAmmo(weapons[1].CurrentAmmo, weapons[1].MaxAmmo);
-            HUDManager.Instance.weaponImage.sprite = weapons[1].weaponImage;
+            if (isReload)
+                return;
+
+            weapons[1].gameObject.SetActive(true);
+            currentWeapon = weapons[1];
 
             if (weapons[0].gameObject.activeSelf == true)
             {
                 weapons[0].gameObject.SetActive(false);
             }
+            HUDManager.Instance.SetWeaponInfo(weapons[1].weaponName, weapons[1].CurrentAmmo, weapons[1].MaxAmmo);
+            HUDManager.Instance.SetWeaponAmmo(weapons[1].CurrentAmmo, weapons[1].MaxAmmo);
+            HUDManager.Instance.weaponImage.sprite = weapons[1].weaponImage;
 
             Debug.Log($"WeaponChanged. Current Weapon = {weapons[1].name}");
         }
