@@ -13,6 +13,8 @@ public class Weapon : MonoBehaviour
 
     public string weaponName;
 
+    public string[] effectString = new string[3];
+
     public float minDamage;
     public float maxDamage;
     public float fireRate;
@@ -39,5 +41,25 @@ public class Weapon : MonoBehaviour
         PlayerStat.Instance.CriticalProbability = criticalProbability;
         PlayerStat.Instance.CriticalDamage = criticalDamage;
     }
+    public void InitFirstWeaponUI()
+    {
+        HUDManager.Instance.weaponName1.text = weaponName;
+        HUDManager.Instance.weaponImg1.sprite = weaponImage;
+        HUDManager.Instance.weaponDamage1.text = minDamage.ToString("N0") + " ~ " + maxDamage.ToString("N0");
+        HUDManager.Instance.weaponFireRate1.text = fireRate.ToString("N2") + "초 / 발";
+        HUDManager.Instance.weaponEffect1_1.text = effectString[0];
+        HUDManager.Instance.weaponEffect1_2.text = effectString[1];
+        HUDManager.Instance.weaponEffect1_3.text = effectString[2];
+    }
 
+    public void InitSecondWeaponUI()
+    {
+        HUDManager.Instance.weaponName2.text = weaponName;
+        HUDManager.Instance.weaponImg2.sprite = weaponImage;
+        HUDManager.Instance.weaponDamage2.text = minDamage.ToString("N0") + " ~ " + maxDamage.ToString("N0");
+        HUDManager.Instance.weaponFireRate2.text = fireRate.ToString("N2") + "초 / 발";
+        HUDManager.Instance.weaponEffect2_1.text = effectString[0];
+        HUDManager.Instance.weaponEffect2_2.text = effectString[1];
+        HUDManager.Instance.weaponEffect2_3.text = effectString[2];
+    }
 }

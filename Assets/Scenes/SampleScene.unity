@@ -3944,6 +3944,20 @@ MonoBehaviour:
   inventoryUI: {fileID: 1259311381}
   weaponBox1: {fileID: 204929697}
   weaponBox2: {fileID: 93724915}
+  weaponName1: {fileID: 468499221}
+  weaponName2: {fileID: 1972992049}
+  weaponDamage1: {fileID: 1640294684}
+  weaponDamage2: {fileID: 1881752113}
+  weaponFireRate1: {fileID: 1573897946}
+  weaponFireRate2: {fileID: 1573274707}
+  weaponEffect1_1: {fileID: 801736611}
+  weaponEffect1_2: {fileID: 1667732613}
+  weaponEffect1_3: {fileID: 100168623}
+  weaponEffect2_1: {fileID: 1077342116}
+  weaponEffect2_2: {fileID: 558852315}
+  weaponEffect2_3: {fileID: 1960547738}
+  weaponImg1: {fileID: 1012141631}
+  weaponImg2: {fileID: 558118227}
 --- !u!1 &801736609
 GameObject:
   m_ObjectHideFlags: 0
@@ -4087,7 +4101,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 860878244}
-  - component: {fileID: 860878245}
   m_Layer: 5
   m_Name: WeaponInfoBox
   m_TagString: Untagged
@@ -4124,26 +4137,6 @@ RectTransform:
   m_AnchoredPosition: {x: 100, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &860878245
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 860878243}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d322b19ecc66aef4a92cc6c6d31876b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weaponDamageText: {fileID: 1881752113}
-  weaponFireRateText: {fileID: 1573274707}
-  weaponNameText: {fileID: 1972992049}
-  effect:
-  - {fileID: 1077342116}
-  - {fileID: 558852315}
-  - {fileID: 1960547738}
-  weaponImg: {fileID: 558118227}
 --- !u!1 &930417433
 GameObject:
   m_ObjectHideFlags: 0
@@ -4582,6 +4575,7 @@ MonoBehaviour:
   recoilTime: 0
   recovery: 0
   isRecoiling: 0
+  isTab: 0
 --- !u!4 &978240926
 Transform:
   m_ObjectHideFlags: 0
@@ -6047,6 +6041,7 @@ MonoBehaviour:
   projectileSpeed: 2000
   fireRate: 0.2
   reloadTime: 2.65
+  isReload: 0
   aimColliderLayerMask:
     serializedVersion: 2
     m_Bits: 192
@@ -8560,7 +8555,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1681951322}
-  - component: {fileID: 1681951323}
   m_Layer: 5
   m_Name: WeaponInfoBox
   m_TagString: Untagged
@@ -8597,26 +8591,6 @@ RectTransform:
   m_AnchoredPosition: {x: -422.36, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1681951323
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1681951321}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d322b19ecc66aef4a92cc6c6d31876b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weaponDamageText: {fileID: 1640294684}
-  weaponFireRateText: {fileID: 1573897946}
-  weaponNameText: {fileID: 468499221}
-  effect:
-  - {fileID: 801736611}
-  - {fileID: 1667732613}
-  - {fileID: 100168623}
-  weaponImg: {fileID: 1012141631}
 --- !u!1 &1703540356
 GameObject:
   m_ObjectHideFlags: 0
@@ -12466,6 +12440,7 @@ MonoBehaviour:
   - 0
   - 0
   - 0
+  effectType: 
 --- !u!1 &2568634380818597409
 GameObject:
   m_ObjectHideFlags: 0
@@ -13082,6 +13057,7 @@ MonoBehaviour:
   - 0
   - 0
   - 0
+  effectType: 
 --- !u!4 &3373214155151642895
 Transform:
   m_ObjectHideFlags: 0
@@ -17445,6 +17421,7 @@ MonoBehaviour:
   maxAmmo: 30
   curAmmo: 30
   weaponName: 
+  effectString: []
   minDamage: 0
   maxDamage: 0
   fireRate: 0

@@ -16,7 +16,7 @@ public class PlayerCharacter : ChrBase
 
     public float fireRate = 0.1f;
     public float reloadTime = 1.3f;
-    bool isReload = false;
+    public bool isReload = false;
 
     [SerializeField] private LayerMask aimColliderLayerMask = new LayerMask();
     [SerializeField] private LayerMask targetPointLayerMask = new LayerMask();
@@ -218,6 +218,8 @@ public class PlayerCharacter : ChrBase
 
                 Debug.Log($"WeaponChanged. Current Weapon = {weapons[0].name}");
             }
+
+            currentWeapon.InitWeaponStat();
         }
     }
 
@@ -243,6 +245,8 @@ public class PlayerCharacter : ChrBase
 
             Debug.Log($"WeaponChanged. Current Weapon = {weapons[1].name}");
         }
+
+        currentWeapon.InitWeaponStat();
     }
 
     IEnumerator Reload()

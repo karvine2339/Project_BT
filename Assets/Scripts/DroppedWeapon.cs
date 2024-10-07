@@ -64,6 +64,7 @@ public class DroppedWeapon : MonoBehaviour, IInteractable
     [SerializeField] private float weaponCriticalProbability = 20.0f;
     [SerializeField] private float weaponCriticalDamage = 1.5f;
     [SerializeField] private float[] effectVal = new float[3];
+    [SerializeField] private int[] effectType = new int[3];
     private string[] weaponEffect = new string[3];
     private void Start()
     {
@@ -109,16 +110,21 @@ public class DroppedWeapon : MonoBehaviour, IInteractable
                 playerCharacter.weapons[0] = newWeapon;
                 playerCharacter.currentWeapon = playerCharacter.weapons[0];
                 playerCharacter.ChangedPrimaryWeapon();
+                ApplyWeaponStats(playerCharacter);
+                newWeapon.InitWeaponStat();
+                newWeapon.InitFirstWeaponUI();
             }
             else if (playerCharacter.weapons[1] == null)
             {
                 playerCharacter.weapons[1] = newWeapon;
                 playerCharacter.currentWeapon = playerCharacter.weapons[1];
                 playerCharacter.ChangedSecondaryWeapon();
+                ApplyWeaponStats(playerCharacter);
+                newWeapon.InitWeaponStat();
+                newWeapon.InitSecondWeaponUI();
             }
 
-            ApplyWeaponStats(playerCharacter);
-            newWeapon.InitWeaponStat();
+  
         }
 
         else
@@ -129,7 +135,9 @@ public class DroppedWeapon : MonoBehaviour, IInteractable
                 playerCharacter.weapons[0] = newWeapon;
                 playerCharacter.currentWeapon = playerCharacter.weapons[0];
                 playerCharacter.ChangedPrimaryWeapon();
-                Debug.Log("d");
+                ApplyWeaponStats(playerCharacter);
+                newWeapon.InitWeaponStat();
+                newWeapon.InitFirstWeaponUI();
             }
             else if (playerCharacter.currentWeapon == playerCharacter.weapons[1])
             {
@@ -137,10 +145,11 @@ public class DroppedWeapon : MonoBehaviour, IInteractable
                 playerCharacter.weapons[1] = newWeapon;
                 playerCharacter.currentWeapon = playerCharacter.weapons[1];
                 playerCharacter.ChangedSecondaryWeapon();
+                ApplyWeaponStats(playerCharacter);
+                newWeapon.InitWeaponStat();
+                newWeapon.InitSecondWeaponUI();
             }
 
-            ApplyWeaponStats(playerCharacter);
-            newWeapon.InitWeaponStat();
         }
         Interaction_UI.Instance.RemoveInteractionData(this);
 
@@ -246,10 +255,12 @@ public class DroppedWeapon : MonoBehaviour, IInteractable
 
     private void ApplyWeaponStats(PlayerCharacter playerCharacter)
     {
+        playerCharacter.currentWeapon.weaponName = weaponName;
         playerCharacter.currentWeapon.minDamage = weaponMinDamage;
         playerCharacter.currentWeapon.maxDamage = weaponMaxDamage;
         playerCharacter.currentWeapon.fireRate = weaponFireRate;
         playerCharacter.currentWeapon.criticalProbability = weaponCriticalProbability;
         playerCharacter.currentWeapon.criticalDamage = weaponCriticalDamage;
+        playerCharacter.currentWeapon.effectString = weaponEffect;
     }
 }

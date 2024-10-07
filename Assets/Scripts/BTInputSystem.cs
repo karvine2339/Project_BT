@@ -62,6 +62,8 @@ public class BTInputSystem : MonoBehaviour
 
     public bool isRecoiling = false;
 
+    public bool isTab = false;
+
 
     private void Update()
     {
@@ -118,7 +120,13 @@ public class BTInputSystem : MonoBehaviour
             if (Input.GetKey(KeyCode.V))
                 return;
 
-            if (Time.timeScale == 0.0f)
+            if (isStrafe)
+                return;
+
+            if (PlayerCharacter.Instance.isReload)
+                return;
+
+            if (isTab)
                 return;
 
             onInteract?.Invoke();
@@ -136,7 +144,7 @@ public class BTInputSystem : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.Alpha1))
         {
-            if (Time.timeScale == 0.0f)
+            if (isTab)
                 return;
 
             onChangedPrimaryWeapon?.Invoke();
@@ -144,10 +152,15 @@ public class BTInputSystem : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.Alpha2))
         {
-            if (Time.timeScale == 0.0f)
+            if (isTab)
                 return;
 
             onChangedSecondaryWeapon?.Invoke();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            HUDManager.Instance.OpenInventory();
         }
 
         float mouseWheel = Input.GetAxis("Mouse ScrollWheel");
