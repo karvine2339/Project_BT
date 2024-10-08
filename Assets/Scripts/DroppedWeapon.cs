@@ -153,7 +153,7 @@ public class DroppedWeapon : MonoBehaviour, IInteractable
         }
         Interaction_UI.Instance.RemoveInteractionData(this);
 
-        HUDManager.Instance.weaponImage.sprite = weaponImg;
+        HUDManager.Instance.curWeaponImage.sprite = weaponImg;
 
         Destroy(gameObject);
 
@@ -245,11 +245,6 @@ public class DroppedWeapon : MonoBehaviour, IInteractable
                 }
 
             }
-        }
-
-        foreach (var effect in selectedEffects)
-        {
-
         }
     }
 

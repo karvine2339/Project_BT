@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 
@@ -110,8 +111,8 @@ public class PlayerCharacter : ChrBase
         targetPointLayerMask = ~LayerMask.GetMask("Wall");
 
         weapons[0] = GetComponentInChildren<Weapon>();
-        currentWeapon = weapons[0];
 
+        SetStartWeapon();
     }
 
     public override void SetAiming(float aiming)
@@ -194,13 +195,17 @@ public class PlayerCharacter : ChrBase
 
     public override void ChangedPrimaryWeapon()
     {
+        Debug.Log("1");
         if (weapons[0] != null)
         {
+            Debug.Log("2");
+
             if (isReload)
                 return;
-
+            Debug.Log("3");
             if (weapons[0].gameObject != null && weapons[0].gameObject.activeSelf == false)
             {
+                Debug.Log("4");
                 if (weapons[0].gameObject.activeSelf == false)
                 {
                     weapons[0].gameObject.SetActive(true);
@@ -209,7 +214,17 @@ public class PlayerCharacter : ChrBase
 
                 HUDManager.Instance.SetWeaponInfo(weapons[0].weaponName, weapons[0].CurrentAmmo, weapons[0].MaxAmmo);
                 HUDManager.Instance.SetWeaponAmmo(weapons[0].CurrentAmmo, weapons[0].MaxAmmo);
-                HUDManager.Instance.weaponImage.sprite = weapons[0].weaponImage;
+                HUDManager.Instance.curWeaponImage.sprite = weapons[0].weaponImage;
+                if (weapons[0] != null)
+                {
+                    HUDManager.Instance.secWeaponImage.gameObject.SetActive(true);
+                    HUDManager.Instance.secWeaponImage.sprite = weapons[1].weaponImage;
+                }
+                else
+                {
+                    HUDManager.Instance.secWeaponImage.gameObject.SetActive(false);
+                }
+                HUDManager.Instance.weaponIndex.text = "[1]";
 
                 if (weapons[1].gameObject.activeSelf == true)
                 {
@@ -217,6 +232,7 @@ public class PlayerCharacter : ChrBase
                 }
 
                 Debug.Log($"WeaponChanged. Current Weapon = {weapons[0].name}");
+                Debug.Log("5");
             }
 
             currentWeapon.InitWeaponStat();
@@ -234,14 +250,23 @@ public class PlayerCharacter : ChrBase
 
             weapons[1].gameObject.SetActive(true);
             currentWeapon = weapons[1];
-
-            if (weapons[0].gameObject.activeSelf == true)
+            if (weapons[0] != null)
             {
                 weapons[0].gameObject.SetActive(false);
             }
             HUDManager.Instance.SetWeaponInfo(weapons[1].weaponName, weapons[1].CurrentAmmo, weapons[1].MaxAmmo);
             HUDManager.Instance.SetWeaponAmmo(weapons[1].CurrentAmmo, weapons[1].MaxAmmo);
-            HUDManager.Instance.weaponImage.sprite = weapons[1].weaponImage;
+            HUDManager.Instance.curWeaponImage.sprite = weapons[1].weaponImage;
+            if (weapons[0] != null)
+            {
+                HUDManager.Instance.secWeaponImage.gameObject.SetActive(true);
+                HUDManager.Instance.secWeaponImage.sprite = weapons[0].weaponImage;
+            }
+            else
+            {
+                HUDManager.Instance.secWeaponImage.gameObject.SetActive(false);
+            }
+            HUDManager.Instance.weaponIndex.text = "[2]";
 
             Debug.Log($"WeaponChanged. Current Weapon = {weapons[1].name}");
         }
@@ -258,6 +283,24 @@ public class PlayerCharacter : ChrBase
         HUDManager.Instance.SetWeaponAmmo(currentWeapon.curAmmo, currentWeapon.maxAmmo);
         characterAnimator.SetBool("IsReload", false);
         isReload = false;
+    }
+
+    public void SetStartWeapon()
+    {
+        currentWeapon = weapons[0];
+        weapons[0].minDamage = 50;
+        weapons[0].maxDamage = 100;
+        weapons[0].criticalProbability = 20f;
+        weapons[0].criticalDamage = 1f;
+        weapons[0].fireRate = 0.2f;
+        weapons[0].weaponName = "WHITE FANG 465";
+        weapons[0].effectString = new string[3];
+
+        weapons[0].effectString[0] = "";
+        weapons[0].effectString[1] = "";
+        weapons[0].effectString[2] = "";
+        weapons[0].InitWeaponStat();
+        weapons[0].InitFirstWeaponUI();
     }
 }
 

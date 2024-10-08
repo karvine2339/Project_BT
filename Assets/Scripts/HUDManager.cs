@@ -13,12 +13,14 @@ public class HUDManager : MonoBehaviour
     public TextMeshProUGUI weaponNameText;
     public TextMeshProUGUI weaponAmmoText;
 
-    public Image weaponImage;
+    public Image curWeaponImage;
+    public Image secWeaponImage;
+    public TextMeshProUGUI weaponIndex;
 
     public GameObject inventoryUI;
-    public GameObject weaponBox1;
-    public GameObject weaponBox2;
 
+    public GameObject weaponUI1;
+    public GameObject weaponUI2;
 
     [Header("--- Inventory UI --- ")]
     public TextMeshProUGUI weaponName1;
@@ -40,18 +42,13 @@ public class HUDManager : MonoBehaviour
     {
         Instance = this; 
 
-        weaponImage = GetComponentInChildren<Image>();
+ 
     }
     public void OnDestroy()
     {
         Instance = null;
     }
 
-
-    private void Start()
-    {
-        
-    }
 
     private void Update()
     {
@@ -78,6 +75,24 @@ public class HUDManager : MonoBehaviour
             BTInputSystem.Instance.isTab = true;
             CursorSystem.Instance.SetCursorState(true);
             Time.timeScale = 0.0f;
+
+            if (PlayerCharacter.Instance.weapons[0] == null)
+            {
+                weaponUI1.gameObject.SetActive(false);
+            }
+            else
+            {
+                weaponUI1.gameObject.SetActive(true);
+            }
+
+            if(PlayerCharacter.Instance.weapons[1] == null)
+            {
+                weaponUI2.gameObject.SetActive(false);
+            }
+            else
+            {
+                weaponUI2.gameObject.SetActive(true);
+            }
         }
         else
         {
@@ -87,4 +102,5 @@ public class HUDManager : MonoBehaviour
             Time.timeScale = 1.0f;
         }
     }
+
 }

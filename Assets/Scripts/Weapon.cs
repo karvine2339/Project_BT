@@ -2,6 +2,7 @@ using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Weapon : MonoBehaviour
 {
@@ -31,6 +32,7 @@ public class Weapon : MonoBehaviour
     private void Start()
     {
         curAmmo = maxAmmo;
+
     }
 
     public void InitWeaponStat()
@@ -62,4 +64,11 @@ public class Weapon : MonoBehaviour
         HUDManager.Instance.weaponEffect2_2.text = effectString[1];
         HUDManager.Instance.weaponEffect2_3.text = effectString[2];
     }
+
+    public void DropWeapon1()
+    {
+        Destroy(PlayerCharacter.Instance.weapons[0]);
+
+    }
+
 }
