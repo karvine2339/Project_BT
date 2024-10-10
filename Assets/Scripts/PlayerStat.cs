@@ -78,6 +78,20 @@ public class PlayerStat : MonoBehaviour
         }
     }
 
+    private float _recoilAmount;
+    public float RecoilAmount
+    {
+        get { return _recoilAmount; }
+        set
+        {
+            if(_recoilAmount != value)
+            {
+                _recoilAmount = value;
+                OnRecoilAmountChanged?.Invoke(_recoilAmount);
+            }
+        }
+    }
+
     public float bulletDamage;
 
     public delegate void DamageChanged(float newDamage);
@@ -91,6 +105,9 @@ public class PlayerStat : MonoBehaviour
 
     public delegate void CriticalDamageChanged(float newCriticalDamage);
     public static event CriticalDamageChanged OnCriticalDamageChanged;
+
+    public delegate void RecoilAmountChanged(float newRecoilAmount);
+    public static event RecoilAmountChanged OnRecoilAmountChanged;
 
     public static PlayerStat Instance;
 

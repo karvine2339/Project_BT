@@ -6,14 +6,17 @@ using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class EnemyCharacter : ChrBase
-{
+public class EnemyCharacter : MonoBehaviour
+{ 
     public static event Action<EnemyCharacter, int> OnEnemyDamaged;
 
     public List<WeaponData> weaponList;
     public GameObject[] weaponPrefab;
 
-    public override void OnDamaged(float damage, float criticalHit,float criticalDamage)  
+    public int curHp = 100;
+    public int maxHp = 100;
+
+    public void OnDamaged(float damage, float criticalHit,float criticalDamage)  
     {
         criticalHit = Random.Range(0.0f, 100.0f);
         if(criticalHit <= PlayerStat.Instance.CriticalProbability)
@@ -45,12 +48,6 @@ public class EnemyCharacter : ChrBase
 
     public GameObject DropWeapon(Vector3 dropPos)
     {
-        if (weaponList.Count == 0 || weaponPrefab.Length == 0)
-        {
-            Debug.LogError("Weapon list or prefab array is empty!");
-            return null;
-        }
-
         GameObject droppedWeapon = Instantiate(weaponPrefab[Random.Range(0,weaponPrefab.Length)], dropPos, gameObject.transform.rotation);    
 
         DroppedWeapon prefabComponent = droppedWeapon.GetComponent<DroppedWeapon>();

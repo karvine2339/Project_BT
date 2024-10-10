@@ -15,12 +15,16 @@ public class Weapon : MonoBehaviour
     public string weaponName;
 
     public string[] effectString = new string[3];
+    public int[] effectType;
+    public float[] effectVal;
 
     public float minDamage;
     public float maxDamage;
     public float fireRate;
     public float criticalProbability;
     public float criticalDamage;
+    public float weaponRecoilAmount;
+    public int weaponType;
 
     public Sprite weaponImage;
 
@@ -31,7 +35,6 @@ public class Weapon : MonoBehaviour
 
     private void Start()
     {
-        curAmmo = maxAmmo;
 
     }
 
@@ -42,6 +45,7 @@ public class Weapon : MonoBehaviour
         PlayerStat.Instance.FireRate = fireRate;
         PlayerStat.Instance.CriticalProbability = criticalProbability;
         PlayerStat.Instance.CriticalDamage = criticalDamage;
+        PlayerStat.Instance.RecoilAmount = weaponRecoilAmount;
     }
     public void InitFirstWeaponUI()
     {
@@ -63,12 +67,6 @@ public class Weapon : MonoBehaviour
         HUDManager.Instance.weaponEffect2_1.text = effectString[0];
         HUDManager.Instance.weaponEffect2_2.text = effectString[1];
         HUDManager.Instance.weaponEffect2_3.text = effectString[2];
-    }
-
-    public void DropWeapon1()
-    {
-        Destroy(PlayerCharacter.Instance.weapons[0]);
-
     }
 
 }

@@ -25,9 +25,11 @@ public class WeaponData : ScriptableObject
     private EffectData effectData;
 
     public string weaponName;
-    public string weaponType;
-    public float minDamage;
-    public float maxDamage;
+    public int weaponType;
+    public float minMinDamage;
+    public float minMaxDamage;
+    public float maxMinDamage;
+    public float maxMaxDamage;
     public float minfireRate;
     public float maxfireRate;
 

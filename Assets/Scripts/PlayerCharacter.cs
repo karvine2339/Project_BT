@@ -195,17 +195,13 @@ public class PlayerCharacter : ChrBase
 
     public override void ChangedPrimaryWeapon()
     {
-        Debug.Log("1");
         if (weapons[0] != null)
         {
-            Debug.Log("2");
-
             if (isReload)
                 return;
-            Debug.Log("3");
-            if (weapons[0].gameObject != null && weapons[0].gameObject.activeSelf == false)
+
+            if (weapons[0].gameObject != null)
             {
-                Debug.Log("4");
                 if (weapons[0].gameObject.activeSelf == false)
                 {
                     weapons[0].gameObject.SetActive(true);
@@ -213,9 +209,8 @@ public class PlayerCharacter : ChrBase
                 }
 
                 HUDManager.Instance.SetWeaponInfo(weapons[0].weaponName, weapons[0].CurrentAmmo, weapons[0].MaxAmmo);
-                HUDManager.Instance.SetWeaponAmmo(weapons[0].CurrentAmmo, weapons[0].MaxAmmo);
                 HUDManager.Instance.curWeaponImage.sprite = weapons[0].weaponImage;
-                if (weapons[0] != null)
+                if (weapons[1] != null)
                 {
                     HUDManager.Instance.secWeaponImage.gameObject.SetActive(true);
                     HUDManager.Instance.secWeaponImage.sprite = weapons[1].weaponImage;
@@ -226,16 +221,16 @@ public class PlayerCharacter : ChrBase
                 }
                 HUDManager.Instance.weaponIndex.text = "[1]";
 
-                if (weapons[1].gameObject.activeSelf == true)
+                if (weapons[1] != null)
                 {
                     weapons[1].gameObject.SetActive(false);
                 }
 
                 Debug.Log($"WeaponChanged. Current Weapon = {weapons[0].name}");
-                Debug.Log("5");
             }
 
             currentWeapon.InitWeaponStat();
+
         }
     }
 
@@ -248,29 +243,34 @@ public class PlayerCharacter : ChrBase
             if (isReload)
                 return;
 
-            weapons[1].gameObject.SetActive(true);
-            currentWeapon = weapons[1];
-            if (weapons[0] != null)
+            if (weapons[1].gameObject != null)
             {
-                weapons[0].gameObject.SetActive(false);
-            }
-            HUDManager.Instance.SetWeaponInfo(weapons[1].weaponName, weapons[1].CurrentAmmo, weapons[1].MaxAmmo);
-            HUDManager.Instance.SetWeaponAmmo(weapons[1].CurrentAmmo, weapons[1].MaxAmmo);
-            HUDManager.Instance.curWeaponImage.sprite = weapons[1].weaponImage;
-            if (weapons[0] != null)
-            {
-                HUDManager.Instance.secWeaponImage.gameObject.SetActive(true);
-                HUDManager.Instance.secWeaponImage.sprite = weapons[0].weaponImage;
-            }
-            else
-            {
-                HUDManager.Instance.secWeaponImage.gameObject.SetActive(false);
-            }
-            HUDManager.Instance.weaponIndex.text = "[2]";
+                if (weapons[1].gameObject.activeSelf == false)
+                {
+                    weapons[1].gameObject.SetActive(true);
+                    currentWeapon = weapons[1];
+                }
+                HUDManager.Instance.SetWeaponInfo(weapons[1].weaponName, weapons[1].CurrentAmmo, weapons[1].MaxAmmo);
+                HUDManager.Instance.curWeaponImage.sprite = weapons[1].weaponImage;
+                if (weapons[0] != null)
+                {
+                    HUDManager.Instance.secWeaponImage.gameObject.SetActive(true);
+                    HUDManager.Instance.secWeaponImage.sprite = weapons[0].weaponImage;
+                }
+                else
+                {
+                    HUDManager.Instance.secWeaponImage.gameObject.SetActive(false);
+                }
+                HUDManager.Instance.weaponIndex.text = "[2]";
 
-            Debug.Log($"WeaponChanged. Current Weapon = {weapons[1].name}");
+                if (weapons[0] != null)
+                {
+                    weapons[0].gameObject.SetActive(false);
+                }
+
+                Debug.Log($"WeaponChanged. Current Weapon = {weapons[1].name}");
+            }
         }
-
         currentWeapon.InitWeaponStat();
     }
 

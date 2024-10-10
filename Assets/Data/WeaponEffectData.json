@@ -40,7 +40,8 @@
           "effectName": "불안정한 개조",
           "minValue": 50,
           "MaxValue": 100,
-          "RecoilValue": 50,
+          "RecoilMinValue": 50,
+          "RecoilMaxValue" : 100,
           "chance": 1.0,
           "InfoString": "불안정한 개조 : 데미지 value% 증가 , 총기 반동 recoilValue% 증가"
         }

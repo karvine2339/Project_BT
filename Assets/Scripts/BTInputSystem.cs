@@ -67,6 +67,8 @@ public class BTInputSystem : MonoBehaviour
 
     private void Update()
     {
+        Debug.Log(recoilY);
+
         if (isRecoiling)
         {
             xRecoilForce = Random.Range(-1.0f, 1.0f);
@@ -184,7 +186,7 @@ public class BTInputSystem : MonoBehaviour
     public void TriggerRecoil()
     {
         isRecoiling = true;
-        recoilY = recoilAmount;
+        recoilY = recoilAmount + PlayerStat.Instance.RecoilAmount;
         recoilTime = recoilDuration;
         recoilX = Random.Range(-0.3f, 0.3f);
     }

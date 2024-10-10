@@ -12,10 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7533f922be9969049b639c59a9dd7dc2, type: 3}
   m_Name: Weapon_Siroko
   m_EditorClassIdentifier: 
+  effectName: 
+  minValue: 0
+  maxValue: 0
+  chance: 0
   weaponName: WHITE FANG 465
   weaponType: 0
-  minDamage: 50
-  maxDamage: 100
+  minMinDamage: 50
+  minMaxDamage: 70
+  maxMinDamage: 100
+  maxMaxDamage: 120
   minfireRate: 0.2
   maxfireRate: 0.1
   weaponImg: {fileID: 21300000, guid: 60bbe4238c168884d88f11871904eed0, type: 3}
