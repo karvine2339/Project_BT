@@ -29,10 +29,6 @@ public class ChrBase : MonoBehaviour
     public float rotationSpeed;
     public float jumpForce;
 
-    public float groundRadius = 0.1f;
-    public float groundOffset = 0.1f;
-    public LayerMask groundLayer;
-
     protected bool isWalk = false;
     protected bool isStrafe = false;
     protected float speed = 0f;
@@ -42,6 +38,8 @@ public class ChrBase : MonoBehaviour
     protected bool isPossibleMovement = false;
     protected bool isPossibleAttack = false;
     protected bool isAttacking = false;
+    protected bool isEngaging = false;
+    protected float engagingTime = 5.0f;
 
     protected float targetRotation;           
     protected float rotationVelocity;         
@@ -50,8 +48,11 @@ public class ChrBase : MonoBehaviour
     protected UnityEngine.CharacterController unityCharacterController;
     protected Animator characterAnimator;
 
-    public int maxHp = 100;
-    public int curHp = 100;
+    public int maxHp;
+    public int curHp;
+
+    public float maxShield;
+    public float curShield;
 
     bool isLive;
 
@@ -63,7 +64,6 @@ public class ChrBase : MonoBehaviour
 
     protected virtual void Update()
     {
-
         characterAnimator.SetFloat("Strafe", isStrafe ? 1f : 0f);
 
         speed = isWalk ? 1f : 3f;
@@ -75,6 +75,10 @@ public class ChrBase : MonoBehaviour
     protected virtual void Start()
     {
         isLive = true;
+
+        curHp = maxHp;
+        curShield = maxShield;
+
     }
 
     public virtual void Fire()
@@ -97,14 +101,23 @@ public class ChrBase : MonoBehaviour
 
     }
 
-    public virtual void OnDamaged(float damage, float criticalHit,float criticalDamage)
+    public virtual void OnDamaged(float damage)
     {
         if(isLive)
         {
-            DamageTextCtrl.Instance.CreatePopup(new Vector3(transform.position.x + Random.Range(-0.2f,0.2f),
-                                                            transform.position.y + Random.Range(-0.2f,0.2f),
-                                                            transform.position.z),damage.ToString());
-            curHp -= (int)damage;
+            engagingTime = 5.0f;
+            isEngaging = true;
+
+            if (curShield > 0)
+            {
+                curShield -= (int)damage;
+                HUDManager.Instance.shieldBar.fillAmount = curShield / maxShield;
+            }
+            else
+            {
+                curHp -= (int)damage;
+                HUDManager.Instance.hpBar.fillAmount = curHp / maxHp;
+            }
 
             if(curHp <= 0)
             {

@@ -142,7 +142,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8407416368423690542
 Transform:
   m_ObjectHideFlags: 0
@@ -227,11 +227,20 @@ MonoBehaviour:
   maxAmmo: 30
   curAmmo: 30
   weaponName: 
+  effectString:
+  - 
+  - 
+  - 
+  effectType: 
+  effectVal: []
   minDamage: 0
   maxDamage: 0
   fireRate: 0
   criticalProbability: 0
   criticalDamage: 0
+  weaponRecoilAmount: 0
+  weaponType: 0
   weaponImage: {fileID: 21300000, guid: 60bbe4238c168884d88f11871904eed0, type: 3}
   projectilePrefab: {fileID: 0}
   fireStartPoint: {fileID: 2745117981141749208}
+  muzzleFlash: {fileID: 0}

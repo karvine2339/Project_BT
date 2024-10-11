@@ -16,9 +16,9 @@ public class EnemyCharacter : MonoBehaviour
     public int curHp = 100;
     public int maxHp = 100;
 
-    public void OnDamaged(float damage, float criticalHit,float criticalDamage)  
+    public void OnDamaged(float damage,float criticalDamage)  
     {
-        criticalHit = Random.Range(0.0f, 100.0f);
+        float criticalHit = Random.Range(0.0f, 100.0f);
         if(criticalHit <= PlayerStat.Instance.CriticalProbability)
         {
             damage *= (1.5f * criticalDamage);

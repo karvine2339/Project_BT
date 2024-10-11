@@ -31,6 +31,8 @@ public class Weapon : MonoBehaviour
     public Projectile projectilePrefab;
     public Transform fireStartPoint;
 
+    public GameObject muzzleFlash;
+
     //bool isReload = false;
 
     private void Start()

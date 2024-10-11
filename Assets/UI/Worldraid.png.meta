@@ -6,7 +6,7 @@ TextureImporter:
   serializedVersion: 12
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 1
+    enableMipMap: 0
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -37,13 +37,13 @@ TextureImporter:
     filterMode: 1
     aniso: 1
     mipBias: 0
-    wrapU: 0
-    wrapV: 0
+    wrapU: 1
+    wrapV: 1
     wrapW: 0
-  nPOTScale: 1
+  nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 0
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -52,9 +52,9 @@ TextureImporter:
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
-  alphaIsTransparency: 0
+  alphaIsTransparency: 1
   spriteTessellationDetail: -1
-  textureType: 0
+  textureType: 8
   textureShape: 1
   singleChannelComponent: 0
   flipbookRows: 1
@@ -95,18 +95,143 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Worldraid_56
+      rect:
+        serializedVersion: 2
+        x: 989
+        y: 64
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2891743c3e9ea964a91c23bcb6291824
+      internalID: -213926184
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Worldraid_0
+      rect:
+        serializedVersion: 2
+        x: 283
+        y: 520
+        width: 290
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 87b47c66f8337754abb5399905ae5990
+      internalID: 1916129677
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Worldraid_1
+      rect:
+        serializedVersion: 2
+        x: 283
+        y: 540
+        width: 290
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 730ef4e392bdfe34abf3a3598b71b33c
+      internalID: 1522359032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5d6bc9debf0f0384980ac51c706ad30a
     internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Worldraid_0: 1916129677
+      Worldraid_1: 1522359032
+      Worldraid_10: -1289433868
+      Worldraid_11: -2141027740
+      Worldraid_12: 125000332
+      Worldraid_13: 1857319567
+      Worldraid_14: 1339009823
+      Worldraid_15: -1262738753
+      Worldraid_16: -560624995
+      Worldraid_17: -545499795
+      Worldraid_18: 184097049
+      Worldraid_19: -1571386060
+      Worldraid_2: -67238901
+      Worldraid_20: -1013214868
+      Worldraid_21: 1310846023
+      Worldraid_22: -988104484
+      Worldraid_23: 601739372
+      Worldraid_24: 436388342
+      Worldraid_25: -1191048100
+      Worldraid_26: 872165361
+      Worldraid_27: 1823267732
+      Worldraid_28: 1228178901
+      Worldraid_29: -854704802
+      Worldraid_3: 862226840
+      Worldraid_30: 1303724580
+      Worldraid_31: 1571875355
+      Worldraid_32: -616588925
+      Worldraid_33: -361134280
+      Worldraid_34: 680536605
+      Worldraid_35: 1521630487
+      Worldraid_36: 1351033754
+      Worldraid_37: -1437327565
+      Worldraid_38: -337827274
+      Worldraid_39: -1436484401
+      Worldraid_4: -91538102
+      Worldraid_40: 121824961
+      Worldraid_41: 1981319171
+      Worldraid_42: -1067259013
+      Worldraid_43: -13222884
+      Worldraid_44: 3380904
+      Worldraid_45: -1498091098
+      Worldraid_46: -1035082602
+      Worldraid_47: -561725846
+      Worldraid_48: -771563430
+      Worldraid_49: -1266835977
+      Worldraid_5: -1617686127
+      Worldraid_50: 315595333
+      Worldraid_51: 1773489464
+      Worldraid_52: -1600945754
+      Worldraid_53: 194739930
+      Worldraid_54: 128271607
+      Worldraid_55: -112329775
+      Worldraid_56: -213926184
+      Worldraid_57: -853762606
+      Worldraid_58: -358535747
+      Worldraid_59: -1692237900
+      Worldraid_6: -1711333292
+      Worldraid_60: 1727375876
+      Worldraid_61: -2057131297
+      Worldraid_7: -227934892
+      Worldraid_8: 538764013
+      Worldraid_9: 996888267
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

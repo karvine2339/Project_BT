@@ -49,8 +49,8 @@ public class BTInputSystem : MonoBehaviour
 
     private Vector2 lastMousePosition;
 
-    public float recoilAmount = 1.0f;  // 반동 강도
-    public float recoilDuration = 0.3f; // 반동 지속 시간
+    public float recoilAmount = 1.0f; 
+    public float recoilDuration = 0.3f; 
 
     private float recoilY = 0f;
     private float recoilX = 0f;
@@ -67,8 +67,6 @@ public class BTInputSystem : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(recoilY);
-
         if (isRecoiling)
         {
             xRecoilForce = Random.Range(-1.0f, 1.0f);

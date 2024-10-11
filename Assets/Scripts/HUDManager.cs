@@ -22,6 +22,9 @@ public class HUDManager : MonoBehaviour
     public GameObject weaponUI1;
     public GameObject weaponUI2;
 
+    public Image hpBar;
+    public Image shieldBar;
+
     [Header("--- Inventory UI --- ")]
     public TextMeshProUGUI weaponName1;
     public TextMeshProUGUI weaponName2;
@@ -43,6 +46,12 @@ public class HUDManager : MonoBehaviour
         Instance = this; 
 
  
+    }
+
+    public void Start()
+    {
+        hpBar.fillAmount = 1.0f;
+        shieldBar.fillAmount = 1.0f;
     }
     public void OnDestroy()
     {

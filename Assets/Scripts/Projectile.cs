@@ -57,13 +57,11 @@ public class Projectile : MonoBehaviour
             if (gameObject.tag == "Rocket")
             {
                 enemy.OnDamaged((int)Random.Range(PlayerStat.Instance.BulletMinDamage,PlayerStat.Instance.BulletMaxDamage) * Random.Range(1.5f, 2.0f),
-                                                  PlayerStat.Instance.CriticalProbability,
                                                   PlayerStat.Instance.CriticalDamage);
             }
             else
             {
                 enemy.OnDamaged(PlayerStat.Instance.bulletDamage,
-                                PlayerStat.Instance.CriticalProbability, 
                                 PlayerStat.Instance.CriticalDamage);
             }
             Destroy(gameObject);

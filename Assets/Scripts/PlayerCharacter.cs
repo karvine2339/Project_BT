@@ -104,6 +104,8 @@ public class PlayerCharacter : ChrBase
     }
     protected override void Start()
     {
+        base.Start();
+
         aimRig = GetComponentInChildren<Rig>();
         rigBuilder = GetComponentInChildren<RigBuilder>();
 
@@ -157,7 +159,28 @@ public class PlayerCharacter : ChrBase
                 return;
             StartCoroutine(Reload());
         }
-        
+
+        if(Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            OnDamaged(10);
+            Debug.Log("OnDamaged!");
+        }
+
+        if (isEngaging)
+        {
+            engagingTime -= Time.deltaTime;
+            if (engagingTime < 0.0f)
+                isEngaging = false;
+        }
+        if(isEngaging == false)
+        {
+            curShield += Time.deltaTime * 10;
+            HUDManager.Instance.shieldBar.fillAmount = curShield / maxShield;
+            if (curShield >= maxShield)
+                curShield = maxShield;
+
+        }
+
     }
 
     public override void Fire()
@@ -179,6 +202,8 @@ public class PlayerCharacter : ChrBase
                     return;
 
                 characterAnimator.SetTrigger("Fire");
+
+                Muzzle();
                 Vector3 aimDir = (targetPointPosition - currentWeapon.fireStartPoint.position).normalized;
                 Projectile newBullet = Instantiate(projectilePrefab, currentWeapon.fireStartPoint.position, Quaternion.LookRotation(aimDir, Vector3.up));
                 newBullet.gameObject.SetActive(true);
@@ -230,6 +255,7 @@ public class PlayerCharacter : ChrBase
             }
 
             currentWeapon.InitWeaponStat();
+            characterAnimator.SetTrigger("ChangeWeapon");
 
         }
     }
@@ -272,6 +298,7 @@ public class PlayerCharacter : ChrBase
             }
         }
         currentWeapon.InitWeaponStat();
+        characterAnimator.SetTrigger("ChangeWeapon");
     }
 
     IEnumerator Reload()
@@ -301,6 +328,19 @@ public class PlayerCharacter : ChrBase
         weapons[0].effectString[2] = "";
         weapons[0].InitWeaponStat();
         weapons[0].InitFirstWeaponUI();
+    }
+
+    public override void OnDamaged(float damage)
+    {
+        base.OnDamaged(damage);
+    }
+
+    public void Muzzle()
+    {
+        GameObject muzzle = Instantiate(currentWeapon.muzzleFlash,
+            currentWeapon.muzzleFlash.transform.position, currentWeapon.muzzleFlash.transform.rotation);
+        muzzle.gameObject.SetActive(true);
+        Destroy(muzzle, 1.0f);
     }
 }
 

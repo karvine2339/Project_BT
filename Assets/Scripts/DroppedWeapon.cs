@@ -8,6 +8,10 @@ using System.IO;
 using Random = UnityEngine.Random;
 using static DroppedWeapon;
 
+public enum Effect
+{
+
+}
 public class DroppedWeapon : MonoBehaviour, IInteractable
 {
     private string jsonFilePath = "Assets/Data/WeaponEffectData.json";
@@ -220,7 +224,7 @@ public class DroppedWeapon : MonoBehaviour, IInteractable
                 selectedEffects.Add(effect);
                 Debug.Log("Effect Applied: " + effect.effectName);
 
-                if (effect.effectType == 1)
+                if (effect.effectType == 0)
                 {
                     effectVal[i] = Random.Range(effect.minValue, effect.maxValue);
                     weaponMinDamage *= 1 + (effectVal[i] / 100);
@@ -228,26 +232,26 @@ public class DroppedWeapon : MonoBehaviour, IInteractable
                     effectString[i] = effect.InfoString.Replace("value", effectVal[i].ToString("N0"));
                 }
 
-                else if (effect.effectType == 2)
+                else if (effect.effectType == 1)
                 {
                     effectVal[i] = Random.Range(effect.minValue, effect.maxValue);
                     weaponFireRate /= 1 + effectVal[i] / 100;
                     effectString[i] = effect.InfoString.Replace("value", effectVal[i].ToString("N0"));
                 }
 
-                else if (effect.effectType == 3)
+                else if (effect.effectType == 2)
                 {
                     effectVal[i] = Random.Range(effect.minValue, effect.maxValue);
                     weaponCriticalProbability += effectVal[i];
                     effectString[i] = effect.InfoString.Replace("value", effectVal[i].ToString("N0"));
                 }
-                else if (effect.effectType == 4)
+                else if (effect.effectType == 3)
                 {
                     effectVal[i] = Random.Range(effect.minValue, effect.maxValue);
                     weaponCriticalDamage += effectVal[i] / 100;
                     effectString[i] = effect.InfoString.Replace("value", effectVal[i].ToString("N0"));
                 }
-                else if (effect.effectType == 5)
+                else if (effect.effectType == 4)
                 {
                     effectVal[i] = Random.Range(effect.minValue, effect.maxValue);
                     weaponMinDamage *= 1 + (effectVal[i] / 100);
@@ -256,6 +260,16 @@ public class DroppedWeapon : MonoBehaviour, IInteractable
                     
                     effectString[i] = effect.InfoString.Replace("value", effectVal[i].ToString("N0"))
                                                      .Replace("recoilValue", (effectVal[i]/2).ToString("N0"));
+                }
+                else if (effect.effectType == 5)
+                {
+                    effectVal[i] = Random.Range(effect.minValue, effect.maxValue);
+                    weaponMinDamage *= 1 - (effectVal[i] / 100) / 4;
+                    weaponMaxDamage *= 1 - (effectVal[i] / 100) / 4;
+                    weaponFireRate /= 1 + effectVal[i] / 100;
+
+                    effectString[i] = effect.InfoString.Replace("value", effectVal[i].ToString("N0"))
+                                                .Replace("damageValue", (effectVal[i] / 4).ToString("N0"));
                 }
 
             }

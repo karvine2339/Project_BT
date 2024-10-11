@@ -196,14 +196,23 @@ MonoBehaviour:
   maxAmmo: 30
   curAmmo: 30
   weaponName: 
+  effectString:
+  - 
+  - 
+  - 
+  effectType: 
+  effectVal: []
   minDamage: 227.54608
   maxDamage: 455.09216
   fireRate: 0.17167315
   criticalProbability: 20
   criticalDamage: 1.5
+  weaponRecoilAmount: 0
+  weaponType: 0
   weaponImage: {fileID: 21300000, guid: d896941779066bb49a236737c2934d5b, type: 3}
   projectilePrefab: {fileID: 0}
   fireStartPoint: {fileID: 540410257200572616}
+  muzzleFlash: {fileID: 0}
 --- !u!1 &6311111077543071460
 GameObject:
   m_ObjectHideFlags: 0
