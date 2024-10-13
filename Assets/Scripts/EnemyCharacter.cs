@@ -16,6 +16,10 @@ public class EnemyCharacter : MonoBehaviour
     public int curHp = 100;
     public int maxHp = 100;
 
+    private void Awake()
+    {
+
+    }
     public void OnDamaged(float damage,float criticalDamage)  
     {
         float criticalHit = Random.Range(0.0f, 100.0f);
@@ -39,7 +43,8 @@ public class EnemyCharacter : MonoBehaviour
         OnEnemyDamaged?.Invoke(this,(int)damage); 
         if (curHp <= 0)
         {
-            DropWeapon(transform.position); 
+            DropWeapon(transform.position);
+            CoinDropper.Instance.DropCoins(transform.position);
             Die();
         }
 

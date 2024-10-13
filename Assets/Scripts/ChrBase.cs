@@ -113,10 +113,10 @@ public class ChrBase : MonoBehaviour
                 curShield -= (int)damage;
                 HUDManager.Instance.shieldBar.fillAmount = curShield / maxShield;
             }
-            else
+            else if (curShield <= 0)
             {
                 curHp -= (int)damage;
-                HUDManager.Instance.hpBar.fillAmount = curHp / maxHp;
+                HUDManager.Instance.hpBar.fillAmount = (float)curHp / (float)maxHp;
             }
 
             if(curHp <= 0)

@@ -157,6 +157,10 @@ public class PlayerCharacter : ChrBase
         {
             if (isReload)
                 return;
+
+            if (currentWeapon.curAmmo == 30)
+                return;
+
             StartCoroutine(Reload());
         }
 
