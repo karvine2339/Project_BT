@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Animations.Rigging;
 
 
@@ -239,15 +240,16 @@ public class PlayerCharacter : ChrBase
 
                 HUDManager.Instance.SetWeaponInfo(weapons[0].weaponName, weapons[0].CurrentAmmo, weapons[0].MaxAmmo);
                 HUDManager.Instance.curWeaponImage.sprite = weapons[0].weaponImage;
+                HUDManager.Instance.firstWeapon.GetComponent<Image>().sprite = weapons[0].weaponImage;
+                HUDManager.Instance.firstWeapon.GetComponent<Image>().color = new Color(1, 1, 1, 1);
+                HUDManager.Instance.firstWeapon.GetComponent<RectTransform>().localScale = new Vector3(0.4f, 0.4f, 0.4f);
                 if (weapons[1] != null)
                 {
-                    HUDManager.Instance.secWeaponImage.gameObject.SetActive(true);
-                    HUDManager.Instance.secWeaponImage.sprite = weapons[1].weaponImage;
+                    HUDManager.Instance.secondWeapon.GetComponent<Image>().sprite = weapons[1].weaponImage;
+                    HUDManager.Instance.secondWeapon.GetComponent<Image>().color = new Color(1, 1, 1, 0.5f);
+                    HUDManager.Instance.secondWeapon.GetComponent<RectTransform>().localScale = new Vector3(0.3f, 0.3f, 0.3f);
                 }
-                else
-                {
-                    HUDManager.Instance.secWeaponImage.gameObject.SetActive(false);
-                }
+
                 HUDManager.Instance.weaponIndex.text = "[1]";
 
                 if (weapons[1] != null)
@@ -282,15 +284,18 @@ public class PlayerCharacter : ChrBase
                 }
                 HUDManager.Instance.SetWeaponInfo(weapons[1].weaponName, weapons[1].CurrentAmmo, weapons[1].MaxAmmo);
                 HUDManager.Instance.curWeaponImage.sprite = weapons[1].weaponImage;
+                HUDManager.Instance.secondWeapon.GetComponent<Image>().sprite = weapons[1].weaponImage;
+                HUDManager.Instance.secondWeapon.GetComponent<Image>().color = new Color(1, 1, 1, 1);
+                HUDManager.Instance.secondWeapon.GetComponent<RectTransform>().localScale = new Vector3(0.4f, 0.4f, 0.4f);
+
                 if (weapons[0] != null)
                 {
-                    HUDManager.Instance.secWeaponImage.gameObject.SetActive(true);
-                    HUDManager.Instance.secWeaponImage.sprite = weapons[0].weaponImage;
+                    HUDManager.Instance.firstWeapon.GetComponent<Image>().sprite = weapons[0].weaponImage;
+                    HUDManager.Instance.firstWeapon.GetComponent<Image>().color = new Color(1, 1, 1, 0.5f);
+                    HUDManager.Instance.firstWeapon.GetComponent<RectTransform>().localScale = new Vector3(0.3f, 0.3f, 0.3f);
+        
                 }
-                else
-                {
-                    HUDManager.Instance.secWeaponImage.gameObject.SetActive(false);
-                }
+
                 HUDManager.Instance.weaponIndex.text = "[2]";
 
                 if (weapons[0] != null)

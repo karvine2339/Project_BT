@@ -6,43 +6,13 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.IO;
 using Random = UnityEngine.Random;
-using static DroppedWeapon;
 
-public enum Effect
-{
-
-}
 public class DroppedWeapon : MonoBehaviour, IInteractable
 {
-    private string jsonFilePath = "Assets/Data/WeaponEffectData.json";
+    public JsonManager jsonManager;
 
-    [Serializable]
-    public class Effect
-    {
-        public string effectName;
-        public int effectType;
-        public float minValue;     
-        public float maxValue;
-        public float minValue2;
-        public float maxValue2;
-        public float chance;
-        public string InfoString;
-    }
+    public JsonManager.Root effectData;
 
-    [Serializable]
-    public class EffectTable
-    {
-        public string name;        
-        public List<Effect> effects; 
-    }
-
-    [Serializable]
-    public class Root
-    {
-        public List<EffectTable> effectTables;  
-    }
-
-    public Root effectData;
     public bool IsAutoInteract => false;
     public string Message => weaponName;
 
@@ -75,16 +45,16 @@ public class DroppedWeapon : MonoBehaviour, IInteractable
 
     [HideInInspector] public bool isThrow = false;
 
+
+
     private void Start()
     {
+        effectData = JsonManager.Instance.effectData;
         weaponInfoBox = Interaction_UI.Instance.weaponInfoBox;
-
-        string json = System.IO.File.ReadAllText(jsonFilePath);
-        effectData = JsonConvert.DeserializeObject<Root>(json);
 
         weaponInfo = weaponInfoBox.GetComponent<WeaponInfoBox>();
 
-        if(isThrow == false)
+        if (isThrow == false)
         {
             InitWeaponEffect();
         }
@@ -169,8 +139,6 @@ public class DroppedWeapon : MonoBehaviour, IInteractable
         }
         Interaction_UI.Instance.RemoveInteractionData(this);
 
-        HUDManager.Instance.curWeaponImage.sprite = weaponImg;
-
         Destroy(gameObject);
 
     }
@@ -212,12 +180,12 @@ public class DroppedWeapon : MonoBehaviour, IInteractable
     }
     public void InitWeaponEffect()
     {
-        List<Effect> selectedEffects = new List<Effect>();
+        List<JsonManager.Effect> selectedEffects = new List<JsonManager.Effect>();
 
         for (int i = 0; i < 3; i++)
         {
-            EffectTable randomTable = effectData.effectTables[Random.Range(0, effectData.effectTables.Count)];
-            Effect effect = randomTable.effects[Random.Range(0, randomTable.effects.Count)];
+            JsonManager.EffectTable randomTable = effectData.effectTables[Random.Range(0, effectData.effectTables.Count)];
+            JsonManager.Effect effect = randomTable.effects[Random.Range(0, randomTable.effects.Count)];
 
             if (Random.value <= effect.chance)
             {

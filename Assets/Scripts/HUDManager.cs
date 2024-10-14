@@ -14,13 +14,15 @@ public class HUDManager : MonoBehaviour
     public TextMeshProUGUI weaponAmmoText;
 
     public Image curWeaponImage;
-    public Image secWeaponImage;
     public TextMeshProUGUI weaponIndex;
 
     public GameObject inventoryUI;
 
     public GameObject weaponUI1;
     public GameObject weaponUI2;
+
+    public GameObject firstWeapon;
+    public GameObject secondWeapon;
 
     public Image hpBar;
     public Image shieldBar;
