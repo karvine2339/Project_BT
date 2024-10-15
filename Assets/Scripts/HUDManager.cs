@@ -27,6 +27,8 @@ public class HUDManager : MonoBehaviour
     public Image hpBar;
     public Image shieldBar;
 
+    public TextMeshProUGUI creditText;
+
     [Header("--- Inventory UI --- ")]
     public TextMeshProUGUI weaponName1;
     public TextMeshProUGUI weaponName2;
@@ -54,6 +56,7 @@ public class HUDManager : MonoBehaviour
     {
         hpBar.fillAmount = 1.0f;
         shieldBar.fillAmount = 1.0f;
+        UpdateCredit();
     }
     public void OnDestroy()
     {
@@ -112,6 +115,11 @@ public class HUDManager : MonoBehaviour
             CursorSystem.Instance.SetCursorState(false);
             Time.timeScale = 1.0f;
         }
+    }
+
+    public void UpdateCredit()
+    {
+        creditText.text = PlayerCharacter.Instance.curCredit.ToString("N0");
     }
 
 }

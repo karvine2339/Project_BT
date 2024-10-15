@@ -4385,6 +4385,7 @@ MonoBehaviour:
   secondWeapon: {fileID: 1595746557}
   hpBar: {fileID: 161175716}
   shieldBar: {fileID: 976032863}
+  creditText: {fileID: 2047269525}
   weaponName1: {fileID: 468499221}
   weaponName2: {fileID: 1972992049}
   weaponDamage1: {fileID: 1640294684}
@@ -6730,6 +6731,7 @@ MonoBehaviour:
   fireRate: 0.2
   reloadTime: 2.65
   isReload: 0
+  credit: 0
   aimColliderLayerMask:
     serializedVersion: 2
     m_Bits: 192

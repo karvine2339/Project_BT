@@ -20,6 +20,9 @@ public class PlayerCharacter : ChrBase
     public float reloadTime = 1.3f;
     public bool isReload = false;
 
+    public float credit;
+    public float curCredit;
+
     [SerializeField] private LayerMask aimColliderLayerMask = new LayerMask();
     [SerializeField] private LayerMask targetPointLayerMask = new LayerMask();
     [SerializeField] private Vector3 mouseWorldPosition;
@@ -186,6 +189,8 @@ public class PlayerCharacter : ChrBase
 
         }
 
+        CreditIncrease();
+
     }
 
     public override void Fire()
@@ -350,6 +355,16 @@ public class PlayerCharacter : ChrBase
             currentWeapon.muzzleFlash.transform.position, currentWeapon.muzzleFlash.transform.rotation);
         muzzle.gameObject.SetActive(true);
         Destroy(muzzle, 1.0f);
+    }
+
+    public void CreditIncrease()
+    {
+        if (curCredit >= credit)
+            return;
+        curCredit += Time.deltaTime * 200;
+        HUDManager.Instance.UpdateCredit();
+        if (curCredit > credit)
+            curCredit = credit;
     }
 }
 
