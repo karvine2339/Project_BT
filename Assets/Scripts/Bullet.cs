@@ -13,11 +13,9 @@ public class Bullet : MonoBehaviour
     public void Shoot(Vector3 dir)
     {
         _Direction = dir;
-        // 5초가 지난 후 총알을 파괴
         Destroy(gameObject, 5f);
     }
 
-    // Update is called once per frame
     void Update()
     {
         transform.Translate(_Direction * Time.deltaTime * _Speed);

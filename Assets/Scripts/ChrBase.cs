@@ -28,7 +28,6 @@ public class ChrBase : MonoBehaviour
 
     public float moveSpeed;
     public float rotationSpeed;
-    public float jumpForce;
 
     protected bool isWalk = false;
     protected bool isStrafe = false;

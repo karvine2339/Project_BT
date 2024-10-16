@@ -52,6 +52,28 @@
           "MaxValue": 100,
           "chance": 1.0,
           "InfoString": "무자비한 사격 : 연사속도 value% 증가 , 데미지 damageValue% 감소"
+        },
+        {
+          "effectType": 6,
+          "effetName": "관통률 증가",
+          "minValue": 1,
+          "MaxValue": 2,
+          "chance": 1.0,
+          "InfoString": "관통률 증가 : 관통률 value증가"
+        },
+        {
+          "effectType": 7,
+          "effectName": "탄창용량 증가",
+          "minValue": 10,
+          "maxValue": 15,
+          "chance": 1.0,
+          "InfoString": "넉넉한 총알 : 탄창용량 value증가"
+        },
+        {
+          "effectType": 8,
+          "effectName": "무자비한 학살자",
+          "change": 1.0,
+          "InfoString": "무자비한 학살자 : 적 처치시 탄창 재장전"
         }
       ]
     }
