@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -96,6 +97,11 @@ public class ChrBase : MonoBehaviour
 
     }
 
+    public virtual void EquipWeapon(DroppedWeapon weapon)
+    {
+
+    }
+
     public virtual void SetAiming(float aiming)
     {
 
@@ -124,6 +130,10 @@ public class ChrBase : MonoBehaviour
                 isLive = false;
             }
         }
+    }
+    public virtual void Reload()
+    {
+
     }
 
     public void Move(Vector2 input, float yAxisAngle)
@@ -182,6 +192,5 @@ public class ChrBase : MonoBehaviour
         // 현재 회전에서 목표 회전으로 부드럽게 보간
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
     }
-
 }
 

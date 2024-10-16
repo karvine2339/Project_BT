@@ -6,18 +6,6 @@ using UnityEngine.UI;
 
 public class Interaction_List : MonoBehaviour
 {
-    public string nonSelectedMessage
-    {
-        get
-        {
-            return nonSelectedMessageText.text;
-        }
-        set
-        {
-            nonSelectedMessageText.text = value;
-        }
-    }
-
     public string selectedMessage
     {
         get
@@ -41,17 +29,6 @@ public class Interaction_List : MonoBehaviour
             outline.enabled = value;
         }
     }
-    public bool IsSelectedObject
-    {
-        get
-        {
-            return selectedObject.activeSelf;
-        }
-        set
-        {
-            selectedObject.SetActive(value);
-        }
-    }
 
     public IInteractable InteractableData
     {
@@ -66,9 +43,7 @@ public class Interaction_List : MonoBehaviour
     }
 
     [SerializeField] private TextMeshProUGUI selectedMessageText;
-    [SerializeField] private TextMeshProUGUI nonSelectedMessageText;
     [SerializeField] private Outline outline;
-    [SerializeField] private GameObject selectedObject;
     [SerializeField] private RectTransform rect;
 
     private IInteractable interactableData;

@@ -35,8 +35,6 @@ public class RightClickButton : MonoBehaviour, IPointerDownHandler , IPointerUpH
                 holdingTimer = 0.0f;
             }
         }
-
-        Debug.Log(holdingTimer);
     }
     public void OnPointerDown(PointerEventData eventData)
     {

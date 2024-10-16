@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2133567975139510680}
   m_Layer: 0
   m_Name: Weapon_Shiroko_Dropped
-  m_TagString: Untagged
+  m_TagString: DroppedWeapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -97,14 +97,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 418c53cb83d6984428adf3e657e98c3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jsonManager: {fileID: 0}
+  effectData:
+    effectTables: []
   weaponName: 
   weaponData: {fileID: 11400000, guid: 32d15122237f9be4a94627369f31a897, type: 2}
   weaponImg: {fileID: 0}
+  weaponObject: {fileID: 0}
   weaponMinDamage: 0
   weaponMaxDamage: 0
   weaponFireRate: 0
   weaponCriticalProbability: 20
   weaponCriticalDamage: 1.5
+  effectVal:
+  - 0
+  - 0
+  - 0
+  effectType: 000000000000000000000000
+  effectString:
+  - 
+  - 
+  - 
+  weaponType: 0
+  weaponRecoilAmount: 0
+  isThrow: 0
 --- !u!135 &2133567975139510680
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -124,5 +140,5 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.28533456
+  m_Radius: 0.5
   m_Center: {x: -0.049485408, y: -0.002676215, z: 0.014026852}

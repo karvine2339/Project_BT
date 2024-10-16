@@ -28,6 +28,10 @@ public class HUDManager : MonoBehaviour
     public Image shieldBar;
 
     public TextMeshProUGUI creditText;
+    public TextMeshProUGUI increaseCreditText;
+
+    public float creditTextTime = 5.0f;
+    public bool isIncreaseCredit = false;
 
     [Header("--- Inventory UI --- ")]
     public TextMeshProUGUI weaponName1;
@@ -48,15 +52,13 @@ public class HUDManager : MonoBehaviour
     public void Awake()
     {
         Instance = this; 
-
- 
     }
 
     public void Start()
     {
         hpBar.fillAmount = 1.0f;
         shieldBar.fillAmount = 1.0f;
-        UpdateCredit();
+        creditText.text = PlayerCharacter.Instance.curCredit.ToString("N0");
     }
     public void OnDestroy()
     {
@@ -66,7 +68,19 @@ public class HUDManager : MonoBehaviour
 
     private void Update()
     {
+        if(creditTextTime >= 5.0f)
+        {
+            creditTextTime -= Time.deltaTime;
+            if (creditTextTime <= 0.0f)
+            {
+                increaseCreditText.text = "";
+            }
+        }
 
+        if(isIncreaseCredit)
+        {
+            IncreaseCredit();
+        }
     }
 
 
@@ -98,7 +112,7 @@ public class HUDManager : MonoBehaviour
             {
                 weaponUI1.gameObject.SetActive(true);
             }
-
+            
             if(PlayerCharacter.Instance.weapons[1] == null)
             {
                 weaponUI2.gameObject.SetActive(false);
@@ -117,9 +131,27 @@ public class HUDManager : MonoBehaviour
         }
     }
 
-    public void UpdateCredit()
+    public void UpdateCredit(int credit)
     {
+        creditTextTime = 5.0f;
+        increaseCreditText.text = "+" + credit;
+        isIncreaseCredit = true;
+    }
+
+    public void IncreaseCredit()
+    {
+        if (PlayerCharacter.Instance.curCredit >= PlayerCharacter.Instance.credit)
+            return;
+
+        PlayerCharacter.Instance.curCredit += Time.deltaTime * 250;
+
         creditText.text = PlayerCharacter.Instance.curCredit.ToString("N0");
+
+        if (PlayerCharacter.Instance.curCredit > PlayerCharacter.Instance.credit)
+        {
+            PlayerCharacter.Instance.curCredit = PlayerCharacter.Instance.credit;
+            isIncreaseCredit = false;
+        }
     }
 
 }

@@ -7,7 +7,7 @@ using System;
 using System.IO;
 using Random = UnityEngine.Random;
 
-public class DroppedWeapon : MonoBehaviour, IInteractable
+public class DroppedWeapon : MonoBehaviour
 {
     public JsonManager jsonManager;
 
@@ -58,23 +58,11 @@ public class DroppedWeapon : MonoBehaviour, IInteractable
         {
             InitWeaponEffect();
         }
-
-        //Root parsedData = JsonConvert.DeserializeObject<Root>(json);
-
-        //foreach (var table in parsedData.effectTables)
-        //{
-        //    Debug.Log("테이블 이름: " + table.name);
-        //    foreach (var effect in table.effects)
-        //    {
-        //        Debug.Log("효과 이름: " + effect.effectName);
-        //        Debug.Log("최소값: " + effect.minValue);
-        //        Debug.Log("최대값: " + effect.maxValue);
-        //        Debug.Log("확률: " + effect.chance);
-        //    }
-        //}
     }
-
-
+    public void InteractWeapon(RaycastHit hit,PlayerCharacter playerCharacter)
+    {
+        Debug.Log(playerCharacter.currentWeapon);
+    }
     public void Interact(PlayerCharacter playerCharacter)
     {
         string prefabPaths = weaponPrefabPaths[this.gameObject.name];
@@ -137,7 +125,6 @@ public class DroppedWeapon : MonoBehaviour, IInteractable
             }
 
         }
-        Interaction_UI.Instance.RemoveInteractionData(this);
 
         Destroy(gameObject);
 
@@ -145,7 +132,7 @@ public class DroppedWeapon : MonoBehaviour, IInteractable
 
     public void ShowInfoBox(PlayerCharacter playerCharacter)
     {
-        if(weaponInfoBox != null)
+        if(weaponInfoBox != null && weaponInfoBox.gameObject.activeSelf == false)
         {
             weaponInfoBox.gameObject.SetActive(true);
             weaponInfo.weaponDamageText.text = weaponMinDamage.ToString("N0") + " ~ " + weaponMaxDamage.ToString("N0");
@@ -156,8 +143,9 @@ public class DroppedWeapon : MonoBehaviour, IInteractable
             weaponInfo.effect[1].text = effectString[1];
             weaponInfo.effect[2].text = effectString[2];
 
+            Debug.Log("Show Info Box");
         }
-        Debug.Log("Show Info Box");
+
     }
 
     public void HideInfoBox(PlayerCharacter playerCharacter)

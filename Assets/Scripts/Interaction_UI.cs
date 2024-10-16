@@ -37,10 +37,8 @@ public class Interaction_UI : MonoBehaviour
         Interaction_List newItem = Instantiate(listItemPrefab, listItemRoot);
         newItem.gameObject.SetActive(true);
         newItem.InteractableData = interactionData;
-        newItem.nonSelectedMessage = interactionData.Message;
         newItem.selectedMessage = interactionData.Message;
         newItem.IsSelected = false;
-        newItem.IsSelectedObject = false;
 
         createdItems.Add(newItem);
 
@@ -48,7 +46,6 @@ public class Interaction_UI : MonoBehaviour
         {
             selectedIndex = 0;
             newItem.IsSelected = true;
-            newItem.IsSelectedObject = true;
         }
     }
 
@@ -72,7 +69,6 @@ public class Interaction_UI : MonoBehaviour
                 selectedIndex = 0;
             }
             createdItems[selectedIndex].IsSelected = true;
-            createdItems[selectedIndex].IsSelectedObject = true;
         }
         else
         {
@@ -91,35 +87,12 @@ public class Interaction_UI : MonoBehaviour
         }
     }
 
-    public void ShowInfoBox()
-    {
-        if (selectedIndex < 0)
-            return;
-
-        if(selectedIndex < createdItems.Count)
-        {
-            createdItems[selectedIndex].InteractableData.ShowInfoBox(PlayerCharacter.Instance);
-        }
-    }
-
-    public void HideInfoBox()
-    {
-        if (selectedIndex < 0)
-            return;
-
-        if(selectedIndex < createdItems.Count)
-        {
-            createdItems[selectedIndex].InteractableData.HideInfoBox(PlayerCharacter.Instance);
-        }
-    }
-
     public void ChangeSelection(float mouseWheel)
     {
         if (createdItems.Count <= 0)
             return;
 
         createdItems[selectedIndex].IsSelected = false;
-        createdItems[selectedIndex].IsSelectedObject = false;
 
         if (mouseWheel > 0)
         {
@@ -139,7 +112,19 @@ public class Interaction_UI : MonoBehaviour
         }
 
         createdItems[selectedIndex].IsSelected = true;
-        createdItems[selectedIndex].IsSelectedObject = true;
+    }
+
+    public void HideInfoBox()
+    {
+        if (weaponInfoBox != null)
+        {
+            if (weaponInfoBox.gameObject.activeSelf)
+            {
+                weaponInfoBox.SetActive(false);
+                Debug.Log("Hide Info Box");
+            }
+        }
+
     }
 }
 

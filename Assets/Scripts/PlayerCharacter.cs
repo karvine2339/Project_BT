@@ -44,6 +44,8 @@ public class PlayerCharacter : ChrBase
 
     public Weapon currentWeapon = null;
 
+    private DroppedWeapon droppedWeapon = null;
+
     protected override void Awake()
     {
         base.Awake();
@@ -65,26 +67,6 @@ public class PlayerCharacter : ChrBase
         }
 
         Interaction_UI.Instance.ExecuteInteractionData();
-    }
-
-    public void ShowInfoBox()
-    {
-        if(currentInteractionItems.Count <= 0)
-        {
-            return;
-        }
-
-        Interaction_UI.Instance.ShowInfoBox();
-    }
-
-    public void HideInfoBox()
-    {
-        if(currentInteractionItems.Count <= 0)
-        {
-            return;
-        }
-
-        Interaction_UI.Instance.HideInfoBox();
     }
 
     private void OnDetectedInteraction(IInteractable interactable)
@@ -140,34 +122,6 @@ public class PlayerCharacter : ChrBase
 
         characterAnimator.SetFloat("Speed", targetSpeedBlend);
 
-        Vector2 screenCenterPoint = new Vector2(Screen.width / 2f, Screen.height / 2f);
-        Ray ray = Camera.main.ScreenPointToRay(screenCenterPoint);
-        if (Physics.Raycast(ray, out RaycastHit raycastHit, 999f, aimColliderLayerMask, QueryTriggerInteraction.Ignore))
-        {
-            mouseWorldPosition = raycastHit.point;
-            aimPointPosition.position = raycastHit.point;
-        }
-
-        if (Physics.Raycast(ray, out RaycastHit targetRaycastHit, 999f, targetPointLayerMask, QueryTriggerInteraction.Ignore))
-        {
-            targetPointPosition = targetRaycastHit.point;
-        }
-        aimRigWeight = isStrafe ? 0.8f : 0f;
-        aimRig.weight = Mathf.Clamp(aimRig.weight, 0f, 0.8f);
-        //aimRig.weight = Mathf.Lerp(aimRig.weight, aimRigWeight, Time.deltaTime * 20f);
-        aimRig.weight = isStrafe ? 0.8f : 0f;
-
-        if(Input.GetKeyDown(KeyCode.R))
-        {
-            if (isReload)
-                return;
-
-            if (currentWeapon.curAmmo == 30)
-                return;
-
-            StartCoroutine(Reload());
-        }
-
         if(Input.GetKeyDown(KeyCode.Alpha3))
         {
             OnDamaged(10);
@@ -189,8 +143,9 @@ public class PlayerCharacter : ChrBase
 
         }
 
-        CreditIncrease();
+        AimStatement();
 
+        RayWeapon();
     }
 
     public override void Fire()
@@ -205,7 +160,7 @@ public class PlayerCharacter : ChrBase
                     if (isReload)
                         return;
 
-                    StartCoroutine(Reload());
+                    StartCoroutine(ReloadCo());
                     return;
                 }
                 if (isReload == true)
@@ -271,8 +226,6 @@ public class PlayerCharacter : ChrBase
         }
     }
 
-
-
     public override void ChangedSecondaryWeapon()
     {
         if (weapons[1] != null)
@@ -315,7 +268,7 @@ public class PlayerCharacter : ChrBase
         characterAnimator.SetTrigger("ChangeWeapon");
     }
 
-    IEnumerator Reload()
+    IEnumerator ReloadCo()
     {
         isReload = true;
         characterAnimator.SetBool("IsReload",true);
@@ -357,14 +310,84 @@ public class PlayerCharacter : ChrBase
         Destroy(muzzle, 1.0f);
     }
 
-    public void CreditIncrease()
+    public void AimStatement()
     {
-        if (curCredit >= credit)
+        Vector2 screenCenterPoint = new Vector2(Screen.width / 2f, Screen.height / 2f);
+        Ray ray = Camera.main.ScreenPointToRay(screenCenterPoint);
+        if (Physics.Raycast(ray, out RaycastHit raycastHit, 999f, aimColliderLayerMask, QueryTriggerInteraction.Ignore))
+        {
+            mouseWorldPosition = raycastHit.point;
+            aimPointPosition.position = raycastHit.point;
+        }
+
+        if (Physics.Raycast(ray, out RaycastHit targetRaycastHit, 999f, targetPointLayerMask, QueryTriggerInteraction.Ignore))
+        {
+            targetPointPosition = targetRaycastHit.point;
+        }
+        aimRigWeight = isStrafe ? 0.8f : 0f;
+        aimRig.weight = Mathf.Clamp(aimRig.weight, 0f, 0.8f);
+        aimRig.weight = isStrafe ? 0.8f : 0f;
+    }
+
+    public override void Reload()
+    {
+        if (isReload)
             return;
-        curCredit += Time.deltaTime * 200;
-        HUDManager.Instance.UpdateCredit();
-        if (curCredit > credit)
-            curCredit = credit;
+
+        if (currentWeapon.curAmmo == 30)
+            return;
+
+        StartCoroutine(ReloadCo());
+        currentWeapon.curAmmo = currentWeapon.maxAmmo;
+    }
+
+    public override void EquipWeapon(DroppedWeapon weapon)
+    {
+        weapon = droppedWeapon;
+        if (weapon != null)
+        {
+            weapon.Interact(this);
+        }
+    }
+
+    public void RayWeapon()
+    {
+        RaycastHit hit;
+        Vector3 direction = Camera.main.transform.forward;
+        Debug.DrawRay(Camera.main.transform.position, direction * 3, color: Color.red);
+        if (Physics.Raycast(Camera.main.transform.position, direction, out hit, 3f))
+        {
+            if (hit.collider.CompareTag("DroppedWeapon"))
+            {
+                hit.collider.GetComponent<DroppedWeapon>().ShowInfoBox(this);
+
+                droppedWeapon = hit.collider.GetComponent<DroppedWeapon>();         
+            }
+            else if (hit.collider.CompareTag("Drone"))
+            {
+                if (droppedWeapon != null)
+                {
+                    droppedWeapon = null;
+                }
+            }
+            else
+            {
+                if (droppedWeapon != null)
+                {
+                    droppedWeapon = null;
+                }
+                Interaction_UI.Instance.HideInfoBox();
+            }
+        }
+        else
+        {
+           if(droppedWeapon != null)
+            {
+                droppedWeapon = null;
+            }
+            Interaction_UI.Instance.HideInfoBox();
+        }
+
     }
 }
 

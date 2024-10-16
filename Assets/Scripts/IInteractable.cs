@@ -9,9 +9,5 @@ public interface IInteractable
 
 
     public void Interact(PlayerCharacter playerCharacter);
-
-    public void ShowInfoBox(PlayerCharacter playerCharacter);
-
-    public void HideInfoBox(PlayerCharacter playerCharacter);
 }
 

@@ -6,12 +6,14 @@ public class CoinCtrl : MonoBehaviour, IInteractable
 {
     public bool IsAutoInteract => true;
 
+    private int credit;
     public string Message => "";
 
     public void Interact(PlayerCharacter playerCharacter)
     {
-        playerCharacter.credit += Random.Range(50, 100);
-        HUDManager.Instance.UpdateCredit();
+        credit = Random.Range(50, 100);
+        playerCharacter.credit += credit;
+        HUDManager.Instance.UpdateCredit(credit);
         Destroy(this.gameObject);
     }
 

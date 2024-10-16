@@ -41,6 +41,8 @@ public class BTInputSystem : MonoBehaviour
 
     public System.Action onAttack;
     public System.Action onInteract;
+    public System.Action onEquipWeapon;
+    public System.Action onReload;
     public System.Action onShowInfo;
     public System.Action onHideInfo;
     public System.Action onChangedPrimaryWeapon;
@@ -130,6 +132,7 @@ public class BTInputSystem : MonoBehaviour
                 return;
 
             onInteract?.Invoke();
+            onEquipWeapon?.Invoke();
         }
 
         if(Input.GetKeyDown(KeyCode.V))
@@ -140,6 +143,11 @@ public class BTInputSystem : MonoBehaviour
         if(Input.GetKeyUp(KeyCode.V))
         {
             onHideInfo?.Invoke();
+        }
+
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            onReload?.Invoke();
         }
 
         if(Input.GetKeyDown(KeyCode.Alpha1))

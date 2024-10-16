@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4637863024448016136}
   m_Layer: 0
   m_Name: Weapon_Serika_Dropped
-  m_TagString: Untagged
+  m_TagString: DroppedWeapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -97,14 +97,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 418c53cb83d6984428adf3e657e98c3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jsonManager: {fileID: 0}
+  effectData:
+    effectTables: []
   weaponName: 
   weaponData: {fileID: 11400000, guid: 452f49eba2faa28469491bb76ab80f5e, type: 2}
   weaponImg: {fileID: 0}
+  weaponObject: {fileID: 0}
   weaponMinDamage: 0
   weaponMaxDamage: 0
   weaponFireRate: 0
   weaponCriticalProbability: 20
   weaponCriticalDamage: 1.5
+  effectVal:
+  - 0
+  - 0
+  - 0
+  effectType: 000000000000000000000000
+  effectString:
+  - 
+  - 
+  - 
+  weaponType: 0
+  weaponRecoilAmount: 0
+  isThrow: 0
 --- !u!135 &4637863024448016136
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -124,5 +140,5 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.2853156
+  m_Radius: 0.5
   m_Center: {x: -0.049154222, y: 0.0000000949949, z: 0.0135495085}

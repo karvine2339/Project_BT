@@ -13,6 +13,8 @@ public class CharacterController : MonoBehaviour
 
     private ChrBase characterBase;
 
+    private DroppedWeapon weapon;
+
     private void Awake()
     {
         characterBase = GetComponent<ChrBase>();
@@ -20,13 +22,13 @@ public class CharacterController : MonoBehaviour
 
     private void Start()
     {
+        BTInputSystem.Instance.onReload += Reload; 
         BTInputSystem.Instance.onAttack += Attack;
         BTInputSystem.Instance.onInteract += Interact;
-        BTInputSystem.Instance.onShowInfo += ShowInfoBox;
-        BTInputSystem.Instance.onHideInfo += HideInfoBox;
         BTInputSystem.Instance.onMouseWheel += OnMouseWheel;
         BTInputSystem.Instance.onChangedPrimaryWeapon += OnChangedPrimaryWeapon;
         BTInputSystem.Instance.onChangedSecondaryWeapon += OnChangedSecondaryWeapon;
+        BTInputSystem.Instance.onEquipWeapon += OnEquipWeapon;
 
     }
 
@@ -42,24 +44,6 @@ public class CharacterController : MonoBehaviour
             return;
 
         playerCharacter.Interact();
-    }
-
-    private void ShowInfoBox()
-    {
-        var playerCharacter = characterBase as PlayerCharacter;
-        if (playerCharacter == null)
-            return;
-
-        playerCharacter.ShowInfoBox();
-    }
-
-    private void HideInfoBox()
-    {
-        var playerCharacter = characterBase as PlayerCharacter;
-        if (playerCharacter == null)
-            return;
-
-        playerCharacter.HideInfoBox();
     }
 
     private void Update()
@@ -86,6 +70,16 @@ public class CharacterController : MonoBehaviour
     private void Attack()
     {
         characterBase.Fire();
+    }
+
+    private void OnEquipWeapon()
+    {
+        characterBase.EquipWeapon(weapon);
+    }
+
+    private void Reload()
+    {
+        characterBase.Reload();
     }
 
     private void OnChangedPrimaryWeapon()

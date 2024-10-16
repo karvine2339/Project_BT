@@ -10,6 +10,8 @@ TagManager:
   - DefaultDamage
   - CriticalDamage
   - Bullet
+  - DroppedWeapon
+  - Drone
   layers:
   - Default
   - TransparentFX
