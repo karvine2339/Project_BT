@@ -99,8 +99,19 @@ public class BTInputSystem : MonoBehaviour
             onJumpCallback();
         }
 
-        isStrafe = Input.GetMouseButton(1); 
-        isAim = Input.GetMouseButton(1); 
+        if (Input.GetMouseButton(1))
+        {
+            if (PlayerCharacter.Instance.isReload)
+                return;
+
+            isStrafe = true;
+            isAim = true;
+        }
+        else
+        {
+            isStrafe = false;
+            isAim = false;
+        }
 
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {

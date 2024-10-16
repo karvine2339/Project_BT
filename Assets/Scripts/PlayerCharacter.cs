@@ -271,6 +271,7 @@ public class PlayerCharacter : ChrBase
     IEnumerator ReloadCo()
     {
         isReload = true;
+        BTInputSystem.Instance.isStrafe = false;
         characterAnimator.SetBool("IsReload",true);
         yield return new WaitForSeconds(reloadTime);
         currentWeapon.curAmmo = currentWeapon.maxAmmo;

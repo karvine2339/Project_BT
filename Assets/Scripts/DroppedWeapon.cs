@@ -46,12 +46,13 @@ public class DroppedWeapon : MonoBehaviour
     [HideInInspector] public bool isThrow = false;
 
 
-
-    private void Start()
+    private void Awake()
     {
         effectData = JsonManager.Instance.effectData;
+    }
+    private void Start()
+    {
         weaponInfoBox = Interaction_UI.Instance.weaponInfoBox;
-
         weaponInfo = weaponInfoBox.GetComponent<WeaponInfoBox>();
 
         if (isThrow == false)
