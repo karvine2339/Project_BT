@@ -15,10 +15,11 @@ public class Interaction_TacticalManual : MonoBehaviour, IInteractable
 
     public void Interact(PlayerCharacter playerCharacter)
     {
-        TacticalManualCanvas.Instance.tacticalManual.gameObject.SetActive(true);
+        TacticalManager.Instance.tacticalManualCanvasObject.gameObject.SetActive(true);
         Time.timeScale = 0.0f;
         CursorSystem.Instance.SetCursorState(true);
         BTInputSystem.Instance.isTab = true;
+        TacticalManager.Instance.SetTacticalManual();
         Destroy(gameObject);
         Interaction_UI.Instance.RemoveInteractionData(this);
     }

@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7533f922be9969049b639c59a9dd7dc2, type: 3}
+  m_Name: Weapon_Serika
+  m_EditorClassIdentifier: 
+  effectName: 
+  minValue: 0
+  maxValue: 0
+  chance: 0
+  weaponName: "\uC2E0\uC2DC\uC5B4\uB9AC\uD2F0"
+  weaponType: 1
+  minMinDamage: 100
+  minMaxDamage: 120
+  maxMinDamage: 150
+  maxMaxDamage: 170
+  minfireRate: 0.3
+  maxfireRate: 0.2
+  weaponImg: {fileID: 21300000, guid: d896941779066bb49a236737c2934d5b, type: 3}
