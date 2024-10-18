@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8171754879073038638}
   - component: {fileID: 6315718752693149878}
   - component: {fileID: 2133567975139510680}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Weapon_Shiroko_Dropped
   m_TagString: DroppedWeapon
   m_Icon: {fileID: 0}

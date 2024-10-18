@@ -92,6 +92,33 @@ public class PlayerStat : MonoBehaviour
         }
     }
 
+    private float _additionalDamage;
+    public float AdditionalDamage
+    {
+        get { return _additionalDamage; }
+        set
+        {
+            if (_additionalDamage != value)
+            {
+                _additionalDamage = value;
+                OnAdditionalDamageChanged?.Invoke(_additionalDamage);
+            }
+        }
+    }
+    private float _additionalBulletDamage;
+    public float AdditionalBulletDamage
+    {
+        get { return _additionalBulletDamage; }
+        set
+        {
+            if(_additionalBulletDamage != value)
+            {
+                _additionalBulletDamage = value;
+                OnAdditionalBulletDamageChanged?.Invoke(_additionalBulletDamage);
+            }
+        }
+    }
+
     public float bulletDamage;
 
     public delegate void DamageChanged(float newDamage);
@@ -109,6 +136,12 @@ public class PlayerStat : MonoBehaviour
     public delegate void RecoilAmountChanged(float newRecoilAmount);
     public static event RecoilAmountChanged OnRecoilAmountChanged;
 
+    public delegate void AdditionalDamageChanged(float newAdditionalDamage);
+    public static event AdditionalDamageChanged OnAdditionalDamageChanged;
+
+    public delegate void AdditionalBulletDamageChanged(float newAddtionalBulletDamage);
+    public static event AdditionalBulletDamageChanged OnAdditionalBulletDamageChanged;
+
     public static PlayerStat Instance;
 
     private void Awake()
@@ -118,6 +151,6 @@ public class PlayerStat : MonoBehaviour
 
     private void Start()
     {
-
+        AdditionalBulletDamage = 1.0f;
     }
 }

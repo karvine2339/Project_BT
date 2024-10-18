@@ -7,16 +7,11 @@ using Unity.VisualScripting;
 public class TacticalManualData : ScriptableObject
 {
     public string EffectName;
-    public int[] level;
+    public int level;
     public float[] value;
     public int index;
 
     public Sprite tacticalManualIcon;
     public Sprite tacticalManualTypeIcon;
-
-    public class TacticalManual
-    {
-
-    }
 
 }

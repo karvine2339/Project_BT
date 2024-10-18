@@ -25,6 +25,7 @@ public class PlayerCharacter : ChrBase
 
     [SerializeField] private LayerMask aimColliderLayerMask = new LayerMask();
     [SerializeField] private LayerMask targetPointLayerMask = new LayerMask();
+    [SerializeField] private LayerMask droppedWeaponLayerMask = new LayerMask();
     [SerializeField] private Vector3 mouseWorldPosition;
     [SerializeField] private Transform aimPointPosition;
     [SerializeField] private Vector3 targetPointPosition;
@@ -45,7 +46,6 @@ public class PlayerCharacter : ChrBase
     public Weapon currentWeapon = null;
 
     private DroppedWeapon droppedWeapon = null;
-
     protected override void Awake()
     {
         base.Awake();
@@ -97,6 +97,7 @@ public class PlayerCharacter : ChrBase
 
         aimColliderLayerMask = LayerMask.GetMask("Wall");
         targetPointLayerMask = ~LayerMask.GetMask("Wall");
+        droppedWeaponLayerMask = LayerMask.GetMask("DroppedWeapon");
 
         weapons[0] = GetComponentInChildren<Weapon>();
 
@@ -144,7 +145,6 @@ public class PlayerCharacter : ChrBase
         }
 
         AimStatement();
-
         RayWeapon();
     }
 
@@ -353,36 +353,41 @@ public class PlayerCharacter : ChrBase
 
     public void RayWeapon()
     {
-        RaycastHit hit;
-        Vector3 direction = Camera.main.transform.forward;
-        Debug.DrawRay(Camera.main.transform.position, direction * 3, color: Color.red);
-        if (Physics.Raycast(Camera.main.transform.position, direction, out hit, 3f))
-        {
-            if (hit.collider.CompareTag("DroppedWeapon"))
-            {
-                hit.collider.GetComponent<DroppedWeapon>().ShowInfoBox(this);
 
-                droppedWeapon = hit.collider.GetComponent<DroppedWeapon>();         
-            }
-            else if (hit.collider.CompareTag("Drone"))
-            {
-                if (droppedWeapon != null)
-                {
-                    droppedWeapon = null;
-                }
-            }
-            else
-            {
-                if (droppedWeapon != null)
-                {
-                    droppedWeapon = null;
-                }
-                Interaction_UI.Instance.HideInfoBox();
-            }
+        //RaycastHit[] hits = Physics.RaycastAll(ray);
+        //Vector3 direction = Camera.main.transform.forward * 3;
+        //bool foundWeapon = false;
+        //foreach (RaycastHit hit in hits)
+        //{
+        //    DroppedWeapon weapon = hit.collider.GetComponent<DroppedWeapon>();
+        //    if (weapon != null)
+        //    {
+        //        weapon.ShowInfoBox(this);
+        //        foundWeapon = true;
+        //    }
+        //    else
+        //    {
+        //        Interaction_UI.Instance.HideInfoBox();
+        //    }
+        //}
+
+        //if (!foundWeapon)
+        //{
+        //    Interaction_UI.Instance.HideInfoBox();
+        //}
+
+        RaycastHit Hit;
+        Vector3 direction = Camera.main.transform.forward * 3;
+        Debug.DrawRay(Camera.main.transform.position, direction * 3, color: Color.red);
+        if (Physics.Raycast(Camera.main.transform.position, direction, out Hit, 3f, droppedWeaponLayerMask))
+        {
+            Hit.collider.GetComponent<DroppedWeapon>().ShowInfoBox(this);
+
+            droppedWeapon = Hit.collider.GetComponent<DroppedWeapon>();
         }
         else
         {
-           if(droppedWeapon != null)
+            if (droppedWeapon != null)
             {
                 droppedWeapon = null;
             }

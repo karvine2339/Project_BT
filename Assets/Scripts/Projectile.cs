@@ -61,7 +61,7 @@ public class Projectile : MonoBehaviour
             }
             else
             {
-                enemy.OnDamaged(PlayerStat.Instance.bulletDamage,
+                enemy.OnDamaged(PlayerStat.Instance.bulletDamage * PlayerStat.Instance.AdditionalBulletDamage,
                                 PlayerStat.Instance.CriticalDamage);
             }
             Destroy(gameObject);

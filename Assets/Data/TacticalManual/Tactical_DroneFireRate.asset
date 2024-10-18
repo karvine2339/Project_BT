@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Tactical_DroneFireRate
   m_EditorClassIdentifier: 
   EffectName: "\uB4DC\uB860 \uBC1C\uC0AC\uAC04\uACA9 \uAC10\uC18C"
-  level: 010000000200000003000000
+  level: 0
   value:
   - 0.5
   - 1

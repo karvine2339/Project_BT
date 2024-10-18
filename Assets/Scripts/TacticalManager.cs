@@ -1,11 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
-public class TacticalLevel
-{
-    public static int[] tacticalLevel;
-}
 public class TacticalManager : MonoBehaviour
 {
     public static TacticalManager Instance;
@@ -13,12 +10,18 @@ public class TacticalManager : MonoBehaviour
     public GameObject tacticalManualGroup;
     public GameObject tacticalManualCanvasObject;
 
-    Dictionary<int,int> tacticalManualDic = new Dictionary<int,int>();
+    public int[] tacticalManualLevel;
 
+    List<TacticalManualData> datas = new List<TacticalManualData>();
 
     private void Awake()
     {
         Instance = this;
+
+        for (int i = 0; i < tacticalManualDatas.Length; i++)
+        {
+            tacticalManualDatas[i].level = 0;
+        }
     }
 
     public TacticalManualData[] tacticalManualDatas;
@@ -27,20 +30,29 @@ public class TacticalManager : MonoBehaviour
 
     public void SetTacticalManual()
     {
-        List<TacticalManualData> datas = new List<TacticalManualData>();
+        List<TacticalManualData> datas = new List<TacticalManualData>(tacticalManualDatas);
 
-        for(int i = 0; i < tacticalManualDatas.Length; i++)
+        for (int i = 0; i < 3; i++)
         {
-            datas.Add(tacticalManualDatas[i]);
-        }
-        for(int i = 0; i < 3; i++)
-        {
-            GameObject tacticalObject = Instantiate(TacticalManual);
-            int RandVal = Random.Range(0, datas.Count);
-            tacticalObject.gameObject.GetComponent<TacticalManual>().GetTacticalManualData(datas[RandVal]);
-            tacticalObject.gameObject.GetComponent<TacticalManual>().InitTacticalData();
-            datas.RemoveAt(RandVal);
-            tacticalObject.transform.SetParent(tacticalManualGroup.transform, false);
+            int rand = Random.Range(0, datas.Count);
+
+            if (datas[rand].level != 3)
+            {
+                GameObject tacticalObject = Instantiate(TacticalManual);
+
+                tacticalObject.gameObject.GetComponent<TacticalManual>().GetTacticalManualData(datas[rand]);
+                tacticalObject.gameObject.GetComponent<TacticalManual>().InitTacticalData();
+
+                datas.RemoveAt(rand);
+
+                tacticalObject.transform.SetParent(tacticalManualGroup.transform, false);
+
+            }
+            else
+            {
+                datas.RemoveAt(rand);
+                i--;
+            }
         }
     }
 }

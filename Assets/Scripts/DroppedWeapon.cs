@@ -48,7 +48,7 @@ public class DroppedWeapon : MonoBehaviour
 
     private void Awake()
     {
-        effectData = JsonManager.Instance.effectData;
+        effectData = JsonManager.Instance.effectData;   
     }
     private void Start()
     {

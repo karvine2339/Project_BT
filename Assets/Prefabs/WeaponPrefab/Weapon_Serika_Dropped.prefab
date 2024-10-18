@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3472223434574455075}
   - component: {fileID: 3867567255864418183}
   - component: {fileID: 4637863024448016136}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Weapon_Serika_Dropped
   m_TagString: DroppedWeapon
   m_Icon: {fileID: 0}
