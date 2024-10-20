@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Animations.Rigging;
+using System.Runtime.CompilerServices;
 
 
 public class PlayerCharacter : ChrBase
@@ -44,6 +45,9 @@ public class PlayerCharacter : ChrBase
     public Weapon[] weapons = new Weapon[2];
 
     public Weapon currentWeapon = null;
+
+    private GameObject weapon;
+    private GameObject weapon2;
 
     private DroppedWeapon droppedWeapon = null;
     protected override void Awake()
@@ -115,7 +119,7 @@ public class PlayerCharacter : ChrBase
 
         aimingBlend = Mathf.Lerp(aimingBlend, (IsAiming ? 1f : 0f), Time.deltaTime * 10f);
         SetAiming(aimingBlend);
-        
+
         characterAnimator.SetFloat("Strafe", isStrafe ? 1f : 0f);
 
         speed = isWalk ? 1f : 3f;
@@ -123,7 +127,7 @@ public class PlayerCharacter : ChrBase
 
         characterAnimator.SetFloat("Speed", targetSpeedBlend);
 
-        if(Input.GetKeyDown(KeyCode.Alpha3))
+        if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             OnDamaged(10);
             Debug.Log("OnDamaged!");
@@ -135,7 +139,7 @@ public class PlayerCharacter : ChrBase
             if (engagingTime < 0.0f)
                 isEngaging = false;
         }
-        if(isEngaging == false)
+        if (isEngaging == false)
         {
             curShield += Time.deltaTime * 10;
             HUDManager.Instance.shieldBar.fillAmount = curShield / maxShield;
@@ -251,7 +255,7 @@ public class PlayerCharacter : ChrBase
                     HUDManager.Instance.firstWeapon.GetComponent<Image>().sprite = weapons[0].weaponImage;
                     HUDManager.Instance.firstWeapon.GetComponent<Image>().color = new Color(1, 1, 1, 0.5f);
                     HUDManager.Instance.firstWeapon.GetComponent<RectTransform>().localScale = new Vector3(0.3f, 0.3f, 0.3f);
-        
+
                 }
 
                 HUDManager.Instance.weaponIndex.text = "[2]";
@@ -272,7 +276,7 @@ public class PlayerCharacter : ChrBase
     {
         isReload = true;
         BTInputSystem.Instance.isStrafe = false;
-        characterAnimator.SetBool("IsReload",true);
+        characterAnimator.SetBool("IsReload", true);
         yield return new WaitForSeconds(reloadTime);
         currentWeapon.curAmmo = currentWeapon.maxAmmo;
         HUDManager.Instance.SetWeaponAmmo(currentWeapon.curAmmo, currentWeapon.maxAmmo);
@@ -351,6 +355,7 @@ public class PlayerCharacter : ChrBase
         }
     }
 
+
     public void RayWeapon()
     {
 
@@ -371,29 +376,29 @@ public class PlayerCharacter : ChrBase
         //    }
         //}
 
-        //if (!foundWeapon)
-        //{
-        //    Interaction_UI.Instance.HideInfoBox();
-        //}
-
         RaycastHit Hit;
         Vector3 direction = Camera.main.transform.forward * 3;
+
         Debug.DrawRay(Camera.main.transform.position, direction * 3, color: Color.red);
         if (Physics.Raycast(Camera.main.transform.position, direction, out Hit, 3f, droppedWeaponLayerMask))
         {
-            Hit.collider.GetComponent<DroppedWeapon>().ShowInfoBox(this);
-
-            droppedWeapon = Hit.collider.GetComponent<DroppedWeapon>();
+            if (Hit.collider.TryGetComponent(out droppedWeapon))
+            {
+                droppedWeapon?.ShowInfoBox(this);
+                weapon = droppedWeapon.gameObject;
+                
+                if(!weapon.Equals(weapon2))
+                {
+                    Interaction_UI.Instance.HideInfoBox();
+                    weapon2 = weapon;
+                }  
+            }
         }
         else
         {
-            if (droppedWeapon != null)
-            {
-                droppedWeapon = null;
-            }
+            droppedWeapon = null;
             Interaction_UI.Instance.HideInfoBox();
         }
-
     }
 }
 

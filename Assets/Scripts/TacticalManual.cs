@@ -46,34 +46,49 @@ public class TacticalManual : MonoBehaviour
         Time.timeScale = 1.0f;
         CursorSystem.Instance.SetCursorState(false);
         tacticalManualData.level++;
-        if(effectIndex == 1)
+        if (effectIndex == 1)
         {
-            if(level == 0)
+            if (level == 0)
             {
                 PlayerStat.Instance.AdditionalBulletDamage += tacticalManualData.value[0] / 100;
             }
-            else if(level == 1)
+            else if (level == 1)
             {
                 PlayerStat.Instance.AdditionalBulletDamage += tacticalManualData.value[1] / 100;
             }
-            else if(level == 2)
+            else if (level == 2)
             {
                 PlayerStat.Instance.AdditionalBulletDamage += tacticalManualData.value[2] / 100;
             }
         }
-        else if(effectIndex == 2)
+        else if (effectIndex == 2)
         {
             if (level == 0)
-            { 
+            {
                 PlayerStat.Instance.FireRate /= 1 + tacticalManualData.value[0] / 100;
             }
-            if(level == 1)
+            if (level == 1)
             {
                 PlayerStat.Instance.FireRate /= 1 + tacticalManualData.value[1] / 100;
             }
-            if(level == 2)
+            if (level == 2)
             {
                 PlayerStat.Instance.FireRate /= 1 + tacticalManualData.value[2] / 100;
+            }
+        }
+        else if (effectIndex == 3)
+        {
+            if(level == 0)
+            {
+                
+            }
+            if(level == 1)
+            {
+
+            }
+            if(level == 2)
+            {
+
             }
         }
         Debug.Log(PlayerStat.Instance.AdditionalBulletDamage);
