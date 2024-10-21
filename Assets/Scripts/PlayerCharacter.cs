@@ -170,13 +170,12 @@ public class PlayerCharacter : ChrBase
                 if (isReload == true)
                     return;
 
-                characterAnimator.SetTrigger("Fire");
-
                 Muzzle();
                 Vector3 aimDir = (targetPointPosition - currentWeapon.fireStartPoint.position).normalized;
                 Projectile newBullet = Instantiate(projectilePrefab, currentWeapon.fireStartPoint.position, Quaternion.LookRotation(aimDir, Vector3.up));
                 newBullet.gameObject.SetActive(true);
                 newBullet.SetForce(projectileSpeed);
+
                 currentWeapon.curAmmo--;
                 PlayerStat.Instance.bulletDamage = Random.Range(PlayerStat.Instance.BulletMinDamage, PlayerStat.Instance.BulletMaxDamage);
                 fireRate = PlayerStat.Instance.FireRate;

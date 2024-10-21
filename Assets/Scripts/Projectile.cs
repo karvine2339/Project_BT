@@ -56,7 +56,8 @@ public class Projectile : MonoBehaviour
         {
             if (gameObject.tag == "Rocket")
             {
-                enemy.OnDamaged((int)Random.Range(PlayerStat.Instance.BulletMinDamage,PlayerStat.Instance.BulletMaxDamage) * Random.Range(1.5f, 2.0f),
+                enemy.OnDamaged((int)Random.Range(PlayerStat.Instance.BulletMinDamage,PlayerStat.Instance.BulletMaxDamage)
+                                                         * Random.Range(1.5f, 2.0f) * PlayerStat.Instance.DroneDamage,
                                                   PlayerStat.Instance.CriticalDamage);
             }
             else
@@ -64,7 +65,7 @@ public class Projectile : MonoBehaviour
                 enemy.OnDamaged(PlayerStat.Instance.bulletDamage * PlayerStat.Instance.AdditionalBulletDamage,
                                 PlayerStat.Instance.CriticalDamage);
             }
-            Destroy(gameObject);
+                Destroy(gameObject);
         }
     }
 
@@ -89,7 +90,7 @@ public class Projectile : MonoBehaviour
         {
             if (DronCtrl.Instance.targetEnemy != null)
             {
-                if (rigid.isKinematic)
+                if (rigid.isKinematic == true)
                     return;
 
                 hasTarget = true;

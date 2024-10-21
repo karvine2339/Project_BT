@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerStat : MonoBehaviour
 {
     private float _bulletMinDamage;
-    private float _bulletMaxDamage;
     public float BulletMinDamage
     {
         get { return _bulletMinDamage; }
@@ -19,6 +18,7 @@ public class PlayerStat : MonoBehaviour
         }
     }
 
+    private float _bulletMaxDamage;
     public float BulletMaxDamage
     {
         get { return _bulletMaxDamage + 1; }
@@ -41,7 +41,7 @@ public class PlayerStat : MonoBehaviour
         get { return _fireRate; }
         set
         {
-            if(_fireRate != value)
+            if (_fireRate != value)
             {
                 _fireRate = value;
                 OnFireRateChanged?.Invoke(_fireRate);
@@ -84,7 +84,7 @@ public class PlayerStat : MonoBehaviour
         get { return _recoilAmount; }
         set
         {
-            if(_recoilAmount != value)
+            if (_recoilAmount != value)
             {
                 _recoilAmount = value;
                 OnRecoilAmountChanged?.Invoke(_recoilAmount);
@@ -111,10 +111,24 @@ public class PlayerStat : MonoBehaviour
         get { return _additionalBulletDamage; }
         set
         {
-            if(_additionalBulletDamage != value)
+            if (_additionalBulletDamage != value)
             {
                 _additionalBulletDamage = value;
                 OnAdditionalBulletDamageChanged?.Invoke(_additionalBulletDamage);
+            }
+        }
+    }
+
+    private float _droneDamage;
+    public float DroneDamage
+    {
+        get { return _droneDamage; }
+        set
+        {
+            if (_droneDamage != value)
+            {
+                _droneDamage = value;
+                OnDroneDamageChanged?.Invoke(_droneDamage);
             }
         }
     }
@@ -142,15 +156,28 @@ public class PlayerStat : MonoBehaviour
     public delegate void AdditionalBulletDamageChanged(float newAddtionalBulletDamage);
     public static event AdditionalBulletDamageChanged OnAdditionalBulletDamageChanged;
 
+    public delegate void DroneDamageChanged(float newDroneDamage);
+    public static event DroneDamageChanged OnDroneDamageChanged;
+
     public static PlayerStat Instance;
 
     private void Awake()
     {
         Instance = this;
-    }
+        DontDestroyOnLoad(gameObject);
 
-    private void Start()
-    {
+        BulletMinDamage = 0;
+        BulletMaxDamage = 0;
+        FireRate = 0;
+        CriticalProbability = 10;
+        CriticalDamage = 1.5f;
+        RecoilAmount = 0;
+        AdditionalDamage = 0;
         AdditionalBulletDamage = 1.0f;
+        DroneDamage = 1.0f;
+    }
+    private void OnDestroy()
+    {
+        Instance = null;
     }
 }

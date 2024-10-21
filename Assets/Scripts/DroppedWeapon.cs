@@ -35,7 +35,7 @@ public class DroppedWeapon : MonoBehaviour
     [HideInInspector] public float weaponMinDamage;
     [HideInInspector] public float  weaponMaxDamage;
     [HideInInspector] public float  weaponFireRate;
-    [HideInInspector] public float  weaponCriticalProbability = 20.0f;
+    [HideInInspector] public float  weaponCriticalProbability = 10.0f;
     [HideInInspector] public float  weaponCriticalDamage = 1.5f;
     [HideInInspector] public float[] effectVal = new float[3];
     [HideInInspector] public int[] effectType = new int[3];
@@ -81,6 +81,7 @@ public class DroppedWeapon : MonoBehaviour
                 playerCharacter.weapons[0] = newWeapon;
                 playerCharacter.currentWeapon = playerCharacter.weapons[0];
                 playerCharacter.ChangedPrimaryWeapon();
+                HUDManager.Instance.firstWeapon.SetActive(true);
                 ApplyWeaponStats(playerCharacter);
                 newWeapon.InitWeaponStat();
                 newWeapon.InitFirstWeaponUI();
@@ -90,6 +91,7 @@ public class DroppedWeapon : MonoBehaviour
                 playerCharacter.weapons[1] = newWeapon;
                 playerCharacter.currentWeapon = playerCharacter.weapons[1];
                 playerCharacter.ChangedSecondaryWeapon();
+                HUDManager.Instance.secondWeapon.SetActive(true);
                 ApplyWeaponStats(playerCharacter);
                 newWeapon.InitWeaponStat();
                 newWeapon.InitSecondWeaponUI();
@@ -227,6 +229,11 @@ public class DroppedWeapon : MonoBehaviour
 
                     effectString[i] = effect.InfoString.Replace("value", effectVal[i].ToString("N0"))
                                                 .Replace("damageValue", (effectVal[i] / 4).ToString("N0"));
+                }
+                else if(effect.effectType == 6)
+                {
+                    effectVal[i] = Random.Range(effect.minValue, effect.maxValue);
+                    
                 }
 
             }

@@ -43,7 +43,7 @@ public class EnemyCharacter : MonoBehaviour
         OnEnemyDamaged?.Invoke(this,(int)damage); 
         if (curHp <= 0)
         {
-            DropWeapon(transform.position);
+            DropWeapon(new Vector3(transform.position.x, transform.position.y + 0.35f, transform.position.z));
             CoinDropper.Instance.DropCoins(transform.position);
             Die();
         }
@@ -53,7 +53,7 @@ public class EnemyCharacter : MonoBehaviour
 
     public GameObject DropWeapon(Vector3 dropPos)
     {
-        GameObject droppedWeapon = Instantiate(weaponPrefab[Random.Range(0,weaponPrefab.Length)], dropPos, gameObject.transform.rotation);    
+        GameObject droppedWeapon = Instantiate(weaponPrefab[Random.Range(0,weaponPrefab.Length)], dropPos, Quaternion.Euler(-30,-90,90));    
 
         DroppedWeapon prefabComponent = droppedWeapon.GetComponent<DroppedWeapon>();
 

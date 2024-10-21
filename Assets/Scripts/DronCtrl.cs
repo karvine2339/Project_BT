@@ -20,9 +20,11 @@ public class DronCtrl : MonoBehaviour
     public Projectile rocketPrefab;
 
     private float rocketRate = 0.5f;
-    private float rocketDelay = 1.5f;
+    private float rocketDelay = 2.0f;
     private bool isRight = false;
     private int rocketCount = 0;
+    [HideInInspector]public float maxRocketDelay = 3.0f;
+    [HideInInspector] public int maxRocketCount = 5;
 
     private float activeTime = 0f;
 
@@ -101,9 +103,9 @@ public class DronCtrl : MonoBehaviour
                 newRocket.gameObject.SetActive(true);
                 rocketRate = 0.2f;
                 rocketCount++;
-                if (rocketCount == 5)
+                if (rocketCount == maxRocketCount)
                 {
-                    rocketDelay = 2.0f;
+                    rocketDelay = maxRocketDelay;
                     rocketCount = 0;
                 }
             }

@@ -46,7 +46,7 @@ public class ChrBase : MonoBehaviour
     protected float RotationSmoothTime = 0.12f; 
 
     protected UnityEngine.CharacterController unityCharacterController;
-    protected Animator characterAnimator;
+    public Animator characterAnimator;
 
     public int maxHp;
     public int curHp;

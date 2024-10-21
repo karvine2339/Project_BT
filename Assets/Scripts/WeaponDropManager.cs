@@ -39,12 +39,15 @@ public class WeaponDropManager : MonoBehaviour
         }
 
         throwDirection = PlayerCharacter.Instance.transform.forward;
-        ThrowEquippedWeapon(PlayerCharacter.Instance.transform.position + throwDirection * throwDistance , 0);
+        ThrowEquippedWeapon(new Vector3(PlayerCharacter.Instance.transform.position.x,
+                                        PlayerCharacter.Instance.transform.position.y + 0.35f,
+                                        PlayerCharacter.Instance.transform.position.z) + throwDirection * throwDistance , 0);
 
         Destroy(PlayerCharacter.Instance.weapons[0].gameObject);
 
         PlayerCharacter.Instance.weapons[0] = null;
         PlayerCharacter.Instance.ChangedSecondaryWeapon();
+        HUDManager.Instance.firstWeapon.SetActive(false);
         HUDManager.Instance.OpenInventory();
     }
     public void ThrowSecondWeapon()
@@ -54,12 +57,15 @@ public class WeaponDropManager : MonoBehaviour
             return;
         }
                 throwDirection = PlayerCharacter.Instance.transform.forward;
-        ThrowEquippedWeapon(PlayerCharacter.Instance.transform.position + throwDirection * throwDistance , 1);
+        ThrowEquippedWeapon(new Vector3(PlayerCharacter.Instance.transform.position.x,
+                                        PlayerCharacter.Instance.transform.position.y + 0.35f,
+                                        PlayerCharacter.Instance.transform.position.z) + throwDirection * throwDistance, 1);
 
         Destroy(PlayerCharacter.Instance.weapons[1].gameObject);
 
         PlayerCharacter.Instance.weapons[1] = null;
         PlayerCharacter.Instance.ChangedPrimaryWeapon();
+        HUDManager.Instance.secondWeapon.SetActive(false);
         HUDManager.Instance.OpenInventory();
     }
 
@@ -78,7 +84,7 @@ public class WeaponDropManager : MonoBehaviour
 
     public GameObject ThrowEquippedWeapon(Vector3 dropPos, int i)
     {
-        GameObject droppedWeapon = Instantiate(weaponPrefab[PlayerCharacter.Instance.weapons[i].weaponType], dropPos, gameObject.transform.rotation);
+        GameObject droppedWeapon = Instantiate(weaponPrefab[PlayerCharacter.Instance.weapons[i].weaponType], dropPos, Quaternion.Euler(-30,-90,90));
 
         DroppedWeapon weaponComponent = droppedWeapon.GetComponent<DroppedWeapon>();
 

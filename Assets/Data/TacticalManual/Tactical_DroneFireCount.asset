@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Tactical_DroneFireCount
   m_EditorClassIdentifier: 
   EffectName: "\uB4DC\uB860 \uBBF8\uC0AC\uC77C \uAC1C\uC218 \uC99D\uAC00"
-  level: 0
+  level: 1
   value:
   - 2
-  - 5
-  - 9
-  index: 0
+  - 3
+  - 4
+  index: 4
   tacticalManualIcon: {fileID: 0}
   tacticalManualTypeIcon: {fileID: 0}

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CoinCtrl : MonoBehaviour, IInteractable
+public class Interaction_Coin : MonoBehaviour, IInteractable
 {
     public bool IsAutoInteract => true;
 
@@ -26,17 +26,5 @@ public class CoinCtrl : MonoBehaviour, IInteractable
     {
         float rotationAmount = rotationSpeed * Time.deltaTime;
         transform.Rotate(0, rotationAmount, 0);
-    }
-
-
-
-    public void ShowInfoBox(PlayerCharacter playerCharacter)
-    {
-
-    }
-
-    public void HideInfoBox(PlayerCharacter playerCharacter)
-    {
-  
     }
 }

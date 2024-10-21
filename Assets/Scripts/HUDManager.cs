@@ -59,6 +59,7 @@ public class HUDManager : MonoBehaviour
         hpBar.fillAmount = 1.0f;
         shieldBar.fillAmount = 1.0f;
         creditText.text = PlayerCharacter.Instance.curCredit.ToString("N0");
+        secondWeapon.gameObject.SetActive(false);
     }
     public void OnDestroy()
     {

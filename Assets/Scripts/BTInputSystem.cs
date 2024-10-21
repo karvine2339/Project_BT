@@ -102,7 +102,10 @@ public class BTInputSystem : MonoBehaviour
         if (Input.GetMouseButton(1))
         {
             if (PlayerCharacter.Instance.isReload)
+            {
+                PlayerCharacter.Instance.characterAnimator.SetBool("IsFiring", false);
                 return;
+            }
 
             isStrafe = true;
             isAim = true;
@@ -126,6 +129,12 @@ public class BTInputSystem : MonoBehaviour
         if (Input.GetMouseButton(0)) 
         {
             onAttack?.Invoke();
+            PlayerCharacter.Instance.characterAnimator.SetBool("IsFiring", true);
+        }
+
+        if(Input.GetMouseButtonUp(0))
+        {
+            PlayerCharacter.Instance.characterAnimator.SetBool("IsFiring", false);
         }
 
         if (Input.GetKeyDown(KeyCode.F))
@@ -166,12 +175,18 @@ public class BTInputSystem : MonoBehaviour
             if (isTab)
                 return;
 
+            if (PlayerCharacter.Instance.weapons[1] == null)
+                return;
+
             onChangedPrimaryWeapon?.Invoke();
         }
 
         if(Input.GetKeyDown(KeyCode.Alpha2))
         {
             if (isTab)
+                return;
+
+            if (PlayerCharacter.Instance.weapons[1] == null)
                 return;
 
             onChangedSecondaryWeapon?.Invoke();
