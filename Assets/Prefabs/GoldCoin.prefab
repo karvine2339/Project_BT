@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 2460952635477620984}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.608, y: 1.02, z: 0}
+  m_LocalPosition: {x: 1.608, y: 1.0231, z: -0.0097}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -43,8 +43,8 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2460952635477620984}
   serializedVersion: 4
-  m_Mass: 5
-  m_Drag: 0.5
+  m_Mass: 1
+  m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -74,6 +74,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11453b5b31e012844b75db658574a9ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  minCoinVal: 0
+  maxCoinVal: 0
 --- !u!135 &7948124786839537649
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -93,8 +95,8 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 0.05
+  m_Center: {x: 0, y: 0, z: 0.02}
 --- !u!1 &3834663869923854258
 GameObject:
   m_ObjectHideFlags: 0

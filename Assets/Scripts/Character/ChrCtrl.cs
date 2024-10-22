@@ -23,7 +23,7 @@ public class CharacterController : MonoBehaviour
     private void Start()
     {
         BTInputSystem.Instance.onReload += Reload; 
-        BTInputSystem.Instance.onAttack += Attack;
+        BTInputSystem.Instance.onFire += Fire;
         BTInputSystem.Instance.onInteract += Interact;
         BTInputSystem.Instance.onMouseWheel += OnMouseWheel;
         BTInputSystem.Instance.onChangedPrimaryWeapon += OnChangedPrimaryWeapon;
@@ -67,7 +67,7 @@ public class CharacterController : MonoBehaviour
         CameraRotate(look);                         
     }
 
-    private void Attack()
+    private void Fire()
     {
         characterBase.Fire();
     }

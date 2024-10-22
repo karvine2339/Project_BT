@@ -39,7 +39,7 @@ public class BTInputSystem : MonoBehaviour
     public delegate void OnJumpCallback(); 
     public OnJumpCallback onJumpCallback; 
 
-    public System.Action onAttack;
+    public System.Action onFire;
     public System.Action onInteract;
     public System.Action onEquipWeapon;
     public System.Action onReload;
@@ -127,7 +127,7 @@ public class BTInputSystem : MonoBehaviour
 
         if (Input.GetMouseButton(0)) 
         {
-            onAttack?.Invoke();
+            onFire?.Invoke();
             PlayerCharacter.Instance.characterAnimator.SetBool("IsFiring", true);
         }
 

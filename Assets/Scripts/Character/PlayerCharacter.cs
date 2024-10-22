@@ -11,7 +11,6 @@ using System.Runtime.CompilerServices;
 public class PlayerCharacter : ChrBase
 {
     public Projectile projectilePrefab;
-    public Transform fireStartPoint;
     public float projectileSpeed = 10f;
 
     protected float aiming = 0f;
@@ -50,6 +49,10 @@ public class PlayerCharacter : ChrBase
     private GameObject weapon2;
 
     private DroppedWeapon droppedWeapon = null;
+
+    public int pelletCount = 10;     
+    public float spreadAngle = 5f; 
+
     protected override void Awake()
     {
         base.Awake();
@@ -150,6 +153,8 @@ public class PlayerCharacter : ChrBase
 
         AimStatement();
         RayWeapon();
+        GroundCheck();
+        FreeFall();
     }
 
     public override void Fire()
@@ -171,10 +176,9 @@ public class PlayerCharacter : ChrBase
                     return;
 
                 Muzzle();
-                Vector3 aimDir = (targetPointPosition - currentWeapon.fireStartPoint.position).normalized;
-                Projectile newBullet = Instantiate(projectilePrefab, currentWeapon.fireStartPoint.position, Quaternion.LookRotation(aimDir, Vector3.up));
-                newBullet.gameObject.SetActive(true);
-                newBullet.SetForce(projectileSpeed);
+
+                //NormalFire();
+                ShotgunFire();
 
                 currentWeapon.curAmmo--;
                 PlayerStat.Instance.bulletDamage = Random.Range(PlayerStat.Instance.BulletMinDamage, PlayerStat.Instance.BulletMaxDamage);
@@ -357,24 +361,6 @@ public class PlayerCharacter : ChrBase
 
     public void RayWeapon()
     {
-
-        //RaycastHit[] hits = Physics.RaycastAll(ray);
-        //Vector3 direction = Camera.main.transform.forward * 3;
-        //bool foundWeapon = false;
-        //foreach (RaycastHit hit in hits)
-        //{
-        //    DroppedWeapon weapon = hit.collider.GetComponent<DroppedWeapon>();
-        //    if (weapon != null)
-        //    {
-        //        weapon.ShowInfoBox(this);
-        //        foundWeapon = true;
-        //    }
-        //    else
-        //    {
-        //        Interaction_UI.Instance.HideInfoBox();
-        //    }
-        //}
-
         RaycastHit Hit;
         Vector3 direction = Camera.main.transform.forward * 3;
 
@@ -398,6 +384,33 @@ public class PlayerCharacter : ChrBase
             droppedWeapon = null;
             Interaction_UI.Instance.HideInfoBox();
         }
+    }
+
+    public void ShotgunFire()
+    {
+        for (int i = 0; i < pelletCount; i++)
+        {
+            Vector3 aimDir = (targetPointPosition - currentWeapon.fireStartPoint.position).normalized;
+            Projectile newBullet = Instantiate(projectilePrefab, currentWeapon.fireStartPoint.position, Quaternion.LookRotation(aimDir, Vector3.up));
+            newBullet.gameObject.SetActive(true);
+            //newBullet.SetForce(projectileSpeed);
+
+            float spreadX = Random.Range(-spreadAngle, spreadAngle);
+            float spreadY = Random.Range(-spreadAngle, spreadAngle);
+
+            Quaternion spreadRotation = Quaternion.Euler(spreadX, spreadY, 0);
+            Vector3 shootDirection = spreadRotation * aimDir;
+
+            newBullet.GetComponent<Rigidbody>().velocity = shootDirection * projectileSpeed;
+        }
+    }
+
+    public void NormalFire()
+    {
+        Vector3 aimDir = (targetPointPosition - currentWeapon.fireStartPoint.position).normalized;
+        Projectile newBullet = Instantiate(projectilePrefab, currentWeapon.fireStartPoint.position, Quaternion.LookRotation(aimDir, Vector3.up));
+        newBullet.gameObject.SetActive(true);
+        newBullet.SetForce(projectileSpeed);
     }
 }
 

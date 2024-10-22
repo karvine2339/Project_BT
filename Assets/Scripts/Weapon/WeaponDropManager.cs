@@ -21,14 +21,7 @@ public class WeaponDropManager : MonoBehaviour
     }
     private void Start()
     {
-        if (dropWeaponButton1 != null)
-        {
-            dropWeaponButton1.onClick.AddListener(ThrowFirstWeapon);
-        }
-        if (dropWeaponButton2 != null)
-        {
-            dropWeaponButton2.onClick.AddListener(ThrowSecondWeapon);
-        }
+
     }
 
     public void ThrowFirstWeapon()

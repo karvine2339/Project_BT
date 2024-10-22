@@ -30,7 +30,7 @@ public class ChrBase : MonoBehaviour
     public float rotationSpeed;
 
     protected bool isWalk = false;
-    protected bool isStrafe = false;
+    public bool isStrafe = false;
     protected float speed = 0f;
     protected float targetSpeed = 0f;
     protected float targetSpeedBlend = 0f;
@@ -43,6 +43,12 @@ public class ChrBase : MonoBehaviour
 
     protected float verticalVelocity;
     protected bool isGrounded;
+    protected float jumpTimeout = 0.1f;
+    protected float jumpTimeoutDelta = 0f;
+
+    public float groundRadius = 0.1f;
+    public float groundOffset = 0.1f;
+    public LayerMask groundLayer;
 
     protected float targetRotation;           
     protected float rotationVelocity;         
@@ -67,6 +73,9 @@ public class ChrBase : MonoBehaviour
 
     protected virtual void Update()
     {
+        FreeFall();
+        GroundCheck();
+
         characterAnimator.SetFloat("Strafe", isStrafe ? 1f : 0f);
 
         speed = isWalk ? 1f : 3f;
@@ -167,7 +176,8 @@ public class ChrBase : MonoBehaviour
 
         Vector3 targetDirection = Quaternion.Euler(0, targetRotation, 0) * Vector3.forward;
 
-        unityCharacterController.Move(targetDirection.normalized * moveSpeed * Time.deltaTime);
+        unityCharacterController.Move(targetDirection.normalized * moveSpeed * Time.deltaTime
+    + new Vector3(0f, verticalVelocity, 0f) * Time.deltaTime);
 
         //characterAnimator.SetFloat("Horizontal", false == IsPossibleMovement ? 0 : input.x);
 
@@ -199,10 +209,24 @@ public class ChrBase : MonoBehaviour
         {
             verticalVelocity += Physics.gravity.y * Time.deltaTime;
         }
-        else
+        else 
         {
-            verticalVelocity = 0f;
+            if (jumpTimeoutDelta > 0)
+            {
+                jumpTimeoutDelta -= Time.deltaTime;
+            }
+            else
+            {
+                verticalVelocity = 0f;
+            }
         }
+    }
+
+    public void GroundCheck()
+    {
+        Vector3 spherePosition = transform.position + (Vector3.down * groundOffset);
+
+        isGrounded = Physics.CheckSphere(spherePosition, groundRadius, groundLayer, QueryTriggerInteraction.Ignore);
     }
 }
 

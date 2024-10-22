@@ -13,6 +13,8 @@ public class EnemyCharacter : MonoBehaviour
     public List<WeaponData> weaponList;
     public GameObject[] weaponPrefab;
 
+    public bool isDead = false;
+
     public int curHp = 100;
     public int maxHp = 100;
 
@@ -41,8 +43,9 @@ public class EnemyCharacter : MonoBehaviour
         }
 
         OnEnemyDamaged?.Invoke(this,(int)damage); 
-        if (curHp <= 0)
+        if (curHp <= 0 && isDead == false)
         {
+            isDead = true;
             DropWeapon(new Vector3(transform.position.x, transform.position.y + 0.35f, transform.position.z));
             CoinDropper.Instance.DropCoins(transform.position);
             Die();

@@ -5257,6 +5257,7 @@ MonoBehaviour:
   weaponPrefab:
   - {fileID: 4484544998081288871, guid: 099ee87ffd7d35d4fae90f2ea4dd9b5e, type: 3}
   - {fileID: 7226450620033817685, guid: 59e8c7aa28590584c91b4c393c1bf179, type: 3}
+  isDead: 0
   curHp: 5000
   maxHp: 5000
 --- !u!1 &668704109
@@ -5883,6 +5884,7 @@ MonoBehaviour:
   weaponPrefab:
   - {fileID: 4484544998081288871, guid: 099ee87ffd7d35d4fae90f2ea4dd9b5e, type: 3}
   - {fileID: 7226450620033817685, guid: 59e8c7aa28590584c91b4c393c1bf179, type: 3}
+  isDead: 0
   curHp: 5000
   maxHp: 5000
 --- !u!95 &704012632
@@ -6383,6 +6385,7 @@ MonoBehaviour:
   weaponPrefab:
   - {fileID: 4484544998081288871, guid: 099ee87ffd7d35d4fae90f2ea4dd9b5e, type: 3}
   - {fileID: 7226450620033817685, guid: 59e8c7aa28590584c91b4c393c1bf179, type: 3}
+  isDead: 0
   curHp: 5000
   maxHp: 5000
 --- !u!95 &760392389
@@ -6502,6 +6505,126 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 888ce82c0af2ab0499d39c93fb0f4ce4, type: 3}
+--- !u!1 &765925466
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 765925471}
+  - component: {fileID: 765925470}
+  - component: {fileID: 765925469}
+  - component: {fileID: 765925468}
+  - component: {fileID: 765925467}
+  m_Layer: 0
+  m_Name: Shop (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &765925467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 765925466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af94a9233492c6d44a2fd3c8b0f1afab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!136 &765925468
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 765925466}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &765925469
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 765925466}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &765925470
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 765925466}
+  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &765925471
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 765925466}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.9, y: 1.16, z: 5.73}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &801736609
 GameObject:
   m_ObjectHideFlags: 0
@@ -7825,7 +7948,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinPrefab: {fileID: 2460952635477620984, guid: b8a94f37f67599c4688b9b2272750b35, type: 3}
-  force: 0.5
+  force: 3
+  upwardForce: 2
 --- !u!4 &1122920850
 Transform:
   m_ObjectHideFlags: 0
@@ -9063,13 +9187,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 4
   rotationSpeed: 720
+  isStrafe: 0
+  groundRadius: 0.05
+  groundOffset: 0.05
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 129
   characterAnimator: {fileID: 0}
   maxHp: 200
   curHp: 200
   maxShield: 160
   curShield: 160
   projectilePrefab: {fileID: 955423163106718808, guid: 4b9a80a557248804db8a7bde2ec9cf60, type: 3}
-  fireStartPoint: {fileID: 3202419658688898017}
   projectileSpeed: 2000
   fireRate: 0.2
   reloadTime: 2.65
@@ -9093,6 +9222,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   currentWeapon: {fileID: 0}
+  pelletCount: 10
+  spreadAngle: 7
 --- !u!95 &1297576543
 Animator:
   serializedVersion: 5
@@ -9585,6 +9716,7 @@ MonoBehaviour:
   weaponPrefab:
   - {fileID: 4484544998081288871, guid: 099ee87ffd7d35d4fae90f2ea4dd9b5e, type: 3}
   - {fileID: 7226450620033817685, guid: 59e8c7aa28590584c91b4c393c1bf179, type: 3}
+  isDead: 0
   curHp: 5000
   maxHp: 5000
 --- !u!95 &1335776348
@@ -13280,6 +13412,7 @@ MonoBehaviour:
   weaponPrefab:
   - {fileID: 4484544998081288871, guid: 099ee87ffd7d35d4fae90f2ea4dd9b5e, type: 3}
   - {fileID: 7226450620033817685, guid: 59e8c7aa28590584c91b4c393c1bf179, type: 3}
+  isDead: 0
   curHp: 5000
   maxHp: 5000
 --- !u!95 &1765907392
@@ -23158,5 +23291,6 @@ SceneRoots:
   - {fileID: 482089095}
   - {fileID: 1804835833}
   - {fileID: 2065753640}
+  - {fileID: 765925471}
   - {fileID: 450887401}
   - {fileID: 1062516605}

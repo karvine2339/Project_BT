@@ -43,13 +43,13 @@ public class JsonManager : MonoBehaviour
     {
         if (Instance == null)
         {
-            Instance = this; 
-            DontDestroyOnLoad(gameObject); 
-            LoadEffectData(); 
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+            LoadEffectData();
         }
         else
         {
-            Destroy(gameObject); 
+            Destroy(gameObject);
         }
     }
 
@@ -84,4 +84,5 @@ public class JsonManager : MonoBehaviour
     {
         DropWeapon(SpawnPos.position);
     }
+
 }
