@@ -91,6 +91,8 @@ public class CharacterController : MonoBehaviour
     {
         characterBase.ChangedSecondaryWeapon();
     }
+
+    //## ChrCtrl
     private void CameraRotate(Vector2 look)
     {
         yaw += look.x * cameraRotationSpeed * Time.deltaTime;      

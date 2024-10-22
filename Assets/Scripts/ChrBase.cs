@@ -41,6 +41,9 @@ public class ChrBase : MonoBehaviour
     protected bool isEngaging = false;
     protected float engagingTime = 5.0f;
 
+    protected float verticalVelocity;
+    protected bool isGrounded;
+
     protected float targetRotation;           
     protected float rotationVelocity;         
     protected float RotationSmoothTime = 0.12f; 
@@ -180,16 +183,26 @@ public class ChrBase : MonoBehaviour
         if (!isStrafe)
             return;
 
-        // 현재 위치와 목표 위치를 기준으로 방향 벡터 계산
+
         Vector3 position = transform.position;
         Vector3 direction = (targetPoint - position).normalized;
-        direction.y = 0f; // 수평 평면에서만 회전
+        direction.y = 0f;
 
-        // 목표 방향으로 회전하기 위한 Quaternion 생성
         Quaternion targetRotation = Quaternion.LookRotation(direction);
 
-        // 현재 회전에서 목표 회전으로 부드럽게 보간
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+    }
+
+    public void FreeFall()
+    {
+        if (isGrounded == false)
+        {
+            verticalVelocity += Physics.gravity.y * Time.deltaTime;
+        }
+        else
+        {
+            verticalVelocity = 0f;
+        }
     }
 }
 

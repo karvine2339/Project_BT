@@ -8,7 +8,10 @@ public class JsonManager : MonoBehaviour
     public static JsonManager Instance { get; private set; }
 
     private string jsonFilePath = "Assets/Data/WeaponEffectData.json";
-    public Root effectData;  
+    public Root effectData;
+
+    public GameObject[] weaponPrefab;
+    public Transform SpawnPos;
 
     [System.Serializable]
     public class Effect
@@ -61,5 +64,24 @@ public class JsonManager : MonoBehaviour
         {
             Debug.LogError("JSON 파일을 찾을 수 없습니다: " + jsonFilePath);
         }
+    }
+
+    public GameObject DropWeapon(Vector3 dropPos)
+    {
+        GameObject droppedWeapon = Instantiate(weaponPrefab[Random.Range(0, weaponPrefab.Length)], dropPos, Quaternion.Euler(-30, -90, 90));
+
+        DroppedWeapon prefabComponent = droppedWeapon.GetComponent<DroppedWeapon>();
+
+        WeaponData weaponData = prefabComponent.weaponData;
+
+        DroppedWeapon weaponComponent = droppedWeapon.GetComponent<DroppedWeapon>();
+        weaponComponent.InitWeaponData(weaponData);
+
+        return droppedWeapon;
+    }
+
+    private void Start()
+    {
+        DropWeapon(SpawnPos.position);
     }
 }

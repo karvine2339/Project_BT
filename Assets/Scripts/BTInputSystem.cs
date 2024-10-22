@@ -66,7 +66,6 @@ public class BTInputSystem : MonoBehaviour
 
     public bool isTab = false;
 
-
     private void Update()
     {
         if (isRecoiling)
@@ -88,8 +87,8 @@ public class BTInputSystem : MonoBehaviour
 
         mouseSensitivity = isStrafe ? 80f : 200f;
 
-        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
-        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
+        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.smoothDeltaTime;
+        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.smoothDeltaTime;
         look = new Vector2(mouseX + recoilX, mouseY + recoilY);
 
 
