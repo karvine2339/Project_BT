@@ -229,7 +229,6 @@ public class PlayerCharacter : ChrBase
 
             currentWeapon.InitWeaponStat();
             characterAnimator.SetTrigger("ChangeWeapon");
-
         }
     }
 
