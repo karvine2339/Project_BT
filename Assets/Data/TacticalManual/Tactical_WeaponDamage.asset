@@ -19,5 +19,5 @@ MonoBehaviour:
   - 30
   - 50
   index: 1
-  tacticalManualIcon: {fileID: 0}
+  tacticalManualIcon: {fileID: 21300000, guid: 0ccfda8feb5acfb4bb0b537855bda213, type: 3}
   tacticalManualTypeIcon: {fileID: 0}

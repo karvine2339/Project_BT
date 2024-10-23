@@ -25,6 +25,8 @@ public class DroppedWeapon : MonoBehaviour
     private GameObject weaponInfoBox;
     WeaponInfoBox weaponInfo;
 
+    private float rotationSpeed = 100;
+
     public GameObject weaponObject;
     Dictionary<string, string> weaponPrefabPaths = new Dictionary<string, string>()
     {
@@ -59,6 +61,12 @@ public class DroppedWeapon : MonoBehaviour
         {
             InitWeaponEffect();
         }
+    }
+
+    private void Update()
+    {
+        float rotationAmount = rotationSpeed * Time.deltaTime;
+        transform.Rotate(0, rotationAmount, 0,Space.World);
     }
     public void InteractWeapon(RaycastHit hit,PlayerCharacter playerCharacter)
     {

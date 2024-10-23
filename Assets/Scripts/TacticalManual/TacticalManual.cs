@@ -18,7 +18,7 @@ public class TacticalManual : MonoBehaviour
 
     private void Awake()
     {
-        icon = GetComponentsInChildren<Image>()[0];
+        icon = GetComponentsInChildren<Image>()[1];
     }
 
     public TacticalManualData GetTacticalManualData(TacticalManualData data)
@@ -30,7 +30,7 @@ public class TacticalManual : MonoBehaviour
 
     public void InitTacticalData()
     {
-        //icon.sprite = tacticalManualData.tacticalManualIcon;
+        icon.sprite = tacticalManualData.tacticalManualIcon;
         //level = tacticalManualData.level[TacticalLevel.DroneDamageLevel];
         level = tacticalManualData.level;
         effectIndex = tacticalManualData.index;

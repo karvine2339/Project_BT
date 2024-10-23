@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Tactical_WeaponFireRate
   m_EditorClassIdentifier: 
   EffectName: "\uBB34\uAE30 \uC5F0\uC0AC\uC18D\uB3C4 \uC99D\uAC00"
-  level: 3
+  level: 0
   value:
   - 15
   - 15
   - 20
   index: 2
-  tacticalManualIcon: {fileID: 0}
+  tacticalManualIcon: {fileID: 21300000, guid: a57e3aea34ad80345a816c720dc10b6b, type: 3}
   tacticalManualTypeIcon: {fileID: 0}

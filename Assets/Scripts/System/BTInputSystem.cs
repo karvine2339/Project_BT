@@ -93,10 +93,10 @@ public class BTInputSystem : MonoBehaviour
 
 
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            onJumpCallback();
-        }
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    onJumpCallback();
+        //}
 
         if (Input.GetMouseButton(1))
         {
