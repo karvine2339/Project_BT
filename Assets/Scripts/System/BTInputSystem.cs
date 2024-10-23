@@ -106,6 +106,10 @@ public class BTInputSystem : MonoBehaviour
                 return;
             }
 
+            if (isTab)
+                return;
+
+
             isStrafe = true;
             isAim = true;
         }
