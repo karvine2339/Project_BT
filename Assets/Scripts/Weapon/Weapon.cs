@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.UI;
+using static WeaponData;
 
 public class Weapon : MonoBehaviour
 {
@@ -54,10 +55,6 @@ public class Weapon : MonoBehaviour
         playerStat.RecoilAmount = weaponRecoilAmount;
     }
 
-    public void ApplyUpgrade()
-    {
-
-    }
     public void InitFirstWeaponUI()
     {
 
@@ -103,4 +100,47 @@ public class Weapon : MonoBehaviour
         hudManager.weaponEffect2_3.text = effectString[2];
     }
 
+    public void ApplyEffect()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            if (effectType[i] == 0)
+            {
+                minDamage *= 1 + (effectVal[i] / 100);
+                maxDamage *= 1 + (effectVal[i] / 100);
+            }
+
+            else if (effectType[i] == 1)
+            {
+                fireRate /= 1 + effectVal[i] / 100;
+            }
+
+            else if (effectType[i] == 2)
+            {
+                criticalProbability += effectVal[i];
+            }
+            else if (effectType[i] == 3)
+            {
+
+                criticalDamage += effectVal[i] / 100;
+            }
+            else if (effectType[i] == 4)
+            {
+                minDamage *= 1 + (effectVal[i] / 100);
+                maxDamage *= 1 + (effectVal[i] / 100);
+                weaponRecoilAmount = 1 + (effectVal[i] / 2) / 100;
+            }
+            else if (effectType[i] == 5)
+            {
+
+                minDamage *= 1 - (effectVal[i] / 100) / 4;
+                maxDamage *= 1 - (effectVal[i] / 100) / 4;
+                fireRate /= 1 + effectVal[i] / 100;
+            }
+            else if (effectType[i] == 6)
+            {
+
+            }
+        }
+    }
 }

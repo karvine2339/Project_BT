@@ -42,6 +42,7 @@ public class DroppedWeapon : MonoBehaviour
     [HideInInspector] public float[] effectVal = new float[3];
     [HideInInspector] public int[] effectType = new int[3];
     [HideInInspector] public string[] effectString = new string[3];
+    [HideInInspector] public int effectIndex;
     [HideInInspector] public int weaponType;
     [HideInInspector] public int weaponUpgradeCount;
     [HideInInspector] public float weaponRecoilAmount;
@@ -203,59 +204,45 @@ public class DroppedWeapon : MonoBehaviour
             if (Random.value <= effect.chance)
             {
                 selectedEffects.Add(effect);
-                Debug.Log("Effect Applied: " + effect.effectName);
+                effectType[i] = effect.effectType;
 
                 if (effect.effectType == 0)
                 {
                     effectVal[i] = Random.Range(effect.minValue, effect.maxValue);
-                    weaponMinDamage *= 1 + (effectVal[i] / 100);
-                    weaponMaxDamage *= 1 + (effectVal[i] / 100);
                     effectString[i] = effect.InfoString.Replace("value", effectVal[i].ToString("N0"));
                 }
 
                 else if (effect.effectType == 1)
                 {
                     effectVal[i] = Random.Range(effect.minValue, effect.maxValue);
-                    weaponFireRate /= 1 + effectVal[i] / 100;
                     effectString[i] = effect.InfoString.Replace("value", effectVal[i].ToString("N0"));
                 }
 
                 else if (effect.effectType == 2)
                 {
                     effectVal[i] = Random.Range(effect.minValue, effect.maxValue);
-                    weaponCriticalProbability += effectVal[i];
                     effectString[i] = effect.InfoString.Replace("value", effectVal[i].ToString("N0"));
                 }
                 else if (effect.effectType == 3)
                 {
                     effectVal[i] = Random.Range(effect.minValue, effect.maxValue);
-                    weaponCriticalDamage += effectVal[i] / 100;
                     effectString[i] = effect.InfoString.Replace("value", effectVal[i].ToString("N0"));
                 }
                 else if (effect.effectType == 4)
                 {
-                    effectVal[i] = Random.Range(effect.minValue, effect.maxValue);
-                    weaponMinDamage *= 1 + (effectVal[i] / 100);
-                    weaponMaxDamage *= 1 + (effectVal[i] / 100);
-                    weaponRecoilAmount = 1 + (effectVal[i] / 2) / 100;
-                    
+                    effectVal[i] = Random.Range(effect.minValue, effect.maxValue);               
                     effectString[i] = effect.InfoString.Replace("value", effectVal[i].ToString("N0"))
                                                      .Replace("recoilValue", (effectVal[i]/2).ToString("N0"));
                 }
                 else if (effect.effectType == 5)
                 {
                     effectVal[i] = Random.Range(effect.minValue, effect.maxValue);
-                    weaponMinDamage *= 1 - (effectVal[i] / 100) / 4;
-                    weaponMaxDamage *= 1 - (effectVal[i] / 100) / 4;
-                    weaponFireRate /= 1 + effectVal[i] / 100;
-
                     effectString[i] = effect.InfoString.Replace("value", effectVal[i].ToString("N0"))
                                                 .Replace("damageValue", (effectVal[i] / 4).ToString("N0"));
                 }
                 else if(effect.effectType == 6)
                 {
                     effectVal[i] = Random.Range(effect.minValue, effect.maxValue);
-                    
                 }
 
             }
@@ -281,5 +268,8 @@ public class DroppedWeapon : MonoBehaviour
         playerCharacter.currentWeapon.effectType = effectType;
         playerCharacter.currentWeapon.effectVal = effectVal;
         playerCharacter.currentWeapon.weaponRecoilAmount = weaponRecoilAmount;
+        Debug.Log(effectType[0]);
+        Debug.Log(effectType[1]);
+        Debug.Log(effectType[2]);
     }
 }
