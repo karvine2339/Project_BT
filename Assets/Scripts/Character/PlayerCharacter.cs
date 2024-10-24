@@ -177,8 +177,8 @@ public class PlayerCharacter : ChrBase
 
                 Muzzle();
 
-                //NormalFire();
-                ShotgunFire();
+                NormalFire();
+                //ShotgunFire();
 
                 currentWeapon.curAmmo--;
                 PlayerStat.Instance.bulletDamage = Random.Range(PlayerStat.Instance.BulletMinDamage, PlayerStat.Instance.BulletMaxDamage);

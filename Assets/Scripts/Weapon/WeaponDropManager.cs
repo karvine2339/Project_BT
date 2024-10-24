@@ -95,6 +95,7 @@ public class WeaponDropManager : MonoBehaviour
         weaponComponent.weaponName = PlayerCharacter.Instance.weapons[i].weaponName;
         weaponComponent.weaponType = PlayerCharacter.Instance.weapons[i].weaponType;
         weaponComponent.weaponRecoilAmount = PlayerCharacter.Instance.weapons[i].weaponRecoilAmount;
+        weaponComponent.weaponUpgradeCount = PlayerCharacter.Instance.weapons[i].weaponUpgradeCount;
 
         Interaction_UI.Instance.HideInfoBox();
         weaponComponent.ShowInfoBox(PlayerCharacter.Instance);

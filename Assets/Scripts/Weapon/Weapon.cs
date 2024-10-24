@@ -2,6 +2,7 @@ using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.UI;
 
 public class Weapon : MonoBehaviour
@@ -24,6 +25,7 @@ public class Weapon : MonoBehaviour
     public float criticalProbability;
     public float criticalDamage;
     public float weaponRecoilAmount;
+    public int weaponUpgradeCount;
     public int weaponType;
 
     public Sprite weaponImage;
@@ -42,33 +44,63 @@ public class Weapon : MonoBehaviour
 
     public void InitWeaponStat()
     {
-        PlayerStat.Instance.BulletMinDamage = minDamage;
-        PlayerStat.Instance.BulletMaxDamage = maxDamage;
-        PlayerStat.Instance.FireRate = fireRate;
-        PlayerStat.Instance.CriticalProbability = criticalProbability;
-        PlayerStat.Instance.CriticalDamage = criticalDamage;
-        PlayerStat.Instance.RecoilAmount = weaponRecoilAmount;
+        PlayerStat playerStat = PlayerStat.Instance;
+
+        playerStat.BulletMinDamage = minDamage * Mathf.Pow(1.1f, weaponUpgradeCount);
+        playerStat.BulletMaxDamage = maxDamage * Mathf.Pow(1.1f, weaponUpgradeCount);
+        playerStat.FireRate = fireRate;
+        playerStat.CriticalProbability = criticalProbability;
+        playerStat.CriticalDamage = criticalDamage;
+        playerStat.RecoilAmount = weaponRecoilAmount;
+    }
+
+    public void ApplyUpgrade()
+    {
+
     }
     public void InitFirstWeaponUI()
     {
-        HUDManager.Instance.weaponName1.text = weaponName;
-        HUDManager.Instance.weaponImg1.sprite = weaponImage;
-        HUDManager.Instance.weaponDamage1.text = minDamage.ToString("N0") + " ~ " + maxDamage.ToString("N0");
-        HUDManager.Instance.weaponFireRate1.text = fireRate.ToString("N2") + "초 / 발";
-        HUDManager.Instance.weaponEffect1_1.text = effectString[0];
-        HUDManager.Instance.weaponEffect1_2.text = effectString[1];
-        HUDManager.Instance.weaponEffect1_3.text = effectString[2];
+
+        HUDManager hudManager = HUDManager.Instance;
+
+        if (weaponUpgradeCount == 0)
+        {
+            hudManager.weaponName1.text = weaponName;
+        }
+        else
+        {
+            hudManager.weaponName1.text = "+" + weaponUpgradeCount + " " + weaponName;
+        }
+
+        hudManager.weaponImg1.sprite = weaponImage;
+        hudManager.weaponDamage1.text = (minDamage * Mathf.Pow(1.1f,weaponUpgradeCount)).ToString("N0") + " ~ " + 
+                                        (maxDamage * Mathf.Pow(1.1f,weaponUpgradeCount)).ToString("N0");
+        hudManager.weaponFireRate1.text = fireRate.ToString("N2") + "초 / 발";
+        hudManager.weaponEffect1_1.text = effectString[0];
+        hudManager.weaponEffect1_2.text = effectString[1];
+        hudManager.weaponEffect1_3.text = effectString[2];
     }
 
     public void InitSecondWeaponUI()
     {
-        HUDManager.Instance.weaponName2.text = weaponName;
-        HUDManager.Instance.weaponImg2.sprite = weaponImage;
-        HUDManager.Instance.weaponDamage2.text = minDamage.ToString("N0") + " ~ " + maxDamage.ToString("N0");
-        HUDManager.Instance.weaponFireRate2.text = fireRate.ToString("N2") + "초 / 발";
-        HUDManager.Instance.weaponEffect2_1.text = effectString[0];
-        HUDManager.Instance.weaponEffect2_2.text = effectString[1];
-        HUDManager.Instance.weaponEffect2_3.text = effectString[2];
+        HUDManager hudManager = HUDManager.Instance;
+
+        if (weaponUpgradeCount == 0)
+        {
+            hudManager.weaponName2.text = weaponName;
+        }
+        else
+        {
+            hudManager.weaponName2.text = "+" + weaponUpgradeCount + " " + weaponName;
+        }
+
+        hudManager.weaponImg2.sprite = weaponImage;
+        hudManager.weaponDamage2.text = (minDamage * Mathf.Pow(1.1f, weaponUpgradeCount)).ToString("N0") + " ~ " +
+                                        (maxDamage * Mathf.Pow(1.1f, weaponUpgradeCount)).ToString("N0");
+        hudManager.weaponFireRate2.text = fireRate.ToString("N2") + "초 / 발";
+        hudManager.weaponEffect2_1.text = effectString[0];
+        hudManager.weaponEffect2_2.text = effectString[1];
+        hudManager.weaponEffect2_3.text = effectString[2];
     }
 
 }

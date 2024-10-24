@@ -65,6 +65,7 @@ public class BTInputSystem : MonoBehaviour
     public bool isRecoiling = false;
 
     public bool isTab = false;
+    public bool isWorkShop = false;
 
     private void Update()
     {
@@ -109,6 +110,8 @@ public class BTInputSystem : MonoBehaviour
             if (isTab)
                 return;
 
+            if (isWorkShop)
+                return;
 
             isStrafe = true;
             isAim = true;
@@ -197,6 +200,9 @@ public class BTInputSystem : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Tab))
         {
+            if (isWorkShop)
+                return;
+
             HUDManager.Instance.OpenInventory();
         }
 

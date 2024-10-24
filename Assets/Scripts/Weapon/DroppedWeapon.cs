@@ -43,6 +43,7 @@ public class DroppedWeapon : MonoBehaviour
     [HideInInspector] public int[] effectType = new int[3];
     [HideInInspector] public string[] effectString = new string[3];
     [HideInInspector] public int weaponType;
+    [HideInInspector] public int weaponUpgradeCount;
     [HideInInspector] public float weaponRecoilAmount;
 
     [HideInInspector] public bool isThrow = false;
@@ -60,7 +61,10 @@ public class DroppedWeapon : MonoBehaviour
         if (isThrow == false)
         {
             InitWeaponEffect();
+            InitWeaponUpgrade();
         }
+
+        
     }
 
     private void Update()
@@ -146,9 +150,19 @@ public class DroppedWeapon : MonoBehaviour
         if(weaponInfoBox != null && weaponInfoBox.gameObject.activeSelf == false)
         {
             weaponInfoBox.gameObject.SetActive(true);
-            weaponInfo.weaponDamageText.text = weaponMinDamage.ToString("N0") + " ~ " + weaponMaxDamage.ToString("N0");
+            weaponInfo.weaponDamageText.text = (weaponMinDamage * Mathf.Pow(1.1f, weaponUpgradeCount)).ToString("N0") + " ~ " +
+                                               (weaponMaxDamage * Mathf.Pow(1.1f, weaponUpgradeCount)).ToString("N0");
             weaponInfo.weaponFireRateText.text = weaponFireRate.ToString("N2") + "√  / πﬂ";
-            weaponInfo.weaponNameText.text = weaponName;
+
+            if (weaponUpgradeCount == 0)
+            {
+                weaponInfo.weaponNameText.text = weaponName;
+            }
+            else
+            {
+                weaponInfo.weaponNameText.text = "+" + weaponUpgradeCount + " " + weaponName;
+            }
+
             weaponInfo.weaponImg.sprite = weaponImg;
             weaponInfo.effect[0].text = effectString[0];
             weaponInfo.effect[1].text = effectString[1];
@@ -248,12 +262,18 @@ public class DroppedWeapon : MonoBehaviour
         }
     }
 
+    public void InitWeaponUpgrade()
+    {
+        weaponUpgradeCount = Random.Range(0, 4);
+    }
+
     private void ApplyWeaponStats(PlayerCharacter playerCharacter)
     {
         playerCharacter.currentWeapon.weaponName = weaponName;
         playerCharacter.currentWeapon.weaponType = weaponType;
-        playerCharacter.currentWeapon.minDamage = weaponMinDamage;
-        playerCharacter.currentWeapon.maxDamage = weaponMaxDamage;
+        playerCharacter.currentWeapon.weaponUpgradeCount = weaponUpgradeCount;
+        playerCharacter.currentWeapon.minDamage = weaponMinDamage * Mathf.Pow(1.1f, weaponUpgradeCount);
+        playerCharacter.currentWeapon.maxDamage = weaponMaxDamage * Mathf.Pow(1.1f, weaponUpgradeCount);
         playerCharacter.currentWeapon.fireRate = weaponFireRate;
         playerCharacter.currentWeapon.criticalProbability = weaponCriticalProbability;
         playerCharacter.currentWeapon.criticalDamage = weaponCriticalDamage;
