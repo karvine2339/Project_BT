@@ -289,11 +289,11 @@ public class PlayerCharacter : ChrBase
     public void SetStartWeapon()
     {
         currentWeapon = weapons[0];
-        weapons[0].minDamage = 50;
-        weapons[0].maxDamage = 100;
-        weapons[0].criticalProbability = 20f;
-        weapons[0].criticalDamage = 1f;
-        weapons[0].fireRate = 0.2f;
+        weapons[0].baseMinDamage = 50;
+        weapons[0].baseMaxDamage = 100;
+        weapons[0].baseCriticalProbability = 20f;
+        weapons[0].baseCriticalDamage = 1f;
+        weapons[0].baseFireRate = 0.2f;
         weapons[0].weaponName = "WHITE FANG 465";
         weapons[0].effectString = new string[3];
 

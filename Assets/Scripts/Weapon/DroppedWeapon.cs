@@ -6,6 +6,7 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.IO;
 using Random = UnityEngine.Random;
+using static UnityEngine.Rendering.DebugUI;
 
 public class DroppedWeapon : MonoBehaviour
 {
@@ -35,12 +36,12 @@ public class DroppedWeapon : MonoBehaviour
     };
 
     [HideInInspector] public float weaponMinDamage;
-    [HideInInspector] public float  weaponMaxDamage;
-    [HideInInspector] public float  weaponFireRate;
-    [HideInInspector] public float  weaponCriticalProbability = 10.0f;
-    [HideInInspector] public float  weaponCriticalDamage = 1.5f;
+    [HideInInspector] public float weaponMaxDamage;
+    [HideInInspector] public float weaponFireRate;
+    [HideInInspector] public float weaponCriticalProbability = 10.0f;
+    [HideInInspector] public float weaponCriticalDamage = 1.5f;
     [HideInInspector] public float[] effectVal = new float[3];
-    [HideInInspector] public int[] effectType = new int[3];
+    [HideInInspector] public EffectType[] effectType = new EffectType[3];
     [HideInInspector] public string[] effectString = new string[3];
     [HideInInspector] public int effectIndex;
     [HideInInspector] public int weaponType;
@@ -93,20 +94,19 @@ public class DroppedWeapon : MonoBehaviour
             {
                 playerCharacter.weapons[0] = newWeapon;
                 playerCharacter.currentWeapon = playerCharacter.weapons[0];
+                ApplyWeaponStats(playerCharacter);
                 playerCharacter.ChangedPrimaryWeapon();
                 HUDManager.Instance.firstWeapon.SetActive(true);
-                ApplyWeaponStats(playerCharacter);
-                newWeapon.InitWeaponStat();
+
                 newWeapon.InitFirstWeaponUI();
             }
             else if (playerCharacter.weapons[1] == null)
             {
                 playerCharacter.weapons[1] = newWeapon;
                 playerCharacter.currentWeapon = playerCharacter.weapons[1];
+                ApplyWeaponStats(playerCharacter);
                 playerCharacter.ChangedSecondaryWeapon();
                 HUDManager.Instance.secondWeapon.SetActive(true);
-                ApplyWeaponStats(playerCharacter);
-                newWeapon.InitWeaponStat();
                 newWeapon.InitSecondWeaponUI();
             }
 
@@ -121,9 +121,8 @@ public class DroppedWeapon : MonoBehaviour
                 Destroy(playerCharacter.weapons[0].gameObject);
                 playerCharacter.weapons[0] = newWeapon;
                 playerCharacter.currentWeapon = playerCharacter.weapons[0];
-                playerCharacter.ChangedPrimaryWeapon();
                 ApplyWeaponStats(playerCharacter);
-                newWeapon.InitWeaponStat();
+                playerCharacter.ChangedPrimaryWeapon();
                 newWeapon.InitFirstWeaponUI();
      
             }
@@ -133,9 +132,8 @@ public class DroppedWeapon : MonoBehaviour
                 Destroy(playerCharacter.weapons[1].gameObject);
                 playerCharacter.weapons[1] = newWeapon;
                 playerCharacter.currentWeapon = playerCharacter.weapons[1];
-                playerCharacter.ChangedSecondaryWeapon();
                 ApplyWeaponStats(playerCharacter);
-                newWeapon.InitWeaponStat();
+                playerCharacter.ChangedSecondaryWeapon();
                 newWeapon.InitSecondWeaponUI();
 
             }
@@ -206,45 +204,41 @@ public class DroppedWeapon : MonoBehaviour
                 selectedEffects.Add(effect);
                 effectType[i] = effect.effectType;
 
-                if (effect.effectType == 0)
+                switch (effect.effectType)
                 {
-                    effectVal[i] = Random.Range(effect.minValue, effect.maxValue);
-                    effectString[i] = effect.InfoString.Replace("value", effectVal[i].ToString("N0"));
-                }
+                    case EffectType.DamageIncrease:
+                        effectVal[i] = Random.Range(effect.minValue, effect.maxValue);
+                        effectString[i] = effect.InfoString.Replace("value", effectVal[i].ToString("N0"));
+                        break;
 
-                else if (effect.effectType == 1)
-                {
-                    effectVal[i] = Random.Range(effect.minValue, effect.maxValue);
-                    effectString[i] = effect.InfoString.Replace("value", effectVal[i].ToString("N0"));
-                }
+                    case EffectType.FireRateIncrease:
+                        effectVal[i] = Random.Range(effect.minValue, effect.maxValue);
+                        effectString[i] = effect.InfoString.Replace("value", effectVal[i].ToString("N0"));
+                        break;
 
-                else if (effect.effectType == 2)
-                {
-                    effectVal[i] = Random.Range(effect.minValue, effect.maxValue);
-                    effectString[i] = effect.InfoString.Replace("value", effectVal[i].ToString("N0"));
-                }
-                else if (effect.effectType == 3)
-                {
-                    effectVal[i] = Random.Range(effect.minValue, effect.maxValue);
-                    effectString[i] = effect.InfoString.Replace("value", effectVal[i].ToString("N0"));
-                }
-                else if (effect.effectType == 4)
-                {
-                    effectVal[i] = Random.Range(effect.minValue, effect.maxValue);               
-                    effectString[i] = effect.InfoString.Replace("value", effectVal[i].ToString("N0"))
-                                                     .Replace("recoilValue", (effectVal[i]/2).ToString("N0"));
-                }
-                else if (effect.effectType == 5)
-                {
-                    effectVal[i] = Random.Range(effect.minValue, effect.maxValue);
-                    effectString[i] = effect.InfoString.Replace("value", effectVal[i].ToString("N0"))
-                                                .Replace("damageValue", (effectVal[i] / 4).ToString("N0"));
-                }
-                else if(effect.effectType == 6)
-                {
-                    effectVal[i] = Random.Range(effect.minValue, effect.maxValue);
-                }
+                    case EffectType.CriticalProbabilityIncrease:
+                        effectVal[i] = Random.Range(effect.minValue, effect.maxValue);
+                        effectString[i] = effect.InfoString.Replace("value", effectVal[i].ToString("N0"));
+                        break;
 
+                    case EffectType.CriticalDamageIncrease:
+                        effectVal[i] = Random.Range(effect.minValue, effect.maxValue);
+                        effectString[i] = effect.InfoString.Replace("value", effectVal[i].ToString("N0"));
+                        break;
+
+                    case EffectType.DamageAndRecoilIncrease:
+                        effectVal[i] = Random.Range(effect.minValue, effect.maxValue);
+                        effectString[i] = effect.InfoString.Replace("value", effectVal[i].ToString("N0"))
+                                                         .Replace("recoilValue", (effectVal[i] / 2).ToString("N0"));
+                        break;
+
+                    case EffectType.FireRateIncreaseAndDamageDecrease:
+                        effectVal[i] = Random.Range(effect.minValue, effect.maxValue);
+                        effectString[i] = effect.InfoString.Replace("value", effectVal[i].ToString("N0"))
+                                                    .Replace("damageValue", (effectVal[i] / 4).ToString("N0"));
+                        break;
+
+                }
             }
         }
     }
@@ -259,17 +253,14 @@ public class DroppedWeapon : MonoBehaviour
         playerCharacter.currentWeapon.weaponName = weaponName;
         playerCharacter.currentWeapon.weaponType = weaponType;
         playerCharacter.currentWeapon.weaponUpgradeCount = weaponUpgradeCount;
-        playerCharacter.currentWeapon.minDamage = weaponMinDamage * Mathf.Pow(1.1f, weaponUpgradeCount);
-        playerCharacter.currentWeapon.maxDamage = weaponMaxDamage * Mathf.Pow(1.1f, weaponUpgradeCount);
-        playerCharacter.currentWeapon.fireRate = weaponFireRate;
-        playerCharacter.currentWeapon.criticalProbability = weaponCriticalProbability;
-        playerCharacter.currentWeapon.criticalDamage = weaponCriticalDamage;
+        playerCharacter.currentWeapon.baseMinDamage = weaponMinDamage;
+        playerCharacter.currentWeapon.baseMaxDamage = weaponMaxDamage;
+        playerCharacter.currentWeapon.baseFireRate = weaponFireRate;
+        playerCharacter.currentWeapon.baseCriticalProbability = weaponCriticalProbability;
+        playerCharacter.currentWeapon.baseCriticalDamage = weaponCriticalDamage;
         playerCharacter.currentWeapon.effectString = effectString;
         playerCharacter.currentWeapon.effectType = effectType;
         playerCharacter.currentWeapon.effectVal = effectVal;
-        playerCharacter.currentWeapon.weaponRecoilAmount = weaponRecoilAmount;
-        Debug.Log(effectType[0]);
-        Debug.Log(effectType[1]);
-        Debug.Log(effectType[2]);
+        playerCharacter.currentWeapon.baseWeaponRecoilAmount = weaponRecoilAmount;
     }
 }

@@ -83,18 +83,18 @@ public class WeaponDropManager : MonoBehaviour
 
         weaponComponent.isThrow = true;
 
-        weaponComponent.weaponMinDamage = PlayerCharacter.Instance.weapons[i].minDamage;
-        weaponComponent.weaponMaxDamage = PlayerCharacter.Instance.weapons[i].maxDamage;
-        weaponComponent.weaponFireRate = PlayerCharacter.Instance.weapons[i].fireRate;
-        weaponComponent.weaponCriticalProbability = PlayerCharacter.Instance.weapons[i].criticalProbability;
-        weaponComponent.weaponCriticalDamage = PlayerCharacter.Instance.weapons[i].criticalDamage;
+        weaponComponent.weaponMinDamage = PlayerCharacter.Instance.weapons[i].baseMinDamage;
+        weaponComponent.weaponMaxDamage = PlayerCharacter.Instance.weapons[i].baseMaxDamage;
+        weaponComponent.weaponFireRate = PlayerCharacter.Instance.weapons[i].baseFireRate;
+        weaponComponent.weaponCriticalProbability = PlayerCharacter.Instance.weapons[i].baseCriticalProbability;
+        weaponComponent.weaponCriticalDamage = PlayerCharacter.Instance.weapons[i].baseCriticalDamage;
         weaponComponent.effectType = PlayerCharacter.Instance.weapons[i].effectType;
         weaponComponent.effectVal = PlayerCharacter.Instance.weapons[i].effectVal;
         weaponComponent.effectString = PlayerCharacter.Instance.weapons[i].effectString;
         weaponComponent.weaponImg = PlayerCharacter.Instance.weapons[i].weaponImage;
         weaponComponent.weaponName = PlayerCharacter.Instance.weapons[i].weaponName;
         weaponComponent.weaponType = PlayerCharacter.Instance.weapons[i].weaponType;
-        weaponComponent.weaponRecoilAmount = PlayerCharacter.Instance.weapons[i].weaponRecoilAmount;
+        weaponComponent.weaponRecoilAmount = PlayerCharacter.Instance.weapons[i].baseWeaponRecoilAmount;
         weaponComponent.weaponUpgradeCount = PlayerCharacter.Instance.weapons[i].weaponUpgradeCount;
 
         Interaction_UI.Instance.HideInfoBox();

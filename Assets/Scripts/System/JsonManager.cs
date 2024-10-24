@@ -17,7 +17,7 @@ public class JsonManager : MonoBehaviour
     public class Effect
     {
         public string effectName;
-        public int effectType;
+        public EffectType effectType;
         public float minValue;
         public float maxValue;
         public float minValue2;

@@ -70,9 +70,9 @@ public class Interaction_WorkShop : MonoBehaviour,IInteractable
         }
 
         weaponImg1.sprite = weapon.weaponImage;
-        weaponDamage1.text = (weapon.minDamage * Mathf.Pow(1.1f, weapon.weaponUpgradeCount)).ToString("N0") + " ~ " +
-                             (weapon.maxDamage * Mathf.Pow(1.1f, weapon.weaponUpgradeCount)).ToString("N0");
-        weaponFireRate1.text = weapon.fireRate.ToString("N2") + "초 / 발";
+        weaponDamage1.text = (weapon.baseMinDamage * Mathf.Pow(1.1f, weapon.weaponUpgradeCount)).ToString("N0") + " ~ " +
+                             (weapon.baseMaxDamage * Mathf.Pow(1.1f, weapon.weaponUpgradeCount)).ToString("N0");
+        weaponFireRate1.text = weapon.baseFireRate.ToString("N2") + "초 / 발";
         weaponEffect1_1.text = weapon.effectString[0];
         weaponEffect1_2.text = weapon.effectString[1];
         weaponEffect1_3.text = weapon.effectString[2];
@@ -102,9 +102,9 @@ public class Interaction_WorkShop : MonoBehaviour,IInteractable
         }
 
         weaponImg2.sprite = weapon.weaponImage;
-        weaponDamage2.text = (weapon.minDamage * Mathf.Pow(1.1f, weapon.weaponUpgradeCount)).ToString("N0") + " ~ " +
-                             (weapon.maxDamage * Mathf.Pow(1.1f, weapon.weaponUpgradeCount)).ToString("N0");
-        weaponFireRate2.text = weapon.fireRate.ToString("N2") + "초 / 발";
+        weaponDamage2.text = (weapon.baseMinDamage * Mathf.Pow(1.1f, weapon.weaponUpgradeCount)).ToString("N0") + " ~ " +
+                             (weapon.baseMaxDamage * Mathf.Pow(1.1f, weapon.weaponUpgradeCount)).ToString("N0");
+        weaponFireRate2.text = weapon.baseFireRate.ToString("N2") + "초 / 발";
         weaponEffect2_1.text = weapon.effectString[0];
         weaponEffect2_2.text = weapon.effectString[1];
         weaponEffect2_3.text = weapon.effectString[2];
