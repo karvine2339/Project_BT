@@ -67,6 +67,7 @@ public class BTInputSystem : MonoBehaviour
     public bool isTac = false;
     public bool isTab = false;
     public bool isWorkShop = false;
+    public bool isOp = false;
 
     private void Update()
     {
@@ -108,10 +109,7 @@ public class BTInputSystem : MonoBehaviour
                 return;
             }
 
-            if (isTab)
-                return;
-
-            if (isWorkShop)
+            if (isTab || isWorkShop || isOp)
                 return;
 
             isStrafe = true;
@@ -155,7 +153,7 @@ public class BTInputSystem : MonoBehaviour
             if (PlayerCharacter.Instance.isReload)
                 return;
 
-            if (isTab)
+            if (isTab || isWorkShop || isOp)
                 return;
 
             onInteract?.Invoke();
@@ -179,7 +177,7 @@ public class BTInputSystem : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.Alpha1))
         {
-            if (isTab)
+            if (isTab || isWorkShop || isOp)
                 return;
 
             if (PlayerCharacter.Instance.weapons[1] == null)
@@ -190,7 +188,7 @@ public class BTInputSystem : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.Alpha2))
         {
-            if (isTab)
+            if (isTab || isWorkShop || isOp)
                 return;
 
             if (PlayerCharacter.Instance.weapons[1] == null)
@@ -201,10 +199,7 @@ public class BTInputSystem : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Tab))
         {
-            if (isWorkShop)
-                return;
-
-            if (isTac)
+            if (isTab || isWorkShop || isOp)
                 return;
 
             HUDManager.Instance.OpenInventory();

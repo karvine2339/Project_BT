@@ -217,8 +217,6 @@ public class PlayerCharacter : ChrBase
                     HUDManager.Instance.secondWeapon.GetComponent<RectTransform>().localScale = new Vector3(0.3f, 0.3f, 0.3f);
                 }
 
-                HUDManager.Instance.weaponIndex.text = "[1]";
-
                 if (weapons[1] != null)
                 {
                     weapons[1].gameObject.SetActive(false);
@@ -259,8 +257,6 @@ public class PlayerCharacter : ChrBase
                     HUDManager.Instance.firstWeapon.GetComponent<RectTransform>().localScale = new Vector3(0.3f, 0.3f, 0.3f);
 
                 }
-
-                HUDManager.Instance.weaponIndex.text = "[2]";
 
                 if (weapons[0] != null)
                 {
