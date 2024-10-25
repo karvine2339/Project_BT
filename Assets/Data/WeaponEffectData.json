@@ -6,7 +6,7 @@
         {
           "effectType" :  0,
           "effectName": "데미지 증가",
-          "minValue": 30,
+          "minValue": 10,
           "maxValue": 50,
           "chance": 1.0,
           "InfoString": "데미지 증가 : 데미지 value% 증가"
@@ -14,7 +14,7 @@
         {
           "effectType": 1,
           "effectName": "연사속도 증가",
-          "minValue": 30,
+          "minValue": 10,
           "maxValue": 50,
           "chance": 1.0,
           "InfoString": "빠른 사격 : 연사속도 value% 증가"
@@ -22,15 +22,15 @@
         {
           "effectType": 2,
           "effectName": "크리티컬 확률 증가",
-          "minValue": 10,
-          "maxValue": 20,
+          "minValue": 20,
+          "maxValue": 30,
           "chance": 1.0,
           "InfoString": "크리티컬 확률 증가 : 크리티컬 확률 value% 증가"
         },
         {
           "effectType": 3,
           "effectName": "크리티컬 데미지 증가",
-          "minValue": 50,
+          "minValue": 20,
           "maxValue": 100,
           "chance": 1.0,
           "InfoString": "크리티컬 데미지 증가 : 크리티컬 데미지 value% 증가"
@@ -48,25 +48,25 @@
         {
           "effectType": 5,
           "effectName": "무자비한 사격",
-          "minValue": 50,
-          "MaxValue": 100,
+          "minValue": 40,
+          "MaxValue": 80,
           "chance": 1.0,
           "InfoString": "무자비한 사격 : 연사속도 value% 증가 , 데미지 damageValue% 감소"
-        },
-        {
-          "effectType": 6,
-          "effectName": "탄창용량 증가",
-          "minValue": 10,
-          "maxValue": 15,
-          "chance": 1.0,
-          "InfoString": "넉넉한 총알 : 탄창용량 value증가"
-        },
-        {
-          "effectType": 7,
-          "effectName": "무자비한 학살자",
-          "change": 1.0,
-          "InfoString": "무자비한 학살자 : 적 처치시 탄창 재장전"
         }
+        //{
+        //  "effectType": 6,
+        //  "effectName": "탄창용량 증가",
+        //  "minValue": 10,
+        //  "maxValue": 15,
+        //  "chance": 1.0,
+        //  "InfoString": "넉넉한 총알 : 탄창용량 value증가"
+        //},
+        //{
+        //  "effectType": 7,
+        //  "effectName": "무자비한 학살자",
+        //  "change": 1.0,
+        //  "InfoString": "무자비한 학살자 : 적 처치시 탄창 재장전"
+        //}
       ]
     }
   ]

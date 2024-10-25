@@ -64,6 +64,7 @@ public class BTInputSystem : MonoBehaviour
 
     public bool isRecoiling = false;
 
+    public bool isTac = false;
     public bool isTab = false;
     public bool isWorkShop = false;
 
@@ -201,6 +202,9 @@ public class BTInputSystem : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             if (isWorkShop)
+                return;
+
+            if (isTac)
                 return;
 
             HUDManager.Instance.OpenInventory();

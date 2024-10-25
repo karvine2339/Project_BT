@@ -44,6 +44,7 @@ public class TacticalManual : MonoBehaviour
     public void OnClick()
     {
         TacticalManager.Instance.tacticalManualCanvasObject.SetActive(false);
+        BTInputSystem.Instance.isTac = false;
         Time.timeScale = 1.0f;
         CursorSystem.Instance.SetCursorState(false);
         tacticalManualData.level++;

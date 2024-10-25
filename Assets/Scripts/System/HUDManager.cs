@@ -144,7 +144,7 @@ public class HUDManager : MonoBehaviour
         if (PlayerCharacter.Instance.curCredit >= PlayerCharacter.Instance.credit)
             return;
 
-        PlayerCharacter.Instance.curCredit += Time.deltaTime * 250;
+        PlayerCharacter.Instance.curCredit += Time.unscaledDeltaTime * 250;
 
         creditText.text = PlayerCharacter.Instance.curCredit.ToString("N0");
 

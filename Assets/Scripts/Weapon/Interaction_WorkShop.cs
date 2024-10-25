@@ -8,6 +8,7 @@ public class Interaction_WorkShop : MonoBehaviour,IInteractable
 {
     public GameObject workShopObject;
 
+    public EffectType newEffectType;
 
     [Header("--- First Weapon ---")]
     public TextMeshProUGUI weaponName1;
@@ -29,6 +30,8 @@ public class Interaction_WorkShop : MonoBehaviour,IInteractable
     public Image weaponImg2;
     public GameObject weaponInfoBox2;
 
+    public TextMeshProUGUI credit;
+
     public bool IsAutoInteract => false;
 
     public string Message => "¿öÅ©¼¥";
@@ -39,6 +42,8 @@ public class Interaction_WorkShop : MonoBehaviour,IInteractable
         CursorSystem.Instance.SetCursorState(true);
         workShopObject.SetActive(true);
 
+
+        this.UpdateCredit();
         InitFirstWeapon();
         InitSecondWeapon();
 
@@ -118,8 +123,32 @@ public class Interaction_WorkShop : MonoBehaviour,IInteractable
         Time.timeScale = 1.0f;
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (BTInputSystem.Instance.isWorkShop == false)
+                return;
+
+            BackButtonClick();
+        }
+    }
+
+    public void UpdateCredit()
+    {
+        credit.text = PlayerCharacter.Instance.credit.ToString();
+    }
     public void Weapon1UpgradeButtonClick()
     {
+        if (PlayerCharacter.Instance.credit < 5000)
+        {
+
+            return;
+        }
+
+        PlayerCharacter.Instance.credit -= 5000;
+        this.UpdateCredit();
+
         Weapon weapon = PlayerCharacter.Instance.weapons[0];
 
         weapon.weaponUpgradeCount++;
@@ -129,11 +158,66 @@ public class Interaction_WorkShop : MonoBehaviour,IInteractable
     }
     public void Weapon2UpgradeButtonClick()
     {
+        if (PlayerCharacter.Instance.credit < 5000)
+        {
+
+            return;
+        }
+
+        PlayerCharacter.Instance.credit -= 5000;
+        this.UpdateCredit();
+
         Weapon weapon = PlayerCharacter.Instance.weapons[1];
 
         weapon.weaponUpgradeCount++;
         weapon.InitSecondWeaponUI();
         weapon.InitWeaponStat();
+        this.InitSecondWeapon();
+    }
+
+    public void Weapon1ChangeEffectButtonClick()
+    {
+        if (PlayerCharacter.Instance.credit < 2500)
+        {
+
+            return;
+        }
+
+        PlayerCharacter.Instance.credit -= 2500;
+        this.UpdateCredit();
+
+        Weapon weapon = PlayerCharacter.Instance.weapons[0];
+
+        if (weapon.effectType.Length < 3)
+            return;
+
+        WeaponEffectManager.Instance.InitWeaponEffect(weapon.effectType, weapon.effectVal, weapon.effectString);
+        weapon.InitFirstWeaponUI();
+        weapon.InitWeaponStat();
+        weapon.ApplyEffects();
+        this.InitFirstWeapon();
+    }
+
+    public void Weapon2ChangeEffectButtonClick()
+    {
+        if (PlayerCharacter.Instance.credit < 2500)
+        {
+
+            return;
+        }
+
+        PlayerCharacter.Instance.credit -= 2500;
+        this.UpdateCredit();
+
+        Weapon weapon = PlayerCharacter.Instance.weapons[1];
+
+        if (weapon.effectType.Length < 3)
+            return;
+
+        WeaponEffectManager.Instance.InitWeaponEffect(weapon.effectType, weapon.effectVal, weapon.effectString);
+        weapon.InitSecondWeaponUI();
+        weapon.InitWeaponStat();
+        weapon.ApplyEffects();
         this.InitSecondWeapon();
     }
 }

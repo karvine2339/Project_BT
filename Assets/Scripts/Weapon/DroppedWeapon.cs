@@ -46,7 +46,7 @@ public class DroppedWeapon : MonoBehaviour
     [HideInInspector] public int effectIndex;
     [HideInInspector] public int weaponType;
     [HideInInspector] public int weaponUpgradeCount;
-    [HideInInspector] public float weaponRecoilAmount;
+    [HideInInspector] public float weaponRecoilAmount = 1.0f;
 
     [HideInInspector] public bool isThrow = false;
 
@@ -62,7 +62,7 @@ public class DroppedWeapon : MonoBehaviour
 
         if (isThrow == false)
         {
-            InitWeaponEffect();
+            WeaponEffectManager.Instance.InitWeaponEffect(effectType,effectVal,effectString);
             InitWeaponUpgrade();
         }
 

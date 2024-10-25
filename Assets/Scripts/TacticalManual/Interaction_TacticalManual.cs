@@ -18,7 +18,7 @@ public class Interaction_TacticalManual : MonoBehaviour, IInteractable
         TacticalManager.Instance.tacticalManualCanvasObject.gameObject.SetActive(true);
         Time.timeScale = 0.0f;
         CursorSystem.Instance.SetCursorState(true);
-        BTInputSystem.Instance.isTab = true;
+        BTInputSystem.Instance.isTac = true;
         TacticalManager.Instance.SetTacticalManual();
         Destroy(gameObject);
         Interaction_UI.Instance.RemoveInteractionData(this);

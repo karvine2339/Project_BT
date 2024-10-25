@@ -89,7 +89,7 @@ public class Weapon : MonoBehaviour
         hudManager.weaponImg1.sprite = weaponImage;
         hudManager.weaponDamage1.text = (baseMinDamage * Mathf.Pow(1.1f,weaponUpgradeCount)).ToString("N0") + " ~ " + 
                                         (baseMaxDamage * Mathf.Pow(1.1f,weaponUpgradeCount)).ToString("N0");
-        hudManager.weaponFireRate1.text = fireRate.ToString("N2") + "초 / 발";
+        hudManager.weaponFireRate1.text = baseFireRate.ToString("N2") + "초 / 발";
         hudManager.weaponEffect1_1.text = effectString[0];
         hudManager.weaponEffect1_2.text = effectString[1];
         hudManager.weaponEffect1_3.text = effectString[2];
@@ -164,7 +164,7 @@ public class Weapon : MonoBehaviour
             case EffectType.DamageAndRecoilIncrease:
                 minDamage *= 1 + (value / 100);
                 maxDamage *= 1 + (value / 100);
-                weaponRecoilAmount = 1 + (value / 2) / 100;
+                weaponRecoilAmount += (value / 2) / 100;
                 break;
 
             case EffectType.FireRateIncreaseAndDamageDecrease:
