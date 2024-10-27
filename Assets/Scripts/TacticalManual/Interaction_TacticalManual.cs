@@ -15,6 +15,9 @@ public class Interaction_TacticalManual : MonoBehaviour, IInteractable
 
     public void Interact(PlayerCharacter playerCharacter)
     {
+        if (BTInputSystem.Instance.isTac)
+            return;
+
         TacticalManager.Instance.tacticalManualCanvasObject.gameObject.SetActive(true);
         Time.timeScale = 0.0f;
         CursorSystem.Instance.SetCursorState(true);

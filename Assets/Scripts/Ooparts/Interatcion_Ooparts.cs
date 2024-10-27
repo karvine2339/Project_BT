@@ -14,7 +14,7 @@ public class Interatcion_Ooparts : MonoBehaviour, IInteractable
         Time.timeScale = 0.0f;
         CursorSystem.Instance.SetCursorState(true);
         BTInputSystem.Instance.isOp = true;
-        Destroy(gameObject);
+        //Destroy(gameObject);
         Interaction_UI.Instance.RemoveInteractionData(this);
     }
 }

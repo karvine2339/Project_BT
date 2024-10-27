@@ -99,6 +99,11 @@ public class PlayerCharacter : ChrBase
     {
         base.Start();
 
+        curCredit = 500000;
+        credit = curCredit;
+        HUDManager.Instance.creditText.text = credit.ToString();
+        
+
         aimRig = GetComponentInChildren<Rig>();
         rigBuilder = GetComponentInChildren<RigBuilder>();
 
@@ -379,6 +384,13 @@ public class PlayerCharacter : ChrBase
             droppedWeapon = null;
             Interaction_UI.Instance.HideInfoBox();
         }
+    }
+
+    public void UpdateCredit(float value)
+    {
+        credit += value;
+        curCredit += value;
+        HUDManager.Instance.creditText.text = PlayerCharacter.Instance.credit.ToString();
     }
 
     public void ShotgunFire()

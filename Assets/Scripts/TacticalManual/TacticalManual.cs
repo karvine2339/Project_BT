@@ -5,11 +5,20 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+public enum TacticalManualEffect
+{
+    Default,
+    BulletDamageIncrease,
+    FireRateIncrease,
+    DroneDamageIncrease,
+    DroneRocketCountIncrease,
+    DroneDelayDecrease
+}
 public class TacticalManual : MonoBehaviour
 {
     private TacticalManualData tacticalManualData;
     public int level;
-    public int effectIndex;
+    public TacticalManualEffect effectIndex;
 
     private Image icon;
     public TextMeshProUGUI effectName;
@@ -33,7 +42,7 @@ public class TacticalManual : MonoBehaviour
         icon.sprite = tacticalManualData.tacticalManualIcon;
         //level = tacticalManualData.level[TacticalLevel.DroneDamageLevel];
         level = tacticalManualData.level;
-        effectIndex = tacticalManualData.index;
+        effectIndex = (TacticalManualEffect)tacticalManualData.index;
         effectName.text = tacticalManualData.EffectName;
         effectLevel.text = "Level " + (level + 1).ToString();
         effectVal.text = tacticalManualData.value[0].ToString() + " / "
@@ -51,13 +60,13 @@ public class TacticalManual : MonoBehaviour
 
         float value = tacticalManualData.value[level];
 
-        Dictionary<int, System.Action> effectActions = new Dictionary<int, System.Action>()
+        Dictionary<TacticalManualEffect, System.Action> effectActions = new Dictionary<TacticalManualEffect, System.Action>()
     {
-        { 1, () => PlayerStat.Instance.AdditionalBulletDamage += value / 100 },
-        { 2, () => PlayerStat.Instance.FireRate /= 1 + value / 100 },
-        { 3, () => PlayerStat.Instance.DroneDamage += value / 100 },
-        { 4, () => DronCtrl.Instance.maxRocketCount += (int)value },
-        { 5, () => DronCtrl.Instance.maxRocketDelay -= value }
+        { TacticalManualEffect.BulletDamageIncrease, () => PlayerStat.Instance.AdditionalBulletDamage += value / 100 },
+        { TacticalManualEffect.FireRateIncrease, () => PlayerStat.Instance.FireRate /= 1 + value / 100 },
+        { TacticalManualEffect.DroneDamageIncrease, () => PlayerStat.Instance.DroneDamage += value / 100 },
+        { TacticalManualEffect.DroneRocketCountIncrease, () => DronCtrl.Instance.maxRocketCount += (int)value },
+        { TacticalManualEffect.DroneDelayDecrease, () => DronCtrl.Instance.maxRocketDelay -= value }
     };
 
         if (effectActions.ContainsKey(effectIndex))

@@ -146,7 +146,8 @@ public class Interaction_WorkShop : MonoBehaviour,IInteractable
             return;
         }
 
-        PlayerCharacter.Instance.credit -= 5000;
+        PlayerCharacter.Instance.UpdateCredit(-5000);
+
         this.UpdateCredit();
 
         Weapon weapon = PlayerCharacter.Instance.weapons[0];
@@ -164,7 +165,8 @@ public class Interaction_WorkShop : MonoBehaviour,IInteractable
             return;
         }
 
-        PlayerCharacter.Instance.credit -= 5000;
+        PlayerCharacter.Instance.UpdateCredit(-5000);
+        
         this.UpdateCredit();
 
         Weapon weapon = PlayerCharacter.Instance.weapons[1];
@@ -183,7 +185,8 @@ public class Interaction_WorkShop : MonoBehaviour,IInteractable
             return;
         }
 
-        PlayerCharacter.Instance.credit -= 2500;
+        PlayerCharacter.Instance.UpdateCredit(-2500);
+
         this.UpdateCredit();
 
         Weapon weapon = PlayerCharacter.Instance.weapons[0];
@@ -206,7 +209,7 @@ public class Interaction_WorkShop : MonoBehaviour,IInteractable
             return;
         }
 
-        PlayerCharacter.Instance.credit -= 2500;
+        PlayerCharacter.Instance.UpdateCredit(-2500);
         this.UpdateCredit();
 
         Weapon weapon = PlayerCharacter.Instance.weapons[1];

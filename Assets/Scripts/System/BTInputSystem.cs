@@ -199,7 +199,7 @@ public class BTInputSystem : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Tab))
         {
-            if (isTab || isWorkShop || isOp)
+            if (isWorkShop || isOp)
                 return;
 
             HUDManager.Instance.OpenInventory();
