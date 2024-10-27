@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class TacticalManager : MonoBehaviour
+public class TacticalManager : UIBase
 {
     public static TacticalManager Instance;
 

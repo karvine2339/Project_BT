@@ -75,46 +75,46 @@ public class Weapon : MonoBehaviour
     public void InitFirstWeaponUI()
     {
 
-        HUDManager hudManager = HUDManager.Instance;
+        InventoryManager inventoryManager = InventoryManager.Instance;
 
         if (weaponUpgradeCount == 0)
         {
-            hudManager.weaponName1.text = weaponName;
+            inventoryManager.weaponName1.text = weaponName;
         }
         else
         {
-            hudManager.weaponName1.text = "+" + weaponUpgradeCount + " " + weaponName;
+            inventoryManager.weaponName1.text = "+" + weaponUpgradeCount + " " + weaponName;
         }
 
-        hudManager.weaponImg1.sprite = weaponImage;
-        hudManager.weaponDamage1.text = (baseMinDamage * Mathf.Pow(1.1f,weaponUpgradeCount)).ToString("N0") + " ~ " + 
+        inventoryManager.weaponImg1.sprite = weaponImage;
+        inventoryManager.weaponDamage1.text = (baseMinDamage * Mathf.Pow(1.1f,weaponUpgradeCount)).ToString("N0") + " ~ " + 
                                         (baseMaxDamage * Mathf.Pow(1.1f,weaponUpgradeCount)).ToString("N0");
-        hudManager.weaponFireRate1.text = baseFireRate.ToString("N2") + "초 / 발";
-        hudManager.weaponEffect1_1.text = effectString[0];
-        hudManager.weaponEffect1_2.text = effectString[1];
-        hudManager.weaponEffect1_3.text = effectString[2];
+        inventoryManager.weaponFireRate1.text = baseFireRate.ToString("N2") + "초 / 발";
+        inventoryManager.weaponEffect1_1.text = effectString[0];
+        inventoryManager.weaponEffect1_2.text = effectString[1];
+        inventoryManager.weaponEffect1_3.text = effectString[2];
     }
 
     public void InitSecondWeaponUI()
     {
-        HUDManager hudManager = HUDManager.Instance;
+        InventoryManager inventoryManager = InventoryManager.Instance;
 
         if (weaponUpgradeCount == 0)
         {
-            hudManager.weaponName2.text = weaponName;
+            inventoryManager.weaponName2.text = weaponName;
         }
         else
         {
-            hudManager.weaponName2.text = "+" + weaponUpgradeCount + " " + weaponName;
+            inventoryManager.weaponName2.text = "+" + weaponUpgradeCount + " " + weaponName;
         }
 
-        hudManager.weaponImg2.sprite = weaponImage;
-        hudManager.weaponDamage2.text = (baseMinDamage * Mathf.Pow(1.1f, weaponUpgradeCount)).ToString("N0") + " ~ " +
+        inventoryManager.weaponImg2.sprite = weaponImage;
+        inventoryManager.weaponDamage2.text = (baseMinDamage * Mathf.Pow(1.1f, weaponUpgradeCount)).ToString("N0") + " ~ " +
                                         (baseMaxDamage * Mathf.Pow(1.1f, weaponUpgradeCount)).ToString("N0");
-        hudManager.weaponFireRate2.text = baseFireRate.ToString("N2") + "초 / 발";
-        hudManager.weaponEffect2_1.text = effectString[0];
-        hudManager.weaponEffect2_2.text = effectString[1];
-        hudManager.weaponEffect2_3.text = effectString[2];
+        inventoryManager.weaponFireRate2.text = baseFireRate.ToString("N2") + "초 / 발";
+        inventoryManager.weaponEffect2_1.text = effectString[0];
+        inventoryManager.weaponEffect2_2.text = effectString[1];
+        inventoryManager.weaponEffect2_3.text = effectString[2];
     }
 
     public void ApplyEffects()

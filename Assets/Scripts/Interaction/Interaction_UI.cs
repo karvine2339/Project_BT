@@ -3,12 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-public class weaponInfo
-{ 
-
-
-}
-public class Interaction_UI : MonoBehaviour
+public class Interaction_UI : UIBase
 {
 
     public static Interaction_UI Instance { get; private set; }

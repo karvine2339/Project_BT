@@ -8,7 +8,7 @@ public class DronCtrl : MonoBehaviour
 
     private SensorBase sensor;
 
-    private List<EnemyCharacter> detectedEnemy = new List<EnemyCharacter>();
+    [SerializeField] private List<EnemyCharacter> detectedEnemy = new List<EnemyCharacter>();
     public EnemyCharacter targetEnemy = null;
 
     public float dronSpeed = 1;

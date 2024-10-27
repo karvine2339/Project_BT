@@ -13,17 +13,16 @@ public class Projectile : MonoBehaviour
 
     public GameObject bulletHole;
 
-    public float rocketSpeed = 10.0f;
+    public float lifeTime = 10f;
 
-    private Vector3 rocketDir;
-
-    private bool hasTarget = false;
-
-    float rocketRotSpeed = 50.0f;
+    private int bounceCount = 0;
 
     private void Awake()
     {
-        rigid = GetComponent<Rigidbody>(); 
+        rigid = GetComponent<Rigidbody>();
+        bounceCount = Random.Range(0, 2);
+
+        Destroy(gameObject, lifeTime);
     }
 
     public void SetForce(float force)
@@ -31,41 +30,35 @@ public class Projectile : MonoBehaviour
         rigid.AddForce(transform.forward * force, ForceMode.Impulse);
     }
 
-    private void Update()
-    {
-        RocketActive();
-
-    }
-
     private void OnCollisionEnter(Collision collision)
     {
+        int prevBouncCount = bounceCount;
         if ((hitLayer & (1 << collision.gameObject.layer)) != 0)
-        {        
-
+        {
             ContactPoint contact = collision.contacts[0];
 
-            if (gameObject.tag == "Bullet")
-            {
+            Instantiate(bulletHole, contact.point, Quaternion.LookRotation(contact.normal) * Quaternion.Euler(90, 0, 0));
 
-                Instantiate(bulletHole, contact.point, Quaternion.LookRotation(contact.normal) * Quaternion.Euler(90, 0, 0));
-                Destroy(gameObject);
+            if (bounceCount > 0)
+            {
+                bounceCount--;
+                transform.forward = collision.contacts[0].normal;
             }
         }
 
-        if(collision.transform.TryGetComponent(out EnemyCharacter enemy))
+        bool isHitEnemy = collision.transform.TryGetComponent(out EnemyCharacter enemy);
+        if (isHitEnemy)
         {
-            if (gameObject.tag == "Rocket")
-            {
-                enemy.OnDamaged((int)Random.Range(PlayerStat.Instance.BulletMinDamage,PlayerStat.Instance.BulletMaxDamage)
-                                                         * Random.Range(1.5f, 2.0f) * PlayerStat.Instance.DroneDamage,
-                                                  PlayerStat.Instance.CriticalDamage);
-            }
-            else
+            if (bounceCount >= 0)
             {
                 enemy.OnDamaged(PlayerStat.Instance.bulletDamage * PlayerStat.Instance.AdditionalBulletDamage,
                                 PlayerStat.Instance.CriticalDamage);
             }
-                Destroy(gameObject);
+        }
+
+        if (prevBouncCount <= 0)
+        {
+            Destroy(gameObject);
         }
     }
 
@@ -81,62 +74,6 @@ public class Projectile : MonoBehaviour
 
     private void HandleEnemyDamaged(EnemyCharacter enemy, int damage)
     {
-       
-    }
-
-    void RocketActive()
-    {
-        if (gameObject.tag == "Rocket")
-        {
-            if (DronCtrl.Instance.targetEnemy != null)
-            {
-                if (rigid.isKinematic == true)
-                    return;
-
-                hasTarget = true;
-
-                RocketRotate();
-                Vector3 targetPosition = new Vector3(DronCtrl.Instance.targetEnemy.transform.position.x,
-                                                     DronCtrl.Instance.targetEnemy.transform.position.y + 0.75f,
-                                                     DronCtrl.Instance.targetEnemy.transform.position.z);
-
-                rocketDir = (targetPosition - transform.position).normalized;
-
-                transform.position = Vector3.MoveTowards(transform.position, targetPosition, Time.deltaTime * rocketSpeed);
-
-                Ray rocketRay = new Ray(transform.position, rocketDir);
-                Debug.DrawRay(transform.position, rocketDir * 10f, Color.red);
-            }
-
-            else if (hasTarget)
-            {
-                transform.position += rocketDir * Time.deltaTime * rocketSpeed;
-
-                Ray rocketRay = new Ray(transform.position, rocketDir);
-                Debug.DrawRay(transform.position, rocketDir * 10f, Color.green);
-
-                rigid.isKinematic = true;
-            }
-
-            Destroy(gameObject, 5.0f);
-        }
-    }
-
-
-    public void RocketRotate()
-    {
-        Vector3 targetPos = new Vector3(DronCtrl.Instance.targetEnemy.transform.position.x,
-                            DronCtrl.Instance.targetEnemy.transform.position.y + 0.75f,
-                            DronCtrl.Instance.targetEnemy.transform.position.z);
-        rocketDir = targetPos - transform.position;
-        rocketDir.Normalize();
-
-        Quaternion targetRot = Quaternion.LookRotation(rocketDir);
-
-        Quaternion newTargetRot = targetRot * Quaternion.Euler(-80, 0, 0);
-
-        transform.rotation = Quaternion.Slerp(transform.rotation, newTargetRot, rocketRotSpeed * Time.deltaTime);
-
 
     }
 }

@@ -202,7 +202,7 @@ public class BTInputSystem : MonoBehaviour
             if (isWorkShop || isOp)
                 return;
 
-            HUDManager.Instance.OpenInventory();
+            InventoryManager.Instance.OpenInventory();
         }
 
         float mouseWheel = Input.GetAxis("Mouse ScrollWheel");

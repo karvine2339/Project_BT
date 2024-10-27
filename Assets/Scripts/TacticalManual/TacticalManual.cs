@@ -7,7 +7,7 @@ using TMPro;
 
 public enum TacticalManualEffect
 {
-    Default,
+    None,
     BulletDamageIncrease,
     FireRateIncrease,
     DroneDamageIncrease,

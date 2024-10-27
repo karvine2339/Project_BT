@@ -30,6 +30,12 @@ public class CharacterController : MonoBehaviour
         BTInputSystem.Instance.onChangedSecondaryWeapon += OnChangedSecondaryWeapon;
         BTInputSystem.Instance.onEquipWeapon += OnEquipWeapon;
 
+        UIManager.Show<TacticalManager>(UIList.TacticalManual_Canvas);
+        UIManager.Show<HUDManager>(UIList.HUDCanvas);
+        UIManager.Show<InventoryManager>(UIList.InventoryCanvas);
+        UIManager.Show<WorkShopManager>(UIList.WorkShopCanvas);
+        UIManager.Show<Interaction_UI>(UIList.Interaction_UICanvas);
+        UIManager.Show<OopartsManager>(UIList.OopartsSelectCanvas);
     }
 
     private void OnMouseWheel(float mouseWheel)

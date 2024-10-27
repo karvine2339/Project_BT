@@ -1,4 +1,3 @@
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -18,10 +17,6 @@ public class EnemyCharacter : MonoBehaviour
     public int curHp = 100;
     public int maxHp = 100;
 
-    private void Awake()
-    {
-
-    }
     public void OnDamaged(float damage,float criticalDamage)  
     {
         float criticalHit = Random.Range(0.0f, 100.0f);

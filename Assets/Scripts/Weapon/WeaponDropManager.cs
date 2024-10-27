@@ -41,7 +41,7 @@ public class WeaponDropManager : MonoBehaviour
         PlayerCharacter.Instance.weapons[0] = null;
         PlayerCharacter.Instance.ChangedSecondaryWeapon();
         HUDManager.Instance.firstWeapon.SetActive(false);
-        HUDManager.Instance.OpenInventory();
+        InventoryManager.Instance.OpenInventory();
     }
     public void ThrowSecondWeapon()
     {
@@ -59,7 +59,7 @@ public class WeaponDropManager : MonoBehaviour
         PlayerCharacter.Instance.weapons[1] = null;
         PlayerCharacter.Instance.ChangedPrimaryWeapon();
         HUDManager.Instance.secondWeapon.SetActive(false);
-        HUDManager.Instance.OpenInventory();
+        InventoryManager.Instance.OpenInventory();
     }
 
 

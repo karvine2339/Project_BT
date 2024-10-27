@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class OopartsManager : MonoBehaviour
+public class OopartsManager : UIBase
 {
     public static OopartsManager Instance { get; private set; }
 
