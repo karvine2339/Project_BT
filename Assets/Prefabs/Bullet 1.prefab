@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7775184492951319377}
   - component: {fileID: 955423163106718808}
   - component: {fileID: 8583944983707124569}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Bullet 1
   m_TagString: Bullet
   m_Icon: {fileID: 0}
@@ -153,7 +153,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   bulletHole: {fileID: 100000, guid: 2a839200057cdda40978622fe60a3637, type: 3}
-  rocketSpeed: 10
   lifeTime: 10
 --- !u!96 &8583944983707124569
 TrailRenderer:

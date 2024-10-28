@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7533f922be9969049b639c59a9dd7dc2, type: 3}
+  m_Name: Weapon_Akari
+  m_EditorClassIdentifier: 
+  effectName: 
+  minValue: 0
+  maxValue: 0
+  chance: 0
+  weaponName: "\uD0D0\uC2DD\uC758 \uC9D5\uD45C"
+  weaponType: 2
+  minMinDamage: 100
+  minMaxDamage: 120
+  maxMinDamage: 150
+  maxMaxDamage: 170
+  minfireRate: 0.3
+  maxfireRate: 0.25
+  weaponImg: {fileID: 21300000, guid: c2623447b323bb445b3b0e321799cedf, type: 3}

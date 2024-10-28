@@ -32,7 +32,9 @@ public class DroppedWeapon : MonoBehaviour
     Dictionary<string, string> weaponPrefabPaths = new Dictionary<string, string>()
     {
         {"Weapon_Shiroko_Dropped(Clone)" , "Weapon_Shiroko" },
-        {"Weapon_Serika_Dropped(Clone)", "Weapon_Serika" }
+        {"Weapon_Serika_Dropped(Clone)", "Weapon_Serika" },
+        {"Weapon_Akari_Dropped(Clone)", "Weapon_Akari" },
+        {"Weapon_Saori_Dropped(Clone)", "Weapon_Saori" }
     };
 
     [HideInInspector] public float weaponMinDamage;
@@ -46,7 +48,7 @@ public class DroppedWeapon : MonoBehaviour
     [HideInInspector] public int effectIndex;
     [HideInInspector] public WeaponType weaponType;
     [HideInInspector] public int weaponUpgradeCount;
-    [HideInInspector] public float weaponRecoilAmount = 1.0f;
+    [HideInInspector] public float weaponRecoilAmount = 0.0f;
 
     [HideInInspector] public bool isThrow = false;
 
@@ -59,6 +61,7 @@ public class DroppedWeapon : MonoBehaviour
     {
         weaponInfoBox = Interaction_UI.Instance.weaponInfoBox;
         weaponInfo = weaponInfoBox.GetComponent<WeaponInfoBox>();
+        weaponRecoilAmount = 0.0f;
 
         if (isThrow == false)
         {

@@ -4,8 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GrenadeLaucher : MonoBehaviour
-{
-    public Transform fireStartPoint;
+{ 
     public float firePower;
     public float fireAngle;
 
@@ -17,9 +16,11 @@ public class GrenadeLaucher : MonoBehaviour
     Scene simulationScene;
     PhysicsScene physicsScene;
 
-    public GameObject explosionRadiusPrefab; // 폭발 반경을 나타낼 구체 프리팹
-    public float explosionRadius = 5f; // 폭발 반경
-    private GameObject activeExplosionSphere; // 활성화된 폭발 구체 참조 변수
+    public LayerMask grenadeColliderMask = new LayerMask();
+
+    public GameObject explosionRadiusPrefab; 
+    public float explosionRadius = 5f;
+    private GameObject activeExplosionSphere; 
 
     private void Start()
     {
@@ -53,13 +54,14 @@ public class GrenadeLaucher : MonoBehaviour
 
     public void Simulation()
     {
-        Rigidbody ghostBullet = Instantiate(bullet, fireStartPoint.position, fireStartPoint.rotation);
+        Rigidbody ghostBullet = Instantiate(bullet, PlayerCharacter.Instance.currentWeapon.fireStartPoint.position,
+                                                    PlayerCharacter.Instance.currentWeapon.fireStartPoint.rotation);
         SceneManager.MoveGameObjectToScene(ghostBullet.gameObject, simulationScene);
 
         ghostBullet.gameObject.SetActive(true);
 
         lineRenderer.positionCount = simulationSteps + 1;
-        lineRenderer.SetPosition(0, fireStartPoint.position);
+        lineRenderer.SetPosition(0, PlayerCharacter.Instance.currentWeapon.fireStartPoint.position);
 
         ghostBullet.AddForce(ghostBullet.transform.forward * firePower, ForceMode.Impulse);
 
@@ -70,7 +72,8 @@ public class GrenadeLaucher : MonoBehaviour
             physicsScene.Simulate(Time.fixedDeltaTime * 5);
             lineRenderer.SetPosition(i, ghostBullet.transform.position);
 
-            if (!hitDetected && Physics.Raycast(ghostBullet.transform.position, ghostBullet.velocity.normalized, out RaycastHit hit, ghostBullet.velocity.magnitude * Time.fixedDeltaTime * 5))
+            if (!hitDetected && Physics.Raycast(ghostBullet.transform.position, ghostBullet.velocity.normalized, out RaycastHit hit,
+                ghostBullet.velocity.magnitude * Time.fixedDeltaTime * 5 , grenadeColliderMask))
             {
                 hitDetected = true;
                 lineRenderer.positionCount = i + 1;

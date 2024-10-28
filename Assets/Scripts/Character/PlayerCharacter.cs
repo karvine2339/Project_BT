@@ -428,16 +428,19 @@ public class PlayerCharacter : ChrBase
         switch(currentWeapon.weaponType)
         {
             case WeaponType.Shiroko:
-                isGrenade = !isGrenade;
                 break;
 
             case WeaponType.Serika:
                 break;
 
             case WeaponType.Akari:
-           
+                isGrenade = !isGrenade;
 
                 break;
+                 
+            case WeaponType.Saori:
+                break;
+
         }    
     }
 

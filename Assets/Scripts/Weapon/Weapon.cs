@@ -20,7 +20,8 @@ public enum WeaponType
 {
     Shiroko = 0,
     Serika = 1,
-    Akari = 2
+    Akari = 2,
+    Saori = 3
 }
 
 public class Weapon : MonoBehaviour
