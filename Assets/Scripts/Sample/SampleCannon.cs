@@ -13,7 +13,7 @@ public class SampleCannon : MonoBehaviour
 
     public Rigidbody bullet;
 
-    public int simulationSteps = 300;
+    public int simulationSteps = 100;
     public LineRenderer lineRenderer;
 
     Scene simulationScene;
@@ -55,7 +55,7 @@ public class SampleCannon : MonoBehaviour
         lineRenderer.positionCount = simulationSteps;
         for(int i = 0; i < simulationSteps; i++)
         {
-            physicsScene.Simulate(Time.fixedDeltaTime);
+            physicsScene.Simulate(Time.fixedDeltaTime * 5);
             lineRenderer.SetPosition(i, ghostBullet.transform.position);
         }
  

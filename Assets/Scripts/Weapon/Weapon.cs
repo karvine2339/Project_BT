@@ -16,6 +16,13 @@ public enum EffectType
     FireRateIncreaseAndDamageDecrease = 5
 }
 
+public enum WeaponType
+{
+    Shiroko = 0,
+    Serika = 1,
+    Akari = 2
+}
+
 public class Weapon : MonoBehaviour
 {
     public int CurrentAmmo => curAmmo;
@@ -37,7 +44,7 @@ public class Weapon : MonoBehaviour
     [HideInInspector] public float criticalDamage;
     [HideInInspector] public float weaponRecoilAmount;
     [HideInInspector] public int weaponUpgradeCount;
-    [HideInInspector] public int weaponType;
+    [HideInInspector] public WeaponType weaponType;
 
     //�ʱ갪
     [HideInInspector] public float baseMinDamage;

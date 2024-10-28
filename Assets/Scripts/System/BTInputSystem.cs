@@ -36,9 +36,6 @@ public class BTInputSystem : MonoBehaviour
 
     public float mouseSensitivity = 0f;
 
-    public delegate void OnJumpCallback(); 
-    public OnJumpCallback onJumpCallback; 
-
     public System.Action onFire;
     public System.Action onInteract;
     public System.Action onEquipWeapon;
@@ -47,6 +44,7 @@ public class BTInputSystem : MonoBehaviour
     public System.Action onHideInfo;
     public System.Action onChangedPrimaryWeapon;
     public System.Action onChangedSecondaryWeapon;
+    public System.Action onWeaponSkill;
     public System.Action<float> onMouseWheel;
 
     private Vector2 lastMousePosition;
@@ -94,13 +92,7 @@ public class BTInputSystem : MonoBehaviour
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.smoothDeltaTime;
         look = new Vector2(mouseX + recoilX, mouseY + recoilY);
 
-
-
-        //if (Input.GetKeyDown(KeyCode.Space))
-        //{
-        //    onJumpCallback();
-        //}
-
+        //-------- Strafe -------- 
         if (Input.GetMouseButton(1))
         {
             if (PlayerCharacter.Instance.isReload)
@@ -115,24 +107,26 @@ public class BTInputSystem : MonoBehaviour
             isStrafe = true;
             isAim = true;
         }
+        else if (PlayerCharacter.Instance.isGrenade)
+        {
+            isStrafe = true;
+            isAim = true;
+        }
         else
         {
             isStrafe = false;
             isAim = false;
         }
+        //-------- Strafe -----------
 
-        if (Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            isWalk = true;
-        }
-
-        if (Input.GetKeyUp(KeyCode.LeftShift))
-        {
-            isWalk = false;
-        }
-
+        //-------- Fire --------
         if (Input.GetMouseButton(0)) 
         {
+            if(PlayerCharacter.Instance.isGrenade)
+            {
+                PlayerCharacter.Instance.LaunchGrenade();
+                PlayerCharacter.Instance.isGrenade = false;
+            }
             onFire?.Invoke();
             PlayerCharacter.Instance.characterAnimator.SetBool("IsFiring", true);
         }
@@ -141,6 +135,8 @@ public class BTInputSystem : MonoBehaviour
         {
             PlayerCharacter.Instance.characterAnimator.SetBool("IsFiring", false);
         }
+
+        //-------- Fire --------
 
         if (Input.GetKeyDown(KeyCode.F))
         {
@@ -203,6 +199,12 @@ public class BTInputSystem : MonoBehaviour
                 return;
 
             InventoryManager.Instance.OpenInventory();
+        }
+
+        if(Input.GetKeyDown(KeyCode.G))
+        {
+
+            onWeaponSkill?.Invoke();
         }
 
         float mouseWheel = Input.GetAxis("Mouse ScrollWheel");

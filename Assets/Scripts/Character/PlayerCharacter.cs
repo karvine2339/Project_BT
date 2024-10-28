@@ -12,6 +12,7 @@ public class PlayerCharacter : ChrBase
 {
     public Projectile projectilePrefab;
     public float projectileSpeed = 10f;
+    public float grenadeSpeed = 15f;
 
     protected float aiming = 0f;
     private float aimingBlend = 0f;
@@ -47,6 +48,8 @@ public class PlayerCharacter : ChrBase
 
     private GameObject weapon;
     private GameObject weapon2;
+
+    public Rigidbody grenadePrefab;
 
     private DroppedWeapon droppedWeapon = null;
 
@@ -419,5 +422,32 @@ public class PlayerCharacter : ChrBase
         newBullet.gameObject.SetActive(true);
         newBullet.SetForce(projectileSpeed);
     }
+
+    public override void ActiveWeaponSkill()
+    {
+        switch(currentWeapon.weaponType)
+        {
+            case WeaponType.Shiroko:
+                isGrenade = !isGrenade;
+                break;
+
+            case WeaponType.Serika:
+                break;
+
+            case WeaponType.Akari:
+           
+
+                break;
+        }    
+    }
+
+    public void LaunchGrenade()
+    {
+        Rigidbody newGrenade = Instantiate(grenadePrefab, currentWeapon.fireStartPoint.position
+                                                        , currentWeapon.fireStartPoint.rotation);
+
+        newGrenade.AddForce(newGrenade.transform.forward * grenadeSpeed, ForceMode.Impulse);
+    }
+
 }
 

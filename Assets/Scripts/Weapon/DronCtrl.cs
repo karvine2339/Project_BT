@@ -17,7 +17,7 @@ public class DronCtrl : MonoBehaviour
     public Transform RocketLeftStartPosition;
     Transform rocketInitPosition;
 
-    public Projectile rocketPrefab;
+    public RocketCtrl rocketPrefab;
 
     private float rocketRate = 0.5f;
     private float rocketDelay = 2.0f;

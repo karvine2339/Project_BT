@@ -29,8 +29,9 @@ public class ChrBase : MonoBehaviour
     public float moveSpeed;
     public float rotationSpeed;
 
+    [HideInInspector] public bool isGrenade = false;
+    [HideInInspector] public bool isStrafe = false;
     protected bool isWalk = false;
-    public bool isStrafe = false;
     protected float speed = 0f;
     protected float targetSpeed = 0f;
     protected float targetSpeedBlend = 0f;
@@ -114,6 +115,11 @@ public class ChrBase : MonoBehaviour
     }
 
     public virtual void SetAiming(float aiming)
+    {
+
+    }
+
+    public virtual void ActiveWeaponSkill()
     {
 
     }

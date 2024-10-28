@@ -37,7 +37,10 @@ public class Projectile : MonoBehaviour
         {
             ContactPoint contact = collision.contacts[0];
 
-            Instantiate(bulletHole, contact.point, Quaternion.LookRotation(contact.normal) * Quaternion.Euler(90, 0, 0));
+            if (gameObject.CompareTag("Bullet"))
+            {
+                Instantiate(bulletHole, contact.point, Quaternion.LookRotation(contact.normal) * Quaternion.Euler(90, 0, 0));
+            }
 
             if (bounceCount > 0)
             {

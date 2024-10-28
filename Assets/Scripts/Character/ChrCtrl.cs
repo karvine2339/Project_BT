@@ -29,6 +29,7 @@ public class CharacterController : MonoBehaviour
         BTInputSystem.Instance.onChangedPrimaryWeapon += OnChangedPrimaryWeapon;
         BTInputSystem.Instance.onChangedSecondaryWeapon += OnChangedSecondaryWeapon;
         BTInputSystem.Instance.onEquipWeapon += OnEquipWeapon;
+        BTInputSystem.Instance.onWeaponSkill += OnWeaponSkill;
 
         UIManager.Show<TacticalManager>(UIList.TacticalManual_Canvas);
         UIManager.Show<HUDManager>(UIList.HUDCanvas);
@@ -110,5 +111,10 @@ public class CharacterController : MonoBehaviour
         pitch = Mathf.Clamp(pitch, -80, 80); 
 
         cameraPivot.rotation = Quaternion.Euler(pitch, yaw, 0.0f);
+    }
+
+    private void OnWeaponSkill()
+    {
+        characterBase.ActiveWeaponSkill();
     }
 }

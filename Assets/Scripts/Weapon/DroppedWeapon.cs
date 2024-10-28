@@ -44,7 +44,7 @@ public class DroppedWeapon : MonoBehaviour
     [HideInInspector] public EffectType[] effectType = new EffectType[3];
     [HideInInspector] public string[] effectString = new string[3];
     [HideInInspector] public int effectIndex;
-    [HideInInspector] public int weaponType;
+    [HideInInspector] public WeaponType weaponType;
     [HideInInspector] public int weaponUpgradeCount;
     [HideInInspector] public float weaponRecoilAmount = 1.0f;
 
@@ -184,7 +184,7 @@ public class DroppedWeapon : MonoBehaviour
     public void InitWeaponData(WeaponData weaponData)
     {
         weaponName = weaponData.weaponName;
-        weaponType = weaponData.weaponType;
+        weaponType = (WeaponType)weaponData.weaponType;
         weaponMinDamage = Random.Range(weaponData.minMinDamage,weaponData.minMaxDamage);
         weaponMaxDamage = Random.Range(weaponData.maxMinDamage, weaponData.maxMaxDamage);
         weaponFireRate = Random.Range(weaponData.minfireRate,weaponData.maxfireRate);

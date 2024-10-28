@@ -77,7 +77,7 @@ public class WeaponDropManager : MonoBehaviour
 
     public GameObject ThrowEquippedWeapon(Vector3 dropPos, int i)
     {
-        GameObject droppedWeapon = Instantiate(weaponPrefab[PlayerCharacter.Instance.weapons[i].weaponType], dropPos, Quaternion.Euler(-30,-90,90));
+        GameObject droppedWeapon = Instantiate(weaponPrefab[(int)PlayerCharacter.Instance.weapons[i].weaponType], dropPos, Quaternion.Euler(-30,-90,90));
 
         DroppedWeapon weaponComponent = droppedWeapon.GetComponent<DroppedWeapon>();
 
