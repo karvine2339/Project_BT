@@ -24,7 +24,11 @@ public class GrenadeLaucher : MonoBehaviour
 
     private void Start()
     {
-        simulationScene = SceneManager.CreateScene("Simulation Scene", new CreateSceneParameters(LocalPhysicsMode.Physics3D));
+        simulationScene = SceneManager.GetSceneByName("Simulation Scene");
+        if (!simulationScene.isLoaded)
+        {
+            simulationScene = SceneManager.CreateScene("Simulation Scene", new CreateSceneParameters(LocalPhysicsMode.Physics3D));
+        }
         physicsScene = simulationScene.GetPhysicsScene();
     }
 

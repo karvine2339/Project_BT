@@ -27,13 +27,11 @@ public class Grenade : MonoBehaviour
     {
         Collider[] hitColliders = Physics.OverlapSphere(center, radius, grenadeLayerMask);
 
-        Debug.Log("Try");
         foreach(Collider hitColl in hitColliders)
         {
             if(hitColl.TryGetComponent<EnemyCharacter>(out EnemyCharacter enemy))
             {
                 enemy.OnDamaged(Random.Range(PlayerStat.Instance.BulletMinDamage,PlayerStat.Instance.BulletMaxDamage) * 10.0f, 1.0f);
-                Debug.Log("Get");
             }
         }
     }

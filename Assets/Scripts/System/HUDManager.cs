@@ -18,6 +18,8 @@ public class HUDManager : UIBase
 
     public GameObject firstWeapon;
     public GameObject secondWeapon;
+    public Image skillIcon;
+    public Image skillImageMask;
 
     public Image hpBar;
     public Image shieldBar;

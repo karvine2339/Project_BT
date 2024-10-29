@@ -49,6 +49,10 @@ public class PlayerCharacter : ChrBase
     private GameObject weapon;
     private GameObject weapon2;
 
+    public float skillCoolDown = 0.0f;
+    public float skillCoolDuration = 0.0f;
+    public bool isCoolDown = false;
+
     public Rigidbody grenadePrefab;
 
     private DroppedWeapon droppedWeapon = null;
@@ -163,6 +167,7 @@ public class PlayerCharacter : ChrBase
         RayWeapon();
         GroundCheck();
         FreeFall();
+
     }
 
     public override void Fire()
@@ -218,6 +223,7 @@ public class PlayerCharacter : ChrBase
                 HUDManager.Instance.firstWeapon.GetComponent<Image>().sprite = weapons[0].weaponImage;
                 HUDManager.Instance.firstWeapon.GetComponent<Image>().color = new Color(1, 1, 1, 1);
                 HUDManager.Instance.firstWeapon.GetComponent<RectTransform>().localScale = new Vector3(0.4f, 0.4f, 0.4f);
+                HUDManager.Instance.skillIcon.sprite = currentWeapon.skillImage;
                 if (weapons[1] != null)
                 {
                     HUDManager.Instance.secondWeapon.GetComponent<Image>().sprite = weapons[1].weaponImage;
@@ -257,6 +263,7 @@ public class PlayerCharacter : ChrBase
                 HUDManager.Instance.secondWeapon.GetComponent<Image>().sprite = weapons[1].weaponImage;
                 HUDManager.Instance.secondWeapon.GetComponent<Image>().color = new Color(1, 1, 1, 1);
                 HUDManager.Instance.secondWeapon.GetComponent<RectTransform>().localScale = new Vector3(0.4f, 0.4f, 0.4f);
+                HUDManager.Instance.skillIcon.sprite = currentWeapon.skillImage;
 
                 if (weapons[0] != null)
                 {
@@ -293,8 +300,8 @@ public class PlayerCharacter : ChrBase
     public void SetStartWeapon()
     {
         currentWeapon = weapons[0];
-        weapons[0].baseMinDamage = 50;
-        weapons[0].baseMaxDamage = 100;
+        weapons[0].baseMinDamage = 1000;
+        weapons[0].baseMaxDamage = 2000;
         weapons[0].baseCriticalProbability = 20f;
         weapons[0].baseCriticalDamage = 1f;
         weapons[0].baseFireRate = 0.2f;
@@ -425,23 +432,7 @@ public class PlayerCharacter : ChrBase
 
     public override void ActiveWeaponSkill()
     {
-        switch(currentWeapon.weaponType)
-        {
-            case WeaponType.Shiroko:
-                break;
-
-            case WeaponType.Serika:
-                break;
-
-            case WeaponType.Akari:
-                isGrenade = !isGrenade;
-
-                break;
-                 
-            case WeaponType.Saori:
-                break;
-
-        }    
+        currentWeapon.ActiveWeaponSkill();
     }
 
     public void LaunchGrenade()

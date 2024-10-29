@@ -20,6 +20,7 @@ public class DronCtrl : MonoBehaviour
     public RocketCtrl rocketPrefab;
 
     private float rocketRate = 0.5f;
+    public float newRocketRate = 0.2f;
     private float rocketDelay = 2.0f;
     private bool isRight = false;
     private int rocketCount = 0;
@@ -101,7 +102,7 @@ public class DronCtrl : MonoBehaviour
                                                                   Quaternion.Euler(-80, 0, 0));
                 isRight = !isRight;
                 newRocket.gameObject.SetActive(true);
-                rocketRate = 0.2f;
+                rocketRate = newRocketRate;
                 rocketCount++;
                 if (rocketCount == maxRocketCount)
                 {

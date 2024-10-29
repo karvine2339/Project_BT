@@ -32,6 +32,8 @@ public class WeaponData : ScriptableObject
     public float maxMaxDamage;
     public float minfireRate;
     public float maxfireRate;
+    public float skillCoolDown;
 
     public Sprite weaponImg;
+    public Sprite skillImg;
 }

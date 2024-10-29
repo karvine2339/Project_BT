@@ -22,6 +22,7 @@ public class DroppedWeapon : MonoBehaviour
     public WeaponData weaponData;
 
     public Sprite weaponImg;
+    public Sprite skillImg;
 
     private GameObject weaponInfoBox;
     WeaponInfoBox weaponInfo;
@@ -49,6 +50,8 @@ public class DroppedWeapon : MonoBehaviour
     [HideInInspector] public WeaponType weaponType;
     [HideInInspector] public int weaponUpgradeCount;
     [HideInInspector] public float weaponRecoilAmount = 0.0f;
+    [HideInInspector] public float weaponCoolDown = 0.0f;
+    [HideInInspector] public float weaponSkillCoolDuration = 0.0f;
 
     [HideInInspector] public bool isThrow = false;
 
@@ -191,7 +194,9 @@ public class DroppedWeapon : MonoBehaviour
         weaponMinDamage = Random.Range(weaponData.minMinDamage,weaponData.minMaxDamage);
         weaponMaxDamage = Random.Range(weaponData.maxMinDamage, weaponData.maxMaxDamage);
         weaponFireRate = Random.Range(weaponData.minfireRate,weaponData.maxfireRate);
+        weaponCoolDown = weaponData.skillCoolDown;
         weaponImg = weaponData.weaponImg;
+        skillImg = weaponData.skillImg;
     }
     public void InitWeaponEffect()
     {
@@ -265,5 +270,9 @@ public class DroppedWeapon : MonoBehaviour
         playerCharacter.currentWeapon.effectType = effectType;
         playerCharacter.currentWeapon.effectVal = effectVal;
         playerCharacter.currentWeapon.baseWeaponRecoilAmount = weaponRecoilAmount;
+        playerCharacter.currentWeapon.baseSkillCoolDown = weaponCoolDown;
+        playerCharacter.currentWeapon.weaponImage = weaponImg;
+        playerCharacter.currentWeapon.skillImage = skillImg;
+        playerCharacter.currentWeapon.skillCoolDuration = weaponSkillCoolDuration;
     }
 }

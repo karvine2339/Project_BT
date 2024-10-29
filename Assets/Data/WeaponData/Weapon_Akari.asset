@@ -24,4 +24,6 @@ MonoBehaviour:
   maxMaxDamage: 170
   minfireRate: 0.3
   maxfireRate: 0.25
+  skillCoolDown: 5
   weaponImg: {fileID: 21300000, guid: c2623447b323bb445b3b0e321799cedf, type: 3}
+  skillImg: {fileID: 21300000, guid: a57e3aea34ad80345a816c720dc10b6b, type: 3}

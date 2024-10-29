@@ -38,6 +38,8 @@ public class Weapon : MonoBehaviour
     public EffectType[] effectType = new EffectType[3];
     public float[] effectVal;
 
+    private Coroutine activeSkillCoroutine;
+
     [HideInInspector] public float minDamage;
     [HideInInspector] public float maxDamage;
     [HideInInspector] public float fireRate;
@@ -46,6 +48,8 @@ public class Weapon : MonoBehaviour
     [HideInInspector] public float weaponRecoilAmount;
     [HideInInspector] public int weaponUpgradeCount;
     [HideInInspector] public WeaponType weaponType;
+    [HideInInspector] public float skillCoolDown;
+    [HideInInspector] public float skillCoolDuration;
 
     //�ʱ갪
     [HideInInspector] public float baseMinDamage;
@@ -54,8 +58,12 @@ public class Weapon : MonoBehaviour
     [HideInInspector] public float baseCriticalProbability;
     [HideInInspector] public float baseCriticalDamage;
     [HideInInspector] public float baseWeaponRecoilAmount;
+    [HideInInspector] public float baseSkillCoolDown;
 
     public Sprite weaponImage;
+    public Sprite skillImage;
+
+    
 
     public Projectile projectilePrefab;
     public Transform fireStartPoint;
@@ -67,6 +75,11 @@ public class Weapon : MonoBehaviour
     private void Start()
     {
         ApplyEffects();
+    }
+
+    private void Update()
+    {
+        CheckCoolDown();
     }
 
     public void InitWeaponStat()
@@ -146,6 +159,7 @@ public class Weapon : MonoBehaviour
         criticalProbability = baseCriticalProbability;
         criticalDamage = baseCriticalDamage;
         weaponRecoilAmount = baseWeaponRecoilAmount;
+        skillCoolDown = baseSkillCoolDown;
     }
 
     public void ApplyEffectType(EffectType effectType, float value)
@@ -181,6 +195,142 @@ public class Weapon : MonoBehaviour
                 fireRate /= 1 + value / 100;
                 break;
 
+        }
+    }
+
+    public void ActiveWeaponSkill()
+    {
+        if (skillCoolDuration > 0)
+            return;
+
+        skillCoolDuration = skillCoolDown;
+        HUDManager.Instance.skillImageMask.fillAmount = 1.0f;
+
+        switch (weaponType)
+        {
+            case WeaponType.Shiroko:
+                activeSkillCoroutine = StartCoroutine(DroneBoost(0.1f, 10));
+                break;
+
+            case WeaponType.Serika:
+                activeSkillCoroutine = StartCoroutine(DamageBoost(100, 10));
+                break;
+
+            case WeaponType.Akari:
+               PlayerCharacter.Instance.isGrenade = !PlayerCharacter.Instance.isGrenade;
+
+                break;
+
+            case WeaponType.Saori:
+                activeSkillCoroutine = StartCoroutine(CriticalBoost(100,10));
+                break;
+
+        }
+    }
+
+
+    public void CheckCoolDown()
+    {
+        if (skillCoolDuration > 0.0f)
+        {
+            if (skillCoolDuration <= 0.0f)
+                return;
+
+            skillCoolDuration -= Time.deltaTime;
+
+            HUDManager.Instance.skillImageMask.fillAmount = skillCoolDuration / skillCoolDown;
+        }
+    }
+
+    private IEnumerator DamageBoost(float damageBoost,float duration)
+    {
+        float originalMinDamage = minDamage;
+        float originalMaxDamage = maxDamage;
+
+        minDamage *= 1 + (damageBoost / 100);
+        maxDamage *= 1 + (damageBoost / 100);
+
+        InitWeaponStat();
+
+        yield return new WaitForSeconds(duration);
+
+        ResetDamage(originalMinDamage,originalMaxDamage);
+
+        activeSkillCoroutine = null;
+    }
+
+    private IEnumerator CriticalBoost(float criticalBoost,float duration)
+    {
+        float originalCriticalProbability = criticalProbability;
+
+        criticalProbability += criticalBoost;
+
+        InitWeaponStat();
+
+        yield return new WaitForSeconds(duration);
+
+        ResetCritical(originalCriticalProbability);
+
+        activeSkillCoroutine = null;
+    }
+
+    private IEnumerator DroneBoost(float droneRocketRate,float duration)
+    {
+        float originalDroneRocketRate = DronCtrl.Instance.newRocketRate;
+
+        DronCtrl.Instance.newRocketRate = droneRocketRate;
+        DronCtrl.Instance.maxRocketDelay = 0.0f;
+
+        yield return new WaitForSeconds(duration);
+
+        DronCtrl.Instance.newRocketRate = originalDroneRocketRate;
+        DronCtrl.Instance.maxRocketDelay = 3.0f;
+
+        activeSkillCoroutine = null;
+    }
+
+    public void ResetCritical(float originalCriticalProbability)
+    {
+        criticalProbability = originalCriticalProbability;
+        InitWeaponStat();
+    }
+    public void ResetDamage(float originalMinDamage, float originalMaxDamage)
+    {
+        minDamage = originalMinDamage;
+        maxDamage = originalMaxDamage;
+
+        InitWeaponStat();
+    }
+
+    private void OnEnable()
+    {
+        if (skillCoolDuration <= 0)
+        {
+            HUDManager.Instance.skillImageMask.fillAmount = 0.0f;
+        }
+
+    }
+    private void OnDisable()
+    {
+        if (activeSkillCoroutine != null)
+        {
+            StopCoroutine(activeSkillCoroutine);
+            ResetCritical(baseCriticalProbability);
+            ResetDamage(baseMinDamage, baseMaxDamage);
+            DronCtrl.Instance.newRocketRate = 0.2f;
+            DronCtrl.Instance.maxRocketDelay = 3.0f;
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (activeSkillCoroutine != null)
+        {
+            StopCoroutine(activeSkillCoroutine);
+            ResetCritical(baseCriticalProbability);
+            ResetDamage(baseMinDamage, baseMaxDamage);
+            DronCtrl.Instance.newRocketRate = 0.2f;
+            DronCtrl.Instance.maxRocketDelay = 3.0f;
         }
     }
 }
