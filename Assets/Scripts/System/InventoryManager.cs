@@ -29,9 +29,36 @@ public class InventoryManager : UIBase
     public Image weaponImg1;
     public Image weaponImg2;
 
+    public GameObject weaponInventory;
+    public GameObject tacticalManualInventory;
+    public GameObject oopartsInventory;
+
     private void Awake()
     {
         Instance = this;
+    }
+
+    public void ToggleInventory(GameObject toggleInventory)
+    {
+        weaponInventory.SetActive(false);
+        tacticalManualInventory.SetActive(false);
+        oopartsInventory.SetActive(false);
+
+        toggleInventory.SetActive(true);
+    }
+    public void OpenWeaponInvetory()
+    {
+        ToggleInventory(weaponInventory);
+    }
+
+    public void OpenTacticalManualInventory()
+    {
+        ToggleInventory(tacticalManualInventory);
+    }
+
+    public void OpenOopartsInventory()
+    {
+        ToggleInventory(oopartsInventory);
     }
 
     public void OpenInventory()
@@ -41,6 +68,7 @@ public class InventoryManager : UIBase
             inventoryUI.gameObject.SetActive(true);
             BTInputSystem.Instance.isTab = true;
             CursorSystem.Instance.SetCursorState(true);
+            OpenWeaponInvetory();
             Time.timeScale = 0.0f;
 
             if (PlayerCharacter.Instance.weapons[0] == null)

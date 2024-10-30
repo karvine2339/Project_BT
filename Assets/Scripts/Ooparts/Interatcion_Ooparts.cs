@@ -16,5 +16,6 @@ public class Interatcion_Ooparts : MonoBehaviour, IInteractable
         BTInputSystem.Instance.isOp = true;
         //Destroy(gameObject);
         Interaction_UI.Instance.RemoveInteractionData(this);
+        OopartsManager.Instance.SetOoparts();
     }
 }

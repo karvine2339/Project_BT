@@ -40,7 +40,6 @@ public class TacticalManual : MonoBehaviour
     public void InitTacticalData()
     {
         icon.sprite = tacticalManualData.tacticalManualIcon;
-        //level = tacticalManualData.level[TacticalLevel.DroneDamageLevel];
         level = tacticalManualData.level;
         effectIndex = (TacticalManualEffect)tacticalManualData.index;
         effectName.text = tacticalManualData.EffectName;

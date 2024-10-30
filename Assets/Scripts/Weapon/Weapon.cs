@@ -60,6 +60,12 @@ public class Weapon : MonoBehaviour
     [HideInInspector] public float baseWeaponRecoilAmount;
     [HideInInspector] public float baseSkillCoolDown;
 
+    //½ºÅ³ÃÊ±ê°ª
+    private float originalMinDamage;
+    private float originalMaxDamage;
+    private float originalCriticalProbability;
+    private float originalDroneRocketRate;
+
     public Sprite weaponImage;
     public Sprite skillImage;
 
@@ -75,6 +81,7 @@ public class Weapon : MonoBehaviour
     private void Start()
     {
         ApplyEffects();
+        StartCoroutine(DelayedInitWeaponStat());
     }
 
     private void Update()
@@ -203,8 +210,13 @@ public class Weapon : MonoBehaviour
         if (skillCoolDuration > 0)
             return;
 
-        skillCoolDuration = skillCoolDown;
-        HUDManager.Instance.skillImageMask.fillAmount = 1.0f;
+        if (weaponType == WeaponType.Akari)
+        {
+            PlayerCharacter.Instance.isGrenade = !PlayerCharacter.Instance.isGrenade;
+            return;
+        }
+
+        ApplyCoolDown();
 
         switch (weaponType)
         {
@@ -216,16 +228,16 @@ public class Weapon : MonoBehaviour
                 activeSkillCoroutine = StartCoroutine(DamageBoost(100, 10));
                 break;
 
-            case WeaponType.Akari:
-               PlayerCharacter.Instance.isGrenade = !PlayerCharacter.Instance.isGrenade;
-
-                break;
-
             case WeaponType.Saori:
                 activeSkillCoroutine = StartCoroutine(CriticalBoost(100,10));
                 break;
-
         }
+    }
+
+    public void ApplyCoolDown()
+    {
+        skillCoolDuration = skillCoolDown;
+        HUDManager.Instance.skillImageMask.fillAmount = 1.0f;
     }
 
 
@@ -244,8 +256,8 @@ public class Weapon : MonoBehaviour
 
     private IEnumerator DamageBoost(float damageBoost,float duration)
     {
-        float originalMinDamage = minDamage;
-        float originalMaxDamage = maxDamage;
+        originalMinDamage = minDamage;
+        originalMaxDamage = maxDamage;
 
         minDamage *= 1 + (damageBoost / 100);
         maxDamage *= 1 + (damageBoost / 100);
@@ -254,14 +266,14 @@ public class Weapon : MonoBehaviour
 
         yield return new WaitForSeconds(duration);
 
-        ResetDamage(originalMinDamage,originalMaxDamage);
+        ResetDamage();
 
         activeSkillCoroutine = null;
     }
 
     private IEnumerator CriticalBoost(float criticalBoost,float duration)
     {
-        float originalCriticalProbability = criticalProbability;
+        originalCriticalProbability = criticalProbability;
 
         criticalProbability += criticalBoost;
 
@@ -269,14 +281,14 @@ public class Weapon : MonoBehaviour
 
         yield return new WaitForSeconds(duration);
 
-        ResetCritical(originalCriticalProbability);
+        ResetCritical();
 
         activeSkillCoroutine = null;
     }
 
     private IEnumerator DroneBoost(float droneRocketRate,float duration)
     {
-        float originalDroneRocketRate = DronCtrl.Instance.newRocketRate;
+        originalDroneRocketRate = DronCtrl.Instance.newRocketRate;
 
         DronCtrl.Instance.newRocketRate = droneRocketRate;
         DronCtrl.Instance.maxRocketDelay = 0.0f;
@@ -289,13 +301,19 @@ public class Weapon : MonoBehaviour
         activeSkillCoroutine = null;
     }
 
-    public void ResetCritical(float originalCriticalProbability)
+    public void ResetCritical()
     {
+        if (originalCriticalProbability < 1)
+            return;
+
         criticalProbability = originalCriticalProbability;
         InitWeaponStat();
     }
-    public void ResetDamage(float originalMinDamage, float originalMaxDamage)
+    public void ResetDamage()
     {
+        if (originalMinDamage < 1)
+            return;
+
         minDamage = originalMinDamage;
         maxDamage = originalMaxDamage;
 
@@ -304,9 +322,14 @@ public class Weapon : MonoBehaviour
 
     private void OnEnable()
     {
+        StartCoroutine(DelayedInitWeaponStat());
+
         if (skillCoolDuration <= 0)
         {
-            HUDManager.Instance.skillImageMask.fillAmount = 0.0f;
+            if (HUDManager.Instance.skillImageMask != null)
+            {
+                HUDManager.Instance.skillImageMask.fillAmount = 0.0f;
+            }
         }
 
     }
@@ -315,8 +338,8 @@ public class Weapon : MonoBehaviour
         if (activeSkillCoroutine != null)
         {
             StopCoroutine(activeSkillCoroutine);
-            ResetCritical(baseCriticalProbability);
-            ResetDamage(baseMinDamage, baseMaxDamage);
+            ResetCritical();
+            ResetDamage();
             DronCtrl.Instance.newRocketRate = 0.2f;
             DronCtrl.Instance.maxRocketDelay = 3.0f;
         }
@@ -327,10 +350,16 @@ public class Weapon : MonoBehaviour
         if (activeSkillCoroutine != null)
         {
             StopCoroutine(activeSkillCoroutine);
-            ResetCritical(baseCriticalProbability);
-            ResetDamage(baseMinDamage, baseMaxDamage);
+            ResetCritical();
+            ResetDamage();
             DronCtrl.Instance.newRocketRate = 0.2f;
             DronCtrl.Instance.maxRocketDelay = 3.0f;
         }
+    }
+
+    private IEnumerator DelayedInitWeaponStat()
+    {
+        yield return null;
+        InitWeaponStat();
     }
 }

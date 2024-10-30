@@ -126,7 +126,10 @@ public class BTInputSystem : MonoBehaviour
             {
                 PlayerCharacter.Instance.LaunchGrenade();
                 PlayerCharacter.Instance.isGrenade = false;
+                PlayerCharacter.Instance.currentWeapon.ApplyCoolDown();
+                return;
             }
+
             onFire?.Invoke();
             PlayerCharacter.Instance.characterAnimator.SetBool("IsFiring", true);
         }

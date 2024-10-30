@@ -238,8 +238,6 @@ public class PlayerCharacter : ChrBase
 
                 Debug.Log($"WeaponChanged. Current Weapon = {weapons[0].name}");
             }
-
-            currentWeapon.InitWeaponStat();
             characterAnimator.SetTrigger("ChangeWeapon");
         }
     }
@@ -281,7 +279,6 @@ public class PlayerCharacter : ChrBase
                 Debug.Log($"WeaponChanged. Current Weapon = {weapons[1].name}");
             }
         }
-        currentWeapon.InitWeaponStat();
         characterAnimator.SetTrigger("ChangeWeapon");
     }
 

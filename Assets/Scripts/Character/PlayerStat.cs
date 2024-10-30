@@ -133,6 +133,22 @@ public class PlayerStat : MonoBehaviour
         }
     }
 
+    private float _oopartsDamage;
+
+    public float OopartsDamage
+    {
+        get { return _oopartsDamage; }
+        set
+        {
+            if(_oopartsDamage != value)
+            {
+                _oopartsDamage = value;
+                OnOopartsDamageChanged?.Invoke(_oopartsDamage);
+            }
+        }
+    }
+   
+
     public float bulletDamage;
 
     public delegate void DamageChanged(float newDamage);
@@ -159,6 +175,9 @@ public class PlayerStat : MonoBehaviour
     public delegate void DroneDamageChanged(float newDroneDamage);
     public static event DroneDamageChanged OnDroneDamageChanged;
 
+    public delegate void OopartsDamageChanged(float newOopartsDamage);
+    public static event OopartsDamageChanged OnOopartsDamageChanged;
+
     public static PlayerStat Instance;
 
     private void Awake()
@@ -175,6 +194,7 @@ public class PlayerStat : MonoBehaviour
         AdditionalDamage = 0;
         AdditionalBulletDamage = 1.0f;
         DroneDamage = 1.0f;
+        OopartsDamage = 1.0f;
     }
     private void OnDestroy()
     {

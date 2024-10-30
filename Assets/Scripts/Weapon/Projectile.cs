@@ -55,7 +55,7 @@ public class Projectile : MonoBehaviour
             if (bounceCount >= 0)
             {
                 enemy.OnDamaged(PlayerStat.Instance.bulletDamage * PlayerStat.Instance.AdditionalBulletDamage,
-                                PlayerStat.Instance.CriticalDamage);
+                                PlayerStat.Instance.CriticalDamage * PlayerStat.Instance.OopartsDamage);
             }
         }
 
