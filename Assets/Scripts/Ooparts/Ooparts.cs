@@ -40,5 +40,8 @@ public class Ooparts : MonoBehaviour
         CursorSystem.Instance.SetCursorState(false);
         BTInputSystem.Instance.isOp = false;
     }
-
+    public void OnDisable()
+    {
+        Destroy(gameObject);
+    }
 }

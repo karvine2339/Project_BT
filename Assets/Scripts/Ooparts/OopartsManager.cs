@@ -48,14 +48,17 @@ public class OopartsManager : UIBase
 
             GameObject oopartsObject = Instantiate(ooparts);
 
-            if (oopartsActive[rand])
-            {
-                i--;
-            }
-            else
+            if (!oopartsActive[rand])
             {
                 oopartsObject.gameObject.GetComponent<Ooparts>().GetOopartsData(datas[rand]);
                 oopartsObject.transform.SetParent(oopartsSelectGroup.transform, false);
+
+                datas.RemoveAt(rand);
+
+            }
+            else
+            {
+                i--;
             }
 
         }
