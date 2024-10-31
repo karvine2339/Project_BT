@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class Ooparts : MonoBehaviour
 {
-
     public TextMeshProUGUI oopartsName;
     public TextMeshProUGUI oopartsEffectString;
     public Image icon;
@@ -28,17 +27,24 @@ public class Ooparts : MonoBehaviour
     {
         oopartsName.text = oopartsData.oopartsName;
         oopartsEffectString.text = oopartsData.effectString;
+        oopartsIndex = oopartsData.oopartsIndex;
         icon.sprite = oopartsData.oopartsIcon;
         BackIcon.sprite = oopartsData.oopartsBackIcon;
 
     }
     public void OnClick()
     {
+        OopartsActiveManager.Instance.oopartsActive[oopartsIndex] = true;
         OopartsManager.Instance.oopartsCanvasObject.SetActive(false);
+
+        InventoryManager.Instance.AddOpparts(oopartsData.oopartsIndex, oopartsData.oopartsName, oopartsData.effectString
+            ,oopartsData.oopartsBackIcon , oopartsData.oopartsIcon); 
+
         BTInputSystem.Instance.isOp = false;
         Time.timeScale = 1.0f;
         CursorSystem.Instance.SetCursorState(false);
         BTInputSystem.Instance.isOp = false;
+
     }
     public void OnDisable()
     {

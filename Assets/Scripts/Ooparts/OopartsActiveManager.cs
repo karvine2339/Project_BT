@@ -4,15 +4,23 @@ using UnityEngine;
 
 public class OopartsActiveManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public static OopartsActiveManager Instance;
 
-    // Update is called once per frame
-    void Update()
+    public bool[] oopartsActive = new bool[(int)OopartsType.Count];
+
+    #region Awake
+    private void Awake()
     {
-        
+        Instance = this;
+    }
+    private void OnDestroy()
+    {
+        Instance = null;
+    }
+    #endregion
+
+    public void ActiveOoparts(int index)
+    {
+        oopartsActive[index] = true;
     }
 }

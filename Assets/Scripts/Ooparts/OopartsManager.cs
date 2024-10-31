@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,11 +11,10 @@ public enum OopartsType
     CursedDoll = 2,
     Dice = 3,
     Medal = 4,
-    Count = 5
+    Count
 }
 public class OopartsManager : UIBase
 {
-    public bool[] oopartsActive = new bool[(int)OopartsType.Count];
     public static OopartsManager Instance { get; private set; }
 
     public GameObject oopartsCanvasObject;
@@ -41,26 +41,35 @@ public class OopartsManager : UIBase
     public void SetOoparts()
     {
         List<OopartsData> datas = new List<OopartsData>(oopartsDatas);
+        List<OopartsData> RemainDatas = datas.ToList();
 
-        for (int i = 0; i < 3; i++)
+        int count = 0;
+
+        while (count < 3)
         {
-            int rand = Random.Range(0, datas.Count - 1);
+            int rand = Random.Range(0, datas.Count);
 
-            GameObject oopartsObject = Instantiate(ooparts);
+            if (RemainDatas.Count == 0)
+                break;
 
-            if (!oopartsActive[rand])
+            if (RemainDatas.Contains(datas[rand]))
             {
-                oopartsObject.gameObject.GetComponent<Ooparts>().GetOopartsData(datas[rand]);
-                oopartsObject.transform.SetParent(oopartsSelectGroup.transform, false);
 
-                datas.RemoveAt(rand);
+                if (!OopartsActiveManager.Instance.oopartsActive[datas[rand].oopartsIndex])
+                {
+                    GameObject oopartsObject = Instantiate(ooparts);
+                    oopartsObject.gameObject.GetComponent<Ooparts>().GetOopartsData(datas[rand]);
+                    oopartsObject.transform.SetParent(oopartsSelectGroup.transform, false);
 
+                    RemainDatas.Remove(datas[rand]);
+                    count++;
+                }
             }
             else
             {
-                i--;
+                RemainDatas.Remove(datas[rand]);
+                continue;
             }
-
         }
     }
 }

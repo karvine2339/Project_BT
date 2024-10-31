@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -32,6 +33,12 @@ public class InventoryManager : UIBase
     public GameObject weaponInventory;
     public GameObject tacticalManualInventory;
     public GameObject oopartsInventory;
+
+    [Header("--- Ooparts Inventory ---")]
+
+    public GameObject[] ooparts;
+
+    public List<OopartsIcon> oopartsList = new List<OopartsIcon>();
 
     private void Awake()
     {
@@ -95,6 +102,28 @@ public class InventoryManager : UIBase
             BTInputSystem.Instance.isTab = false;
             CursorSystem.Instance.SetCursorState(false);
             Time.timeScale = 1.0f;
+        }
+    }
+    
+    public void AddOpparts(int index, string oopartsName, string oopartsEffectString, Sprite oopartsBackImg, Sprite oopartsIcon)
+    {
+        foreach(var oopartsCell in ooparts)
+        {
+            var icon = oopartsCell.gameObject.GetComponent<OopartsIcon>();
+            if (false == icon.isActive)
+            {
+                icon.oopartsimages[1].gameObject.SetActive(true);
+
+                icon.oopartsimages[0].sprite = oopartsBackImg;
+                icon.oopartsimages[1].sprite = oopartsIcon;
+                //icon.oopartsString[0].text = oopartsName;
+                //icon.oopartsString[1].text = oopartsEffectString;
+                icon.oopartsIndex = index;
+
+                icon.isActive = true;
+
+                break;
+            }
         }
     }
 
