@@ -6,7 +6,6 @@ using UnityEngine.Animations.Rigging;
 
 public class Grenade : MonoBehaviour
 {
-    public GameObject explosionRange;
     public float radius = 3f;
     public LayerMask grenadeLayerMask;
 
@@ -36,10 +35,4 @@ public class Grenade : MonoBehaviour
         }
     }
 
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = new Color(1, 1, 0, 0.5f);
-
-        Gizmos.DrawSphere(transform.position, radius);
-    }
 }

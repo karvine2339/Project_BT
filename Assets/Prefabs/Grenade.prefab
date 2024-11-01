@@ -184,4 +184,4 @@ MonoBehaviour:
   radius: 3
   grenadeLayerMask:
     serializedVersion: 2
-    m_Bits: 1408
+    m_Bits: 1409

@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class OopartsIcon : MonoBehaviour
 {
     [HideInInspector] public Image[] oopartsimages;
-    [HideInInspector] public TextMeshProUGUI[] oopartsString;
+    [HideInInspector] public string[] oopartsString = new string[2];
     [HideInInspector] public int oopartsIndex;
 
     public bool isActive = false;
@@ -15,8 +15,9 @@ public class OopartsIcon : MonoBehaviour
     private void Awake()
     {
         oopartsimages = GetComponentsInChildren<Image>(true);
-        oopartsString = GetComponentsInChildren<TextMeshProUGUI>(true); 
-
+        oopartsString = new string[2];
+        Debug.Log(oopartsString.Length);
+        oopartsIndex = -1;
     }
 
     private void Start()

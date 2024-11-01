@@ -154,6 +154,7 @@ MonoBehaviour:
     m_Bits: 256
   bulletHole: {fileID: 100000, guid: 2a839200057cdda40978622fe60a3637, type: 3}
   lifeTime: 10
+  isExplosion: 0
 --- !u!96 &8583944983707124569
 TrailRenderer:
   serializedVersion: 3

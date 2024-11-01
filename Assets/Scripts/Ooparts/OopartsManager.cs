@@ -41,34 +41,23 @@ public class OopartsManager : UIBase
     public void SetOoparts()
     {
         List<OopartsData> datas = new List<OopartsData>(oopartsDatas);
-        List<OopartsData> RemainDatas = datas.ToList();
 
-        int count = 0;
-
-        while (count < 3)
+        for (int i = 0; i < 3; i++)
         {
             int rand = Random.Range(0, datas.Count);
 
-            if (RemainDatas.Count == 0)
-                break;
-
-            if (RemainDatas.Contains(datas[rand]))
+            if (!OopartsActiveManager.Instance.oopartsActive[datas[rand].oopartsIndex])
             {
+                GameObject oopartsObject = Instantiate(ooparts);
+                oopartsObject.gameObject.GetComponent<Ooparts>().GetOopartsData(datas[rand]);
+                oopartsObject.transform.SetParent(oopartsSelectGroup.transform, false);
 
-                if (!OopartsActiveManager.Instance.oopartsActive[datas[rand].oopartsIndex])
-                {
-                    GameObject oopartsObject = Instantiate(ooparts);
-                    oopartsObject.gameObject.GetComponent<Ooparts>().GetOopartsData(datas[rand]);
-                    oopartsObject.transform.SetParent(oopartsSelectGroup.transform, false);
-
-                    RemainDatas.Remove(datas[rand]);
-                    count++;
-                }
+                datas.Remove(datas[rand]);
             }
             else
             {
-                RemainDatas.Remove(datas[rand]);
-                continue;
+                datas.Remove(datas[rand]);
+                i--;
             }
         }
     }

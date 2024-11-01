@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Ooparts_Boots
   m_EditorClassIdentifier: 
   oopartsName: "\uC2E0\uBC1C"
-  effectString: "\uC774\uB3D9\uC18D\uB3C4 20% \uC99D\uAC00"
+  effectString: "\uC774\uB3D9\uC18D\uB3C4 30% \uC99D\uAC00"
   oopartsIndex: 0
   oopartsIcon: {fileID: 21300000, guid: ff4e4cb400094194884699a246a29c59, type: 3}
   oopartsBackIcon: {fileID: 21300000, guid: da8bd303506db0041af58ecf5dce176f, type: 3}

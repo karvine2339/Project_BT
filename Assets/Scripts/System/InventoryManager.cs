@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class InventoryManager : UIBase
@@ -36,15 +37,35 @@ public class InventoryManager : UIBase
 
     [Header("--- Ooparts Inventory ---")]
 
+    private Canvas inventoryCanvas;
+    private GraphicRaycaster rayCaster;
+    private PointerEventData pointEventData;
+    private bool isInfo = false;
+
+    public OopartsInfoBox oopartsInfoBox;
+
     public GameObject[] ooparts;
-
-    public List<OopartsIcon> oopartsList = new List<OopartsIcon>();
-
     private void Awake()
     {
         Instance = this;
+
+        inventoryCanvas = GetComponent<Canvas>();
+        rayCaster = GetComponent<GraphicRaycaster>();
+        pointEventData = new PointerEventData(null);
+    }
+    private void Start()
+    {
+        oopartsInfoBox.gameObject.SetActive(false);
     }
 
+    private void Update()
+    {
+        if(BTInputSystem.Instance.isTab)
+        {
+            OpenOopartsInfo();
+        }
+
+    }
     public void ToggleInventory(GameObject toggleInventory)
     {
         weaponInventory.SetActive(false);
@@ -116,14 +137,53 @@ public class InventoryManager : UIBase
 
                 icon.oopartsimages[0].sprite = oopartsBackImg;
                 icon.oopartsimages[1].sprite = oopartsIcon;
-                //icon.oopartsString[0].text = oopartsName;
-                //icon.oopartsString[1].text = oopartsEffectString;
+                icon.oopartsString[0] = oopartsName;
+                icon.oopartsString[1] = oopartsEffectString;
                 icon.oopartsIndex = index;
 
                 icon.isActive = true;
 
                 break;
             }
+        }
+    }
+
+    public void OpenOopartsInfo()
+    {
+        OopartsIcon oopartsIcon;
+
+        pointEventData.position = Input.mousePosition;
+
+        List<RaycastResult> results = new List<RaycastResult>();
+        rayCaster.Raycast(pointEventData, results);
+
+        if (results.Count > 0)
+        { 
+            if (results[0].gameObject.TryGetComponent(out oopartsIcon))
+            {
+                if (isInfo == false)
+                {
+                    if (oopartsIcon.oopartsIndex != -1)
+                    {
+                        oopartsInfoBox.gameObject.SetActive(true);
+                        oopartsInfoBox.oopartsIcon.sprite = oopartsIcon.oopartsimages[1].sprite;
+                        oopartsInfoBox.oopartsBackImage.sprite = oopartsIcon.oopartsimages[0].sprite;
+                        oopartsInfoBox.oopartsName.text = oopartsIcon.oopartsString[0];
+                        oopartsInfoBox.oopartsInfo.text = oopartsIcon.oopartsString[1];
+
+                        oopartsInfoBox.transform.position = oopartsIcon.transform.position;
+                    }
+                }
+
+                else
+                {
+                    isInfo = false;
+                }
+            }
+        }
+        else
+        {
+            oopartsInfoBox.gameObject.SetActive(false);
         }
     }
 

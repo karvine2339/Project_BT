@@ -69,8 +69,6 @@ public class Weapon : MonoBehaviour
     public Sprite weaponImage;
     public Sprite skillImage;
 
-    
-
     public Projectile projectilePrefab;
     public Transform fireStartPoint;
 
@@ -326,10 +324,7 @@ public class Weapon : MonoBehaviour
 
         if (skillCoolDuration <= 0)
         {
-            if (HUDManager.Instance.skillImageMask != null)
-            {
-                HUDManager.Instance.skillImageMask.fillAmount = 0.0f;
-            }
+            HUDManager.Instance.skillImageMask.fillAmount = 0.0f;
         }
 
     }

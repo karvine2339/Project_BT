@@ -23,4 +23,19 @@ public class OopartsActiveManager : MonoBehaviour
     {
         oopartsActive[index] = true;
     }
+
+    public List<bool> CheckOoparts()
+    {
+        List<bool> falseValues = new List<bool>();
+        foreach(var ooparts in oopartsActive)
+        {
+            if (ooparts == false)
+            {
+                falseValues.Add(ooparts);
+            }
+        }
+
+        return falseValues;
+
+    }
 }

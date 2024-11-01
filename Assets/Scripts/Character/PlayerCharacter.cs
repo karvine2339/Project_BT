@@ -58,7 +58,9 @@ public class PlayerCharacter : ChrBase
     private DroppedWeapon droppedWeapon = null;
 
     public int pelletCount = 10;     
-    public float spreadAngle = 5f; 
+    public float spreadAngle = 5f;
+
+    public int explosionCount = 0;
 
     protected override void Awake()
     {
@@ -190,8 +192,16 @@ public class PlayerCharacter : ChrBase
 
                 Muzzle();
 
+                if (OopartsActiveManager.Instance.oopartsActive[(int)OopartsType.Dice])
+                {
+                    explosionCount++;
+                    Debug.Log(explosionCount);
+                }
+
                 NormalFire();
                 //ShotgunFire();
+
+
 
                 currentWeapon.curAmmo--;
                 PlayerStat.Instance.bulletDamage = Random.Range(PlayerStat.Instance.BulletMinDamage, PlayerStat.Instance.BulletMaxDamage);
@@ -425,6 +435,11 @@ public class PlayerCharacter : ChrBase
         Projectile newBullet = Instantiate(projectilePrefab, currentWeapon.fireStartPoint.position, Quaternion.LookRotation(aimDir, Vector3.up));
         newBullet.gameObject.SetActive(true);
         newBullet.SetForce(projectileSpeed);
+        if(explosionCount == 10)
+        {
+            newBullet.isExplosion = true;
+            explosionCount = 0;
+        }
     }
 
     public override void ActiveWeaponSkill()

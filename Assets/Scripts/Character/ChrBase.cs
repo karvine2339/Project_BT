@@ -80,6 +80,7 @@ public class ChrBase : MonoBehaviour
         characterAnimator.SetFloat("Strafe", isStrafe ? 1f : 0f);
 
         speed = isWalk ? 1f : 3f;
+
         targetSpeedBlend = Mathf.Lerp(targetSpeedBlend, targetSpeed, Time.deltaTime * 10f);
 
         characterAnimator.SetFloat("Speed", targetSpeedBlend);
@@ -182,8 +183,16 @@ public class ChrBase : MonoBehaviour
 
         Vector3 targetDirection = Quaternion.Euler(0, targetRotation, 0) * Vector3.forward;
 
-        unityCharacterController.Move(targetDirection.normalized * moveSpeed * Time.deltaTime
-    + new Vector3(0f, verticalVelocity, 0f) * Time.deltaTime);
+        if (OopartsActiveManager.Instance.oopartsActive[(int)OopartsType.Boots] == true)
+        {
+            unityCharacterController.Move(targetDirection.normalized * moveSpeed * 1.3f * Time.deltaTime
+        + new Vector3(0f, verticalVelocity, 0f) * Time.deltaTime);
+        }
+        else
+        {
+            unityCharacterController.Move(targetDirection.normalized * moveSpeed * Time.deltaTime
+        + new Vector3(0f, verticalVelocity, 0f) * Time.deltaTime);
+        }
 
         //characterAnimator.SetFloat("Horizontal", false == IsPossibleMovement ? 0 : input.x);
 

@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class Projectile : MonoBehaviour
 {
     public LayerMask hitLayer;
+    public LayerMask enemyLayer;
 
     private Rigidbody rigid;
 
@@ -16,6 +17,8 @@ public class Projectile : MonoBehaviour
     public float lifeTime = 10f;
 
     private int bounceCount = 0;
+
+    [HideInInspector] public bool isExplosion = false;
 
     private void Awake()
     {
@@ -54,8 +57,19 @@ public class Projectile : MonoBehaviour
         {
             if (bounceCount >= 0)
             {
-                enemy.OnDamaged(PlayerStat.Instance.bulletDamage * PlayerStat.Instance.AdditionalBulletDamage,
-                                PlayerStat.Instance.CriticalDamage * PlayerStat.Instance.OopartsDamage);
+                if (isExplosion)
+                {
+                    enemy.OnDamaged(PlayerStat.Instance.bulletDamage * PlayerStat.Instance.AdditionalBulletDamage,
+                PlayerStat.Instance.CriticalDamage * PlayerStat.Instance.OopartsDamage);
+                    GameObject ex = Instantiate(Resources.Load("ExplosionEffect") as GameObject);
+                    ex.transform.position = enemy.transform.position;
+                    ExplosionDamage(enemy.transform.position);
+                }
+                else
+                {
+                    enemy.OnDamaged(PlayerStat.Instance.bulletDamage * PlayerStat.Instance.AdditionalBulletDamage,
+                                    PlayerStat.Instance.CriticalDamage * PlayerStat.Instance.OopartsDamage);
+                }
             }
         }
 
@@ -78,6 +92,20 @@ public class Projectile : MonoBehaviour
     private void HandleEnemyDamaged(EnemyCharacter enemy, int damage)
     {
 
+    }
+
+    private void ExplosionDamage(Vector3 center)
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(center, 3);
+        Debug.Log("coll");
+        foreach (Collider hitColl in hitColliders)
+        {
+            if (hitColl.TryGetComponent<EnemyCharacter>(out EnemyCharacter enemy))
+            {
+                Debug.Log("hit");
+                enemy.OnDamaged(Random.Range(PlayerStat.Instance.BulletMinDamage, PlayerStat.Instance.BulletMaxDamage) * 5.0f, 1.0f);
+            }
+        }
     }
 }
 
