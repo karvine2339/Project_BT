@@ -62,6 +62,7 @@ public class PlayerCharacter : ChrBase
 
     public int explosionCount = 0;
 
+
     protected override void Awake()
     {
         base.Awake();
@@ -83,6 +84,7 @@ public class PlayerCharacter : ChrBase
         }
 
         Interaction_UI.Instance.ExecuteInteractionData();
+
     }
 
     private void OnDetectedInteraction(IInteractable interactable)
@@ -111,7 +113,7 @@ public class PlayerCharacter : ChrBase
         curCredit = 500000;
         credit = curCredit;
         HUDManager.Instance.creditText.text = credit.ToString();
-        
+  
 
         aimRig = GetComponentInChildren<Rig>();
         rigBuilder = GetComponentInChildren<RigBuilder>();
@@ -195,7 +197,6 @@ public class PlayerCharacter : ChrBase
                 if (OopartsActiveManager.Instance.oopartsActive[(int)OopartsType.Dice])
                 {
                     explosionCount++;
-                    Debug.Log(explosionCount);
                 }
 
                 NormalFire();

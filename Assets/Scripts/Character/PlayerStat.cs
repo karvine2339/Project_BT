@@ -21,7 +21,7 @@ public class PlayerStat : MonoBehaviour
     private float _bulletMaxDamage;
     public float BulletMaxDamage
     {
-        get { return _bulletMaxDamage + 1; }
+        get { return _bulletMaxDamage; }
         set
         {
             if (_bulletMaxDamage != value)
@@ -115,6 +115,7 @@ public class PlayerStat : MonoBehaviour
             {
                 _additionalBulletDamage = value;
                 OnAdditionalBulletDamageChanged?.Invoke(_additionalBulletDamage);
+                RefreshStat();
             }
         }
     }
@@ -144,6 +145,7 @@ public class PlayerStat : MonoBehaviour
             {
                 _oopartsDamage = value;
                 OnOopartsDamageChanged?.Invoke(_oopartsDamage);
+                RefreshStat();
             }
         }
     }
@@ -183,7 +185,6 @@ public class PlayerStat : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        DontDestroyOnLoad(gameObject);
 
         BulletMinDamage = 0;
         BulletMaxDamage = 0;
@@ -195,9 +196,20 @@ public class PlayerStat : MonoBehaviour
         AdditionalBulletDamage = 1.0f;
         DroneDamage = 1.0f;
         OopartsDamage = 1.0f;
+
+  
     }
     private void OnDestroy()
     {
         Instance = null;
     }
+
+    public void RefreshStat()
+    {
+        bulletDamage = BulletMinDamage * AdditionalBulletDamage * OopartsDamage;
+        Debug.Log("Refresh Stat");
+        Debug.Log("Bullet Damage : " + bulletDamage);
+    }
+
+   
 }

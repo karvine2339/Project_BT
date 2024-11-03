@@ -244,13 +244,17 @@ MonoBehaviour:
   weaponRecoilAmount: 0
   weaponUpgradeCount: 0
   weaponType: 0
+  skillCoolDown: 0
+  skillCoolDuration: 0
   baseMinDamage: 0
   baseMaxDamage: 0
   baseFireRate: 0
   baseCriticalProbability: 0
   baseCriticalDamage: 0
   baseWeaponRecoilAmount: 0
+  baseSkillCoolDown: 0
   weaponImage: {fileID: 21300000, guid: c2623447b323bb445b3b0e321799cedf, type: 3}
+  skillImage: {fileID: 0}
   projectilePrefab: {fileID: 0}
   fireStartPoint: {fileID: 2745117981141749208}
   muzzleFlash: {fileID: 6952203719765815676}
@@ -373,11 +377,11 @@ MonoBehaviour:
   firePower: 15
   fireAngle: 0
   bullet: {fileID: 658288695989740879, guid: 3708b1c072cac7647987c243ef720bd1, type: 3}
-  simulationSteps: 30
+  simulationSteps: 25
   lineRenderer: {fileID: 3034725901979729857}
   grenadeColliderMask:
     serializedVersion: 2
-    m_Bits: 1408
+    m_Bits: 1409
   explosionRadiusPrefab: {fileID: 2525854515846816335, guid: 07e81293c50120840a2a5617994ef2c3, type: 3}
   explosionRadius: 3
 --- !u!1001 &6952203719765908626

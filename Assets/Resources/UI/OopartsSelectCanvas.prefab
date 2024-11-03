@@ -424,7 +424,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c4311cf065b5b64fac3bb8a05c3aeaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  oopartsActive: 0000000000
   oopartsCanvasObject: {fileID: 850784109160731686}
   oopartsSelectGroup: {fileID: 4628233767835713681}
   oopartsDatas:
@@ -433,4 +432,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 47b9aef03077af54da0fb37ae3424b85, type: 2}
   - {fileID: 11400000, guid: 1eec3bb5ccdaaf84ea6bc99e2d535ceb, type: 2}
   - {fileID: 11400000, guid: 02678113d8af6314b96b7aa10cb7add9, type: 2}
+  - {fileID: 11400000, guid: afddd52aa9acffc488c5fa9d0139dc07, type: 2}
+  - {fileID: 11400000, guid: 1c67458286552f248ae01550b01f4f0c, type: 2}
   ooparts: {fileID: 4606621239186825825, guid: 4b4c5c17758ab054ba3e5f88623ad39e, type: 3}

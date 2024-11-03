@@ -30,6 +30,11 @@ public class TacticalManual : MonoBehaviour
         icon = GetComponentsInChildren<Image>()[1];
     }
 
+    private void Start()
+    {
+        PlayerStat.OnAdditionalBulletDamageChanged += HandleAdditionalBulletDamageChange;
+    }
+
     public TacticalManualData GetTacticalManualData(TacticalManualData data)
     {
         tacticalManualData = data;
@@ -79,5 +84,10 @@ public class TacticalManual : MonoBehaviour
     public void OnDisable()
     {
         Destroy(gameObject);
+    }
+
+    public void HandleAdditionalBulletDamageChange(float value)
+    {
+        PlayerStat.Instance.AdditionalBulletDamage += value;
     }
 }

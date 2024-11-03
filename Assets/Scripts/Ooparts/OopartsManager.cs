@@ -11,6 +11,8 @@ public enum OopartsType
     CursedDoll = 2,
     Dice = 3,
     Medal = 4,
+    Card = 5,
+    Glasses = 6,
     Count
 }
 public class OopartsManager : UIBase

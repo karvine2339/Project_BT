@@ -97,12 +97,10 @@ public class Projectile : MonoBehaviour
     private void ExplosionDamage(Vector3 center)
     {
         Collider[] hitColliders = Physics.OverlapSphere(center, 3);
-        Debug.Log("coll");
         foreach (Collider hitColl in hitColliders)
         {
             if (hitColl.TryGetComponent<EnemyCharacter>(out EnemyCharacter enemy))
             {
-                Debug.Log("hit");
                 enemy.OnDamaged(Random.Range(PlayerStat.Instance.BulletMinDamage, PlayerStat.Instance.BulletMaxDamage) * 5.0f, 1.0f);
             }
         }

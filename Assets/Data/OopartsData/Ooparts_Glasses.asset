@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9244cfd5e4a03794ca21a84e26bdb8ea, type: 3}
+  m_Name: Ooparts_Glasses
+  m_EditorClassIdentifier: 
+  oopartsName: "\uBE91\uBE91\uC774 \uC548\uACBD"
+  effectString: "\uC5F0\uC0AC\uC18D\uB3C4 50%\uC99D\uAC00 , \uCD1D\uAE30 \uBC18\uB3D9
+    50% \uC99D\uAC00"
+  oopartsIndex: 6
+  oopartsIcon: {fileID: 21300000, guid: 1f0ac39ac79fa3f449ddd65653ad8e94, type: 3}
+  oopartsBackIcon: {fileID: 21300000, guid: e9e2974f6f1fe554b88cebe75a0772e5, type: 3}

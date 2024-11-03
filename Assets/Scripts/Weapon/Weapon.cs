@@ -1,6 +1,7 @@
 using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.UI;
@@ -80,6 +81,8 @@ public class Weapon : MonoBehaviour
     {
         ApplyEffects();
         StartCoroutine(DelayedInitWeaponStat());
+
+        //PlayerStat.OnAdditionalBulletDamageChanged += HandleBulletDamageChanged;
     }
 
     private void Update()
@@ -357,4 +360,5 @@ public class Weapon : MonoBehaviour
         yield return null;
         InitWeaponStat();
     }
+
 }

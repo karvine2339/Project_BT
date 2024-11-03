@@ -13,7 +13,7 @@ public class Grenade : MonoBehaviour
     {
         ContactPoint contact = collision.contacts[0];
 
-        GameObject ex = Instantiate(Resources.Load("ExplosionEffect") as GameObject);
+        GameObject ex = Instantiate(Resources.Load(Constant.GrenadeResourcePath) as GameObject);
         ex.transform.position = contact.point;
 
         ExplosionDamage(contact.point);
