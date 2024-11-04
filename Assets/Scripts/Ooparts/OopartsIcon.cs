@@ -14,7 +14,7 @@ public class OopartsIcon : MonoBehaviour
 
     private void Awake()
     {
-        oopartsimages = GetComponentsInChildren<Image>(true);
+        oopartsimages = GetComponentsInChildren<Image>(false);
         oopartsString = new string[2];
         oopartsIndex = -1;
     }

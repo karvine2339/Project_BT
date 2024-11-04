@@ -166,6 +166,7 @@ public class InventoryManager : UIBase
         }
     }
 
+
     public void OpenOopartsInfo()
     {
         OopartsIcon oopartsIcon;
