@@ -125,6 +125,7 @@ public class PlayerCharacter : ChrBase
         weapons[0] = GetComponentInChildren<Weapon>();
 
         SetStartWeapon();
+
     }
 
     public override void SetAiming(float aiming)

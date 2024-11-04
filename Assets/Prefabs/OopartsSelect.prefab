@@ -319,10 +319,10 @@ RectTransform:
   - {fileID: 2762049869970718101}
   - {fileID: 3297844079540362922}
   - {fileID: 3252912735384824643}
-  - {fileID: 3212688546890837347}
-  - {fileID: 7629254859711511667}
   - {fileID: 6784153649290314879}
   - {fileID: 6535579564341212728}
+  - {fileID: 3212688546890837347}
+  - {fileID: 7629254859711511667}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}

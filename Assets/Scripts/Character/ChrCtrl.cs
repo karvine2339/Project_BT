@@ -17,6 +17,7 @@ public class CharacterController : MonoBehaviour
 
     private void Awake()
     {
+        UIManager.Show<HUDManager>(UIList.HUDCanvas);
         characterBase = GetComponent<ChrBase>();
     }
 
@@ -32,11 +33,11 @@ public class CharacterController : MonoBehaviour
         BTInputSystem.Instance.onWeaponSkill += OnWeaponSkill;
 
         UIManager.Show<TacticalManager>(UIList.TacticalManual_Canvas);
-        UIManager.Show<HUDManager>(UIList.HUDCanvas);
         UIManager.Show<InventoryManager>(UIList.InventoryCanvas);
         UIManager.Show<WorkShopManager>(UIList.WorkShopCanvas);
         UIManager.Show<Interaction_UI>(UIList.Interaction_UICanvas);
         UIManager.Show<OopartsManager>(UIList.OopartsSelectCanvas);
+        UIManager.Show<ShopManager>(UIList.ShopCanvas);
     }
 
     private void OnMouseWheel(float mouseWheel)

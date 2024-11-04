@@ -60,8 +60,8 @@ public class CameraSystem : MonoBehaviour
         }
 
         thirdPersonFollow.ShoulderOffset.z = BTInputSystem.Instance.isStrafe ?
-            Mathf.Lerp(thirdPersonFollow.ShoulderOffset.z, 0.8f, smoothSpeed * Time.deltaTime) : 
-            Mathf.Lerp(thirdPersonFollow.ShoulderOffset.z, 0, smoothSpeed * Time.deltaTime);
+            Mathf.Lerp(thirdPersonFollow.ShoulderOffset.z, 1.3f, smoothSpeed * Time.deltaTime) : 
+            Mathf.Lerp(thirdPersonFollow.ShoulderOffset.z, 0.5f, smoothSpeed * Time.deltaTime);
 
 
         if(Input.GetKeyDown(KeyCode.Q))

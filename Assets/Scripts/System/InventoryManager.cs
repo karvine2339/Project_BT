@@ -44,7 +44,11 @@ public class InventoryManager : UIBase
 
     public OopartsInfoBox oopartsInfoBox;
 
-    public GameObject[] ooparts;
+    public GameObject content;
+
+    public GameObject oopartsIconObject;
+
+    public List<OopartsIcon> oopartsIconList = new();
     private void Awake()
     {
         Instance = this;
@@ -52,6 +56,8 @@ public class InventoryManager : UIBase
         inventoryCanvas = GetComponent<Canvas>();
         rayCaster = GetComponent<GraphicRaycaster>();
         pointEventData = new PointerEventData(null);
+
+        AddOopartsCell(25);
     }
     private void Start()
     {
@@ -126,25 +132,37 @@ public class InventoryManager : UIBase
         }
     }
     
-    public void AddOpparts(int index, string oopartsName, string oopartsEffectString, Sprite oopartsBackImg, Sprite oopartsIcon)
+    public void AddOoparts(int index, string oopartsName, string oopartsEffectString, Sprite oopartsBackImg, Sprite oopartsIcon)
     {
-        foreach(var oopartsCell in ooparts)
+        foreach(var oopartsCell in oopartsIconList)
         {
-            var icon = oopartsCell.gameObject.GetComponent<OopartsIcon>();
-            if (false == icon.isActive)
+            if (false == oopartsCell.isActive)
             {
-                icon.oopartsimages[1].gameObject.SetActive(true);
+                oopartsCell.oopartsimages[1].gameObject.SetActive(true);
 
-                icon.oopartsimages[0].sprite = oopartsBackImg;
-                icon.oopartsimages[1].sprite = oopartsIcon;
-                icon.oopartsString[0] = oopartsName;
-                icon.oopartsString[1] = oopartsEffectString;
-                icon.oopartsIndex = index;
+                oopartsCell.oopartsimages[0].sprite = oopartsBackImg;
+                oopartsCell.oopartsimages[1].sprite = oopartsIcon;
+                oopartsCell.oopartsString[0] = oopartsName;
+                oopartsCell.oopartsString[1] = oopartsEffectString;
+                oopartsCell.oopartsIndex = index;
 
-                icon.isActive = true;
+                oopartsCell.isActive = true;
 
                 break;
             }
+        }
+    }
+
+    public void AddOopartsCell(int count)
+    {
+        for (int i = 0; i < count; i++)
+        {
+            GameObject oopartsCell = Instantiate(oopartsIconObject);
+            oopartsCell.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+            oopartsCell.transform.SetParent(content.transform, true);
+
+            oopartsCell.GetComponentsInChildren<Image>()[1].gameObject.SetActive(false);
+            oopartsIconList.Add(oopartsCell.GetComponent<OopartsIcon>());
         }
     }
 

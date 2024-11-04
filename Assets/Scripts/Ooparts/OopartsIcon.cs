@@ -16,7 +16,6 @@ public class OopartsIcon : MonoBehaviour
     {
         oopartsimages = GetComponentsInChildren<Image>(true);
         oopartsString = new string[2];
-        Debug.Log(oopartsString.Length);
         oopartsIndex = -1;
     }
 

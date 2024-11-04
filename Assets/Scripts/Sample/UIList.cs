@@ -20,6 +20,8 @@ public enum UIList
 
     WorkShopCanvas,
 
+    ShopCanvas,
+
     Interaction_UICanvas,
 
     OopartsSelectCanvas,

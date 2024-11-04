@@ -32,7 +32,7 @@ public class TacticalManual : MonoBehaviour
 
     private void Start()
     {
-        PlayerStat.OnAdditionalBulletDamageChanged += HandleAdditionalBulletDamageChange;
+        //PlayerStat.OnAdditionalBulletDamageChanged += HandleAdditionalBulletDamageChange;
     }
 
     public TacticalManualData GetTacticalManualData(TacticalManualData data)

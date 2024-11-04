@@ -37,10 +37,9 @@ public class Ooparts : MonoBehaviour
         OopartsActiveManager.Instance.oopartsActive[oopartsIndex] = true;
         OopartsManager.Instance.oopartsCanvasObject.SetActive(false);
 
-        InventoryManager.Instance.AddOpparts(oopartsData.oopartsIndex, oopartsData.oopartsName, oopartsData.effectString
+        InventoryManager.Instance.AddOoparts(oopartsData.oopartsIndex, oopartsData.oopartsName, oopartsData.effectString
             ,oopartsData.oopartsBackIcon , oopartsData.oopartsIcon); 
 
-        BTInputSystem.Instance.isOp = false;
         Time.timeScale = 1.0f;
         CursorSystem.Instance.SetCursorState(false);
         BTInputSystem.Instance.isOp = false;
