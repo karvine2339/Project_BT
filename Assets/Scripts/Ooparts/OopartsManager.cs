@@ -13,6 +13,11 @@ public enum OopartsType
     Medal = 4,
     Card = 5,
     Glasses = 6,
+    Volt = 7,
+    Jar = 8,
+    Ether = 9,
+    Charm_Oopart = 10,
+    Charm_Weapon = 11,
     Count
 }
 public class OopartsManager : UIBase

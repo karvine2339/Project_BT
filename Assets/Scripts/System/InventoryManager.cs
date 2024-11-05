@@ -37,7 +37,6 @@ public class InventoryManager : UIBase
 
     [Header("--- Ooparts Inventory ---")]
 
-    private Canvas inventoryCanvas;
     private GraphicRaycaster rayCaster;
     private PointerEventData pointEventData;
     private bool isInfo = false;
@@ -53,7 +52,6 @@ public class InventoryManager : UIBase
     {
         Instance = this;
 
-        inventoryCanvas = GetComponent<Canvas>();
         rayCaster = GetComponent<GraphicRaycaster>();
         pointEventData = new PointerEventData(null);
 
@@ -68,7 +66,7 @@ public class InventoryManager : UIBase
     {
         if(BTInputSystem.Instance.isTab)
         {
-            OpenOopartsInfo();
+            OpenOopartsInfo(rayCaster, pointEventData, oopartsInfoBox);
         }
 
     }
@@ -142,6 +140,7 @@ public class InventoryManager : UIBase
 
                 oopartsCell.oopartsimages[0].sprite = oopartsBackImg;
                 oopartsCell.oopartsimages[1].sprite = oopartsIcon;
+                oopartsCell.oopartsimages[1].transform.localScale = new Vector3(1, 1, 1);
                 oopartsCell.oopartsString[0] = oopartsName;
                 oopartsCell.oopartsString[1] = oopartsEffectString;
                 oopartsCell.oopartsIndex = index;
@@ -158,7 +157,7 @@ public class InventoryManager : UIBase
         for (int i = 0; i < count; i++)
         {
             GameObject oopartsCell = Instantiate(oopartsIconObject);
-            oopartsCell.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+            oopartsCell.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
             oopartsCell.transform.SetParent(content.transform, true);
 
             oopartsCell.GetComponentsInChildren<Image>()[1].gameObject.SetActive(false);
@@ -167,14 +166,14 @@ public class InventoryManager : UIBase
     }
 
 
-    public void OpenOopartsInfo()
+    public void OpenOopartsInfo(GraphicRaycaster raycaster, PointerEventData pointEventData, OopartsInfoBox oopartsInfoBox)
     {
         OopartsIcon oopartsIcon;
 
         pointEventData.position = Input.mousePosition;
 
         List<RaycastResult> results = new List<RaycastResult>();
-        rayCaster.Raycast(pointEventData, results);
+        raycaster.Raycast(pointEventData, results);
 
         if (results.Count > 0)
         { 

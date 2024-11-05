@@ -8,6 +8,8 @@ public class Interaction_Shop : MonoBehaviour, IInteractable
 
     public string Message => "ªÛ¡°";
 
+    private bool isInteract = false;
+
     public void Interact(PlayerCharacter playerCharacter)
     {
         var shopManager = ShopManager.Instance;
@@ -20,7 +22,12 @@ public class Interaction_Shop : MonoBehaviour, IInteractable
 
         BTInputSystem.Instance.isShop = true;
 
-        ShopManager.Instance.SetOoparts();
+        if (false == isInteract)
+        {
+            ShopManager.Instance.SetOoparts();
+        }
+
+        isInteract = true;
     }
 
 }

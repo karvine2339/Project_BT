@@ -434,4 +434,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 02678113d8af6314b96b7aa10cb7add9, type: 2}
   - {fileID: 11400000, guid: afddd52aa9acffc488c5fa9d0139dc07, type: 2}
   - {fileID: 11400000, guid: 1c67458286552f248ae01550b01f4f0c, type: 2}
+  - {fileID: 11400000, guid: 0c99878d76b3acb4a995acd9046f2634, type: 2}
+  - {fileID: 11400000, guid: 779a3c0dbc1d6ea458f9d91455d6b372, type: 2}
+  - {fileID: 11400000, guid: 8c8b5b036c12746438cd1f85df361d61, type: 2}
+  - {fileID: 11400000, guid: 0dbf54c8dfa89b847b60fc88715719e8, type: 2}
+  - {fileID: 11400000, guid: cbafd61ee9b79de4b82b2de49abab0c3, type: 2}
   ooparts: {fileID: 4606621239186825825, guid: 4b4c5c17758ab054ba3e5f88623ad39e, type: 3}

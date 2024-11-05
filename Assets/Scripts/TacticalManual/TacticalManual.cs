@@ -79,6 +79,14 @@ public class TacticalManual : MonoBehaviour
         }
 
         BTInputSystem.Instance.isTab = false;
+
+        if(BTInputSystem.Instance.isShop)
+        {
+            ShopManager.Instance.shopObject.SetActive(true);
+            Time.timeScale = 0.0f;
+            CursorSystem.Instance.SetCursorState(true);
+            ShopManager.Instance.UpdateCredit();
+        }
     }
 
     public void OnDisable()

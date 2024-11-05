@@ -12,6 +12,28 @@ public class OopartsIcon : MonoBehaviour
 
     public bool isActive = false;
 
+    private OopartsData oopartsData;
+    public OopartsData GetOopartsData(OopartsData data)
+    {
+        oopartsData = data;
+
+        InitOopartsData();
+
+        return oopartsData;
+    }
+
+    public void InitOopartsData()
+    {
+        oopartsString[0] = oopartsData.oopartsName;
+        oopartsString[1] = oopartsData.effectString;
+        oopartsIndex = oopartsData.oopartsIndex;
+        oopartsimages[0].sprite = oopartsData.oopartsBackIcon;
+        oopartsimages[1].sprite = oopartsData.oopartsIcon;
+
+    }
+
+
+
     private void Awake()
     {
         oopartsimages = GetComponentsInChildren<Image>(false);
