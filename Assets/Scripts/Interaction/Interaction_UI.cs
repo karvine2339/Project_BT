@@ -13,7 +13,7 @@ public class Interaction_UI : UIBase
     [SerializeField] private Interaction_List listItemPrefab;
     public GameObject weaponInfoBox; 
 
-    private List<Interaction_List> createdItems = new List<Interaction_List>();
+    public List<Interaction_List> createdItems = new List<Interaction_List>();
     private int selectedIndex = -1;
 
     public Transform canvas;

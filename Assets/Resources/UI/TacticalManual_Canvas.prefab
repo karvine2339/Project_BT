@@ -428,9 +428,9 @@ MonoBehaviour:
   tacticalManualCanvasObject: {fileID: 3610928654752889918}
   tacticalManualLevel: 
   tacticalManualDatas:
+  - {fileID: 11400000, guid: 696bf945abcb68948b0e6fe25a85572e, type: 2}
+  - {fileID: 11400000, guid: 7706cb2d210bb9b4ba4faac6d0fd4fac, type: 2}
   - {fileID: 11400000, guid: 0b2a511bb40db884d94330cadfb3bbcb, type: 2}
   - {fileID: 11400000, guid: 59638848202d7bc46b9a278e2c8b1b6e, type: 2}
   - {fileID: 11400000, guid: 65c0d755894071340bfc5f67611a8c09, type: 2}
-  - {fileID: 11400000, guid: 696bf945abcb68948b0e6fe25a85572e, type: 2}
-  - {fileID: 11400000, guid: 7706cb2d210bb9b4ba4faac6d0fd4fac, type: 2}
   TacticalManual: {fileID: 439855248717350647, guid: 25ec1a49c534c384b903ebefe2ca205a, type: 3}

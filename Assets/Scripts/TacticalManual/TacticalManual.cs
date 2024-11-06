@@ -7,7 +7,6 @@ using TMPro;
 
 public enum TacticalManualEffect
 {
-    None,
     BulletDamageIncrease,
     FireRateIncrease,
     DroneDamageIncrease,
@@ -24,6 +23,8 @@ public class TacticalManual : MonoBehaviour
     public TextMeshProUGUI effectName;
     public TextMeshProUGUI effectLevel;
     public TextMeshProUGUI effectVal;
+
+    public static event System.Action OnRefreshTacticalIcons;
 
     private void Awake()
     {
@@ -87,6 +88,8 @@ public class TacticalManual : MonoBehaviour
             CursorSystem.Instance.SetCursorState(true);
             ShopManager.Instance.UpdateCredit();
         }
+
+        OnRefreshTacticalIcons?.Invoke();
     }
 
     public void OnDisable()

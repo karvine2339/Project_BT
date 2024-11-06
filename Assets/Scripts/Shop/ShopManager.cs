@@ -48,14 +48,6 @@ public class ShopManager : UIBase
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (BTInputSystem.Instance.isShop == false)
-                return;
-
-            BackButtonClick();
-        }
-
         if(BTInputSystem.Instance.isShop == true)
         {
             InventoryManager.Instance.OpenOopartsInfo(raycaster, pointEventData, oopartsInfoBox);

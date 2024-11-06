@@ -112,13 +112,7 @@ public class WorkShopManager : UIBase
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (BTInputSystem.Instance.isWorkShop == false)
-                return;
 
-            BackButtonClick();
-        }
     }
 
     public void UpdateCredit()

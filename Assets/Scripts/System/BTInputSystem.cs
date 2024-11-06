@@ -156,8 +156,14 @@ public class BTInputSystem : MonoBehaviour
             if (isTab || isWorkShop || isOp || isShop)
                 return;
 
+            if (Interaction_UI.Instance.createdItems.Count < 1)
+            {
+                onEquipWeapon?.Invoke();
+            }
+
             onInteract?.Invoke();
-            onEquipWeapon?.Invoke();
+
+
         }
 
         if(Input.GetKeyDown(KeyCode.V))
@@ -205,7 +211,31 @@ public class BTInputSystem : MonoBehaviour
             InventoryManager.Instance.OpenInventory();
         }
 
-        if(Input.GetKeyDown(KeyCode.G))
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (isTab)
+            {
+                InventoryManager.Instance.OpenInventory();
+                Debug.Log("isTab");
+            }
+            else if (isShop)
+            {
+                if(isTac)
+                {
+                    return;
+                }
+
+                ShopManager.Instance.BackButtonClick();
+                Debug.Log("isShop");
+            }
+            else if (isWorkShop)
+            {
+                WorkShopManager.Instance.BackButtonClick();
+                Debug.Log("isWorkShop");
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.G))
         {
 
             onWeaponSkill?.Invoke();

@@ -35,6 +35,8 @@ public class InventoryManager : UIBase
     public GameObject tacticalManualInventory;
     public GameObject oopartsInventory;
 
+    public Button[] toggleButton;
+
     [Header("--- Ooparts Inventory ---")]
 
     private GraphicRaycaster rayCaster;
@@ -48,6 +50,13 @@ public class InventoryManager : UIBase
     public GameObject oopartsIconObject;
 
     public List<OopartsIcon> oopartsIconList = new();
+
+    [Header("--- TacticalManual Inventory ---")]
+
+    public GameObject tacticalManualContent;
+    public TacticalInfoBox tacticalManualInfoBox;
+
+
     private void Awake()
     {
         Instance = this;
@@ -67,6 +76,7 @@ public class InventoryManager : UIBase
         if(BTInputSystem.Instance.isTab)
         {
             OpenOopartsInfo(rayCaster, pointEventData, oopartsInfoBox);
+            OpenTacticalManualInfo(rayCaster, pointEventData, tacticalManualInfoBox);
         }
 
     }
@@ -81,16 +91,25 @@ public class InventoryManager : UIBase
     public void OpenWeaponInvetory()
     {
         ToggleInventory(weaponInventory);
+        toggleButton[0].interactable = false;
+        toggleButton[1].interactable = true;
+        toggleButton[2].interactable = true;
     }
 
     public void OpenTacticalManualInventory()
     {
         ToggleInventory(tacticalManualInventory);
+        toggleButton[1].interactable = false;
+        toggleButton[0].interactable = true;
+        toggleButton[2].interactable = true;
     }
 
     public void OpenOopartsInventory()
     {
         ToggleInventory(oopartsInventory);
+        toggleButton[2].interactable = false;
+        toggleButton[0].interactable = true;
+        toggleButton[1].interactable = true;
     }
 
     public void OpenInventory()
@@ -128,6 +147,11 @@ public class InventoryManager : UIBase
             CursorSystem.Instance.SetCursorState(false);
             Time.timeScale = 1.0f;
         }
+    }
+
+    public void AddTacticalManual(int level, string tacticalManualName, string tacticalManualInfo, Sprite tacticalManualIcon)
+    {
+
     }
     
     public void AddOoparts(int index, string oopartsName, string oopartsEffectString, Sprite oopartsBackImg, Sprite oopartsIcon)
@@ -205,4 +229,42 @@ public class InventoryManager : UIBase
         }
     }
 
+    public void OpenTacticalManualInfo(GraphicRaycaster raycaster, PointerEventData pointEventData, TacticalInfoBox tacticalInfoBox)
+    {
+        TacticalIcon tacticalIcon;
+
+        pointEventData.position = Input.mousePosition;
+
+        List<RaycastResult> results = new List<RaycastResult>();
+        raycaster.Raycast(pointEventData, results);
+
+        if (results.Count > 0)
+        {
+            if (results[0].gameObject.TryGetComponent(out tacticalIcon))
+            {
+                if (isInfo == false)
+                {
+                    if (tacticalIcon.tacticalLevel > 0)
+                    {
+                        tacticalInfoBox.gameObject.SetActive(true);
+                        tacticalInfoBox.tacticalManualIcon.sprite = tacticalIcon.tacticalIconImage.sprite;
+                        tacticalInfoBox.tacticalManualName.text = tacticalIcon.tacticalString[0];
+                        tacticalInfoBox.tacticalManualInfo.text = tacticalIcon.tacticalString[1];
+
+                        tacticalInfoBox.transform.position = tacticalIcon.transform.position;
+                    }
+                }
+
+                else
+                {
+                    isInfo = false;
+                }
+            }
+        }
+        else
+        {
+            tacticalInfoBox.gameObject.SetActive(false);
+        }
+
+    }
 }
