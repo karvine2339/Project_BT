@@ -10,6 +10,7 @@ public class TacticalIcon : MonoBehaviour
     public int Index;
     [HideInInspector] public string[] tacticalString = new string[2];
     [HideInInspector] public int tacticalLevel;
+    public float[] tacticalValue;
 
     private TacticalManualData tacticalManualData;
 
@@ -28,6 +29,7 @@ public class TacticalIcon : MonoBehaviour
         tacticalString[1] = tacticalManualData.EffectName;
         tacticalIconImage.sprite = tacticalManualData.tacticalManualIcon;
         tacticalLevel = tacticalManualData.level;
+        tacticalValue = tacticalManualData.value;
 
     }
     private void Start()

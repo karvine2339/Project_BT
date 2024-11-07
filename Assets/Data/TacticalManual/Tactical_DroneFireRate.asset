@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ab4b464f897740439ce34a07565795c, type: 3}
   m_Name: Tactical_DroneFireRate
   m_EditorClassIdentifier: 
-  EffectName: "\uB4DC\uB860 \uBC1C\uC0AC\uAC04\uACA9 \uAC10\uC18C"
+  EffectName: "\uB4DC\uB860 \uBC1C\uC0AC\uAC04\uACA9"
   level: 0
   value:
   - 0.5

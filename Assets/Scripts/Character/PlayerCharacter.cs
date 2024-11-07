@@ -173,13 +173,20 @@ public class PlayerCharacter : ChrBase
         GroundCheck();
         FreeFall();
 
+        if (isStrafe)
+        {
+            if (fireRate > 0.0f)
+            {
+                fireRate -= Time.deltaTime;
+            }
+        }
     }
 
     public override void Fire()
     {
+
         if (isStrafe)
-        {
-            fireRate -= Time.deltaTime;
+        {  
             if (fireRate <= 0.0f)
             {
                 if (currentWeapon.curAmmo == 0)

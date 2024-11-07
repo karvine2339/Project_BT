@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ab4b464f897740439ce34a07565795c, type: 3}
   m_Name: Tactical_WeaponFireRate
   m_EditorClassIdentifier: 
-  EffectName: "\uBB34\uAE30 \uC5F0\uC0AC\uC18D\uB3C4 \uC99D\uAC00"
-  level: 0
+  EffectName: "\uBB34\uAE30 \uC5F0\uC0AC\uC18D\uB3C4"
+  level: 2
   value:
   - 15
   - 15

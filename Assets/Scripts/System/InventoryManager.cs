@@ -213,7 +213,27 @@ public class InventoryManager : UIBase
                         oopartsInfoBox.oopartsName.text = oopartsIcon.oopartsString[0];
                         oopartsInfoBox.oopartsInfo.text = oopartsIcon.oopartsString[1];
 
-                        oopartsInfoBox.transform.position = oopartsIcon.transform.position;
+                        // 초기 위치 설정
+                        Vector3 iconPosition = oopartsIcon.transform.position;
+                        oopartsInfoBox.transform.position = iconPosition;
+
+                        // ScrollView의 Content 영역의 RectTransform 가져오기
+                        RectTransform scrollViewContent = oopartsInfoBox.GetComponentInParent<ScrollRect>().content;
+                        RectTransform infoRectTransform = oopartsInfoBox.GetComponent<RectTransform>();
+
+                        // ScrollView Content 내의 상대적인 위치를 계산
+                        Vector2 localPosition = infoRectTransform.localPosition;
+                        Vector2 sizeDelta = infoRectTransform.sizeDelta;
+
+                        // 오른쪽 경계를 넘어가는 경우
+                        if (localPosition.x + sizeDelta.x > scrollViewContent.rect.width)
+                        {
+                            localPosition.x = scrollViewContent.rect.width - sizeDelta.x - 20;
+                        }
+
+
+                        // 경계 체크 후 위치 재설정
+                        infoRectTransform.localPosition = localPosition;
                     }
                 }
 
@@ -249,7 +269,11 @@ public class InventoryManager : UIBase
                         tacticalInfoBox.gameObject.SetActive(true);
                         tacticalInfoBox.tacticalManualIcon.sprite = tacticalIcon.tacticalIconImage.sprite;
                         tacticalInfoBox.tacticalManualName.text = tacticalIcon.tacticalString[0];
-                        tacticalInfoBox.tacticalManualInfo.text = tacticalIcon.tacticalString[1];
+                        tacticalInfoBox.tacticalManualLevel.text = "Level " + tacticalIcon.tacticalLevel.ToString();
+
+                        // 값을 합산하는 함수 호출
+                        tacticalInfoBox.tacticalManualInfo.text = tacticalIcon.tacticalString[0] + " " +
+                            CalculateTacticalValueIncrease(tacticalIcon.tacticalLevel, tacticalIcon.tacticalValue) + "% 증가";
 
                         tacticalInfoBox.transform.position = tacticalIcon.transform.position;
                     }
@@ -266,5 +290,17 @@ public class InventoryManager : UIBase
             tacticalInfoBox.gameObject.SetActive(false);
         }
 
+
+
+    }
+
+    private int CalculateTacticalValueIncrease(int level, float[] values)
+    {
+        float total = 0;
+        for (int i = 0; i < level; i++)
+        {
+            total += values[i];
+        }
+        return (int)total;
     }
 }

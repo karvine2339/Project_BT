@@ -2799,6 +2799,7 @@ MonoBehaviour:
   - 
   - 
   tacticalLevel: 0
+  tacticalValue: []
 --- !u!1 &3564069862675646969
 GameObject:
   m_ObjectHideFlags: 0
@@ -7180,6 +7181,7 @@ MonoBehaviour:
   - 
   - 
   tacticalLevel: 0
+  tacticalValue: []
 --- !u!1 &8354050900252214339
 GameObject:
   m_ObjectHideFlags: 0
@@ -7673,6 +7675,7 @@ MonoBehaviour:
   - 
   - 
   tacticalLevel: 0
+  tacticalValue: []
 --- !u!1 &8919239330883418974
 GameObject:
   m_ObjectHideFlags: 0
@@ -7708,7 +7711,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 250, y: -560}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 293.76, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3554880155766964361
 CanvasRenderer:
@@ -7781,7 +7784,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 0
+  m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
