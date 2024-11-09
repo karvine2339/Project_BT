@@ -181,7 +181,7 @@ public class InventoryManager : UIBase
         for (int i = 0; i < count; i++)
         {
             GameObject oopartsCell = Instantiate(oopartsIconObject);
-            oopartsCell.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
+            oopartsCell.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
             oopartsCell.transform.SetParent(content.transform, true);
 
             oopartsCell.GetComponentsInChildren<Image>()[1].gameObject.SetActive(false);
@@ -200,7 +200,8 @@ public class InventoryManager : UIBase
         raycaster.Raycast(pointEventData, results);
 
         if (results.Count > 0)
-        { 
+        {
+            Debug.Log(results[0].gameObject.name);
             if (results[0].gameObject.TryGetComponent(out oopartsIcon))
             {
                 if (isInfo == false)
@@ -213,27 +214,28 @@ public class InventoryManager : UIBase
                         oopartsInfoBox.oopartsName.text = oopartsIcon.oopartsString[0];
                         oopartsInfoBox.oopartsInfo.text = oopartsIcon.oopartsString[1];
 
-                        // 초기 위치 설정
-                        Vector3 iconPosition = oopartsIcon.transform.position;
-                        oopartsInfoBox.transform.position = iconPosition;
 
-                        // ScrollView의 Content 영역의 RectTransform 가져오기
-                        RectTransform scrollViewContent = oopartsInfoBox.GetComponentInParent<ScrollRect>().content;
-                        RectTransform infoRectTransform = oopartsInfoBox.GetComponent<RectTransform>();
-
-                        // ScrollView Content 내의 상대적인 위치를 계산
-                        Vector2 localPosition = infoRectTransform.localPosition;
-                        Vector2 sizeDelta = infoRectTransform.sizeDelta;
-
-                        // 오른쪽 경계를 넘어가는 경우
-                        if (localPosition.x + sizeDelta.x > scrollViewContent.rect.width)
+                        if (BTInputSystem.Instance.isTab)
                         {
-                            localPosition.x = scrollViewContent.rect.width - sizeDelta.x - 20;
+                            Vector3 iconPosition = oopartsIcon.transform.position;
+                            oopartsInfoBox.transform.position = iconPosition;
+
+                            RectTransform scrollViewContent = oopartsInfoBox.GetComponentInParent<ScrollRect>().content;
+                            RectTransform infoRectTransform = oopartsInfoBox.GetComponent<RectTransform>();
+
+                            Vector2 localPosition = infoRectTransform.localPosition;
+                            Vector2 sizeDelta = infoRectTransform.sizeDelta;
+
+                            if (localPosition.x + sizeDelta.x > scrollViewContent.rect.width)
+                            {
+                                localPosition.x = scrollViewContent.rect.width - sizeDelta.x - 20;
+                            }
+                            infoRectTransform.localPosition = localPosition;
+                        }    
+                        else if(BTInputSystem.Instance.isShop)
+                        {
+                            oopartsInfoBox.transform.position = oopartsIcon.transform.position;
                         }
-
-
-                        // 경계 체크 후 위치 재설정
-                        infoRectTransform.localPosition = localPosition;
                     }
                 }
 
