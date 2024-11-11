@@ -4,27 +4,26 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyMoveNode : Node
-{
+public class EnemyMoveNode : ActionNode
+{ 
     private Transform player;
-    private Transform transform;
-    private Animator anim;
-    private NavMeshAgent agent;
+    private Transform enemy;
 
-    public EnemyMoveNode(Transform player, Transform transform)
+    public EnemyMoveNode(Transform player, Transform enemy, Animator animator, NavMeshAgent agent) : base(() =>
+    {
+        enemy.LookAt(player);
+        agent.isStopped = false;
+        agent.SetDestination(player.position);
+        animator.SetFloat("Move", 1);
+        animator.SetFloat("Attack", 0);
+        animator.SetFloat("Idle", 0);
+        return NodeState.Running;
+
+    })
     {
         this.player = player;
-        this.transform = transform;
-        anim = transform.GetComponent<Animator>();
-        agent = transform.GetComponent<NavMeshAgent>();
-    }
-
-    public override NodeState Evaluate()
-    {
-        transform.LookAt(player);
-        agent.SetDestination(player.position);
-        anim.SetFloat("Move", 1);
-
-        return state = NodeState.Running;
+        this.enemy = enemy;
+        this.animator = animator;
+        this.agent = agent;
     }
 }

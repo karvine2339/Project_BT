@@ -7,6 +7,8 @@ public abstract class Tree : MonoBehaviour
 {
     private Node rootNode;
 
+    public bool isDead = false;
+
     protected void Start()
     {
         rootNode = SetupBehaviorTree();
@@ -14,8 +16,13 @@ public abstract class Tree : MonoBehaviour
 
     protected void Update()
     {
-        if (rootNode is null) return;
-        rootNode.Evaluate();
+        if (rootNode is null)
+            return;
+
+        if (!isDead)
+        {
+            rootNode.Evaluate();
+        }
     }
 
     protected abstract Node SetupBehaviorTree();

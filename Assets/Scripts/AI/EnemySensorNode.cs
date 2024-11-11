@@ -3,27 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemySensorNode : Node
+public class EnemySensorNode : ActionNode
 {
     private static int playerLayerMask = 1 << 9;
-    private Transform transform;
+    private Transform enemy;
+    private Transform player;
 
-    private Animator anim;
-    private NavMeshAgent agent;
-
-    public EnemySensorNode(Transform transform)
+    public EnemySensorNode(Transform enemy,Transform player) : base(()=>
     {
-        this.transform = transform;
-        anim = transform.GetComponent<Animator>();
-        agent = transform.GetComponent<NavMeshAgent>();
-    }
 
-    public override NodeState Evaluate()
-    {
-        var collider = Physics.OverlapSphere(transform.position, 5.0f, playerLayerMask);
+        var collider = Physics.OverlapSphere(enemy.position, 20.0f, playerLayerMask);
         if (collider.Length <= 0)
-            return state = NodeState.Failure;
-
-        return state = NodeState.Success;
+        {
+            return NodeState.Failure;
+        }
+        else
+        { 
+            return NodeState.Success;
+        }
+    })
+    {
+        this.enemy = enemy;
+        this.player = player;
     }
 }

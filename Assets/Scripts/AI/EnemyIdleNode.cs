@@ -1,20 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 
-public class EnemyIdleNode : Node
+public class EnemyIdleNode : ActionNode
 {
-    private Animator anim;
-
-    public EnemyIdleNode(Transform transform)
+    public EnemyIdleNode(Animator animator, NavMeshAgent agent) : base(() =>
     {
-        anim = transform.GetComponent<Animator>();
-    }
+        animator.SetFloat("Move", 0);
+        animator.SetFloat("Attack", 1);
+        animator.SetFloat("Idle", 1);
 
-    public override NodeState Evaluate()
+        agent.isStopped = true;
+
+        return NodeState.Running;
+    })
     {
-        anim.SetFloat("Move", 0);
-
-        return state = NodeState.Running;
+        this.animator = animator;
+        this.agent = agent;
     }
 }

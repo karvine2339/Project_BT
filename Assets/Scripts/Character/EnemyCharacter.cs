@@ -13,13 +13,26 @@ public class EnemyCharacter : MonoBehaviour
     public List<WeaponData> weaponList;
     public GameObject[] weaponPrefab;
 
+    public Transform fireStartPosition;
+
+    private Animator animator;
+
     public bool isDead = false;
+    public bool isAttack = false;
 
     public int curHp = 100;
     public int maxHp = 100;
 
+
+    private void Start()
+    {
+        animator = GetComponent<Animator>();
+    }
     public void OnDamaged(float damage,float criticalDamage)  
     {
+        if (isDead)
+            return;
+        
         float criticalHit = Random.Range(0.0f, 100.0f);
         if(criticalHit <= PlayerStat.Instance.CriticalProbability)
         {
@@ -66,6 +79,12 @@ public class EnemyCharacter : MonoBehaviour
 
     private void Die()
     {
-        Destroy(gameObject);
+        isDead = true;
+        Destroy(gameObject,5.0f);
+    }
+
+    public void Fire()
+    {
+
     }
 }
