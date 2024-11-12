@@ -21,19 +21,19 @@ public class EnemyAIBT : Tree
         {
              new EnemyDeadNode(enemyAnimator, enemyNavMeshAgent, enemyCharacter, this), 
 
-             new SequenceNode(new List<Node> // Sequence: 센서 감지 후 이동 및 공격 실행
+             new SequenceNode(new List<Node>
              {
-                 new EnemySensorNode(enemy, player),           // 20의 범위로 센서 감지
-                 new SelectorNode(new List<Node>                   // 공격 범위(10)를 체크하기 위한 Selector
+                 new EnemySensorNode(enemy, player),           
+                 new SelectorNode(new List<Node>                   
                  {
-                     new SequenceNode(new List<Node>               // 공격 범위 내일 때
+                     new SequenceNode(new List<Node>              
                      {
                            new EnemyAttackNode(player, enemy, enemyAnimator, enemyNavMeshAgent, enemyCharacter)
                      }),
-                     new EnemyMoveNode(player, enemy, enemyAnimator, enemyNavMeshAgent) // 공격 범위 밖일 때 이동
+                     new EnemyMoveNode(player, enemy, enemyAnimator, enemyNavMeshAgent) 
                  })
              }),
-             new EnemyIdleNode(enemyAnimator, enemyNavMeshAgent) // 이동이나 공격을 하지 않을 경우 Idle 상태 유지
+             new EnemyIdleNode(enemyAnimator, enemyNavMeshAgent) 
         });
         return root;
     }

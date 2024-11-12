@@ -11,13 +11,30 @@ public class EnemyMoveNode : ActionNode
 
     public EnemyMoveNode(Transform player, Transform enemy, Animator animator, NavMeshAgent agent) : base(() =>
     {
-        enemy.LookAt(player);
-        agent.isStopped = false;
-        agent.SetDestination(player.position);
-        animator.SetFloat("Move", 1);
-        animator.SetFloat("Attack", 0);
-        animator.SetFloat("Idle", 0);
-        return NodeState.Running;
+        if (Vector3.Distance(enemy.position, player.position) > 5)
+        {
+
+            enemy.LookAt(player);
+            agent.isStopped = false;
+            agent.SetDestination(player.position);
+            animator.SetFloat("Move", 1);
+            animator.SetFloat("Attack", 0);
+            animator.SetFloat("Idle", 0);
+            Debug.Log("Move");
+            if (agent.remainingDistance > agent.stoppingDistance)
+            {
+                return NodeState.Running;
+            }
+            else
+            {
+                return NodeState.Success;
+            }
+        }
+        else
+        {
+            agent.isStopped = true;
+            return NodeState.Failure;
+        }
 
     })
     {

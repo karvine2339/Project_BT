@@ -12,13 +12,14 @@ public class EnemySensorNode : ActionNode
     public EnemySensorNode(Transform enemy,Transform player) : base(()=>
     {
 
-        var collider = Physics.OverlapSphere(enemy.position, 20.0f, playerLayerMask);
+        var collider = Physics.OverlapSphere(enemy.position, 10.0f, playerLayerMask);
         if (collider.Length <= 0)
         {
             return NodeState.Failure;
         }
         else
-        { 
+        {
+            Debug.Log("Detected");
             return NodeState.Success;
         }
     })

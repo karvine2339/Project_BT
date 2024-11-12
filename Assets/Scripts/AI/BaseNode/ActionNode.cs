@@ -21,10 +21,4 @@ public class ActionNode : Node
         return state = NodeState.Failure;
     }
 
-    //Node actionNode = new ActionNode(() =>
-    //{
-    //    // 특정 동작을 수행
-    //    Debug.Log("Executing action");
-    //    return NodeState.Success;
-    //});
 }

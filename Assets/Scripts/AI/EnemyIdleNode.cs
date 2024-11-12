@@ -9,7 +9,7 @@ public class EnemyIdleNode : ActionNode
     public EnemyIdleNode(Animator animator, NavMeshAgent agent) : base(() =>
     {
         animator.SetFloat("Move", 0);
-        animator.SetFloat("Attack", 1);
+        animator.SetFloat("Attack", 0);
         animator.SetFloat("Idle", 1);
 
         agent.isStopped = true;
