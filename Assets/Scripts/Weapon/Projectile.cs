@@ -35,48 +35,67 @@ public class Projectile : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        int prevBouncCount = bounceCount;
-        if ((hitLayer & (1 << collision.gameObject.layer)) != 0)
+        //---- player Bullet
+        if (this.gameObject.layer == 12)
         {
-            ContactPoint contact = collision.contacts[0];
 
-            if (gameObject.CompareTag("Bullet"))
+            int prevBouncCount = bounceCount;
+            if ((hitLayer & (1 << collision.gameObject.layer)) != 0)
             {
-                Instantiate(bulletHole, contact.point, Quaternion.LookRotation(contact.normal) * Quaternion.Euler(90, 0, 0));
-            }
+                ContactPoint contact = collision.contacts[0];
 
-            if (bounceCount > 0)
-            {
-                bounceCount--;
-                transform.forward = collision.contacts[0].normal;
-            }
-        }
-
-        bool isHitEnemy = collision.transform.TryGetComponent(out EnemyCharacter enemy);
-        if (isHitEnemy)
-        {
-            if (bounceCount >= 0)
-            {
-                if (isExplosion)
+                if (gameObject.CompareTag("Bullet"))
                 {
-                    enemy.OnDamaged(PlayerStat.Instance.bulletDamage * PlayerStat.Instance.AdditionalBulletDamage,
-                PlayerStat.Instance.CriticalDamage * PlayerStat.Instance.OopartsDamage);
-                    GameObject ex = Instantiate(Resources.Load("ExplosionEffect") as GameObject);
-                    ex.transform.position = enemy.transform.position;
-                    ExplosionDamage(enemy.transform.position);
+                    Instantiate(bulletHole, contact.point, Quaternion.LookRotation(contact.normal) * Quaternion.Euler(90, 0, 0));
                 }
-                else
+
+                if (bounceCount > 0)
                 {
-                    enemy.OnDamaged(PlayerStat.Instance.bulletDamage * PlayerStat.Instance.AdditionalBulletDamage,
-                                    PlayerStat.Instance.CriticalDamage * PlayerStat.Instance.OopartsDamage);
+                    bounceCount--;
+                    transform.forward = collision.contacts[0].normal;
                 }
             }
+
+            bool isHitEnemy = collision.transform.TryGetComponent(out EnemyCharacter enemy);
+            if (isHitEnemy)
+            {
+                if (bounceCount >= 0)
+                {
+                    if (isExplosion)
+                    {
+                        enemy.OnDamaged(PlayerStat.Instance.bulletDamage * PlayerStat.Instance.AdditionalBulletDamage,
+                    PlayerStat.Instance.CriticalDamage * PlayerStat.Instance.OopartsDamage);
+                        GameObject ex = Instantiate(Resources.Load("ExplosionEffect") as GameObject);
+                        ex.transform.position = enemy.transform.position;
+                        ExplosionDamage(enemy.transform.position);
+                    }
+                    else
+                    {
+                        enemy.OnDamaged(PlayerStat.Instance.bulletDamage * PlayerStat.Instance.AdditionalBulletDamage,
+                                        PlayerStat.Instance.CriticalDamage * PlayerStat.Instance.OopartsDamage);
+                    }
+                }
+            }
+
+            if (prevBouncCount <= 0)
+            {
+                Destroy(gameObject);
+            }
+        }
+        //---- player Bullet
+
+        //--- Enemy Bullet
+        else if (this.gameObject.layer == 14)
+        {
+
+            bool isHitPlayer = collision.transform.TryGetComponent(out PlayerCharacter player);
+            if (isHitPlayer)
+            {
+                player.OnDamaged(10f);
+                Destroy(gameObject);
+            }
         }
 
-        if (prevBouncCount <= 0)
-        {
-            Destroy(gameObject);
-        }
     }
 
     private void OnEnable()

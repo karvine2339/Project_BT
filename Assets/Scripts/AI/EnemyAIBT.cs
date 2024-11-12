@@ -10,6 +10,7 @@ public class EnemyAIBT : Tree
     private EnemyCharacter enemyCharacter;
     [SerializeField] private Animator enemyAnimator;
     [SerializeField] private NavMeshAgent enemyNavMeshAgent;
+    [SerializeField] private LayerMask obstacleMask;
 
     protected override Node SetupBehaviorTree()
     {
@@ -26,14 +27,14 @@ public class EnemyAIBT : Tree
                  new EnemySensorNode(enemy, player),           
                  new SelectorNode(new List<Node>                   
                  {
-                     new SequenceNode(new List<Node>              
+                     new SelectorNode(new List<Node>              
                      {
-                           new EnemyAttackNode(player, enemy, enemyAnimator, enemyNavMeshAgent, enemyCharacter)
+                           new EnemyAttackNode(player, enemy, enemyCharacter, obstacleMask),
+                           new EnemyMoveNode(player,enemy,enemyAnimator,enemyNavMeshAgent,enemyCharacter)
                      }),
-                     new EnemyMoveNode(player, enemy, enemyAnimator, enemyNavMeshAgent) 
                  })
              }),
-             new EnemyIdleNode(enemyAnimator, enemyNavMeshAgent) 
+             new EnemyIdleNode(enemyCharacter) 
         });
         return root;
     }

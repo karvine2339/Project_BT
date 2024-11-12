@@ -18,8 +18,8 @@ public class EnemyDeadNode : Node
     {
         if (enemyCharacter.curHp <= 0 && isDead == false)
         {
-            agent.isStopped = true;
-            animator.SetTrigger("Death");
+            enemyCharacter.SetDeadAnimState();
+
             tree.isDead = true;
             isDead = true;
             return NodeState.Success;
