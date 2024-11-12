@@ -1,0 +1,145 @@
+{
+  "m_GameObject": {
+    "m_FileID": 0,
+    "m_PathID": -8822485965843670255
+  },
+  "m_Enabled": 0,
+  "m_Script": {
+    "m_FileID": 0,
+    "m_PathID": 7091944792911963760
+  },
+  "m_Name": "",
+  "PlayOnEnable": 1,
+  "AudioSourceDatas": [
+    {
+      "GroupId": 0,
+      "IgnoreInterruptDelay": 1,
+      "IgnoreInterruptPlay": 1,
+      "AudioMixerGroup": {
+        "m_FileID": 17,
+        "m_PathID": 7801575669670115345
+      },
+      "AudioMixerSnapshot": {
+        "AudioMixerSnapshot": {
+          "m_FileID": 17,
+          "m_PathID": -1000336850424371888
+        },
+        "TimeToReach": 0.0
+      },
+      "AudioClips": [
+        {
+          "m_FileID": 19,
+          "m_PathID": -2590378937169715695
+        },
+        {
+          "m_FileID": 19,
+          "m_PathID": 4186385168502418344
+        },
+        {
+          "m_FileID": 19,
+          "m_PathID": -6864838318237071894
+        },
+        {
+          "m_FileID": 19,
+          "m_PathID": -3712423787489881776
+        },
+        {
+          "m_FileID": 19,
+          "m_PathID": 5442952559197258692
+        },
+        {
+          "m_FileID": 19,
+          "m_PathID": -2671999855716204917
+        }
+      ],
+      "CustomCurves": [],
+      "BypassEffects": 0,
+      "BypassListenerEffects": 0,
+      "BypassReverbZones": 0,
+      "Loop": 0,
+      "Priority": 90,
+      "Volume": 0.6,
+      "Pitch": 1.0,
+      "Delay": 0.1,
+      "StereoPan": 0.0,
+      "SpatialBlend": 1.0,
+      "ReverbZoneMix": 1.0,
+      "DopplerLevel": 1.0,
+      "Spread": 0.0,
+      "VolumeRolloff": 1,
+      "MinDistance": 1.0,
+      "MaxDistance": 500.0
+    },
+    {
+      "GroupId": 1,
+      "IgnoreInterruptDelay": 1,
+      "IgnoreInterruptPlay": 1,
+      "AudioMixerGroup": {
+        "m_FileID": 17,
+        "m_PathID": 7801575669670115345
+      },
+      "AudioMixerSnapshot": {
+        "AudioMixerSnapshot": {
+          "m_FileID": 0,
+          "m_PathID": 0
+        },
+        "TimeToReach": 0.0
+      },
+      "AudioClips": [
+        {
+          "m_FileID": 19,
+          "m_PathID": 3571046088286254606
+        },
+        {
+          "m_FileID": 19,
+          "m_PathID": -4926864098846926882
+        },
+        {
+          "m_FileID": 19,
+          "m_PathID": -14309897728125650
+        },
+        {
+          "m_FileID": 19,
+          "m_PathID": -1636729549679474147
+        },
+        {
+          "m_FileID": 19,
+          "m_PathID": 597841632386361326
+        },
+        {
+          "m_FileID": 19,
+          "m_PathID": -5391186190796727983
+        },
+        {
+          "m_FileID": 19,
+          "m_PathID": -6452146281266730476
+        },
+        {
+          "m_FileID": 19,
+          "m_PathID": -740758338782487670
+        },
+        {
+          "m_FileID": 19,
+          "m_PathID": 1784811919268120555
+        }
+      ],
+      "CustomCurves": [],
+      "BypassEffects": 0,
+      "BypassListenerEffects": 0,
+      "BypassReverbZones": 0,
+      "Loop": 0,
+      "Priority": 90,
+      "Volume": 0.4,
+      "Pitch": 1.0,
+      "Delay": 0.0,
+      "StereoPan": 0.0,
+      "SpatialBlend": 1.0,
+      "ReverbZoneMix": 1.0,
+      "DopplerLevel": 1.0,
+      "Spread": 0.0,
+      "VolumeRolloff": 1,
+      "MinDistance": 1.0,
+      "MaxDistance": 500.0
+    }
+  ]
+}

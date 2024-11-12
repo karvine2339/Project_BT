@@ -113,12 +113,37 @@ public class EnemyCharacter : MonoBehaviour
         player = PlayerCharacter.Instance.transform;
         Vector3 bulletDir = player.position - transform.position;
 
-        Projectile bullet = Instantiate(bulletPrefab,fireStartPosition.position,Quaternion.LookRotation(bulletDir));
+        if (this.gameObject.layer == 10)
+        {
+            Projectile newBullet = Instantiate(bulletPrefab, fireStartPosition.position, Quaternion.LookRotation(bulletDir));
 
-        bullet.gameObject.layer = 14;
+            newBullet.gameObject.layer = 14;
 
-        bullet.SetForce(50);
+            newBullet.SetForce(50);
+        }
 
+        else if (this.gameObject.layer == 15)
+        {
+            
+            Debug.Log("Rabu");
+            int pelletCount = Random.Range(5, 10);
+            float spreadAngle = 5.0f;
+
+            for (int i = 0; i < pelletCount; i++)
+            {
+                Projectile newBullet = Instantiate(bulletPrefab, fireStartPosition.position, Quaternion.LookRotation(bulletDir));
+                newBullet.gameObject.layer = 14;
+
+                float spreadX = Random.Range(-spreadAngle, spreadAngle);
+                float spreadY = Random.Range(-spreadAngle, spreadAngle);
+
+                Quaternion spreadRotation = Quaternion.Euler(spreadX, spreadY, 0);
+                Vector3 shootDirection = spreadRotation * bulletDir;
+
+                newBullet.GetComponent<Rigidbody>().velocity = shootDirection * 50;
+                //newBullet.GetComponent<Rigidbody>().velocity = shootDirection * projectileSpeed;
+            }
+        }
     }
 
     public void SetAttackAnimState()

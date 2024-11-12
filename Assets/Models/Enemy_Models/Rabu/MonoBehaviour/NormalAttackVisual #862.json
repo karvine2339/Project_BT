@@ -1,0 +1,125 @@
+{
+  "m_GameObject": {
+    "m_FileID": 0,
+    "m_PathID": -3095866839815466497
+  },
+  "m_Enabled": 1,
+  "m_Script": {
+    "m_FileID": 0,
+    "m_PathID": -8927237529964508998
+  },
+  "m_Name": "",
+  "UpCurveList": [
+    {
+      "m_Curve": [
+        {
+          "time": 0.0,
+          "value": 0.0,
+          "inSlope": 4.96755075,
+          "outSlope": 4.96755075,
+          "weightedMode": 0,
+          "inWeight": 0.0,
+          "outWeight": 0.08900314
+        },
+        {
+          "time": 0.565863967,
+          "value": 1.79276991,
+          "inSlope": -0.8977604,
+          "outSlope": -0.8977604,
+          "weightedMode": 0,
+          "inWeight": 0.333333343,
+          "outWeight": 0.256119579
+        },
+        {
+          "time": 1.0,
+          "value": 0.0,
+          "inSlope": -4.92283773,
+          "outSlope": -4.92283773,
+          "weightedMode": 0,
+          "inWeight": 0.09900291,
+          "outWeight": 0.0
+        }
+      ],
+      "m_PreInfinity": 2,
+      "m_PostInfinity": 2,
+      "m_RotationOrder": 4
+    }
+  ],
+  "RightCurveList": [
+    {
+      "m_Curve": [
+        {
+          "time": 0.0,
+          "value": 0.0,
+          "inSlope": 0.0,
+          "outSlope": 0.0,
+          "weightedMode": 0,
+          "inWeight": 0.0,
+          "outWeight": 0.333333343
+        },
+        {
+          "time": 1.0,
+          "value": 0.0,
+          "inSlope": 0.0,
+          "outSlope": 0.0,
+          "weightedMode": 0,
+          "inWeight": 0.333333343,
+          "outWeight": 0.0
+        }
+      ],
+      "m_PreInfinity": 2,
+      "m_PostInfinity": 2,
+      "m_RotationOrder": 0
+    }
+  ],
+  "ForwardCurveList": [
+    {
+      "m_Curve": [
+        {
+          "time": 0.0,
+          "value": 0.0,
+          "inSlope": 1.0,
+          "outSlope": 1.0,
+          "weightedMode": 0,
+          "inWeight": 0.0,
+          "outWeight": 0.0
+        },
+        {
+          "time": 1.0,
+          "value": 1.0,
+          "inSlope": 1.0,
+          "outSlope": 1.0,
+          "weightedMode": 0,
+          "inWeight": 0.0,
+          "outWeight": 0.0
+        }
+      ],
+      "m_PreInfinity": 2,
+      "m_PostInfinity": 2,
+      "m_RotationOrder": 0
+    }
+  ],
+  "ObjectToHideWhenDestroyed": [
+    {
+      "ObjectToHide": {
+        "m_FileID": 0,
+        "m_PathID": -1096638832046167037
+      },
+      "HideDelaySecond": 0.0
+    },
+    {
+      "ObjectToHide": {
+        "m_FileID": 0,
+        "m_PathID": 2443784293531469094
+      },
+      "HideDelaySecond": 0.3
+    },
+    {
+      "ObjectToHide": {
+        "m_FileID": 0,
+        "m_PathID": 5454986426423008328
+      },
+      "HideDelaySecond": 0.8
+    }
+  ]
+}
