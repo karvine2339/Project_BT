@@ -20,7 +20,7 @@ public class RandomSelectorNode : Node
             switch (node.Evaluate())
             {
                 case NodeState.Failure:
-                    nodes.RemoveAt(index); // 실패한 노드는 제외
+                    nodes.RemoveAt(index);
                     continue;
                 case NodeState.Success:
                     return state = NodeState.Success;

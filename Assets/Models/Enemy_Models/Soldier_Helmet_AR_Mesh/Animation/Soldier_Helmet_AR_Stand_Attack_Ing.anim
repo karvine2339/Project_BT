@@ -24218,4 +24218,18 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_Events: []
+  m_Events:
+  - time: 0.16666667
+    functionName: Fire
+    data: 
+    objectReferenceParameter: {fileID: 11500000, guid: 58260caeb0ff3d147bc8221599661763, type: 3}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.6333333
+    functionName: EndAttack
+    data: 
+    objectReferenceParameter: {fileID: 11500000, guid: 58260caeb0ff3d147bc8221599661763, type: 3}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0

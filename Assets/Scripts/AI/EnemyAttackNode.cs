@@ -26,8 +26,17 @@ public class EnemyAttackNode : ActionNode
             { 
                 return NodeState.Failure; 
             }
+
             enemyCharacter.SetAttackAnimState();
-            return NodeState.Success;
+
+            if (enemyCharacter.isAttackAnimate == true)
+            {
+                return NodeState.Running;
+            }
+            else
+            {
+                return NodeState.Success;
+            }
         })
     {
         this.player = player;

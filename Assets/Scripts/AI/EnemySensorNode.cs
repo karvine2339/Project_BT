@@ -19,7 +19,6 @@ public class EnemySensorNode : ActionNode
         }
         else
         {
-            Debug.Log("Detected");
             return NodeState.Success;
         }
     })

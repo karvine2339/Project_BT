@@ -19,12 +19,17 @@ public abstract class Node
     protected Animator animator;
     protected NavMeshAgent agent;
     protected EnemyCharacter enemyCharacter;
+    protected Enemy_Rabu enemyRabu;
 
     public Node(Animator animator, NavMeshAgent agent, EnemyCharacter enemyCharacter)
     {
         this.animator = animator;
         this.agent = agent;
-        this.enemyCharacter = enemyCharacter;
+        this.enemyCharacter = enemyCharacter;   
+    }
+    public Node(Enemy_Rabu enemyRabu)
+    {
+        this.enemyRabu = enemyRabu;
     }
     public Node()
     {

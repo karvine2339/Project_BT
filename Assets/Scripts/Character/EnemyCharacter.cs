@@ -20,8 +20,8 @@ public class EnemyCharacter : MonoBehaviour
     public GameObject muzzleFlashPrefab;
     public Projectile bulletPrefab;
 
-    private Animator animator;
-    private NavMeshAgent agent;
+    protected Animator animator;
+    protected NavMeshAgent agent;
 
     public bool isDead = false;
     public bool isAttack = false;
@@ -29,29 +29,22 @@ public class EnemyCharacter : MonoBehaviour
     public int curHp = 100;
     public int maxHp = 100;
 
-    private float attackDelay;
-    private float attackTime = 3.0f;
+    protected float attackDelay;
+    protected float attackTime = 3.0f;
+    public int attackCount = 0;
+    public bool isReload = false;
+    public bool isAttackAnimate = false;
 
-    private Transform player;
+    protected Transform player;
     public Transform raycastPosition;
 
 
-    private void Start()
+    protected virtual void Start()
     {
         animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
     }
 
-    private void Update()
-    {
-        player = PlayerCharacter.Instance.transform;
-        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
-        Vector3 directionToPlayer = (player.position - transform.position).normalized;
-
-        Debug.DrawRay(transform.position,directionToPlayer,Color.green);
-
-
-    }
     public void OnDamaged(float damage, float criticalDamage)
     {
         if (isDead)
@@ -124,8 +117,6 @@ public class EnemyCharacter : MonoBehaviour
 
         else if (this.gameObject.layer == 15)
         {
-            
-            Debug.Log("Rabu");
             int pelletCount = Random.Range(5, 10);
             float spreadAngle = 5.0f;
 
@@ -141,7 +132,6 @@ public class EnemyCharacter : MonoBehaviour
                 Vector3 shootDirection = spreadRotation * bulletDir;
 
                 newBullet.GetComponent<Rigidbody>().velocity = shootDirection * 50;
-                //newBullet.GetComponent<Rigidbody>().velocity = shootDirection * projectileSpeed;
             }
         }
     }
@@ -163,17 +153,32 @@ public class EnemyCharacter : MonoBehaviour
         if (attackTime <= 0)
         {
             animator.SetTrigger("Attack");
-            Fire();
-            attackTime = 3.0f;
+            isAttackAnimate = true;
+
+            if (this.gameObject.layer == 10)
+            {
+                attackTime = 3.0f;
+            }
+            else if(this.gameObject.layer == 15)
+            {
+                attackTime = 1.0f;
+            }
+
+            attackCount++;
         }
 
         isAttack = true;
         
-
-
         animator.SetFloat("Idle", 0);
         animator.SetFloat("Move", 0);
         agent.isStopped = true;
+    }
+
+    public void SetReloadAnimState()
+    {
+        isReload = true;
+        attackCount = 0;
+        animator.SetTrigger("Reload");
     }
 
     public void SetIdleAnimState()
@@ -206,5 +211,15 @@ public class EnemyCharacter : MonoBehaviour
         muzzle.transform.position = fireStartPosition.position;
         muzzle.gameObject.SetActive(true);
         Destroy(muzzle, 1.0f);
+    }
+
+    public void EndReload()
+    {
+        isReload = false;
+    }
+
+    public void EndAttack()
+    {
+        isAttackAnimate = false;
     }
 }
