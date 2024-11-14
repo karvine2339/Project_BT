@@ -60,33 +60,35 @@ public class EnemyCharacter : MonoBehaviour
         HpBarActive();
     }
 
-    public void OnDamaged(float damage, float criticalDamage)
+    public virtual void OnDamaged(float damage, float criticalDamage)
     {
         if (isDead)
             return;
 
         float criticalHit = Random.Range(0.0f, 100.0f);
+        float _damage = PlayerCharacter.Instance.CalculateOopartsValue(damage, PlayerCharacter.Instance.IncreaseDamage);
         if (criticalHit <= PlayerStat.Instance.CriticalProbability)
         {
             damage *= (1.5f * criticalDamage);
-            curHp -= (int)damage;
+            curHp -= (int)_damage;
 
 
             DamageTextCtrl.Instance.CreateCriPopup(new Vector3(transform.position.x + Random.Range(-0.2f, 0.2f),
                                                                transform.position.y + Random.Range(-0.2f, 0.2f),
-                                                               transform.position.z), damage.ToString("N0"));
+                                                               transform.position.z), _damage.ToString("N0"));
         }
         else
         {
-            curHp -= (int)damage;
+            curHp -= (int)_damage;
             DamageTextCtrl.Instance.CreatePopup(new Vector3(transform.position.x + Random.Range(-0.2f, 0.2f),
                                                                transform.position.y + Random.Range(-0.2f, 0.2f),
-                                                               transform.position.z), damage.ToString("N0"));
+                                                               transform.position.z), _damage.ToString("N0"));
         }
 
         UpdateHpBar();
 
-        OnEnemyDamaged?.Invoke(this, (int)damage);
+        OnEnemyDamaged?.Invoke(this, (int)_damage);
+
         if (curHp <= 0 && isDead == false)
         {
             isDead = true;
@@ -130,9 +132,11 @@ public class EnemyCharacter : MonoBehaviour
         return droppedWeapon;
     }
 
-    private void Die()
+    protected void Die()
     {
         isDead = true;
+        hpBarObject.SetActive(false);
+        hpBarActiveTime = 0.0f;
         Destroy(gameObject, 5.0f);
     }
 

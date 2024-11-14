@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   oopartsName: "\uC2DC\uACC4"
   effectString: "\uBAA8\uB4E0 \uC2A4\uD0AC\uC758 \uC7AC\uC0AC\uC6A9 \uB300\uAE30\uC2DC\uAC04
-    25% \uAC10\uC18C"
+    30% \uAC10\uC18C"
   oopartsIndex: 1
   oopartsIcon: {fileID: 21300000, guid: 885b05d118fa19f4b9e8bce13ecedf5b, type: 3}
   oopartsBackIcon: {fileID: 21300000, guid: 56eb5c926796abf459b931fabd1cc978, type: 3}

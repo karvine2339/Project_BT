@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -32,7 +33,9 @@ public class HUDManager : UIBase
     public float creditTextTime = 5.0f;
     public bool isIncreaseCredit = false;
 
-
+    public TextMeshProUGUI enemyNameText;
+    public Image enemyHpBar;
+    public GameObject enemyHpObject;
 
     public void Awake()
     {
@@ -45,6 +48,7 @@ public class HUDManager : UIBase
         shieldBar.fillAmount = 1.0f;
         creditText.text = PlayerCharacter.Instance.curCredit.ToString("N0");
         secondWeapon.gameObject.SetActive(false);
+        enemyHpObject.SetActive(false);
     }
     public void OnDestroy()
     {
@@ -114,6 +118,27 @@ public class HUDManager : UIBase
     {
         shieldText.text = (int)curShield + " / " + (int)maxShield;
         shieldBar.fillAmount = curShield / maxShield;
+    }
+
+    private void OnEnable()
+    {
+        Enemy_Rabu.OnEnemyRabuDamaged += HandleEnemyRabuDamaged;
+    }
+
+
+    private void OnDisable()
+    {
+        Enemy_Rabu.OnEnemyRabuDamaged -= HandleEnemyRabuDamaged;
+    }
+    private void HandleEnemyRabuDamaged(Enemy_Rabu rabu, int damage)
+    {
+        enemyHpObject.SetActive(true);
+        enemyNameText.text = rabu.enemyName;
+        enemyHpBar.fillAmount = (float)rabu.curHp / (float)rabu.maxHp;
+        if(enemyHpBar.fillAmount <= 0)
+        {
+            enemyHpObject.SetActive(false);
+        }
     }
 
 }

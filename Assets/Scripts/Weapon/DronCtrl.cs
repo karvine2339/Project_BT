@@ -58,12 +58,14 @@ public class DronCtrl : MonoBehaviour
 
     private void OnEnable()
     {
-        EnemyCharacter.OnEnemyDamaged += HandleEnemyDamaged; 
+        EnemyCharacter.OnEnemyDamaged += HandleEnemyDamaged;
+        Enemy_Rabu.OnEnemyRabuDamaged += HandleEnemyRabuDamaged;
     }
 
     private void OnDisable()
     {
-        EnemyCharacter.OnEnemyDamaged -= HandleEnemyDamaged; 
+        EnemyCharacter.OnEnemyDamaged -= HandleEnemyDamaged;
+        Enemy_Rabu.OnEnemyRabuDamaged -= HandleEnemyRabuDamaged;
     }
 
     private void HandleEnemyDamaged(EnemyCharacter enemy, int damage)
@@ -72,6 +74,19 @@ public class DronCtrl : MonoBehaviour
         foreach(var _enemy in detectedEnemy)
         {
             if(enemy == _enemy)
+            {
+                activeTime = 10.0f;
+                targetEnemy = _enemy;
+            }
+        }
+    }
+
+    private void HandleEnemyRabuDamaged(Enemy_Rabu rabu, int damage)
+    {
+
+        foreach (var _enemy in detectedEnemy)
+        {
+            if (rabu == _enemy)
             {
                 activeTime = 10.0f;
                 targetEnemy = _enemy;

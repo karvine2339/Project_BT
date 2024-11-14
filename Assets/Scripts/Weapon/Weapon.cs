@@ -237,7 +237,8 @@ public class Weapon : MonoBehaviour
 
     public void ApplyCoolDown()
     {
-        skillCoolDuration = skillCoolDown;
+        PlayerCharacter player = PlayerCharacter.Instance;
+        skillCoolDuration = player.CalculateOopartsValue(skillCoolDown,player.DecreaseCoolDown);
         HUDManager.Instance.skillImageMask.fillAmount = 1.0f;
     }
 
@@ -251,7 +252,8 @@ public class Weapon : MonoBehaviour
 
             skillCoolDuration -= Time.deltaTime;
 
-            HUDManager.Instance.skillImageMask.fillAmount = skillCoolDuration / skillCoolDown;
+            HUDManager.Instance.skillImageMask.fillAmount = skillCoolDuration / 
+                PlayerCharacter.Instance.CalculateOopartsValue(skillCoolDown,PlayerCharacter.Instance.DecreaseCoolDown);
         }
     }
 

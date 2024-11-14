@@ -22,6 +22,20 @@ public class OopartsActiveManager : MonoBehaviour
     public void ActiveOoparts(int index)
     {
         oopartsActive[index] = true;
+
+        if(index == 1)
+        {
+            PlayerCharacter.Instance.DecreaseCoolDown.Add(30);
+        }
+        if (index == 2)
+        {
+            PlayerCharacter.Instance.DecreaseDamage.Add(-50);
+            PlayerCharacter.Instance.IncreaseDamage.Add(50);
+        }
+        if (index == 4)
+        {
+            PlayerCharacter.Instance.DecreaseDamage.Add(30);
+        }
     }
 
     public List<bool> CheckOoparts()

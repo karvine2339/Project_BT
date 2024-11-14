@@ -34,7 +34,7 @@ public class Ooparts : MonoBehaviour
     }
     public void OnClick()
     {
-        OopartsActiveManager.Instance.oopartsActive[oopartsIndex] = true;
+        OopartsActiveManager.Instance.ActiveOoparts(oopartsIndex);
         OopartsManager.Instance.oopartsCanvasObject.SetActive(false);
 
         InventoryManager.Instance.AddOoparts(oopartsData.oopartsIndex, oopartsData.oopartsName, oopartsData.effectString

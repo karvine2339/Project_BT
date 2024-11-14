@@ -53,7 +53,11 @@ public class ChrBase : MonoBehaviour
 
     protected float targetRotation;           
     protected float rotationVelocity;         
-    protected float RotationSmoothTime = 0.12f; 
+    protected float RotationSmoothTime = 0.12f;
+
+    public List<float> DecreaseDamage = new List<float>();
+    public List<float> DecreaseCoolDown = new List<float>();
+    public List<float> IncreaseDamage = new List<float>();
 
     protected UnityEngine.CharacterController unityCharacterController;
     public Animator characterAnimator;
@@ -132,9 +136,11 @@ public class ChrBase : MonoBehaviour
             engagingTime = 5.0f;
             isEngaging = true;
 
+            float _damage = CalculateOopartsValue(damage,DecreaseDamage);
+
             if (curShield > 0)
             {
-                curShield -= (int)damage;
+                curShield -= (int)_damage;
                 if (curShield < 0)
                 {
                     curShield = 0;
@@ -143,7 +149,7 @@ public class ChrBase : MonoBehaviour
             }
             else if (curShield <= 0)
             {
-                curHp -= (int)damage;
+                curHp -= (int)_damage;
                 HUDManager.Instance.UpdateHpHUD(curHp, maxHp);
             }
 
@@ -246,6 +252,18 @@ public class ChrBase : MonoBehaviour
         Vector3 spherePosition = transform.position + (Vector3.down * groundOffset);
 
         isGrounded = Physics.CheckSphere(spherePosition, groundRadius, groundLayer, QueryTriggerInteraction.Ignore);
+    }
+
+    public float CalculateOopartsValue(float oopartsValue, List<float> listValue)
+    {
+        float baseOopartsValue = 1.0f;
+
+        foreach (var value in listValue)
+        {
+            baseOopartsValue *= (1 - value / 100);
+        }
+
+        return oopartsValue * baseOopartsValue;
     }
 }
 

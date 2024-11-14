@@ -75,7 +75,7 @@ public class ShopManager : UIBase
         buyButton[0].interactable = false;
         OopartsIcon firstOoparts = ooparts[0].gameObject.GetComponent<OopartsIcon>();
 
-        OopartsActiveManager.Instance.oopartsActive[firstOoparts.oopartsIndex] = true;
+        OopartsActiveManager.Instance.ActiveOoparts(firstOoparts.oopartsIndex);
 
         Image[] image = products[0].GetComponentsInChildren<Image>();
 
@@ -102,8 +102,7 @@ public class ShopManager : UIBase
         buyButton[1].interactable = false;
         OopartsIcon secondOoparts = ooparts[1].gameObject.GetComponent<OopartsIcon>();
 
-        OopartsActiveManager.Instance.oopartsActive[secondOoparts.oopartsIndex] = true;
-
+        OopartsActiveManager.Instance.ActiveOoparts(secondOoparts.oopartsIndex);
         Image[] image = products[1].GetComponentsInChildren<Image>();
 
         foreach (var img in image)
