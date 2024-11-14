@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2477324925353778112}
-  - component: {fileID: 2566924809544395003}
   - component: {fileID: 3647558820261626858}
   - component: {fileID: 7600400925446020258}
+  - component: {fileID: 6240406555130999179}
   m_Layer: 0
   m_Name: Rabu_Grenade
   m_TagString: Untagged
@@ -35,27 +35,6 @@ Transform:
   - {fileID: 8361173635845174613}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2566924809544395003
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1385701509601895902}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d16f2cf37a6066e4d8129234b1987cc1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hitLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  bulletHole: {fileID: 0}
-  lifeTime: 10
-  isExplosion: 0
 --- !u!54 &3647558820261626858
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -104,6 +83,22 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6240406555130999179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1385701509601895902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b1f4feeb63b5e5469610d800598caed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 3
+  enemyGrenadeLayerMask:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!1 &3819699850131054973
 GameObject:
   m_ObjectHideFlags: 0

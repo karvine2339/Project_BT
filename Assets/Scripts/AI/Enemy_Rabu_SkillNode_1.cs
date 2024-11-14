@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Enemy_Rabu_SkillNode_1 : ActionNode
 {
@@ -11,17 +12,17 @@ public class Enemy_Rabu_SkillNode_1 : ActionNode
                 if (enemyRabu.skillTime >= 10.0f)
                 {
                     enemyRabu.SetSkillState();
-                    return NodeState.Running;
                 }
                 
-                else if(enemyRabu.isSkill == true)
+                if(enemyRabu.isSkill)
                 {
-                    return NodeState.Success;
+                    return NodeState.Running;
                 }
                 else
                 {
-                    return NodeState.Failure;
-                }
+                    return NodeState.Success;
+                }    
+
             })
     {
         this.enemyRabu = enemyRabu;

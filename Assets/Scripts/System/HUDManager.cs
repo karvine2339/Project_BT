@@ -12,6 +12,8 @@ public class HUDManager : UIBase
 
     public TextMeshProUGUI weaponNameText;
     public TextMeshProUGUI weaponAmmoText;
+    public TextMeshProUGUI shieldText;
+    public TextMeshProUGUI hpText;
 
     public Image curWeaponImage;
     public TextMeshProUGUI weaponIndex;
@@ -100,6 +102,18 @@ public class HUDManager : UIBase
             PlayerCharacter.Instance.curCredit = PlayerCharacter.Instance.credit;
             isIncreaseCredit = false;
         }
+    }
+
+    public void UpdateHpHUD(float curHp, float maxHp)
+    {
+        hpText.text = (int)curHp + " / " + (int)maxHp;
+        hpBar.fillAmount = curHp / maxHp;
+    }
+
+    public void  UpdateShieldHUD(float curShield, float maxShield)
+    {
+        shieldText.text = (int)curShield + " / " + (int)maxShield;
+        shieldBar.fillAmount = curShield / maxShield;
     }
 
 }

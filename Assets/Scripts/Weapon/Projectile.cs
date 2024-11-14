@@ -23,7 +23,7 @@ public class Projectile : MonoBehaviour
     private void Awake()
     {
         rigid = GetComponent<Rigidbody>();
-        bounceCount = Random.Range(0, 2);
+        //bounceCount = Random.Range(0, 2);
 
         Destroy(gameObject, lifeTime);
     }
@@ -49,18 +49,18 @@ public class Projectile : MonoBehaviour
                     Instantiate(bulletHole, contact.point, Quaternion.LookRotation(contact.normal) * Quaternion.Euler(90, 0, 0));
                 }
 
-                if (bounceCount > 0)
-                {
-                    bounceCount--;
-                    transform.forward = collision.contacts[0].normal;
-                }
+                //if (bounceCount > 0)
+                //{
+                //    bounceCount--;
+                //    transform.forward = collision.contacts[0].normal;
+                //}
             }
 
             bool isHitEnemy = collision.transform.TryGetComponent(out EnemyCharacter enemy);
             if (isHitEnemy)
             {
-                if (bounceCount >= 0)
-                {
+                //if (bounceCount >= 0)
+                //{
                     if (isExplosion)
                     {
                         enemy.OnDamaged(PlayerStat.Instance.bulletDamage * PlayerStat.Instance.AdditionalBulletDamage,
@@ -74,13 +74,13 @@ public class Projectile : MonoBehaviour
                         enemy.OnDamaged(PlayerStat.Instance.bulletDamage * PlayerStat.Instance.AdditionalBulletDamage,
                                         PlayerStat.Instance.CriticalDamage * PlayerStat.Instance.OopartsDamage);
                     }
-                }
+                //}
             }
 
-            if (prevBouncCount <= 0)
-            {
+            //if (prevBouncCount <= 0)
+            //{
                 Destroy(gameObject);
-            }
+            //}
         }
         //---- player Bullet
 

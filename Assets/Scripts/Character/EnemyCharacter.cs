@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.AI;
 using static UnityEngine.EventSystems.EventTrigger;
 using Random = UnityEngine.Random;
@@ -19,9 +20,13 @@ public class EnemyCharacter : MonoBehaviour
 
     public GameObject muzzleFlashPrefab;
     public Projectile bulletPrefab;
+    public Image hpBar;
+    public GameObject hpBarObject;
 
     protected Animator animator;
     protected NavMeshAgent agent;
+
+    private float hpBarActiveTime;
 
     public bool isDead = false;
     public bool isAttack = false;
@@ -34,6 +39,8 @@ public class EnemyCharacter : MonoBehaviour
     public int attackCount = 0;
     public bool isReload = false;
     public bool isAttackAnimate = false;
+    public bool reloadStarted = false;
+    public bool isSkill = false;
 
     protected Transform player;
     public Transform raycastPosition;
@@ -43,6 +50,14 @@ public class EnemyCharacter : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
+
+        hpBar.fillAmount = curHp / maxHp;
+        hpBarObject.SetActive(false);
+    }
+
+    private void Update()
+    {
+        HpBarActive();
     }
 
     public void OnDamaged(float damage, float criticalDamage)
@@ -56,6 +71,7 @@ public class EnemyCharacter : MonoBehaviour
             damage *= (1.5f * criticalDamage);
             curHp -= (int)damage;
 
+
             DamageTextCtrl.Instance.CreateCriPopup(new Vector3(transform.position.x + Random.Range(-0.2f, 0.2f),
                                                                transform.position.y + Random.Range(-0.2f, 0.2f),
                                                                transform.position.z), damage.ToString("N0"));
@@ -68,6 +84,8 @@ public class EnemyCharacter : MonoBehaviour
                                                                transform.position.z), damage.ToString("N0"));
         }
 
+        UpdateHpBar();
+
         OnEnemyDamaged?.Invoke(this, (int)damage);
         if (curHp <= 0 && isDead == false)
         {
@@ -77,7 +95,25 @@ public class EnemyCharacter : MonoBehaviour
             Die();
         }
 
+    }
 
+    public void UpdateHpBar()
+    {
+        hpBarObject.SetActive(true);
+        hpBarActiveTime = 10.0f;
+        hpBar.fillAmount = (float)curHp / (float)maxHp;
+        Debug.Log(hpBar.fillAmount);
+    }
+    public void HpBarActive()
+    {
+        if(hpBarActiveTime > 0)
+        {
+            hpBarActiveTime -= Time.deltaTime;
+            if(hpBarActiveTime < 0)
+            {
+                hpBarObject.SetActive(false);
+            }
+        }
     }
 
     public GameObject DropWeapon(Vector3 dropPos)
@@ -142,7 +178,7 @@ public class EnemyCharacter : MonoBehaviour
 
         Vector3 lookDir = player.position - transform.position;
         lookDir.y = 0;
-        float rotationSpeed = 5.0f;
+        float rotationSpeed = 20.0f;
 
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(lookDir), Time.deltaTime * rotationSpeed);
 
@@ -176,6 +212,7 @@ public class EnemyCharacter : MonoBehaviour
 
     public void SetReloadAnimState()
     {
+        agent.isStopped = true;
         isReload = true;
         attackCount = 0;
         animator.SetTrigger("Reload");
@@ -216,10 +253,12 @@ public class EnemyCharacter : MonoBehaviour
     public void EndReload()
     {
         isReload = false;
+        agent.isStopped = false;
     }
 
     public void EndAttack()
     {
+        agent.isStopped = false;
         isAttackAnimate = false;
     }
 }

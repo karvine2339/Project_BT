@@ -24,16 +24,17 @@ public class EnemyAI_BT : Tree
 
              new SequenceNode(new List<Node>
              {
-                 new EnemySensorNode(enemy, player),           
-                 new SelectorNode(new List<Node>                   
+                 new EnemyReloadNode(enemyCharacter),
+       
+                 new SequenceNode(new List<Node>                   
                  {
-                     new EnemyReloadNode(enemyCharacter),
+                     new EnemySensorNode(enemy, player),
 
                      new SelectorNode(new List<Node>              
                      {
-                           new EnemyAttackNode(player, enemy, enemyCharacter, obstacleMask),
+                           new EnemyAttackNode(player, enemy, enemyCharacter,obstacleMask),
                            new EnemyMoveNode(player,enemy,enemyAnimator,enemyNavMeshAgent,enemyCharacter)
-                     }),
+                     })
                  })
              }),
              new EnemyIdleNode(enemyCharacter) 

@@ -14,11 +14,14 @@ public class EnemyMoveNode : ActionNode
     {
         if (!(Vector3.Distance(enemy.position, player.position) >= 20))
         {
-            agent.isStopped = false;
-            agent.SetDestination(player.position);
 
-            enemyCharacter.SetMoveAnimState();
+            if (!(enemyCharacter.isReload || enemyCharacter.isDead || enemyCharacter.isAttackAnimate || enemyCharacter.isSkill))
+            {
+                agent.isStopped = false;
+                agent.SetDestination(player.position);
 
+                enemyCharacter.SetMoveAnimState();
+            }
             if (agent.remainingDistance > agent.stoppingDistance)
             {
                 return NodeState.Running;

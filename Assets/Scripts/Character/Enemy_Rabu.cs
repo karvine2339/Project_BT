@@ -3,22 +3,21 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.InputSystem.Android;
 
 public class Enemy_Rabu : EnemyCharacter
 {
     public float skillTime = 0.0f;
 
-    public bool isSkill = false;
     private bool isGrenade = false;
 
-    public Projectile grenade;
+    public EnemyGrenade grenade;
     public Transform grenadeStartPosition;
 
 
     protected override void Start()
     {
-       animator = GetComponent<Animator>();
-       agent = GetComponent<NavMeshAgent>();
+        base.Start();
     }
 
     private void Update()
@@ -27,30 +26,37 @@ public class Enemy_Rabu : EnemyCharacter
         {
             skillTime += Time.deltaTime;
         }
-
-        Debug.Log(skillTime);
         
     }
 
     public void SetSkillState()
     {
-        animator.SetTrigger("Skill1");
+        if (isSkill == false)
+        {
+            agent.isStopped = true;
+            animator.SetTrigger("Skill1");
+            isSkill = true;
+        }
+    }
 
+    public void StartSkill()
+    { 
         if (isGrenade == false)
         {
+            Vector3 grenadeDir = new Vector3(player.transform.position.x,player.transform.position.y + 0.5f, player.transform.position.z)
+                                                                                                    - grenadeStartPosition.position;
             isGrenade = true;
-            Projectile go = Instantiate(grenade);
-            go.transform.position = grenadeStartPosition.position;
-            go.SetForce(100);
+            EnemyGrenade go = Instantiate(grenade, grenadeStartPosition.position, Quaternion.LookRotation(grenadeDir));
+            go.GetComponent<Rigidbody>().velocity = grenadeDir * 3;
         }
-        
-        
-        isSkill = true;
     }
 
     public void EndSkill()
     {
+        agent.isStopped = false;
         skillTime = 0.0f;
         isSkill = false;
+        isGrenade = false;
     }
+
 }

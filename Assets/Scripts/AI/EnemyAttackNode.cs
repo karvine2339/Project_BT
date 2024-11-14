@@ -10,7 +10,7 @@ public class EnemyAttackNode : ActionNode
 
     private LayerMask obstacleMask;
 
-    public EnemyAttackNode(Transform player, Transform enemy, EnemyCharacter enemyCharacter, LayerMask obstacleMask)
+    public EnemyAttackNode(Transform player, Transform enemy, EnemyCharacter enemyCharacter,LayerMask obstacleMask)
         : base(() =>
         {
             float distanceToPlayer = Vector3.Distance(enemy.position, player.position);

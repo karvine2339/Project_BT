@@ -110,6 +110,9 @@ public class PlayerCharacter : ChrBase
     {
         base.Start();
 
+        HUDManager.Instance.UpdateHpHUD(curHp, maxHp);
+        HUDManager.Instance.UpdateShieldHUD(curShield, maxShield);
+
         curCredit = 500000;
         credit = curCredit;
         HUDManager.Instance.creditText.text = credit.ToString();
@@ -159,10 +162,10 @@ public class PlayerCharacter : ChrBase
             if (engagingTime < 0.0f)
                 isEngaging = false;
         }
-        if (isEngaging == false)
+        if (isEngaging == false && curShield != maxShield)
         {
             curShield += Time.deltaTime * 10;
-            HUDManager.Instance.shieldBar.fillAmount = curShield / maxShield;
+            HUDManager.Instance.UpdateShieldHUD(curShield, maxShield);
             if (curShield >= maxShield)
                 curShield = maxShield;
 

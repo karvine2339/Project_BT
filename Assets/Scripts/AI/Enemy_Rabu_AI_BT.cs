@@ -24,10 +24,11 @@ public class Enemy_Rabu_AI_BT : Tree
 
              new SequenceNode(new List<Node>
              {
-                 new EnemySensorNode(enemy, player),
-                 new SelectorNode(new List<Node>
+                 new EnemyReloadNode(enemyRabu),
+
+                 new SequenceNode(new List<Node>
                  {
-                     new EnemyReloadNode(enemyRabu),
+                     new EnemySensorNode(enemy, player),
                      new Enemy_Rabu_SkillNode_1(enemyRabu),
 
                      new SelectorNode(new List<Node>
