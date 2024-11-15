@@ -12,6 +12,9 @@ public class WorkShopManager : UIBase
 
     public EffectType newEffectType;
 
+    private float upgradePrice = 5000;
+    private float effectChangePrice = 2500;
+
     [Header("--- First Weapon ---")]
     public TextMeshProUGUI weaponName1;
     public TextMeshProUGUI weaponDamage1;
@@ -21,6 +24,8 @@ public class WorkShopManager : UIBase
     public TextMeshProUGUI weaponEffect1_3;
     public Image weaponImg1;
     public GameObject weaponInfoBox1;
+    public TextMeshProUGUI weapon1UpgradePriceText;
+    public TextMeshProUGUI weapon1EffectChangePriceText;
 
     [Header("--- Second Weapon ---")]
     public TextMeshProUGUI weaponName2;
@@ -31,6 +36,8 @@ public class WorkShopManager : UIBase
     public TextMeshProUGUI weaponEffect2_3;
     public Image weaponImg2;
     public GameObject weaponInfoBox2;
+    public TextMeshProUGUI weapon2UpgradePriceText;
+    public TextMeshProUGUI weapon2EffectChangePriceText;
 
     public TextMeshProUGUI credit;
 
@@ -121,13 +128,15 @@ public class WorkShopManager : UIBase
     }
     public void Weapon1UpgradeButtonClick()
     {
-        if (PlayerCharacter.Instance.credit < 5000)
+        if (PlayerCharacter.Instance.credit < PlayerCharacter.Instance.CalculateOopartsValue(upgradePrice,
+                                                                PlayerCharacter.Instance.DecreaseShopPrice))
         {
 
             return;
         }
 
-        PlayerCharacter.Instance.UpdateCredit(-5000);
+        PlayerCharacter.Instance.UpdateCredit(-PlayerCharacter.Instance.CalculateOopartsValue(upgradePrice,
+                                                                PlayerCharacter.Instance.DecreaseShopPrice));
 
         this.UpdateCredit();
 
@@ -140,13 +149,15 @@ public class WorkShopManager : UIBase
     }
     public void Weapon2UpgradeButtonClick()
     {
-        if (PlayerCharacter.Instance.credit < 5000)
+        if (PlayerCharacter.Instance.credit < PlayerCharacter.Instance.CalculateOopartsValue(upgradePrice,
+                                                                PlayerCharacter.Instance.DecreaseShopPrice))
         {
 
             return;
         }
 
-        PlayerCharacter.Instance.UpdateCredit(-5000);
+        PlayerCharacter.Instance.UpdateCredit(-PlayerCharacter.Instance.CalculateOopartsValue(upgradePrice,
+                                                                PlayerCharacter.Instance.DecreaseShopPrice));
 
         this.UpdateCredit();
 
@@ -160,13 +171,15 @@ public class WorkShopManager : UIBase
 
     public void Weapon1ChangeEffectButtonClick()
     {
-        if (PlayerCharacter.Instance.credit < 2500)
+        if (PlayerCharacter.Instance.credit < PlayerCharacter.Instance.CalculateOopartsValue(effectChangePrice,
+                                                                PlayerCharacter.Instance.DecreaseShopPrice))
         {
 
             return;
         }
 
-        PlayerCharacter.Instance.UpdateCredit(-2500);
+        PlayerCharacter.Instance.UpdateCredit(-PlayerCharacter.Instance.CalculateOopartsValue(effectChangePrice,
+                                                                PlayerCharacter.Instance.DecreaseShopPrice));
 
         this.UpdateCredit();
 
@@ -184,13 +197,15 @@ public class WorkShopManager : UIBase
 
     public void Weapon2ChangeEffectButtonClick()
     {
-        if (PlayerCharacter.Instance.credit < 2500)
+        if (PlayerCharacter.Instance.credit < PlayerCharacter.Instance.CalculateOopartsValue(effectChangePrice,
+                                                                PlayerCharacter.Instance.DecreaseShopPrice))
         {
 
             return;
         }
 
-        PlayerCharacter.Instance.UpdateCredit(-2500);
+        PlayerCharacter.Instance.UpdateCredit(-PlayerCharacter.Instance.CalculateOopartsValue(effectChangePrice,
+                                                                PlayerCharacter.Instance.DecreaseShopPrice));
         this.UpdateCredit();
 
         Weapon weapon = PlayerCharacter.Instance.weapons[1];
@@ -203,5 +218,18 @@ public class WorkShopManager : UIBase
         weapon.InitWeaponStat();
         weapon.ApplyEffects();
         this.InitSecondWeapon();
+    }
+
+    public void SetPriceText()
+    {
+        weapon1UpgradePriceText.text = PlayerCharacter.Instance.CalculateOopartsValue(upgradePrice,
+                                                                PlayerCharacter.Instance.DecreaseShopPrice).ToString();
+        weapon1EffectChangePriceText.text = PlayerCharacter.Instance.CalculateOopartsValue(effectChangePrice,
+                                                                PlayerCharacter.Instance.DecreaseShopPrice).ToString();
+        weapon2UpgradePriceText.text = PlayerCharacter.Instance.CalculateOopartsValue(upgradePrice,
+                                                                PlayerCharacter.Instance.DecreaseShopPrice).ToString();
+        weapon2EffectChangePriceText.text = PlayerCharacter.Instance.CalculateOopartsValue(effectChangePrice,
+                                                                PlayerCharacter.Instance.DecreaseShopPrice).ToString();
+
     }
 }

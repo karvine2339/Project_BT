@@ -34,6 +34,7 @@ public class EnemyMoveNode : ActionNode
         else
         {
             agent.isStopped = true;
+            agent.ResetPath();
             return NodeState.Failure;
         }
 

@@ -412,6 +412,8 @@ MonoBehaviour:
   weaponEffect1_3: {fileID: 2256510149390498918}
   weaponImg1: {fileID: 880273282764934005}
   weaponInfoBox1: {fileID: 8697201852272285303}
+  weapon1UpgradePriceText: {fileID: 8036950827452035769}
+  weapon1EffectChangePriceText: {fileID: 1654739560146168392}
   weaponName2: {fileID: 5510334712851704774}
   weaponDamage2: {fileID: 1007135056033080264}
   weaponFireRate2: {fileID: 5124086569146372858}
@@ -420,6 +422,8 @@ MonoBehaviour:
   weaponEffect2_3: {fileID: 1754741030122214779}
   weaponImg2: {fileID: 8735878844886846241}
   weaponInfoBox2: {fileID: 2967906649026061548}
+  weapon2UpgradePriceText: {fileID: 423037107657302888}
+  weapon2EffectChangePriceText: {fileID: 5189210411783682545}
   credit: {fileID: 1799580514902552554}
 --- !u!1 &1107701068276629068
 GameObject:

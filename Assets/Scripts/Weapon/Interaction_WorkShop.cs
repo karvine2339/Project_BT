@@ -22,6 +22,8 @@ public class Interaction_WorkShop : MonoBehaviour, IInteractable
         workShopManager.InitFirstWeapon();
         workShopManager.InitSecondWeapon();
 
+        workShopManager.SetPriceText();
+
         BTInputSystem.Instance.isWorkShop = true;
     }
 

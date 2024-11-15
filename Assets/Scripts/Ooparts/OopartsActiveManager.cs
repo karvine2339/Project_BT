@@ -23,18 +23,35 @@ public class OopartsActiveManager : MonoBehaviour
     {
         oopartsActive[index] = true;
 
-        if(index == 1)
+        if (index == 1)
         {
             PlayerCharacter.Instance.DecreaseCoolDown.Add(30);
         }
         if (index == 2)
         {
             PlayerCharacter.Instance.DecreaseDamage.Add(-50);
-            PlayerCharacter.Instance.IncreaseDamage.Add(50);
+            PlayerCharacter.Instance.IncreaseDamage.Add(-50);
         }
         if (index == 4)
         {
             PlayerCharacter.Instance.DecreaseDamage.Add(30);
+        }
+        if (index == 6)
+        {
+            PlayerCharacter.Instance.IncreaseFireRate.Add(50);
+            PlayerCharacter.Instance.IncreaseRecoil.Add(50);
+        }
+        if (index == 7)
+        {
+            PlayerCharacter.Instance.DecreaseShopPrice.Add(30);
+        }
+        if (index == 8)
+        {
+            PlayerCharacter.Instance.IncreaseGainCoin.Add(30);
+        }
+        if(index == 9)
+        {
+            PlayerCharacter.Instance.IncreaseShield.Add(50);
         }
     }
 

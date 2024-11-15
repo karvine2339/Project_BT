@@ -12,7 +12,7 @@ public class Interaction_Coin : MonoBehaviour, IInteractable
     public void Interact(PlayerCharacter playerCharacter)
     {
         credit = Random.Range(50, 100);
-        playerCharacter.credit += credit;
+        playerCharacter.credit += playerCharacter.CalculateOopartsValue(credit,playerCharacter.IncreaseGainCoin);
         HUDManager.Instance.UpdateCredit(credit);
         Destroy(this.gameObject);
     }

@@ -9,7 +9,7 @@ public class BootStrapper : MonoBehaviour
     private static List<string> AutoBootStrapperScenes = new List<string>()
     {
         "MainScene",
-        "SampleScene", // <- 자동으로 시스템이 부팅 되는 씬의 이름을 추가. [유니티 씬 파일이름]
+        "SampleScene", // <- Add Scene
     };
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]

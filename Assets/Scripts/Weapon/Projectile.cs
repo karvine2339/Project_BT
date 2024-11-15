@@ -10,7 +10,7 @@ public class Projectile : MonoBehaviour
     public LayerMask hitLayer;
     public LayerMask enemyLayer;
 
-    private Rigidbody rigid;
+    protected Rigidbody rigid;
 
     public GameObject bulletHole;
 

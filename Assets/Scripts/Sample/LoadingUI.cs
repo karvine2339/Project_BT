@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class LoadingUI : UIBase
 { 
-    /// <summary> Progress 는 항상 0 ~ 1 사이 값으로 넣을 것 </summary>
     
     public float LoadingProgress
     {

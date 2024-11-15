@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9244cfd5e4a03794ca21a84e26bdb8ea, type: 3}
   m_Name: Ooparts_Boots
   m_EditorClassIdentifier: 
-  oopartsName: "\uC2E0\uBC1C"
+  oopartsName: "\uB7EC\uB2DD \uC288\uC988"
   effectString: "\uC774\uB3D9\uC18D\uB3C4 30% \uC99D\uAC00"
   oopartsIndex: 0
   oopartsIcon: {fileID: 21300000, guid: ff4e4cb400094194884699a246a29c59, type: 3}

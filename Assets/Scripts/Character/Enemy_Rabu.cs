@@ -30,10 +30,10 @@ public class Enemy_Rabu : EnemyCharacter
             skillTime += Time.deltaTime;
         }
 
-        if(isSkill)
-        {
-            transform.rotation = Quaternion.LookRotation(player.transform.position);
-        }
+        //if(isSkill)
+        //{
+        //    transform.rotation = Quaternion.LookRotation(player.transform.position);
+        //}
         
     }
 

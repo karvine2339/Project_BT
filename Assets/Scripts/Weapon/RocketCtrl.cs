@@ -34,6 +34,10 @@ public class RocketCtrl : Projectile
 
             Destroy(gameObject);
         }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
     void RocketActive()
     {

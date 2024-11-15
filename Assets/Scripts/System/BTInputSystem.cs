@@ -262,7 +262,9 @@ public class BTInputSystem : MonoBehaviour
     public void TriggerRecoil()
     {
         isRecoiling = true;
-        recoilY = recoilAmount + PlayerStat.Instance.RecoilAmount;
+        recoilY = recoilAmount + 
+            PlayerCharacter.Instance.CalculateOopartsValue(PlayerStat.Instance.RecoilAmount,
+                                                           PlayerCharacter.Instance.IncreaseRecoil);
         recoilTime = recoilDuration;
         recoilX = Random.Range(-0.3f, 0.3f);
     }

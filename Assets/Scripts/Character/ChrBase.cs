@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 
 public class ChrBase : MonoBehaviour
@@ -55,12 +56,19 @@ public class ChrBase : MonoBehaviour
     protected float rotationVelocity;         
     protected float RotationSmoothTime = 0.12f;
 
-    public List<float> DecreaseDamage = new List<float>();
-    public List<float> DecreaseCoolDown = new List<float>();
-    public List<float> IncreaseDamage = new List<float>();
+    [HideInInspector] public List<float> DecreaseDamage = new List<float>();
+    [HideInInspector] public List<float> DecreaseCoolDown = new List<float>();
+    [HideInInspector] public List<float> IncreaseDamage = new List<float>();
+    [HideInInspector] public List<float> IncreaseFireRate = new List<float>();
+    [HideInInspector] public List<float> IncreaseRecoil = new List<float>();
+    [HideInInspector] public List<float> DecreaseShopPrice = new List<float>();
+    [HideInInspector] public List<float> IncreaseGainCoin = new List<float>();
+    [HideInInspector] public List<float> IncreaseWeaponDrop = new List<float>();
+    [HideInInspector] public List<float> IncreaseOopartsDrop = new List<float>();
+    [HideInInspector] public List<float> IncreaseShield = new List<float>();
 
     protected UnityEngine.CharacterController unityCharacterController;
-    public Animator characterAnimator;
+    [HideInInspector] public Animator characterAnimator;
 
     public int maxHp;
     public int curHp;
@@ -264,6 +272,17 @@ public class ChrBase : MonoBehaviour
         }
 
         return oopartsValue * baseOopartsValue;
+    }
+
+    public float CalculateOopartsFireRateValue(float oopartsValue, List<float> listValue)
+    {
+        float baseOopartsFireRateValue = 1.0f;
+
+        foreach(var value in listValue)
+        {
+            baseOopartsFireRateValue /= 1 + value / 100;
+        }
+        return oopartsValue * baseOopartsFireRateValue;
     }
 }
 

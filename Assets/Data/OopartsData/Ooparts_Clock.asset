@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9244cfd5e4a03794ca21a84e26bdb8ea, type: 3}
   m_Name: Ooparts_Clock
   m_EditorClassIdentifier: 
-  oopartsName: "\uC2DC\uACC4"
+  oopartsName: "\uC564\uD2F0\uD06C \uD68C\uC911 \uC2DC\uACC4"
   effectString: "\uBAA8\uB4E0 \uC2A4\uD0AC\uC758 \uC7AC\uC0AC\uC6A9 \uB300\uAE30\uC2DC\uAC04
     30% \uAC10\uC18C"
   oopartsIndex: 1

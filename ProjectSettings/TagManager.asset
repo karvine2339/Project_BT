@@ -16,7 +16,7 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - AimPoint
   - Water
   - UI
   - Wall
@@ -29,8 +29,8 @@ TagManager:
   - Grenade
   - EnemyBullet
   - Rabu
-  - 
-  - 
+  - Rocket
+  - Drone
   - 
   - 
   - 

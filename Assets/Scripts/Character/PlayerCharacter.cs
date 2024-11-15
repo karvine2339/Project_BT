@@ -19,15 +19,15 @@ public class PlayerCharacter : ChrBase
 
     public float fireRate = 0.1f;
     public float reloadTime = 1.3f;
-    public bool isReload = false;
+    private float shieldIncreaseSpeed = 10f;
+    [HideInInspector] public bool isReload = false;
 
-    public float credit;
-    public float curCredit;
+    [HideInInspector] public float credit;
+    [HideInInspector] public float curCredit;
 
     [SerializeField] private LayerMask aimColliderLayerMask = new LayerMask();
     [SerializeField] private LayerMask targetPointLayerMask = new LayerMask();
     [SerializeField] private LayerMask droppedWeaponLayerMask = new LayerMask();
-    [SerializeField] private Vector3 mouseWorldPosition;
     [SerializeField] private Transform aimPointPosition;
     [SerializeField] private Vector3 targetPointPosition;
     private Rig aimRig;
@@ -42,16 +42,16 @@ public class PlayerCharacter : ChrBase
     private List<IInteractable> currentInteractionItems = new List<IInteractable>();
 
     public Transform weaponRoot;
-    public Weapon[] weapons = new Weapon[2];
+    [HideInInspector] public Weapon[] weapons = new Weapon[2];
 
-    public Weapon currentWeapon = null;
+    [HideInInspector] public Weapon currentWeapon = null;
 
     private GameObject weapon;
     private GameObject weapon2;
 
-    public float skillCoolDown = 0.0f;
-    public float skillCoolDuration = 0.0f;
-    public bool isCoolDown = false;
+    [HideInInspector] public float skillCoolDown = 0.0f;
+    [HideInInspector] public float skillCoolDuration = 0.0f;
+    [HideInInspector] public bool isCoolDown = false;
 
     public Rigidbody grenadePrefab;
 
@@ -122,7 +122,7 @@ public class PlayerCharacter : ChrBase
         rigBuilder = GetComponentInChildren<RigBuilder>();
 
         aimColliderLayerMask = LayerMask.GetMask("Wall");
-        targetPointLayerMask = ~LayerMask.GetMask("Wall");
+        targetPointLayerMask = ~LayerMask.GetMask("AimPoint");
         droppedWeaponLayerMask = LayerMask.GetMask("DroppedWeapon");
 
         weapons[0] = GetComponentInChildren<Weapon>();
@@ -162,15 +162,8 @@ public class PlayerCharacter : ChrBase
             if (engagingTime < 0.0f)
                 isEngaging = false;
         }
-        if (isEngaging == false && curShield != maxShield)
-        {
-            curShield += Time.deltaTime * 10;
-            HUDManager.Instance.UpdateShieldHUD(curShield, maxShield);
-            if (curShield >= maxShield)
-                curShield = maxShield;
 
-        }
-
+        UpdateShield();
         AimStatement();
         RayWeapon();
         GroundCheck();
@@ -217,7 +210,10 @@ public class PlayerCharacter : ChrBase
 
                 currentWeapon.curAmmo--;
                 PlayerStat.Instance.bulletDamage = Random.Range(PlayerStat.Instance.BulletMinDamage, PlayerStat.Instance.BulletMaxDamage);
-                fireRate = PlayerStat.Instance.FireRate;
+
+                fireRate = PlayerCharacter.Instance.CalculateOopartsFireRateValue(PlayerStat.Instance.FireRate,
+                                                                                  PlayerCharacter.Instance.IncreaseFireRate);
+
                 HUDManager.Instance.SetWeaponAmmo(currentWeapon.curAmmo, currentWeapon.maxAmmo);
 
                 BTInputSystem.Instance.TriggerRecoil();
@@ -316,6 +312,18 @@ public class PlayerCharacter : ChrBase
         isReload = false;
     }
 
+    public void UpdateShield()
+    {
+        if (isEngaging == false && curShield != maxShield)
+        {
+            curShield += Time.deltaTime * CalculateOopartsValue(shieldIncreaseSpeed,IncreaseShield);
+
+            HUDManager.Instance.UpdateShieldHUD(curShield, maxShield);
+            if (curShield >= maxShield)
+                curShield = maxShield;
+        }
+    }
+
     public void SetStartWeapon()
     {
         currentWeapon = weapons[0];
@@ -353,9 +361,9 @@ public class PlayerCharacter : ChrBase
         Ray ray = Camera.main.ScreenPointToRay(screenCenterPoint);
         if (Physics.Raycast(ray, out RaycastHit raycastHit, 999f, aimColliderLayerMask, QueryTriggerInteraction.Ignore))
         {
-            mouseWorldPosition = raycastHit.point;
             aimPointPosition.position = raycastHit.point;
         }
+
 
         if (Physics.Raycast(ray, out RaycastHit targetRaycastHit, 999f, targetPointLayerMask, QueryTriggerInteraction.Ignore))
         {

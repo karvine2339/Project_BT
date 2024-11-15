@@ -15,6 +15,7 @@ public class EnemyCharacter : MonoBehaviour
 
     public List<WeaponData> weaponList;
     public GameObject[] weaponPrefab;
+    public GameObject oopartsPrefab;
 
     public Transform fireStartPosition;
 
@@ -25,6 +26,7 @@ public class EnemyCharacter : MonoBehaviour
 
     protected Animator animator;
     protected NavMeshAgent agent;
+    protected Collider enemyCollider;
 
     private float hpBarActiveTime;
 
@@ -45,11 +47,11 @@ public class EnemyCharacter : MonoBehaviour
     protected Transform player;
     public Transform raycastPosition;
 
-
     protected virtual void Start()
     {
         animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
+        enemyCollider = GetComponent<Collider>();
 
         hpBar.fillAmount = curHp / maxHp;
         hpBarObject.SetActive(false);
@@ -91,9 +93,6 @@ public class EnemyCharacter : MonoBehaviour
 
         if (curHp <= 0 && isDead == false)
         {
-            isDead = true;
-            DropWeapon(new Vector3(transform.position.x, transform.position.y + 0.35f, transform.position.z));
-            CoinDropper.Instance.DropCoins(transform.position);
             Die();
         }
 
@@ -104,7 +103,6 @@ public class EnemyCharacter : MonoBehaviour
         hpBarObject.SetActive(true);
         hpBarActiveTime = 10.0f;
         hpBar.fillAmount = (float)curHp / (float)maxHp;
-        Debug.Log(hpBar.fillAmount);
     }
     public void HpBarActive()
     {
@@ -132,12 +130,38 @@ public class EnemyCharacter : MonoBehaviour
         return droppedWeapon;
     }
 
+    public void DropOoparts(Vector3 dropPos)
+    {
+        GameObject ooparts = Instantiate(oopartsPrefab, dropPos, Quaternion.identity);
+    }
+
+    public void DropItem()
+    {
+        float weaponRandVal = Random.Range(0, 100);
+        float oopartsRandVal = Random.Range(0, 100);
+        float weaponDropValue = 5.0f;
+        float oopartsDropValue = 3.0f;
+
+        if(oopartsDropValue > oopartsRandVal)
+        {
+            DropOoparts(new Vector3(transform.position.x, transform.position.y + 0.35f, transform.position.z));
+        }
+        if (weaponDropValue > weaponRandVal)
+        {
+            DropWeapon(new Vector3(transform.position.x, transform.position.y + 0.35f, transform.position.z));
+        }
+
+    }
     protected void Die()
     {
         isDead = true;
         hpBarObject.SetActive(false);
         hpBarActiveTime = 0.0f;
         Destroy(gameObject, 5.0f);
+        enemyCollider.enabled = false;
+
+        DropItem();
+        CoinDropper.Instance.DropCoins(transform.position);
     }
 
     public void Fire()
@@ -212,11 +236,13 @@ public class EnemyCharacter : MonoBehaviour
         animator.SetFloat("Idle", 0);
         animator.SetFloat("Move", 0);
         agent.isStopped = true;
+        agent.ResetPath();
     }
 
     public void SetReloadAnimState()
     {
         agent.isStopped = true;
+        agent.ResetPath();
         isReload = true;
         attackCount = 0;
         animator.SetTrigger("Reload");
@@ -229,6 +255,7 @@ public class EnemyCharacter : MonoBehaviour
         animator.SetFloat("Idle", 1);
 
         agent.isStopped = true;
+        agent.ResetPath();
     }
     
     public void SetMoveAnimState()
@@ -243,6 +270,7 @@ public class EnemyCharacter : MonoBehaviour
     public void SetDeadAnimState()
     {
         agent.isStopped = true;
+        agent.ResetPath();
         animator.SetTrigger("Death");
     }
 

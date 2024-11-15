@@ -5,10 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class Main : MonoBehaviour
 {
-    // Main 클래스는 프로젝트의 시작점으로.
-    // #1. 각종 시스템의 초기화.
-    // #2. Scene을 관리하는 기능을 내포하고 있다.
-
     public static Main Instance { get; private set; } = null;
 
     public enum SceneType

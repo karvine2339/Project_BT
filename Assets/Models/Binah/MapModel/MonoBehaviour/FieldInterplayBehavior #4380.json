@@ -1,0 +1,44 @@
+{
+  "m_GameObject": {
+    "m_FileID": 0,
+    "m_PathID": 6777248250010113077
+  },
+  "m_Enabled": 1,
+  "m_Script": {
+    "m_FileID": 0,
+    "m_PathID": 728138247149263612
+  },
+  "m_Name": "",
+  "interplayId": 83399011,
+  "idleAnimation": {
+    "m_FileID": 0,
+    "m_PathID": -6890509318973786202
+  },
+  "startLocation": {
+    "m_FileID": 0,
+    "m_PathID": 1777421029170552146
+  },
+  "endLocation": {
+    "m_FileID": 0,
+    "m_PathID": -7227787274384920637
+  },
+  "startDirector": {
+    "m_FileID": 0,
+    "m_PathID": 5974374430156485381
+  },
+  "ingDirector": {
+    "m_FileID": 0,
+    "m_PathID": 3452606180187582672
+  },
+  "endDirector": {
+    "m_FileID": 0,
+    "m_PathID": 4488842976836372153
+  },
+  "introFadeDuration": 0.5,
+  "outroFadeDuration": 0.5,
+  "virtualCamera": {
+    "m_FileID": 0,
+    "m_PathID": 0
+  },
+  "hideUI": 1
+}
