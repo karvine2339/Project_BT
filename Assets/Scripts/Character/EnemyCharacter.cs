@@ -139,14 +139,14 @@ public class EnemyCharacter : MonoBehaviour
     {
         float weaponRandVal = Random.Range(0, 100);
         float oopartsRandVal = Random.Range(0, 100);
-        float weaponDropValue = 5.0f;
-        float oopartsDropValue = 3.0f;
+        float weaponDropValue = 40.0f;
+        float oopartsDropValue = 20.0f;
 
         if(oopartsDropValue > oopartsRandVal)
         {
             DropOoparts(new Vector3(transform.position.x, transform.position.y + 0.35f, transform.position.z));
         }
-        if (weaponDropValue > weaponRandVal)
+        else if (weaponDropValue > weaponRandVal)
         {
             DropWeapon(new Vector3(transform.position.x, transform.position.y + 0.35f, transform.position.z));
         }

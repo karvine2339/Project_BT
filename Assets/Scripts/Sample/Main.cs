@@ -25,14 +25,7 @@ public class Main : MonoBehaviour
 
     public void Initialize()
     {
-        // BootStrapper 클래스에서 처리하기 힘든 시스템 구조인것들을 초기화.
-        // 예시 => Resources 에서 Instantiate를 해서 prefab을 생성해야되는 시스템 이라던지..?
-
-        // Next Workflow ? 
-        // Game Scene[ex: Title Scene?] 으로 이동.
-
-        LoadScene(SceneType.GameScene);
-        
+        LoadScene(SceneType.TitleScene);   
     }
 
     private SceneBase currentSceneController = null;
@@ -50,6 +43,7 @@ public class Main : MonoBehaviour
             case SceneType.GameScene:
                 newSceneController = sceneController.AddComponent<GameScene>();
                 break;
+
         }
 
         StartCoroutine(SceneLoadCoroutine(newSceneController));
@@ -57,7 +51,6 @@ public class Main : MonoBehaviour
 
     private IEnumerator SceneLoadCoroutine<T>(T newSceneController) where T : SceneBase
     {
-        // Loading UI를 띄워놓자.
 
         LoadingUI loadingUI = UIManager.Show<LoadingUI>(UIList.LoadingUI);
         loadingUI.LoadingProgress = 0;
@@ -68,27 +61,21 @@ public class Main : MonoBehaviour
             yield return null;
         }
 
-        // 만약에 기존에 불러다놓은 Scene이 있다면?
-        // => 기존 Scene의 SceneEnd를 호출하고 제거한다.
-
         if (currentSceneController != null)
         {
             yield return StartCoroutine(currentSceneController.SceneEnd());
             loadingUI.LoadingProgress = 0.4f;
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.5f);
         }
 
-        //기존 Scene이 제거되고 나면, 새로운 Scene을 로드한다.
         yield return StartCoroutine(newSceneController.SceneStart());
         loadingUI.LoadingProgress = 0.8f;
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
         currentSceneController = newSceneController;
-
-        // Loading UI를 다시 닫아주자.
 
         loadingUI.LoadingProgress = 1f;
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
 
         UIManager.Hide<LoadingUI>(UIList.LoadingUI);
     }

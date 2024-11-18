@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
-using UnityEditor.ShaderGraph.Internal;
 using Unity.VisualScripting;
 
 public class CameraSystem : MonoBehaviour
@@ -46,8 +45,6 @@ public class CameraSystem : MonoBehaviour
 
     private void Update()
     {
-
-
         Ray ray = mainCamera.ScreenPointToRay(new Vector2(Screen.width * 0.5f, Screen.height * 0.5f));
         if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, aimingLayers, QueryTriggerInteraction.Ignore))
         {

@@ -36,8 +36,6 @@ public class BootStrapper : MonoBehaviour
 
     private static void InternalSystemBoot()
     {
-        // TODO : 시스템 초기화가 필요한 것들을 추가.
-
         // UI System 초기화
         UIManager.Singleton.Initialize();
     }

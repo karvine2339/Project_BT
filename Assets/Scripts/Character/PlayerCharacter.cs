@@ -334,6 +334,8 @@ public class PlayerCharacter : ChrBase
         weapons[0].baseFireRate = 0.2f;
         weapons[0].weaponName = "WHITE FANG 465";
         weapons[0].effectString = new string[3];
+        weapons[0].baseSkillCoolDown = 20.0f;
+        HUDManager.Instance.skillIcon.sprite = currentWeapon.skillImage;
 
         weapons[0].effectString[0] = "";
         weapons[0].effectString[1] = "";

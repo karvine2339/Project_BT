@@ -51,6 +51,8 @@ public class InventoryManager : UIBase
 
     public List<OopartsIcon> oopartsIconList = new();
 
+    public ScrollRect scrollRect;
+
     [Header("--- TacticalManual Inventory ---")]
 
     public GameObject tacticalManualContent;
@@ -64,10 +66,11 @@ public class InventoryManager : UIBase
         rayCaster = GetComponent<GraphicRaycaster>();
         pointEventData = new PointerEventData(null);
 
-        AddOopartsCell(25);
+
     }
     private void Start()
     {
+        AddOopartsCell(25);
         oopartsInfoBox.gameObject.SetActive(false);
     }
 
@@ -110,6 +113,8 @@ public class InventoryManager : UIBase
         toggleButton[2].interactable = false;
         toggleButton[0].interactable = true;
         toggleButton[1].interactable = true;
+
+        scrollRect.normalizedPosition = new Vector2(0, 1);
     }
 
     public void OpenInventory()
@@ -164,7 +169,7 @@ public class InventoryManager : UIBase
 
                 oopartsCell.oopartsimages[0].sprite = oopartsBackImg;
                 oopartsCell.oopartsimages[1].sprite = oopartsIcon;
-                oopartsCell.oopartsimages[1].transform.localScale = new Vector3(1, 1, 1);
+                oopartsCell.oopartsimages[1].transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
                 oopartsCell.oopartsString[0] = oopartsName;
                 oopartsCell.oopartsString[1] = oopartsEffectString;
                 oopartsCell.oopartsIndex = index;

@@ -7,7 +7,7 @@ public class JsonManager : MonoBehaviour
 {
     public static JsonManager Instance { get; private set; }
 
-    private string jsonFilePath = "Assets/Data/WeaponEffectData.json";
+    private string jsonFilePath;
     public Root effectData;
 
     public GameObject[] weaponPrefab;
@@ -44,7 +44,7 @@ public class JsonManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
+            jsonFilePath = Path.Combine(Application.streamingAssetsPath, "WeaponEffectData.json");
             LoadEffectData();
         }
         else
@@ -65,24 +65,4 @@ public class JsonManager : MonoBehaviour
             Debug.LogError("JSON 파일을 찾을 수 없습니다: " + jsonFilePath);
         }
     }
-
-    public GameObject DropWeapon(Vector3 dropPos)
-    {
-        GameObject droppedWeapon = Instantiate(weaponPrefab[Random.Range(0, weaponPrefab.Length)], dropPos, Quaternion.Euler(-30, -90, 90));
-
-        DroppedWeapon prefabComponent = droppedWeapon.GetComponent<DroppedWeapon>();
-
-        WeaponData weaponData = prefabComponent.weaponData;
-
-        DroppedWeapon weaponComponent = droppedWeapon.GetComponent<DroppedWeapon>();
-        weaponComponent.InitWeaponData(weaponData);
-
-        return droppedWeapon;
-    }
-
-    private void Start()
-    {
-        DropWeapon(SpawnPos.position);
-    }
-
 }

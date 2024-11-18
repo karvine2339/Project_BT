@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.InputSystem.Android;
 using Random = UnityEngine.Random;
 
 public class Enemy_Rabu : EnemyCharacter

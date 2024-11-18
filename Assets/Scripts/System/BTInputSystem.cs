@@ -89,8 +89,8 @@ public class BTInputSystem : MonoBehaviour
 
         mouseSensitivity = isStrafe ? 80f : 200f;
 
-        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.smoothDeltaTime;
-        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.smoothDeltaTime;
+        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.fixedDeltaTime;
+        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.fixedDeltaTime;
         look = new Vector2(mouseX + recoilX, mouseY + recoilY);
 
         //-------- Strafe -------- 
