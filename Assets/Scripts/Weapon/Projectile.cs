@@ -38,11 +38,12 @@ public class Projectile : MonoBehaviour
         //---- player Bullet
         if (this.gameObject.layer == 12)
         {
+            ContactPoint contact = collision.contacts[0];
 
             int prevBouncCount = bounceCount;
             if ((hitLayer & (1 << collision.gameObject.layer)) != 0)
             {
-                ContactPoint contact = collision.contacts[0];
+
 
                 if (gameObject.CompareTag("Bullet"))
                 {
@@ -63,15 +64,15 @@ public class Projectile : MonoBehaviour
                 //{
                     if (isExplosion)
                     {
-                        enemy.OnDamaged(PlayerStat.Instance.bulletDamage * PlayerStat.Instance.AdditionalBulletDamage,
+                        enemy.OnDamaged(contact.point, PlayerStat.Instance.bulletDamage * PlayerStat.Instance.AdditionalBulletDamage,
                     PlayerStat.Instance.CriticalDamage * PlayerStat.Instance.OopartsDamage);
-                        GameObject ex = Instantiate(Resources.Load("ExplosionEffect") as GameObject);
-                        ex.transform.position = enemy.transform.position;
+                        GameObject ex = Instantiate(Resources.Load(Constant.SmallExplosionResourcePath) as GameObject);
+                        ex.transform.position = contact.point;
                         ExplosionDamage(enemy.transform.position);
                     }
                     else
                     {
-                        enemy.OnDamaged(PlayerStat.Instance.bulletDamage * PlayerStat.Instance.AdditionalBulletDamage,
+                        enemy.OnDamaged(contact.point, PlayerStat.Instance.bulletDamage * PlayerStat.Instance.AdditionalBulletDamage,
                                         PlayerStat.Instance.CriticalDamage * PlayerStat.Instance.OopartsDamage);
                     }
                 //}

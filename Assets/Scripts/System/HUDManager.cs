@@ -122,12 +122,14 @@ public class HUDManager : UIBase
     private void OnEnable()
     {
         Enemy_Rabu.OnEnemyRabuDamaged += HandleEnemyRabuDamaged;
+        Enemy_Binah.OnEnemyBinahDamaged += HandleEnemyBinahDamaged;
     }
 
 
     private void OnDisable()
     {
         Enemy_Rabu.OnEnemyRabuDamaged -= HandleEnemyRabuDamaged;
+        Enemy_Binah.OnEnemyBinahDamaged -= HandleEnemyBinahDamaged;
     }
     private void HandleEnemyRabuDamaged(Enemy_Rabu rabu, int damage)
     {
@@ -135,6 +137,17 @@ public class HUDManager : UIBase
         enemyNameText.text = rabu.enemyName;
         enemyHpBar.fillAmount = (float)rabu.curHp / (float)rabu.maxHp;
         if(enemyHpBar.fillAmount <= 0)
+        {
+            enemyHpObject.SetActive(false);
+        }
+    }
+
+    private void HandleEnemyBinahDamaged(Enemy_Binah binah, int damage)
+    {
+        enemyHpObject.SetActive(true);
+        enemyNameText.text = binah.enemyName;
+        enemyHpBar.fillAmount = (float)binah.curHp / (float)binah.maxHp;
+        if (enemyHpBar.fillAmount <= 0)
         {
             enemyHpObject.SetActive(false);
         }

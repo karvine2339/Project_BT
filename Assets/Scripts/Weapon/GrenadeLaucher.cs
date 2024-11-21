@@ -47,7 +47,6 @@ public class GrenadeLaucher : MonoBehaviour
         {
             lineRenderer.positionCount = 0;
 
-            // isGrenade가 false일 때 폭발 구체 제거
             if (activeExplosionSphere != null)
             {
                 Destroy(activeExplosionSphere);
@@ -82,7 +81,6 @@ public class GrenadeLaucher : MonoBehaviour
                 hitDetected = true;
                 lineRenderer.positionCount = i + 1;
 
-                // 충돌 지점에 구 형태 폭발 반경 표시
                 DisplayExplosionRadius(hit.point);
                 break;
             }
@@ -93,13 +91,11 @@ public class GrenadeLaucher : MonoBehaviour
 
     void DisplayExplosionRadius(Vector3 position)
     { 
-        // 기존 폭발 구체가 있으면 제거
         if (activeExplosionSphere != null)
         {
             Destroy(activeExplosionSphere);
         }
 
-        // 새로운 구체 생성 및 크기 설정
         activeExplosionSphere = Instantiate(explosionRadiusPrefab, position, Quaternion.identity);
         activeExplosionSphere.transform.localScale = Vector3.one * explosionRadius * 2;
     }

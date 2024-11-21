@@ -26,9 +26,11 @@ public class RocketCtrl : Projectile
     {
         bool isHitEnemy = collision.transform.TryGetComponent(out EnemyCharacter enemy);
 
+        ContactPoint contact = collision.contacts[0];
+
         if (isHitEnemy)
         {
-            enemy.OnDamaged((int)Random.Range(PlayerStat.Instance.BulletMinDamage, PlayerStat.Instance.BulletMaxDamage)
+            enemy.OnDamaged(contact.point, (int)Random.Range(PlayerStat.Instance.BulletMinDamage, PlayerStat.Instance.BulletMaxDamage)
                                                          * Random.Range(1.5f, 2.0f) * PlayerStat.Instance.DroneDamage,
                                                   PlayerStat.Instance.CriticalDamage);
 

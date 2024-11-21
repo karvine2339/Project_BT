@@ -12,6 +12,7 @@ TagManager:
   - Bullet
   - DroppedWeapon
   - Drone
+  - ClickBlock
   layers:
   - Default
   - TransparentFX
@@ -31,8 +32,8 @@ TagManager:
   - Rabu
   - Rocket
   - Drone
-  - 
-  - 
+  - Binah
+  - Particle
   - 
   - 
   - 

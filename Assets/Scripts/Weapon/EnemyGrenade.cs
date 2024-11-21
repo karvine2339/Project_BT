@@ -14,7 +14,7 @@ public class EnemyGrenade : MonoBehaviour
 
             ContactPoint contact = collision.contacts[0];
 
-            GameObject ex = Instantiate(Resources.Load(Constant.GrenadeResourcePath) as GameObject);
+            GameObject ex = Instantiate(Resources.Load(Constant.BigExplosionResourcePath) as GameObject);
             ex.transform.position = contact.point;
 
             ExplosionDamage(contact.point);

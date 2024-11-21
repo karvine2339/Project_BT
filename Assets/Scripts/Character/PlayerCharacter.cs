@@ -477,5 +477,11 @@ public class PlayerCharacter : ChrBase
         newGrenade.AddForce(newGrenade.transform.forward * grenadeSpeed, ForceMode.Impulse);
     }
 
+    private void OnParticleCollisionStay(Collision collision)
+    {
+        OnDamaged(0.1f);
+            Debug.Log("Damaged!");
+        
+    }
 }
 

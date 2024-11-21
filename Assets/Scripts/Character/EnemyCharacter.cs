@@ -56,13 +56,12 @@ public class EnemyCharacter : MonoBehaviour
         hpBar.fillAmount = curHp / maxHp;
         hpBarObject.SetActive(false);
     }
-
-    private void Update()
+    public virtual void Update()
     {
         HpBarActive();
     }
 
-    public virtual void OnDamaged(float damage, float criticalDamage)
+    public virtual void OnDamaged(Vector3 contactPoint, float damage, float criticalDamage)
     {
         if (isDead)
             return;
@@ -75,16 +74,12 @@ public class EnemyCharacter : MonoBehaviour
             curHp -= (int)_damage;
 
 
-            DamageTextCtrl.Instance.CreateCriPopup(new Vector3(transform.position.x + Random.Range(-0.2f, 0.2f),
-                                                               transform.position.y + Random.Range(-0.2f, 0.2f),
-                                                               transform.position.z), _damage.ToString("N0"));
+            DamageTextCtrl.Instance.CreateCriPopup(contactPoint, _damage.ToString("N0"));
         }
         else
         {
             curHp -= (int)_damage;
-            DamageTextCtrl.Instance.CreatePopup(new Vector3(transform.position.x + Random.Range(-0.2f, 0.2f),
-                                                               transform.position.y + Random.Range(-0.2f, 0.2f),
-                                                               transform.position.z), _damage.ToString("N0"));
+            DamageTextCtrl.Instance.CreatePopup(contactPoint, _damage.ToString("N0"));
         }
 
         UpdateHpBar();
@@ -96,6 +91,12 @@ public class EnemyCharacter : MonoBehaviour
             Die();
         }
 
+    }
+    public virtual void OnDamaged(float damage, float criticalDamage)
+    {
+        Vector3 defaultContactPoint = transform.position;
+
+        OnDamaged(defaultContactPoint, damage, criticalDamage);
     }
 
     public void UpdateHpBar()

@@ -4,5 +4,8 @@ using UnityEngine;
 
 public class Constant
 {
-    public static string GrenadeResourcePath = "ExplosionEffect";
+    public static string BigExplosionResourcePath = "BigExplosion";
+    public static string SmallExplosionResourcePath = "SmallExplosion";
+
+    public static string BinahFlameStreamResourcePath = "FlameStream";
 }

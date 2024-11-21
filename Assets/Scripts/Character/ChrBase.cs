@@ -70,8 +70,8 @@ public class ChrBase : MonoBehaviour
     protected UnityEngine.CharacterController unityCharacterController;
     [HideInInspector] public Animator characterAnimator;
 
-    public int maxHp;
-    public int curHp;
+    public float maxHp;
+    public float curHp;
 
     public float maxShield;
     public float curShield;
@@ -148,7 +148,7 @@ public class ChrBase : MonoBehaviour
 
             if (curShield > 0)
             {
-                curShield -= (int)_damage;
+                curShield -= _damage;
                 if (curShield < 0)
                 {
                     curShield = 0;
@@ -157,7 +157,7 @@ public class ChrBase : MonoBehaviour
             }
             else if (curShield <= 0)
             {
-                curHp -= (int)_damage;
+                curHp -= _damage;
                 HUDManager.Instance.UpdateHpHUD(curHp, maxHp);
             }
 

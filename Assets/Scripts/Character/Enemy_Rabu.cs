@@ -22,7 +22,7 @@ public class Enemy_Rabu : EnemyCharacter
         base.Start();
     }
 
-    private void Update()
+    public override void Update()
     {
         if (!isDead)
         {
@@ -66,7 +66,7 @@ public class Enemy_Rabu : EnemyCharacter
         isGrenade = false;
     }
 
-    public override void OnDamaged(float damage, float criticalDamage)
+    public override void OnDamaged(Vector3 contactPoint, float damage, float criticalDamage)
     {
         if (isDead)
             return;
@@ -78,16 +78,12 @@ public class Enemy_Rabu : EnemyCharacter
             curHp -= (int)damage;
 
 
-            DamageTextCtrl.Instance.CreateCriPopup(new Vector3(transform.position.x + Random.Range(-0.2f, 0.2f),
-                                                               transform.position.y + Random.Range(-0.2f, 0.2f),
-                                                               transform.position.z), damage.ToString("N0"));
+            DamageTextCtrl.Instance.CreateCriPopup(contactPoint, damage.ToString("N0"));
         }
         else
         {
             curHp -= (int)damage;
-            DamageTextCtrl.Instance.CreatePopup(new Vector3(transform.position.x + Random.Range(-0.2f, 0.2f),
-                                                               transform.position.y + Random.Range(-0.2f, 0.2f),
-                                                               transform.position.z), damage.ToString("N0"));
+            DamageTextCtrl.Instance.CreatePopup(contactPoint, damage.ToString("N0"));
         }
 
         UpdateHpBar();
