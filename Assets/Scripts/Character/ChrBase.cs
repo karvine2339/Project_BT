@@ -284,5 +284,12 @@ public class ChrBase : MonoBehaviour
         }
         return oopartsValue * baseOopartsFireRateValue;
     }
+
+    public void Teleport(Vector3 position)
+    {
+        unityCharacterController.enabled = false;
+        transform.position = position;
+        unityCharacterController.enabled = true;
+    }
 }
 

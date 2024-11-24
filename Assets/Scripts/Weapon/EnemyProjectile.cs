@@ -12,6 +12,8 @@ public class EnemyProjectile : MonoBehaviour
     private Rigidbody rigid;
     private Transform player;
 
+    public GameObject warningRangePrefab;
+
     private void Start()
     {
         rigid = GetComponent<Rigidbody>();
@@ -63,10 +65,12 @@ public class EnemyProjectile : MonoBehaviour
 
     public IEnumerator missileRotateCor()
     {
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(1.5f);
+
+        Instantiate(warningRangePrefab, player.position, Quaternion.Euler(90, 0, 0));
 
         Vector3 dir = player.position - transform.position;
 
-        rigid.velocity = dir.normalized * 20f;
+        rigid.velocity = dir.normalized * 25f;
     }
 }

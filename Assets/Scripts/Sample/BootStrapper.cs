@@ -38,5 +38,11 @@ public class BootStrapper : MonoBehaviour
     {
         // UI System 초기화
         UIManager.Singleton.Initialize();
+
+        // GameData System 초기화
+        GameDataModel.Singleton.Initialize();
+
+        // UserData System 초기화
+        UserDataModel.Singleton.Initialize();
     }
 }

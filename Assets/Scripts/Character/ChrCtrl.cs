@@ -38,6 +38,8 @@ public class CharacterController : MonoBehaviour
         UIManager.Show<Interaction_UI>(UIList.Interaction_UICanvas);
         UIManager.Show<OopartsManager>(UIList.OopartsSelectCanvas);
         UIManager.Show<ShopManager>(UIList.ShopCanvas);
+
+        characterBase.Teleport(UserDataModel.Singleton.PlayerSessionData.lastPosition);
     }
 
     private void OnMouseWheel(float mouseWheel)
@@ -59,6 +61,11 @@ public class CharacterController : MonoBehaviour
         Vector2 input = BTInputSystem.Instance.moveInput;        
 
         characterBase.Move(input, Camera.main.transform.rotation.eulerAngles.y);
+
+        UserDataModel.Singleton.SetPlayerSessionData(
+            characterBase.transform.position,
+            characterBase.curHp,
+            characterBase.curShield);
 
         characterBase.Rotate(CameraSystem.Instance.AimingTargetPoint);
 
