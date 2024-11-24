@@ -20,6 +20,7 @@ public abstract class Node
     protected NavMeshAgent agent;
     protected EnemyCharacter enemyCharacter;
     protected Enemy_Rabu enemyRabu;
+    protected Enemy_Binah enemyBinah;
 
     public Node(Animator animator, NavMeshAgent agent, EnemyCharacter enemyCharacter)
     {

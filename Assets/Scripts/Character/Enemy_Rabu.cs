@@ -13,7 +13,7 @@ public class Enemy_Rabu : EnemyCharacter
     private bool isGrenade = false;
 
     public string enemyName = "¶óºê";
-    public EnemyGrenade grenade;
+    public EnemyProjectile grenade;
     public Transform grenadeStartPosition;
     public static event Action<Enemy_Rabu, int> OnEnemyRabuDamaged;
 
@@ -53,7 +53,7 @@ public class Enemy_Rabu : EnemyCharacter
             Vector3 grenadeDir = new Vector3(player.transform.position.x,player.transform.position.y + 0.5f, player.transform.position.z)
                                                                                                     - grenadeStartPosition.position;
             isGrenade = true;
-            EnemyGrenade go = Instantiate(grenade, grenadeStartPosition.position, Quaternion.LookRotation(grenadeDir));
+            EnemyProjectile go = Instantiate(grenade, grenadeStartPosition.position, Quaternion.LookRotation(grenadeDir));
             go.GetComponent<Rigidbody>().velocity = grenadeDir * 3;
         }
     }

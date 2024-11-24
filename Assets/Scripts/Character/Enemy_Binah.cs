@@ -14,6 +14,11 @@ public class Enemy_Binah : EnemyCharacter
     public GameObject exParticalObject = null;
 
     private float rotationSpeed = 10.0f;
+
+    public Transform[] missileStartPoint;
+    public EnemyProjectile missilePrefab;
+
+    private int missileCount;
     protected override void Start()
     {
         animator = GetComponent<Animator>();
@@ -74,9 +79,17 @@ public class Enemy_Binah : EnemyCharacter
 
     }
 
+    public void SetSkillState(int index)
+    {
+        if (isSkill == false)
+        {
+            animator.SetTrigger($"Skill{index}");
+            isSkill = true;
+        }
+    }
+
     public void Ex1_Start()
     {
-        isSkill = true;
         exParticalObject = Instantiate(Resources.Load(Constant.BinahFlameStreamResourcePath) as GameObject);
     }
 
@@ -86,5 +99,21 @@ public class Enemy_Binah : EnemyCharacter
         Destroy(exParticalObject.gameObject);
         exParticalObject = null;
     }
+     
+    public void Ex2_Start()
+    {
+        EnemyProjectile missile = Instantiate(missilePrefab, missileStartPoint[missileCount].position,transform.rotation);
+
+        missile.transform.rotation = Quaternion.Euler(-90,0,0);
+
+        missileCount++;
+    }
+
+    public void Ex2_End()
+    {
+        missileCount = 0;
+        isSkill = false;
+    }
+
 
 }
