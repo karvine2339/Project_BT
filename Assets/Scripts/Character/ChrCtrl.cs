@@ -31,6 +31,7 @@ public class CharacterController : MonoBehaviour
         BTInputSystem.Instance.onChangedSecondaryWeapon += OnChangedSecondaryWeapon;
         BTInputSystem.Instance.onEquipWeapon += OnEquipWeapon;
         BTInputSystem.Instance.onWeaponSkill += OnWeaponSkill;
+        BTInputSystem.Instance.onDash += OnDash;
 
         UIManager.Show<TacticalManager>(UIList.TacticalManual_Canvas);
         UIManager.Show<InventoryManager>(UIList.InventoryCanvas);
@@ -105,6 +106,11 @@ public class CharacterController : MonoBehaviour
     private void OnChangedSecondaryWeapon()
     {
         characterBase.ChangedSecondaryWeapon();
+    }
+
+    private void OnDash()
+    {
+        characterBase.Dash();
     }
 
     //## ChrCtrl

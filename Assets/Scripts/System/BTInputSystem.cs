@@ -45,6 +45,7 @@ public class BTInputSystem : MonoBehaviour
     public System.Action onChangedPrimaryWeapon;
     public System.Action onChangedSecondaryWeapon;
     public System.Action onWeaponSkill;
+    public System.Action onDash;
     public System.Action<float> onMouseWheel;
 
     private Vector2 lastMousePosition;
@@ -239,6 +240,11 @@ public class BTInputSystem : MonoBehaviour
         {
 
             onWeaponSkill?.Invoke();
+        }
+
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            onDash?.Invoke();
         }
 
         float mouseWheel = Input.GetAxis("Mouse ScrollWheel");

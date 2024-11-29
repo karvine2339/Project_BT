@@ -52,6 +52,9 @@ public class PlayerCharacter : ChrBase
     [HideInInspector] public float skillCoolDown = 0.0f;
     [HideInInspector] public float skillCoolDuration = 0.0f;
     [HideInInspector] public bool isCoolDown = false;
+    [HideInInspector] public bool isDash = false;
+    [HideInInspector] public float dashCoolDown = 5.0f;
+    private float dashCoolDuration = 0;
 
     public Rigidbody grenadePrefab;
 
@@ -175,6 +178,12 @@ public class PlayerCharacter : ChrBase
             {
                 fireRate -= Time.deltaTime;
             }
+        }
+
+        if(dashCoolDuration > 0)
+        {
+            dashCoolDuration -= Time.deltaTime;
+            HUDManager.Instance.dashImageMask.fillAmount = dashCoolDuration / CalculateOopartsValue(dashCoolDown,DecreaseDashCoolDown);
         }
     }
 
@@ -475,6 +484,29 @@ public class PlayerCharacter : ChrBase
                                                         , currentWeapon.fireStartPoint.rotation);
 
         newGrenade.AddForce(newGrenade.transform.forward * grenadeSpeed, ForceMode.Impulse);
+    }
+
+    public override void Dash()
+    {
+        if (isDash)
+            return;
+
+        if (dashCoolDuration > 0)
+            return;
+
+        dashCoolDuration = dashCoolDown;
+
+        StartCoroutine(DashCo());   
+    }
+
+    public IEnumerator DashCo()
+    {
+        isDash = true;
+        float baseSpeed = moveSpeed;
+        moveSpeed = 20f;
+        yield return new WaitForSeconds(0.1f);
+        moveSpeed = baseSpeed;
+        isDash = false;
     }
 }
 

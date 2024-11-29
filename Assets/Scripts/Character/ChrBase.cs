@@ -66,6 +66,7 @@ public class ChrBase : MonoBehaviour
     [HideInInspector] public List<float> IncreaseWeaponDrop = new List<float>();
     [HideInInspector] public List<float> IncreaseOopartsDrop = new List<float>();
     [HideInInspector] public List<float> IncreaseShield = new List<float>();
+    [HideInInspector] public List<float> DecreaseDashCoolDown = new List<float>();
 
     protected UnityEngine.CharacterController unityCharacterController;
     [HideInInspector] public Animator characterAnimator;
@@ -168,6 +169,11 @@ public class ChrBase : MonoBehaviour
         }
     }
     public virtual void Reload()
+    {
+
+    }
+
+    public virtual void Dash()
     {
 
     }
