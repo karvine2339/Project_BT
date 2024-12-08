@@ -9,6 +9,13 @@ public class Grenade : MonoBehaviour
     public float radius = 3f;
     public LayerMask grenadeLayerMask;
 
+    public Rigidbody rigid;
+
+    private void Start()
+    {
+        rigid = GetComponent<Rigidbody>();
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         ContactPoint contact = collision.contacts[0];
@@ -32,6 +39,14 @@ public class Grenade : MonoBehaviour
             {
                 enemy.OnDamaged(Random.Range(PlayerStat.Instance.BulletMinDamage,PlayerStat.Instance.BulletMaxDamage) * 10.0f, 1.0f);
             }
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (rigid.velocity.magnitude > 0.1f)
+        {
+            transform.rotation = Quaternion.LookRotation(rigid.velocity);
         }
     }
 

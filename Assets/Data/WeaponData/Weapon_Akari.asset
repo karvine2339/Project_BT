@@ -18,10 +18,10 @@ MonoBehaviour:
   chance: 0
   weaponName: "\uD0D0\uC2DD\uC758 \uC9D5\uD45C"
   weaponType: 2
-  minMinDamage: 100
-  minMaxDamage: 120
-  maxMinDamage: 150
-  maxMaxDamage: 170
+  minMinDamage: 120
+  minMaxDamage: 150
+  maxMinDamage: 180
+  maxMaxDamage: 200
   minfireRate: 0.3
   maxfireRate: 0.25
   skillCoolDown: 5
